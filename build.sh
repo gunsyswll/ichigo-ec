@@ -17,4 +17,5 @@ build delivery "Delivery & Freshness"
 build product "Standard Strawberry Box"
 # index.html is standalone — stamp it in place
 stamp < index.html > index.html.tmp && mv index.html.tmp index.html
+stamp < 404.html > 404.html.tmp && mv 404.html.tmp 404.html
 echo "stamped v=$VER"
