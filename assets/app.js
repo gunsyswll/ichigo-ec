@@ -116,20 +116,34 @@
   render(false);
 })();
 
-// ---- inject live floating/spinning strawberry orbs into bold sections ----
+// ---- inject a visible floating + spinning strawberry into the bold sections ----
 (function(){
+  var seeds='';
+  var sp=[[40,72,20],[54,66,-15],[68,68,12],[82,76,-22],[34,92,18],[48,86,-10],[62,84,8],[76,88,-18],[88,98,15],[44,108,-12],[58,104,6],[72,106,-16],[52,122,10],[66,122,-8]];
+  sp.forEach(function(s){ seeds+='<ellipse cx="'+s[0]+'" cy="'+s[1]+'" rx="1.7" ry="2.9" transform="rotate('+s[2]+' '+s[0]+' '+s[1]+')"/>'; });
+  var BERRY='<svg viewBox="0 0 120 152" xmlns="http://www.w3.org/2000/svg">'
+    +'<path fill="#2f7e48" d="M58 8h4v15h-4z"/>'
+    +'<path fill="#43985a" d="M60 16c-5 11-15 14-23 12 9 8 9 14 5 20 9-4 14-3 18 3 4-6 9-7 18-3-4-6-4-12 5-20-8 2-18-1-23-12z"/>'
+    +'<path fill="#D94050" d="M60 40C29 36 15 61 21 89c6 28 29 51 39 55 10-4 33-27 39-55 6-28-9-53-39-49z"/>'
+    +'<path fill="#B22F40" opacity=".32" d="M60 40c30-4 45 21 39 49-6 28-29 51-39 55z"/>'
+    +'<ellipse cx="42" cy="66" rx="9" ry="15" fill="#fff" opacity=".20" transform="rotate(-22 42 66)"/>'
+    +'<g class="sb-seed">'+seeds+'</g></svg>';
   var spots=[
-    {sel:'.hero', css:'width:300px;height:300px;right:-70px;top:-40px;opacity:.1'},
-    {sel:'.statement', css:'width:240px;height:240px;left:-90px;bottom:-70px;opacity:.14'},
-    {sel:'.page-hero', css:'width:260px;height:260px;right:-80px;top:-60px;opacity:.1'},
-    {sel:'#club .band', css:'width:220px;height:220px;right:30px;bottom:-90px;opacity:.16'},
-    {sel:'.farmers', css:'width:280px;height:280px;left:-90px;top:30px;opacity:.08'}
+    {sel:'.hero',        css:'width:340px;height:340px;right:-90px;bottom:-120px;opacity:.5'},
+    {sel:'.statement',   css:'width:300px;height:300px;left:-110px;top:-90px;opacity:.5'},
+    {sel:'.page-hero',   css:'width:300px;height:300px;right:-100px;bottom:-130px;opacity:.45'},
+    {sel:'#club .band',  css:'width:260px;height:260px;right:24px;bottom:-110px;opacity:.55'},
+    {sel:'.farmers',     css:'width:320px;height:320px;left:-110px;top:20px;opacity:.85'},
+    {sel:'.shipmap',     css:'width:300px;height:300px;right:-90px;top:30px;opacity:.8'},
+    {sel:'.news',        css:'width:260px;height:260px;left:-90px;bottom:-110px;opacity:.4'}
   ];
+  var d=0;
   spots.forEach(function(s){
     document.querySelectorAll(s.sel).forEach(function(sec){
       sec.classList.add('has-orb');
-      var orb=document.createElement('div'); orb.className='berry-orb'; orb.setAttribute('style',s.css);
-      orb.style.animationDelay=(Math.random? '' : '0s'); // deterministic
+      var orb=document.createElement('div'); orb.className='berry-orb';
+      orb.setAttribute('style', s.css+';animation-delay:'+(d* -2.3)+'s,'+(d* -1.1)+'s'); d++;
+      orb.innerHTML=BERRY;
       sec.insertBefore(orb, sec.firstChild);
     });
   });
