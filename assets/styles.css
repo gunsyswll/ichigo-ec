@@ -534,3 +534,23 @@ footer{background:var(--cream-2);border-top:1px solid var(--line);padding:60px 0
 .stop .dot{border-color:rgba(235,210,168,.7)}
 .stop b{font-size:.9rem}
 .shipmap .berry-orb{opacity:.3!important}
+
+/* ===== mark7: on-map journey (Japan + Philippines, vehicle flies the route) =====
+   Light ivory map panel, clear blush land, red route — glows on the dark section. */
+.geomap{position:relative;border:1px solid rgba(110,98,86,.22);border-radius:18px;overflow:hidden;
+  background:radial-gradient(85% 90% at 50% 26%,#FFFDFB 0%,#F5EEE5 62%,#EBDBCB 100%);
+  box-shadow:0 30px 70px -34px rgba(0,0,0,.55), inset 0 0 0 1px rgba(255,255,255,.5)}
+.geomap::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(158,142,126,.16) 1.1px,transparent 1.1px);background-size:24px 24px}
+.geomap svg{position:relative;width:100%;height:auto;display:block;overflow:visible}
+.geo-land{fill:#EBD0C4;stroke:#C58E84;stroke-width:1.6;stroke-linejoin:round}
+.geo-node{fill:var(--red);stroke:#fff;stroke-width:2}
+.geo-pulse{fill:none;stroke:var(--red);stroke-width:2;transform-box:fill-box;transform-origin:center;animation:pr 2.4s ease-out infinite}
+.rt-line{fill:none;stroke:rgba(158,142,126,.42);stroke-width:2;stroke-dasharray:3 6}
+.rt-draw{fill:none;stroke:var(--red);stroke-width:3;stroke-linecap:round;filter:drop-shadow(0 0 5px rgba(217,64,80,.5));
+  stroke-dasharray:100;stroke-dashoffset:100;animation:rtdraw 9s cubic-bezier(.5,0,.5,1) infinite}
+@keyframes rtdraw{0%{stroke-dashoffset:100}10%{stroke-dashoffset:100}90%{stroke-dashoffset:4}100%{stroke-dashoffset:4}}
+.geo-lbl{fill:#2B2420;font-family:'Libre Baskerville';font-size:14px}
+.geo-lbl.sub{fill:#9a6a5f;font-family:Outfit;font-size:10.5px}
+.geo-cap{position:absolute;top:16px;left:18px;font-family:'Libre Baskerville';color:var(--red);font-size:.95rem;z-index:2}
+.geo-veh text{font-size:30px}
