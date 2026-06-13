@@ -556,3 +556,34 @@ footer{background:var(--cream-2);border-top:1px solid var(--line);padding:60px 0
 .geo-lbl.hot{fill:var(--red)}
 .geo-lbl.sub{fill:#9a6a5f;font-family:Outfit;font-size:10px}
 .geo-veh circle{fill:#241317}
+
+/* ===== journey timeline (zigzag graph, on the dark shipmap section) ===== */
+.timeline{position:relative;display:flex;max-width:1060px;margin:48px auto 0;padding:0 10px}
+.timeline::before{content:"";position:absolute;left:46px;right:46px;top:50%;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(234,208,164,.55) 7%,rgba(234,208,164,.55) 93%,transparent)}
+.tl-step{position:relative;flex:1;display:flex;align-items:center;justify-content:center;min-height:260px}
+.tl-step:not(:last-child)::after{content:"";position:absolute;right:-5px;top:50%;width:8px;height:8px;
+  border-top:2px solid rgba(234,208,164,.7);border-right:2px solid rgba(234,208,164,.7);transform:translateY(-50%) rotate(45deg)}
+.tl-dot{width:74px;height:74px;border-radius:50%;background:var(--cream);border:3px solid var(--red);
+  display:grid;place-items:center;color:var(--red);z-index:2;box-shadow:0 0 0 7px rgba(217,64,80,.13),0 14px 30px -12px rgba(0,0,0,.5);
+  transition:transform .3s var(--ease)}
+.tl-step:hover .tl-dot{transform:scale(1.08)}
+.tl-card{position:absolute;width:190px;text-align:center;left:50%;transform:translateX(-50%)}
+.tl-card::before{content:"";position:absolute;left:50%;width:1.5px;height:30px;background:rgba(234,208,164,.45);transform:translateX(-50%)}
+.tl-step:nth-child(odd) .tl-card{bottom:calc(50% + 52px)}
+.tl-step:nth-child(odd) .tl-card::before{bottom:-30px}
+.tl-step:nth-child(even) .tl-card{top:calc(50% + 52px)}
+.tl-step:nth-child(even) .tl-card::before{top:-30px}
+.tl-num{display:inline-block;font-family:'Libre Baskerville';color:var(--red);font-size:.95rem;letter-spacing:.1em}
+.tl-card h3{color:#fff;font-size:1.04rem;margin:3px 0 6px;font-family:'Libre Baskerville'}
+.tl-card p{color:rgba(251,246,241,.6);font-size:.8rem;line-height:1.46}
+@media(max-width:760px){
+  .timeline{flex-direction:column;gap:8px;max-width:340px;padding-left:20px}
+  .timeline::before{left:34px;right:auto;top:34px;bottom:34px;width:2px;height:auto}
+  .tl-step{min-height:0;justify-content:flex-start;gap:18px}
+  .tl-step:not(:last-child)::after{display:none}
+  .tl-dot{width:58px;height:58px;flex:none}
+  .tl-card{position:static;transform:none;width:auto;text-align:left}
+  .tl-card::before{display:none}
+  .tl-step:nth-child(odd) .tl-card,.tl-step:nth-child(even) .tl-card{bottom:auto;top:auto}
+}
