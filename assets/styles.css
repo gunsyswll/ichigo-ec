@@ -335,3 +335,39 @@ footer{background:var(--cream-2);border-top:1px solid var(--line);padding:60px 0
   .why-grid,.shop-grid,.method-grid,.cred-grid,.info-grid,.journey-grid,.band-feats,.statband,.qfacts,.week,.pd-gallery,.promise{grid-template-columns:1fr}
   .news-row{flex-direction:column}.band,.cta-band,.cta-band{padding:30px 24px}
 }
+
+/* real-photo blocks */
+.ph.img{background-size:cover;background-position:center;background-repeat:no-repeat}
+.ph.img::after{display:none}
+.ph.img .berry{display:none}
+.ph.img::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(43,36,32,0) 55%,rgba(43,36,32,.28) 100%)}
+.card .ph.img::before,.fc .ph.img::before{background:linear-gradient(180deg,rgba(43,36,32,0) 60%,rgba(43,36,32,.18) 100%)}
+
+/* responsive fixes (mobile QA) */
+.split2{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.faq-layout{display:grid;grid-template-columns:260px 1fr;gap:44px;align-items:start}
+@media(max-width:840px){.faq-layout{grid-template-columns:1fr}.faq-layout aside{position:static!important}}
+@media(max-width:760px){.split2{grid-template-columns:1fr}}
+@media(max-width:640px){
+  .hide-mobile{display:none!important}      /* header Reserve-Now button: burger + hero CTA cover it */
+  .nav{height:64px}.brand{font-size:1.25rem}
+  .nav-right{gap:10px}.icon-btn{width:34px;height:34px}
+  .announce{font-size:.74rem;padding:8px 12px}
+  .as-data{gap:18px}.badges{gap:18px}
+  .arrival-strip{padding:24px}.band{padding:28px 22px}
+  section{padding:60px 0}.hero{padding:40px 0 50px}
+}
+
+/* marquee storytelling strip */
+.marquee{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--cream-2);padding:20px 0}
+.marquee-track{display:flex;width:max-content;white-space:nowrap;animation:marq 30s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.marquee-track span{font-family:'Libre Baskerville';font-size:1.25rem;color:var(--greige-deep);padding:0 28px;display:inline-flex;align-items:center}
+.marquee-track span b{color:var(--red);font-weight:400;margin-left:56px}
+@keyframes marq{to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.marquee-track{animation:none}}
+/* hero image subtle settle-in */
+.hero-photo .ph.img{animation:heroZoom 1.6s var(--ease) both}
+@keyframes heroZoom{from{transform:scale(1.12);opacity:.4}to{transform:scale(1);opacity:1}}
+/* parallax wrappers need overflow clip so the scaled image stays framed */
+[data-parallax]{will-change:transform}
