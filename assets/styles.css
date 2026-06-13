@@ -276,12 +276,7 @@ footer{background:var(--cream-2);border-top:1px solid var(--line);padding:60px 0
 .cred{border:1px solid var(--line);border-radius:12px;padding:22px;background:var(--cream)}
 .cred .ic{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--red);color:var(--red);display:grid;place-items:center;margin-bottom:12px}
 .cred b{display:block;margin-bottom:5px}.cred p{font-size:.82rem;color:var(--greige-deep)}
-.timeline{display:flex;justify-content:space-between;gap:10px;position:relative;margin:30px 0}
-.timeline::before{content:"";position:absolute;top:18px;left:5%;right:5%;height:2px;background:repeating-linear-gradient(90deg,var(--red) 0 8px,transparent 8px 16px)}
-.tl{text-align:center;flex:1;position:relative}
-.tl .n{width:38px;height:38px;border-radius:50%;background:var(--cream);border:2px solid var(--red);color:var(--red);display:grid;place-items:center;margin:0 auto 12px;font-family:'Libre Baskerville';position:relative;z-index:2}
-.tl.done .n{background:var(--red);color:#fff}
-.tl h4{font-size:.9rem;margin-bottom:4px}.tl p{font-size:.76rem;color:var(--greige-deep)}
+/* (old .timeline/.tl stepper removed — replaced by the shared .timeline graph below) */
 
 /* ============ DELIVERY ============ */
 .qfacts{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
@@ -328,7 +323,7 @@ footer{background:var(--cream-2);border-top:1px solid var(--line);padding:60px 0
   .farmer-grid,.farmcard-grid{grid-template-columns:1fr}
   .journey-grid,.band-feats{grid-template-columns:1fr 1fr}
   .statband,.qfacts{grid-template-columns:1fr 1fr}
-  .week{grid-template-columns:1fr 1fr 1fr}.two-col{columns:1}.timeline{flex-wrap:wrap;gap:24px}.timeline::before{display:none}
+  .week{grid-template-columns:1fr 1fr 1fr}.two-col{columns:1}
   .gallery{height:auto;grid-template-columns:1fr 1fr}.gallery .ph:first-child{grid-row:auto}
 }
 @media(max-width:560px){
@@ -595,3 +590,12 @@ footer{background:var(--cream-2);border-top:1px solid var(--line);padding:60px 0
 .jpmap svg{width:100%;max-width:370px;height:auto;display:block;margin:0 auto;overflow:visible}
 .jpmap-cap{margin:20px auto 0;color:var(--greige-deep);font-size:.92rem;max-width:32em;line-height:1.65}
 .jpmap-cap b{color:var(--red);font-weight:600}
+
+/* timeline — light variant (for the About 'Japan → Philippines' process on cream) + numbered dots */
+.tl-dot .tl-no{font-family:'Libre Baskerville';font-size:1.4rem;color:var(--red);line-height:1}
+.timeline.light::before{background:linear-gradient(90deg,transparent,rgba(158,142,126,.5) 7%,rgba(158,142,126,.5) 93%,transparent)}
+.timeline.light .tl-step::after{border-top-color:rgba(158,142,126,.75);border-right-color:rgba(158,142,126,.75)}
+.timeline.light .tl-card::before{background:rgba(158,142,126,.4)}
+.timeline.light .tl-card h3{color:var(--ink);font-size:.98rem}
+.timeline.light .tl-card p{color:var(--greige-deep)}
+@media(max-width:760px){.timeline.light::before{background:linear-gradient(180deg,transparent,rgba(158,142,126,.5) 6%,rgba(158,142,126,.5) 94%,transparent)}}
