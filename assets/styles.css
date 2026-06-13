@@ -578,12 +578,14 @@ footer{background:var(--cream-2);border-top:1px solid var(--line);padding:60px 0
 .tl-card h3{color:#fff;font-size:1.04rem;margin:3px 0 6px;font-family:'Libre Baskerville'}
 .tl-card p{color:rgba(251,246,241,.6);font-size:.8rem;line-height:1.46}
 @media(max-width:760px){
-  .timeline{flex-direction:column;gap:8px;max-width:340px;padding-left:20px}
-  .timeline::before{left:34px;right:auto;top:34px;bottom:34px;width:2px;height:auto}
-  .tl-step{min-height:0;justify-content:flex-start;gap:18px}
+  /* vertical timeline: dots ride a left rail, text to the right */
+  .timeline{flex-direction:column;gap:0;max-width:400px;margin:30px auto 0;padding-left:6px}
+  .timeline::before{left:36px;right:auto;top:36px;bottom:36px;width:2px;height:auto;
+    background:linear-gradient(180deg,transparent,rgba(234,208,164,.55) 6%,rgba(234,208,164,.55) 94%,transparent)}
+  .tl-step{flex-direction:row-reverse;justify-content:flex-end;align-items:center;gap:16px;min-height:0;padding:15px 0}
   .tl-step:not(:last-child)::after{display:none}
-  .tl-dot{width:58px;height:58px;flex:none}
-  .tl-card{position:static;transform:none;width:auto;text-align:left}
+  .tl-dot{width:60px;height:60px;flex:none}
+  .tl-card{position:static;transform:none;width:auto;text-align:left;flex:1}
   .tl-card::before{display:none}
   .tl-step:nth-child(odd) .tl-card,.tl-step:nth-child(even) .tl-card{bottom:auto;top:auto}
 }
