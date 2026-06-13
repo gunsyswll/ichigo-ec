@@ -75,6 +75,22 @@
     </div>
   </div>
 </section>
+<section class="statement">
+  <div class="wrap statement-grid">
+    <div class="st-copy" data-reveal="left">
+      <span class="eyebrow">A little luxury, not a formal gift</span>
+      <h2>Grown in Japan.<br><em>Loved</em> in the<br>Philippines.</h2>
+      <p>One bite and you taste the difference — single-origin berries, picked at their sweetest and rushed to your door. Reserve a box for the moment you deserve it.</p>
+      <a class="btn btn-white" href="shop.html">Reserve your box →</a>
+    </div>
+    <div class="st-berry" data-reveal="right">
+      <span class="tagfloat t1">15° Brix sweetness</span>
+      <div class="ph3d" style="background-image:url('assets/img/str-red.jpg')"></div>
+      <span class="tagfloat t2">Single-origin · Japan</span>
+    </div>
+  </div>
+</section>
+
 
 <section class="farmers" id="farmers">
   <div class="wrap">
@@ -86,14 +102,63 @@
   </div>
 </section>
 
-<section id="journey">
+<section class="shipmap" id="journey">
   <div class="wrap">
-    <div class="sec-head" data-reveal><span class="eyebrow muted">From Japan to your door</span><h2>How it works</h2></div>
+    <div class="sec-head" data-reveal><span class="eyebrow" style="color:#E8A0A6">From Japan to your door · live</span><h2>Track every box, farm to door</h2><p style="color:rgba(251,246,241,.6)">Each reservation is followed from the Japanese farm to your address in the Philippines.</p></div>
+    <div class="map-wrap" data-reveal>
+      <div class="map-stage">
+        <span class="live"><i></i> LIVE TRACKING</span>
+        <svg viewBox="0 0 1000 460" class="mapsvg" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <radialGradient id="glow"><stop offset="0" stop-color="#ff5061" stop-opacity=".55"/><stop offset="1" stop-color="#ff5061" stop-opacity="0"/></radialGradient>
+            <linearGradient id="arcg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E8A0A6"/><stop offset="1" stop-color="#D94050"/></linearGradient>
+          </defs>
+          <!-- stylized landmasses -->
+          <path class="land" d="M690,70 q40,-14 70,6 q26,18 14,46 q22,6 18,34 q-8,30 -44,30 q-30,16 -56,-6 q-30,-2 -28,-34 q-16,-22 6,-44 q4,-26 48,-38z"/>
+          <path class="land" d="M250,290 q30,-10 48,8 q22,-6 34,12 q26,2 22,28 q14,16 -6,34 q-6,26 -40,22 q-26,16 -50,-6 q-30,2 -30,-28 q-18,-18 4,-40 q0,-26 18,-30z"/>
+          <circle class="land" cx="360" cy="370" r="9"/><circle class="land" cx="300" cy="350" r="6"/><circle class="land" cx="690" cy="160" r="7"/>
+          <!-- arcs Japan -> Manila -->
+          <path id="arc1" class="arc" d="M760,120 Q470,10 330,330"/>
+          <path id="arc2" class="arc faint" d="M740,140 Q440,150 320,330"/>
+          <path id="arc3" class="arc faint" d="M770,130 Q520,80 360,360"/>
+          <!-- moving shipments -->
+          <circle r="5" class="ship" fill="#fff"><animateMotion dur="3.6s" repeatCount="indefinite"><mpath href="#arc1"/></animateMotion></circle>
+          <circle r="4" class="ship" fill="#E8A0A6"><animateMotion dur="4.6s" begin="1.2s" repeatCount="indefinite"><mpath href="#arc2"/></animateMotion></circle>
+          <circle r="4" class="ship" fill="#fff"><animateMotion dur="5.2s" begin="2.4s" repeatCount="indefinite"><mpath href="#arc3"/></animateMotion></circle>
+          <!-- nodes -->
+          <circle cx="760" cy="120" r="42" fill="url(#glow)"/><circle class="pulse" cx="760" cy="120"/><circle class="nodedot" cx="760" cy="120" r="6"/>
+          <circle cx="330" cy="330" r="42" fill="url(#glow)"/><circle class="pulse" cx="330" cy="330" style="animation-delay:1s"/><circle class="nodedot" cx="330" cy="330" r="6"/>
+          <text class="lbl" x="778" y="112">Fukuoka · Tochigi</text><text class="lbl sub" x="778" y="132">Japan — harvest origin</text>
+          <text class="lbl" x="348" y="322">Manila</text><text class="lbl sub" x="348" y="342">Philippines — your door</text>
+        </svg>
+      </div>
+      <div class="map-log">
+        <h4>Live shipments</h4>
+        <div class="log-mask"><div class="log-track">
+          <div class="log"><b>#1284</b> Fukuoka → Manila <span class="rt transit">In transit</span></div>
+          <div class="log"><b>#1283</b> Tochigi → Manila <span class="rt cust">Customs</span></div>
+          <div class="log"><b>#1281</b> Fukuoka → Cebu <span class="rt out">Out for delivery</span></div>
+          <div class="log"><b>#1280</b> Tochigi → Manila <span class="rt transit">In transit</span></div>
+          <div class="log"><b>#1278</b> Fukuoka → Davao <span class="rt cust">Customs</span></div>
+          <div class="log"><b>#1277</b> Tochigi → Manila <span class="rt out">Out for delivery</span></div>
+          <div class="log"><b>#1275</b> Fukuoka → Manila <span class="rt transit">In transit</span></div>
+          <div class="log"><b>#1274</b> Tochigi → Iloilo <span class="rt cust">Customs</span></div>
+          <div class="log"><b>#1284</b> Fukuoka → Manila <span class="rt transit">In transit</span></div>
+          <div class="log"><b>#1283</b> Tochigi → Manila <span class="rt cust">Customs</span></div>
+          <div class="log"><b>#1281</b> Fukuoka → Cebu <span class="rt out">Out for delivery</span></div>
+          <div class="log"><b>#1280</b> Tochigi → Manila <span class="rt transit">In transit</span></div>
+          <div class="log"><b>#1278</b> Fukuoka → Davao <span class="rt cust">Customs</span></div>
+          <div class="log"><b>#1277</b> Tochigi → Manila <span class="rt out">Out for delivery</span></div>
+          <div class="log"><b>#1275</b> Fukuoka → Manila <span class="rt transit">In transit</span></div>
+          <div class="log"><b>#1274</b> Tochigi → Iloilo <span class="rt cust">Customs</span></div>
+        </div></div>
+      </div>
+    </div>
     <div class="journey-grid" data-stagger>
-      <div class="step" data-reveal><div class="sc"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6h14M4 11h14M4 16h9"/></svg></div><h3>Reserve Online</h3><p>Pre-order from the week's incoming harvest. Quantities are capped.</p></div>
-      <div class="step" data-reveal><div class="sc"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8l9-4 9 4-9 4z"/><path d="M2 8v6l9 4 9-4V8"/></svg></div><h3>Imported from Japan</h3><p>Harvested at peak ripeness by Farmer A or B, the morning before shipping.</p></div>
-      <div class="step" data-reveal><div class="sc"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="8"/><path d="M7 11l3 3 5-6"/></svg></div><h3>Quality Checked</h3><p>Cold-chain air freight, customs-cleared, and inspected on arrival.</p></div>
-      <div class="step" data-reveal><div class="sc"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13l3-7h9l3 7M3 13v4h16v-4M3 13h16"/></svg></div><h3>Delivered in the PH</h3><p>At your door fresh, with a QR code to meet the grower behind your box.</p></div>
+      <div class="step" data-reveal><div class="sc"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6h14M4 11h14M4 16h9"/></svg></div><h3>Reserve Online</h3><p>Pre-order from the week's incoming harvest.</p></div>
+      <div class="step" data-reveal><div class="sc"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8l9-4 9 4-9 4z"/><path d="M2 8v6l9 4 9-4V8"/></svg></div><h3>Imported from Japan</h3><p>Picked at peak ripeness, the morning before shipping.</p></div>
+      <div class="step" data-reveal><div class="sc"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="8"/><path d="M7 11l3 3 5-6"/></svg></div><h3>Quality Checked</h3><p>Cold-chain air freight, customs-cleared, inspected.</p></div>
+      <div class="step" data-reveal><div class="sc"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13l3-7h9l3 7M3 13v4h16v-4M3 13h16"/></svg></div><h3>Delivered in the PH</h3><p>At your door fresh, with a QR to meet your grower.</p></div>
     </div>
   </div>
 </section>
