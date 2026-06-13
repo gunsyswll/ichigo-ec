@@ -537,7 +537,7 @@ footer{background:var(--cream-2);border-top:1px solid var(--line);padding:60px 0
 
 /* ===== mark7: on-map journey (Japan + Philippines, vehicle flies the route) =====
    Light ivory map panel, clear blush land, red route — glows on the dark section. */
-.geomap{position:relative;border:1px solid rgba(110,98,86,.22);border-radius:18px;overflow:hidden;
+.geomap{position:relative;max-width:1000px;margin-inline:auto;border:1px solid rgba(110,98,86,.22);border-radius:18px;overflow:hidden;
   background:radial-gradient(85% 90% at 50% 26%,#FFFDFB 0%,#F5EEE5 62%,#EBDBCB 100%);
   box-shadow:0 30px 70px -34px rgba(0,0,0,.55), inset 0 0 0 1px rgba(255,255,255,.5)}
 .geomap::before{content:"";position:absolute;inset:0;pointer-events:none;
