@@ -488,3 +488,49 @@ footer{background:var(--cream-2);border-top:1px solid var(--line);padding:60px 0
 .berry-orb .sb-seed{fill:#FCE7C4}
 /* on dark sections it glows; on light it's solid brand red (set per-section opacity inline) */
 .shipmap .berry-orb,.farmers .berry-orb{filter:drop-shadow(0 0 22px rgba(217,64,80,.55))}
+
+/* ===== mark6: Japan map + farm-to-door route tracker ===== */
+.jp-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:30px;align-items:center}
+.jp-map{position:relative;border:1px solid rgba(235,210,168,.25);border-radius:18px;padding:22px;
+  background:radial-gradient(75% 78% at 55% 35%,rgba(217,64,80,.18),transparent 62%),#3c1620;min-height:360px;display:grid;place-items:center}
+.jp-map svg{width:100%;max-width:300px;height:auto;overflow:visible}
+.jp-land{fill:rgba(235,210,168,.16);stroke:rgba(235,210,168,.4);stroke-width:1.4;stroke-linejoin:round}
+.jp-chiba{fill:var(--red);stroke:#fff;stroke-width:1.5}
+.jp-pulse{fill:none;stroke:var(--red);stroke-width:2;transform-box:fill-box;transform-origin:center;animation:pr 2.4s ease-out infinite}
+.jp-chiba-lbl{fill:#fff;font-family:'Libre Baskerville';font-size:15px}
+.jp-chiba-lbl tspan{fill:#EAD0A4;font-family:Outfit;font-size:11px}
+.jp-tag{position:absolute;top:18px;left:20px;font-family:'Libre Baskerville';color:#EAD0A4;font-size:.95rem}
+
+/* route tracker */
+.route{position:relative;padding:60px 8px 18px}
+.route-line{position:absolute;left:4%;right:4%;top:78px;height:3px;background:rgba(235,210,168,.22);border-radius:3px}
+.route-prog{position:absolute;left:4%;top:78px;height:3px;border-radius:3px;background:linear-gradient(90deg,#EAD0A4,var(--red));
+  width:0;animation:routeFill 13s cubic-bezier(.6,.1,.3,1) infinite}
+@keyframes routeFill{0%{width:0}8%{width:0}92%{width:92%}100%{width:92%}}
+.stops{display:flex;justify-content:space-between;position:relative;z-index:2;padding:0 4%}
+.stop{text-align:center;width:19%}
+.stop .dot{display:block;width:16px;height:16px;border-radius:50%;background:#3c1620;border:2px solid rgba(235,210,168,.5);margin:0 auto 12px;transition:.3s}
+.stop.on .dot{background:var(--red);border-color:#fff;box-shadow:0 0 14px var(--red)}
+.stop b{display:block;color:#fff;font-size:.86rem;font-family:'Libre Baskerville'}
+.stop small{color:rgba(251,246,241,.6);font-size:.74rem}
+.mover{position:absolute;top:64px;left:4%;font-size:30px;line-height:1;z-index:3;filter:drop-shadow(0 6px 10px rgba(0,0,0,.5));
+  animation:moveX 13s cubic-bezier(.6,.1,.3,1) infinite}
+@keyframes moveX{0%{left:4%}8%{left:4%}92%{left:88%}100%{left:88%}}
+.mover .veh{position:absolute;left:0;top:0;opacity:0}
+.v-truck{animation:vt 13s linear infinite}.v-plane{animation:vp 13s linear infinite}.v-van{animation:vv 13s linear infinite}
+@keyframes vt{0%,8%{opacity:1}24%{opacity:1}26%{opacity:0}56%{opacity:0}58%{opacity:1}74%{opacity:1}76%{opacity:0}100%{opacity:0}}
+@keyframes vp{0%,26%{opacity:0}28%{opacity:1}54%{opacity:1}56%{opacity:0}100%{opacity:0}}
+@keyframes vv{0%,76%{opacity:0}78%{opacity:1}100%{opacity:1}}
+/* plane lifts during air leg */
+.v-plane{animation:vp 13s linear infinite, planeLift 13s ease-in-out infinite}
+@keyframes planeLift{0%,27%{transform:translateY(0) rotate(0)}40%{transform:translateY(-26px) rotate(-8deg)}54%{transform:translateY(0) rotate(0)}100%{transform:translateY(0)}}
+@media(max-width:840px){.jp-wrap{grid-template-columns:1fr}.stop small{display:none}.stop b{font-size:.72rem}.mover{font-size:24px}}
+
+/* mark6 — brighten Japan map + route */
+.jp-map{background:radial-gradient(75% 80% at 55% 35%,rgba(217,64,80,.16),transparent 62%),#4a1e29}
+.jp-land{fill:rgba(235,210,168,.32);stroke:rgba(235,210,168,.6);stroke-width:1.6}
+.jp-chiba-lbl{font-size:16px}
+.route-line{background:rgba(235,210,168,.3)}
+.stop .dot{border-color:rgba(235,210,168,.7)}
+.stop b{font-size:.9rem}
+.shipmap .berry-orb{opacity:.3!important}

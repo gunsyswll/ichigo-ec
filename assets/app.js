@@ -134,7 +134,7 @@
     {sel:'.page-hero',   css:'width:300px;height:300px;right:-100px;bottom:-130px;opacity:.45'},
     {sel:'#club .band',  css:'width:260px;height:260px;right:24px;bottom:-110px;opacity:.55'},
     {sel:'.farmers',     css:'width:320px;height:320px;left:-110px;top:20px;opacity:.85'},
-    {sel:'.shipmap',     css:'width:300px;height:300px;right:-90px;top:30px;opacity:.8'},
+    {sel:'.shipmap', css:'width:240px;height:240px;right:-100px;bottom:-110px;opacity:.3'},
     {sel:'.news',        css:'width:260px;height:260px;left:-90px;bottom:-110px;opacity:.4'}
   ];
   var d=0;
