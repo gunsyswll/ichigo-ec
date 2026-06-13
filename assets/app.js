@@ -84,22 +84,53 @@
   });
 })();
 
-// ---- shop filters ----
+// ---- shop: filter + pagination ----
 (function(){
   var grid=document.querySelector('.shop-grid'); if(!grid) return;
   var tabs=document.querySelectorAll('.filters a[data-filter]');
   var bar=document.querySelector('.shop-bar span');
-  function apply(f){
-    var shown=0;
-    grid.querySelectorAll('[data-cat]').forEach(function(c){
-      var ok = f==='all' || (' '+c.getAttribute('data-cat')+' ').indexOf(' '+f+' ')>=0;
-      c.style.display = ok?'':'none'; if(ok) shown++;
-    });
-    if(bar) bar.innerHTML='Showing <b style="color:var(--ink)">'+shown+'</b> product'+(shown!==1?'s':'');
+  var pager=document.querySelector('.pager');
+  // data-cat sits on .card-body — resolve each to its .card wrapper
+  var cards=[].slice.call(grid.querySelectorAll('[data-cat]')).map(function(el){
+    var card=el.closest('.card')||el; card.setAttribute('data-cat', el.getAttribute('data-cat')); return card;
+  });
+  var PER=6, filter='all', page=1;
+  function matches(){ return cards.filter(function(c){ return filter==='all' || (' '+c.getAttribute('data-cat')+' ').indexOf(' '+filter+' ')>=0; }); }
+  function render(scroll){
+    var m=matches(), pages=Math.max(1,Math.ceil(m.length/PER));
+    if(page>pages) page=pages;
+    cards.forEach(function(c){ c.style.display='none'; });
+    m.slice((page-1)*PER, page*PER).forEach(function(c){ c.style.display=''; });
+    if(bar){ var a=m.length?(page-1)*PER+1:0, b=Math.min(page*PER,m.length);
+      bar.innerHTML='Showing <b style="color:var(--ink)">'+a+'–'+b+'</b> of '+m.length+' product'+(m.length!==1?'s':''); }
+    if(pager){ var h='<a href="#" data-pg="prev">‹</a>'; for(var i=1;i<=pages;i++) h+='<a href="#" data-pg="'+i+'"'+(i===page?' class="active"':'')+'>'+i+'</a>';
+      h+='<a href="#" data-pg="next">›</a>'; pager.innerHTML=h; pager.style.display = pages>1?'':'none'; }
+    if(scroll){ var t=grid.getBoundingClientRect().top+window.scrollY-110; window.scrollTo({top:t,behavior:'smooth'}); }
   }
-  tabs.forEach(function(t){ t.addEventListener('click',function(e){
-    e.preventDefault();
+  if(pager) pager.addEventListener('click',function(e){ var a=e.target.closest('a'); if(!a)return; e.preventDefault();
+    var v=a.getAttribute('data-pg'), pages=Math.ceil(matches().length/PER);
+    if(v==='prev') page=Math.max(1,page-1); else if(v==='next') page=Math.min(pages,page+1); else page=parseInt(v,10); render(true); });
+  tabs.forEach(function(t){ t.addEventListener('click',function(e){ e.preventDefault();
     tabs.forEach(function(x){x.classList.remove('active')}); t.classList.add('active');
-    apply(t.getAttribute('data-filter'));
-  }); });
+    filter=t.getAttribute('data-filter'); page=1; render(true); }); });
+  render(false);
+})();
+
+// ---- inject live floating/spinning strawberry orbs into bold sections ----
+(function(){
+  var spots=[
+    {sel:'.hero', css:'width:300px;height:300px;right:-70px;top:-40px;opacity:.1'},
+    {sel:'.statement', css:'width:240px;height:240px;left:-90px;bottom:-70px;opacity:.14'},
+    {sel:'.page-hero', css:'width:260px;height:260px;right:-80px;top:-60px;opacity:.1'},
+    {sel:'#club .band', css:'width:220px;height:220px;right:30px;bottom:-90px;opacity:.16'},
+    {sel:'.farmers', css:'width:280px;height:280px;left:-90px;top:30px;opacity:.08'}
+  ];
+  spots.forEach(function(s){
+    document.querySelectorAll(s.sel).forEach(function(sec){
+      sec.classList.add('has-orb');
+      var orb=document.createElement('div'); orb.className='berry-orb'; orb.setAttribute('style',s.css);
+      orb.style.animationDelay=(Math.random? '' : '0s'); // deterministic
+      sec.insertBefore(orb, sec.firstChild);
+    });
+  });
 })();

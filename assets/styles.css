@@ -442,3 +442,41 @@ footer{background:var(--cream-2);border-top:1px solid var(--line);padding:60px 0
 .map-stage{background:radial-gradient(70% 75% at 60% 25%,rgba(217,64,80,.28),transparent 60%),#2c211d}
 .arc{stroke:#F0B8BD;stroke-width:3;filter:drop-shadow(0 0 7px rgba(240,184,189,1))}
 .arc.faint{opacity:.7;stroke-width:2;stroke:#E8A0A6}
+
+/* ===== mark4 ===== */
+/* 3) red header banner */
+.announce{background:linear-gradient(90deg,var(--red),var(--red-deep));color:#fff}
+.announce a{color:#fff;text-decoration:underline;text-underline-offset:3px}
+
+/* 2) live floating + spinning strawberry orb (injected into bold sections) */
+.berry-orb{position:absolute;border-radius:50%;background-image:url('assets/img/str-one.jpg');background-size:cover;background-position:center;
+  pointer-events:none;z-index:0;opacity:.16;filter:saturate(1.1);
+  box-shadow:0 30px 70px -20px rgba(0,0,0,.4),inset 0 0 60px rgba(0,0,0,.3);
+  animation:orbSpin 26s linear infinite, orbFloat 9s ease-in-out infinite}
+@keyframes orbSpin{to{transform:rotate(360deg)}}
+@keyframes orbFloat{0%,100%{margin-top:0}50%{margin-top:-26px}}
+.hero,.statement,.page-hero,.band,.farmers,.shipmap{position:relative;overflow:hidden}
+.has-orb>.wrap,.band-top,.band-feats{position:relative;z-index:2}
+@media(prefers-reduced-motion:reduce){.berry-orb{animation:none}}
+/* statement strawberry: add slow spin to its float */
+.st-berry .ph3d{animation:floaty 6s ease-in-out infinite, spin3d 30s linear infinite}
+@keyframes spin3d{to{transform:rotate(-7deg) rotateY(360deg)}}
+
+/* 4) shipment map — on-brand, grander (warm burgundy + champagne/cream arcs) */
+.shipmap{background:radial-gradient(130% 95% at 72% 0%,#6e2733 0%,#481923 42%,#2c0f16 100%)}
+.map-stage{border:1px solid rgba(235,210,168,.28);
+  background:radial-gradient(72% 78% at 60% 26%,rgba(217,64,80,.26),transparent 60%),#3c1620;
+  background-image:radial-gradient(rgba(235,210,168,.14) 1.2px,transparent 1.2px);background-size:24px 24px}
+.land{fill:rgba(235,210,168,.10);stroke:rgba(235,210,168,.30);stroke-width:1.1}
+.arc{stroke:#EAD0A4!important;stroke-width:2.6;filter:drop-shadow(0 0 7px rgba(234,208,164,.95))}
+.arc.faint{opacity:.62;stroke:#d9b98f!important;stroke-width:1.8}
+.ship{filter:drop-shadow(0 0 8px #fff) drop-shadow(0 0 14px #EAD0A4)}
+.nodedot{fill:#EAD0A4;filter:drop-shadow(0 0 13px #EAD0A4)}
+.pulse{stroke:#EAD0A4}
+.lbl{fill:#FBF6F1;font-family:'Libre Baskerville';font-size:17px}.lbl.sub{fill:rgba(251,246,241,.6);font-family:'Outfit';font-size:12px}
+.live i{background:#EAD0A4;box-shadow:0 0 0 0 rgba(234,208,164,.7);animation:blip 1.6s infinite}
+.map-log{border-color:rgba(235,210,168,.28);background:rgba(40,15,22,.5)}
+.map-log h4{color:#EAD0A4}.map-log h4::before{background:#EAD0A4;box-shadow:0 0 6px #EAD0A4}
+.log b{color:#fff}.log{border-left-color:#EAD0A4}
+.rt.transit{background:rgba(235,210,168,.16);color:#EAD0A4}
+.shipmap .step .sc{border-color:#EAD0A4;color:#EAD0A4}
