@@ -587,3 +587,9 @@ footer{background:var(--cream-2);border-top:1px solid var(--line);padding:60px 0
   .tl-card::before{display:none}
   .tl-step:nth-child(odd) .tl-card,.tl-step:nth-child(even) .tl-card{bottom:auto;top:auto}
 }
+
+/* farmers — real Japan map highlighting Chiba */
+.jpmap{max-width:540px;margin:0 auto;text-align:center}
+.jpmap svg{width:100%;max-width:370px;height:auto;display:block;margin:0 auto;overflow:visible}
+.jpmap-cap{margin:20px auto 0;color:var(--greige-deep);font-size:.92rem;max-width:32em;line-height:1.65}
+.jpmap-cap b{color:var(--red);font-weight:600}
