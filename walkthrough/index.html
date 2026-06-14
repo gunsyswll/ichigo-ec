@@ -1,0 +1,112 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ichigo — Website Walkthrough</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--red:#D94050;--red-deep:#B22F40;--cream:#FBF6F1;--cream2:#F3EBE3;--greige:#9E8E7E;--greige-deep:#6E6256;--ink:#2B2420;--line:rgba(110,98,86,.18)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Outfit,sans-serif;color:var(--ink);background:var(--cream);line-height:1.6}
+h1,h2,h3,h4{font-family:'Libre Baskerville',serif;font-weight:400}
+.wrap{max-width:1080px;margin:0 auto;padding:0 40px}
+.cover{background:radial-gradient(120% 120% at 70% 10%,#fff,var(--cream2) 70%,#EAD9C8);padding:90px 0 70px;border-bottom:1px solid var(--line)}
+.cover .brand{font-family:'Libre Baskerville';font-size:1.3rem;letter-spacing:.04em;color:var(--red);margin-bottom:30px}
+.cover h1{font-size:clamp(2.4rem,5vw,3.6rem);line-height:1.08}
+.cover h1 em{color:var(--red)}
+.cover .sub{margin-top:18px;color:var(--greige-deep);max-width:40em;font-size:1.05rem}
+.cover .meta{margin-top:26px;font-size:.85rem;letter-spacing:.14em;text-transform:uppercase;color:var(--greige)}
+.intro{padding:54px 0;border-bottom:1px solid var(--line)}
+.intro h3{font-size:1.5rem;margin-bottom:14px}
+.intro p{color:var(--greige-deep);max-width:54em;margin-bottom:10px}
+.intro ul{margin:14px 0 0 0;list-style:none;display:grid;gap:8px}
+.intro li{padding-left:18px;position:relative;color:var(--greige-deep);font-size:.95rem}
+.intro li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:8px;background:var(--red);border-radius:50% 50% 50% 0;transform:rotate(45deg)}
+.intro li b{color:var(--ink)}
+.page{padding:54px 0;border-bottom:1px solid var(--line)}
+.ph-head .kicker{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--red);font-weight:600}
+.ph-head h2{font-size:2rem;margin:8px 0 4px}
+.ph-head .purpose{color:var(--greige-deep);max-width:50em}
+.page-grid{display:grid;grid-template-columns:1fr 460px;gap:46px;margin-top:28px;align-items:start}
+.sec{display:flex;gap:14px;padding:13px 0;border-top:1px solid var(--line)}
+.sec:first-child{border-top:none}
+.sec .n{font-family:'Libre Baskerville';color:var(--red);font-size:.95rem;min-width:26px}
+.sec h4{font-size:1rem;margin-bottom:2px}
+.sec p{font-size:.9rem;color:var(--greige-deep)}
+.shot{position:sticky;top:24px}
+.shot img{width:100%;display:block;border-radius:12px;border:1px solid var(--line);box-shadow:0 24px 60px -28px rgba(43,36,32,.5)}
+footer{padding:40px 0 60px;text-align:center;color:var(--greige);font-size:.85rem}
+@media(max-width:860px){.page-grid{grid-template-columns:1fr}.shot{position:static}}
+@media print{.page-grid{display:block}.shot{position:static;margin-top:18px}.shot img{max-width:660px;margin:0 auto;box-shadow:none}.page{padding:30px 0}}
+</style></head>
+<body>
+<div class="cover"><div class="wrap">
+  <div class="brand">Ichigo ／苺</div>
+  <h1>Website <em>Walkthrough</em></h1>
+  <p class="sub">Premium Japanese strawberries — pre-order &amp; 頒布会 subscription — delivered fresh to the Philippines. A page-by-page guide to the storefront and what every section does.</p>
+  <div class="meta">Design preview · for client review</div>
+</div></div>
+
+<div class="intro"><div class="wrap">
+  <h3>What this is</h3>
+  <p>A custom storefront in the brand's image-led, "ちょこっと贅沢 (a little luxury)" style — simple, professional and approachable. Palette: Ripe Red, warm off-white and greige; type: Libre Baskerville + Outfit. The site centres on lot-based <b>pre-orders</b>, the monthly <b>頒布会 club</b>, and farmer storytelling with QR traceability.</p>
+  <h3 style="margin-top:24px">Pages</h3>
+  <ul><li><b>Home</b> — The storefront's front door — sets the premium-but-approachable tone and funnels visitors to reserve the next arrival.</li><li><b>Shop / Reserve</b> — The catalogue — browse and reserve from the current and upcoming lots.</li><li><b>Farmers</b> — Builds trust — the people and places behind every box (the 親近感 pillar).</li><li><b>Farm detail</b> — A deep-dive on a single farm — story, method, and its boxes.</li><li><b>About</b> — The company story and the import/logistics credibility.</li><li><b>FAQ</b> — Self-service answers to reduce pre-purchase friction.</li><li><b>Delivery &amp; Freshness</b> — Sets delivery expectations and reassures on freshness — key for a pre-paid, perishable product.</li><li><b>Product detail</b> — The conversion page — everything needed to reserve one box.</li><li><b>404 (not found)</b> — A friendly, on-brand dead-end that routes lost visitors back to shopping.</li></ul>
+  <p style="margin-top:18px;font-size:.85rem"><b>Note:</b> all photography shown is temporary placeholder imagery — final shots and the real farm details (names, varieties, Chiba farms) will replace them.</p>
+</div></div>
+
+<div class="wrap"><section class="page">
+  <div class="ph-head"><span class="kicker">index.html</span><h2>Home</h2><p class="purpose">The storefront's front door — sets the premium-but-approachable tone and funnels visitors to reserve the next arrival.</p></div>
+  <div class="page-grid">
+    <div class="secs"><div class="sec"><div class="n">01</div><div><h4>Announcement bar</h4><p>Rotating notice for the current drop ('New arrival · Pre-orders open · Limited boxes').</p></div></div><div class="sec"><div class="n">02</div><div><h4>Header &amp; navigation</h4><p>Logo, primary nav (Shop/Reserve, Subscription, Farmers, How It Works, FAQ), account + cart, and a 'Reserve Now' button.</p></div></div><div class="sec"><div class="n">03</div><div><h4>Hero</h4><p>Headline 'Premium Japanese strawberries, delivered fresh in the Philippines', lead copy, two CTAs (Reserve Next Arrival / Join Waitlist), trust badges, and the hero photo.</p></div></div><div class="sec"><div class="n">04</div><div><h4>Next-arrival strip</h4><p>At-a-glance lot info: arrival date, reservation deadline, delivery window, boxes available, with a Reserve CTA.</p></div></div><div class="sec"><div class="n">05</div><div><h4>Marquee</h4><p>Scrolling keyword ribbon (varieties, Chiba, cold-chain, 頒布会, single-origin) for texture and brand cues.</p></div></div><div class="sec"><div class="n">06</div><div><h4>Choose your box</h4><p>Three featured products — Standard Box, Premium Gift Box, Japanese Strawberry Club — as image cards.</p></div></div><div class="sec"><div class="n">07</div><div><h4>The quality you can taste</h4><p>Why Japanese strawberries are different — short value points (carefully grown, peak-ripeness, cold-chain).</p></div></div><div class="sec"><div class="n">08</div><div><h4>Statement block</h4><p>Bold red/white 'Grown in Japan. Loved in the Philippines.' moment with a 3D strawberry.</p></div></div><div class="sec"><div class="n">09</div><div><h4>Farmers</h4><p>'Not a far-away fruit — a farmer you know.' Two farmer cards linking to their stories.</p></div></div><div class="sec"><div class="n">10</div><div><h4>The journey (How it works)</h4><p>Animated Chiba → your-door map (truck → plane → warehouse → van) plus the step timeline: Reserve → Harvested &amp; Flown → Quality Checked → Delivered.</p></div></div><div class="sec"><div class="n">11</div><div><h4>頒布会 Club band</h4><p>Promo for the monthly subscription club.</p></div></div><div class="sec"><div class="n">12</div><div><h4>Info cards</h4><p>Delivery, freshness and quality reassurances.</p></div></div><div class="sec"><div class="n">13</div><div><h4>Newsletter</h4><p>Email capture for arrivals &amp; restocks.</p></div></div><div class="sec"><div class="n">14</div><div><h4>FAQ teaser + Footer</h4><p>Common questions, then the full footer (shop, info, policies, account).</p></div></div></div>
+    <div class="shot"><img src="img/index.jpg" alt="Home"></div>
+  </div>
+</section><section class="page">
+  <div class="ph-head"><span class="kicker">shop.html</span><h2>Shop / Reserve</h2><p class="purpose">The catalogue — browse and reserve from the current and upcoming lots.</p></div>
+  <div class="page-grid">
+    <div class="secs"><div class="sec"><div class="n">01</div><div><h4>Page hero</h4><p>'Shop &amp; Reserve' title, quick filter tabs (All / This Week / Pre-order / Gift / Subscription / Sold-Out), and the arrival/deadline summary.</p></div></div><div class="sec"><div class="n">02</div><div><h4>Product grid</h4><p>Nine product cards (boxes, gift sets, subscription, limited lots) with status tags (Pre-order / Gift / New / Sold Out), price and a Reserve action. Includes working filters + pagination.</p></div></div><div class="sec"><div class="n">03</div><div><h4>Newsletter + Footer</h4><p>Back-in-stock email capture and the site footer.</p></div></div></div>
+    <div class="shot"><img src="img/shop.jpg" alt="Shop / Reserve"></div>
+  </div>
+</section><section class="page">
+  <div class="ph-head"><span class="kicker">farmers.html</span><h2>Farmers</h2><p class="purpose">Builds trust — the people and places behind every box (the 親近感 pillar).</p></div>
+  <div class="page-grid">
+    <div class="secs"><div class="sec"><div class="n">01</div><div><h4>Hero + stats</h4><p>'Meet the Farmers Behind Every Box' with headline figures (partner farms, region, combined experience).</p></div></div><div class="sec"><div class="n">02</div><div><h4>Two growers</h4><p>Why we work with only two farms — a card per farm (story snippet, variety tags, link to the farm page).</p></div></div><div class="sec"><div class="n">03</div><div><h4>Our standard</h4><p>The criteria every partner farm must meet (quality, sustainable practice, cold-chain ready).</p></div></div><div class="sec"><div class="n">04</div><div><h4>Where your strawberries grow</h4><p>A real map of Japan highlighting Chiba, where the farms are, with a short note.</p></div></div><div class="sec"><div class="n">05</div><div><h4>CTA + Footer</h4><p>Reserve prompt and footer.</p></div></div></div>
+    <div class="shot"><img src="img/farmers.jpg" alt="Farmers"></div>
+  </div>
+</section><section class="page">
+  <div class="ph-head"><span class="kicker">farm.html</span><h2>Farm detail</h2><p class="purpose">A deep-dive on a single farm — story, method, and its boxes.</p></div>
+  <div class="page-grid">
+    <div class="secs"><div class="sec"><div class="n">01</div><div><h4>Farm hero</h4><p>Farm name, location (Chiba), and a quick facts table.</p></div></div><div class="sec"><div class="n">02</div><div><h4>The story</h4><p>The grower's background and philosophy.</p></div></div><div class="sec"><div class="n">03</div><div><h4>Growing method &amp; philosophy</h4><p>How the berries are grown — the craft points.</p></div></div><div class="sec"><div class="n">04</div><div><h4>Inside the farm</h4><p>A photo gallery of field, harvest and berries.</p></div></div><div class="sec"><div class="n">05</div><div><h4>Boxes from this farm</h4><p>Products that come from this grower, plus a cross-link to the other farm.</p></div></div></div>
+    <div class="shot"><img src="img/farm.jpg" alt="Farm detail"></div>
+  </div>
+</section><section class="page">
+  <div class="ph-head"><span class="kicker">about.html</span><h2>About</h2><p class="purpose">The company story and the import/logistics credibility.</p></div>
+  <div class="page-grid">
+    <div class="secs"><div class="sec"><div class="n">01</div><div><h4>Hero</h4><p>'Bringing Japan's Finest Strawberries to the Philippines' with section tabs.</p></div></div><div class="sec"><div class="n">02</div><div><h4>Our Story &amp; Mission</h4><p>Why the business exists, values, and headline stats.</p></div></div><div class="sec"><div class="n">03</div><div><h4>Officially Imported &amp; Managed</h4><p>Credential cards (licensed importer, cold-chain, customs, food-safety).</p></div></div><div class="sec"><div class="n">04</div><div><h4>From Japan to the Philippines</h4><p>The 6-step journey as a timeline graph: Harvest → Quality Check → Cold-Chain Air → PH Customs → Local QC → Delivered (≈36–48h door-to-door).</p></div></div><div class="sec"><div class="n">05</div><div><h4>The people behind the brand</h4><p>Founder/team introductions.</p></div></div><div class="sec"><div class="n">06</div><div><h4>CTA + Footer</h4><p>Reserve prompt and footer.</p></div></div></div>
+    <div class="shot"><img src="img/about.jpg" alt="About"></div>
+  </div>
+</section><section class="page">
+  <div class="ph-head"><span class="kicker">faq.html</span><h2>FAQ</h2><p class="purpose">Self-service answers to reduce pre-purchase friction.</p></div>
+  <div class="page-grid">
+    <div class="secs"><div class="sec"><div class="n">01</div><div><h4>Hero + search</h4><p>'How can we help?' with a search field.</p></div></div><div class="sec"><div class="n">02</div><div><h4>Categories + questions</h4><p>Sidebar categories (Ordering &amp; Reservation, Delivery, Products &amp; Quality) with expandable Q&amp;A accordions.</p></div></div><div class="sec"><div class="n">03</div><div><h4>Still have questions</h4><p>Contact options (email, live chat, Messenger) and footer.</p></div></div></div>
+    <div class="shot"><img src="img/faq.jpg" alt="FAQ"></div>
+  </div>
+</section><section class="page">
+  <div class="ph-head"><span class="kicker">delivery.html</span><h2>Delivery &amp; Freshness</h2><p class="purpose">Sets delivery expectations and reassures on freshness — key for a pre-paid, perishable product.</p></div>
+  <div class="page-grid">
+    <div class="secs"><div class="sec"><div class="n">01</div><div><h4>Hero + stats</h4><p>'Delivery &amp; Freshness' with headline figures (areas, lead time, fee, guarantee).</p></div></div><div class="sec"><div class="n">02</div><div><h4>Delivery area</h4><p>Serviced regions with a coverage map and a postcode/area checker.</p></div></div><div class="sec"><div class="n">03</div><div><h4>Shipping schedule</h4><p>A weekly timeline from reservation deadline to delivery.</p></div></div><div class="sec"><div class="n">04</div><div><h4>Freshness guarantee</h4><p>The promise (and what happens if a box arrives damaged).</p></div></div><div class="sec"><div class="n">05</div><div><h4>Storage &amp; handling</h4><p>How to keep the berries at their best, plus a downloadable guide.</p></div></div><div class="sec"><div class="n">06</div><div><h4>CTA + Footer</h4><p>Reserve prompt and footer.</p></div></div></div>
+    <div class="shot"><img src="img/delivery.jpg" alt="Delivery &amp; Freshness"></div>
+  </div>
+</section><section class="page">
+  <div class="ph-head"><span class="kicker">product.html</span><h2>Product detail</h2><p class="purpose">The conversion page — everything needed to reserve one box.</p></div>
+  <div class="page-grid">
+    <div class="secs"><div class="sec"><div class="n">01</div><div><h4>Product gallery + details</h4><p>Main image + thumbnails, price, specs table, quantity, and the Reserve/Pre-order action.</p></div></div><div class="sec"><div class="n">02</div><div><h4>Grown by</h4><p>The farm behind this box, with a link to its story and a QR-traceability nod.</p></div></div><div class="sec"><div class="n">03</div><div><h4>You might also like</h4><p>Related products to raise basket size.</p></div></div><div class="sec"><div class="n">04</div><div><h4>Footer</h4><p>Site footer.</p></div></div></div>
+    <div class="shot"><img src="img/product.jpg" alt="Product detail"></div>
+  </div>
+</section><section class="page">
+  <div class="ph-head"><span class="kicker">404.html</span><h2>404 (not found)</h2><p class="purpose">A friendly, on-brand dead-end that routes lost visitors back to shopping.</p></div>
+  <div class="page-grid">
+    <div class="secs"><div class="sec"><div class="n">01</div><div><h4>Error block</h4><p>A floating strawberry, '404 — this one rolled off the table', and buttons back to Home / Shop plus quick links.</p></div></div></div>
+    <div class="shot"><img src="img/404.jpg" alt="404 (not found)"></div>
+  </div>
+</section></div>
+
+<footer>Ichigo — Website Walkthrough · design preview for client review</footer>
+</body></html>
