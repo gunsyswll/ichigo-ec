@@ -147,3 +147,30 @@
     });
   });
 })();
+
+// ---- photo audit overlay: append ?audit=photos to any page to tag every photo spot (Pnn) ----
+(function(){
+  if(!/[?&]audit=photos/.test(location.search)) return;
+  function run(){
+    var s=document.createElement('style');           // audit mode: reveal everything so all photos show at once
+    s.textContent='[data-reveal]{opacity:1!important;transform:none!important}';
+    document.head.appendChild(s);
+    document.querySelectorAll('.ph').forEach(function(el,i){
+      if(getComputedStyle(el).position==='static') el.style.position='relative';
+      el.style.outline='3px solid #1565c0'; el.style.outlineOffset='-3px';
+      var id='P'+('0'+(i+1)).slice(-2);
+      var b=document.createElement('div');
+      b.textContent='📷 '+id;
+      b.style.cssText='position:absolute;top:6px;left:6px;z-index:60;background:#1565c0;color:#fff;'+
+        'font:700 12px/1.4 Outfit,sans-serif;letter-spacing:.04em;padding:3px 9px;border-radius:6px;'+
+        'box-shadow:0 2px 10px rgba(0,0,0,.45);pointer-events:none';
+      el.appendChild(b);
+    });
+    var n=document.querySelectorAll('.ph').length, t=document.createElement('div');
+    t.textContent='PHOTO AUDIT · '+n+' spots on this page · see PHOTOS.md';
+    t.style.cssText='position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#1565c0;color:#fff;'+
+      'text-align:center;font:600 13px/2.6 Outfit,sans-serif;letter-spacing:.05em';
+    document.body.appendChild(t);
+  }
+  if(document.readyState!=='loading') run(); else document.addEventListener('DOMContentLoaded',run);
+})();
