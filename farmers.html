@@ -3,13 +3,13 @@
 <title>Our Farmers · Ichigo — Japanese Strawberries (PH)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=78896a5f">
+<link rel="stylesheet" href="assets/styles.css?v=0cbbd6b8">
 <script>(function(d){d.documentElement.classList.add('reveal-js');setTimeout(function(){var n=d.querySelectorAll('[data-reveal]:not(.in)');for(var i=0;i<n.length;i++)n[i].classList.add('in')},4000)})(document)</script>
 </head><body>
 <div class="announce">New arrival from Japan · Pre-orders now open · Limited boxes available &nbsp;<a href="shop.html">Reserve Now →</a></div>
 <header><div class="wrap nav">
   <a class="brand" href="index.html"><span class="seed"></span> <b>Ichigo</b><span style="color:var(--greige);font-size:.92rem;font-family:Outfit;letter-spacing:.1em">／苺</span></a>
-  <nav class="links"><a href="shop.html">Shop / Reserve</a><a href="shop.html#club">Subscription</a><a href="farmers.html">Farmers</a><a href="index.html#journey">How It Works</a><a href="about.html">About</a><a href="faq.html">FAQ</a></nav>
+  <nav class="links"><a href="shop.html">Shop / Reserve</a><a href="shop.html#club">Subscription</a><a href="farmers.html">Farmers</a><a href="index.html#journey">How It Works</a><a href="about.html">About</a><a href="help.html">Help</a></nav>
   <div class="nav-right">
     <a class="icon-btn" href="#" aria-label="Account"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></a>
     <a class="icon-btn" href="#" aria-label="Cart"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6h15l-1.5 9h-12L6 6zM6 6l-1-3H2"/><circle cx="9" cy="20" r="1.3"/><circle cx="18" cy="20" r="1.3"/></svg><span class="dot">0</span></a>
@@ -35,14 +35,14 @@
   </div>
 </div></section>
 
-<section id="farm-detail" style="padding-top:0"><div class="wrap">
-  <div class="farm-tabs" role="tablist" aria-label="Choose a farm">
-    <button class="farm-tab active" data-farm="a" type="button" role="tab" aria-selected="true">Farm A — Berry Farm</button>
-    <button class="farm-tab" data-farm="b" type="button" role="tab" aria-selected="false">Farm B — Sun Harvest</button>
+<section id="farm-detail" data-seg="farm" style="padding-top:0"><div class="wrap">
+  <div class="seg-tabs" role="tablist" aria-label="Choose a farm">
+    <button class="seg-tab active" data-id="a" type="button" role="tab" aria-selected="true">Farm A — Berry Farm</button>
+    <button class="seg-tab" data-id="b" type="button" role="tab" aria-selected="false">Farm B — Sun Harvest</button>
   </div>
 
   <!-- ===== Farm A ===== -->
-  <div class="farm-panel" data-farm="a" role="tabpanel">
+  <div class="seg-panel" data-id="a" role="tabpanel">
     <div class="detail-hero">
       <div class="ph" data-img="people"></div>
       <div class="dh-info">
@@ -66,11 +66,13 @@
       <p style="margin-top:14px">Today the current generation continues that tradition, pairing hard-won family knowledge with careful innovation in temperature and humidity control. Every box that leaves the farm carries that history — and the human care behind it.</p>
     </div>
 
-    <div class="sec-head" style="margin-top:52px"><span class="eyebrow muted">Craft</span><h2>Growing method &amp; philosophy</h2></div>
-    <div class="method-grid">
-      <div class="method"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 2c3 5 6 7 6 11a6 6 0 11-12 0c0-4 3-6 6-11z"/></svg></div><h3>Soil &amp; Water</h3><p>A carefully managed soil and water balance, unique to this farm, builds the berry's depth of flavour.</p></div>
-      <div class="method"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 3v9M8 12a3 3 0 106 0V5a3 3 0 10-6 0z"/></svg></div><h3>Temperature Control</h3><p>Greenhouse temperature and humidity are tuned through the season for optimum sweetness.</p></div>
-      <div class="method"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 14l5-9 4 7 3-3 4 5z"/><path d="M3 18h16"/></svg></div><h3>Hand-Picked Selection</h3><p>Each berry is hand-picked at peak ripeness and inspected before it's ever packed.</p></div>
+    <div class="panel-band pink">
+      <div class="sec-head"><span class="eyebrow muted">Craft</span><h2>Growing method &amp; philosophy</h2></div>
+      <div class="method-grid">
+        <div class="method"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 2c3 5 6 7 6 11a6 6 0 11-12 0c0-4 3-6 6-11z"/></svg></div><h3>Soil &amp; Water</h3><p>A carefully managed soil and water balance, unique to this farm, builds the berry's depth of flavour.</p></div>
+        <div class="method"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 3v9M8 12a3 3 0 106 0V5a3 3 0 10-6 0z"/></svg></div><h3>Temperature Control</h3><p>Greenhouse temperature and humidity are tuned through the season for optimum sweetness.</p></div>
+        <div class="method"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 14l5-9 4 7 3-3 4 5z"/><path d="M3 18h16"/></svg></div><h3>Hand-Picked Selection</h3><p>Each berry is hand-picked at peak ripeness and inspected before it's ever packed.</p></div>
+      </div>
     </div>
 
     <div class="bigquote" style="margin-top:52px">"We grow the strawberry we'd want to give our own family — nothing less leaves this farm."<span class="by">— Tanaka-san, Farm A</span></div>
@@ -90,7 +92,7 @@
   </div>
 
   <!-- ===== Farm B ===== -->
-  <div class="farm-panel" data-farm="b" role="tabpanel" hidden>
+  <div class="seg-panel" data-id="b" role="tabpanel" hidden>
     <div class="detail-hero">
       <div class="ph soft" data-img="people"></div>
       <div class="dh-info">
@@ -114,11 +116,13 @@
       <p style="margin-top:14px">Their approach pairs advanced cultivation with old-fashioned patience — light, climate, and selection tuned so that every Tochiotome and Skyberry is chosen for shine and flavour before it is ever packed.</p>
     </div>
 
-    <div class="sec-head" style="margin-top:52px"><span class="eyebrow muted">Craft</span><h2>Growing method &amp; philosophy</h2></div>
-    <div class="method-grid">
-      <div class="method"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 2l2.5 5 5.5.8-4 4 1 5.5L11 14.5 6 17l1-5.5-4-4 5.5-.8z"/></svg></div><h3>Variety Selection</h3><p>Only the varieties that travel and taste best — Tochiotome for balance, Skyberry for size and shine.</p></div>
-      <div class="method"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 3v9M8 12a3 3 0 106 0V5a3 3 0 10-6 0z"/></svg></div><h3>Climate Tuning</h3><p>Light and humidity are adjusted through the season for even ripening and deep, uniform colour.</p></div>
-      <div class="method"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 14l5-9 4 7 3-3 4 5z"/><path d="M3 18h16"/></svg></div><h3>Careful Selection</h3><p>Every berry is graded by shape, shine, and sweetness before it earns a place in the box.</p></div>
+    <div class="panel-band pink">
+      <div class="sec-head"><span class="eyebrow muted">Craft</span><h2>Growing method &amp; philosophy</h2></div>
+      <div class="method-grid">
+        <div class="method"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 2l2.5 5 5.5.8-4 4 1 5.5L11 14.5 6 17l1-5.5-4-4 5.5-.8z"/></svg></div><h3>Variety Selection</h3><p>Only the varieties that travel and taste best — Tochiotome for balance, Skyberry for size and shine.</p></div>
+        <div class="method"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 3v9M8 12a3 3 0 106 0V5a3 3 0 10-6 0z"/></svg></div><h3>Climate Tuning</h3><p>Light and humidity are adjusted through the season for even ripening and deep, uniform colour.</p></div>
+        <div class="method"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 14l5-9 4 7 3-3 4 5z"/><path d="M3 18h16"/></svg></div><h3>Careful Selection</h3><p>Every berry is graded by shape, shine, and sweetness before it earns a place in the box.</p></div>
+      </div>
     </div>
 
     <div class="bigquote" style="margin-top:52px">"A beautiful berry earns its place on the table before the first bite."<span class="by">— Sato-san, Farm B</span></div>
@@ -326,11 +330,11 @@ l3 129 -35 -22 c-19 -11 -41 -21 -50 -21 -8 0 -35 20 -59 44 -33 34 -52 45
   <div class="foot-grid">
     <div class="foot-brand"><a class="brand" href="index.html"><span class="seed"></span> <b>Ichigo</b></a><p>Premium Japanese strawberries, reserved by the lot and delivered fresh across the Philippines.</p></div>
     <div class="foot-col"><h4>Shop</h4><a href="shop.html">All Products</a><a href="shop.html">Gift Boxes</a><a href="shop.html#club">Subscription (Club)</a><a href="shop.html">Sold Out / Waitlist</a></div>
-    <div class="foot-col"><h4>Information</h4><a href="about.html">About Us</a><a href="farmers.html">Farmers</a><a href="index.html#journey">How It Works</a><a href="delivery.html">Delivery &amp; Freshness</a><a href="faq.html">FAQ</a></div>
+    <div class="foot-col"><h4>Information</h4><a href="about.html">About Us</a><a href="farmers.html">Farmers</a><a href="index.html#journey">How It Works</a><a href="help.html#help-delivery">Delivery &amp; Freshness</a><a href="help.html#help-faq">FAQ</a></div>
     <div class="foot-col"><h4>Policies</h4><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Refund &amp; Returns</a><a href="#">Shipping Policy</a><a href="#">Subscription Policy</a></div>
     <div class="foot-col"><h4>Account</h4><a href="#">Contact / Support</a><a href="#">My Account</a><a href="#">Order History</a><a href="#">Addresses</a></div>
   </div>
   <div class="foot-bottom"><div class="legal"><a href="#">Privacy</a><span>·</span><a href="#">Terms</a><span>·</span><a href="#">Refund</a><span>·</span><a href="#">Shipping</a><span>·</span><a href="#">Subscription</a><span>·</span><a href="#">Cookie</a><span>·</span><a href="#">Legal Notice</a></div>
   <div class="pays"><span>GCash</span><span>Maya</span><span>VISA</span><span>Mastercard</span><span style="border:none;background:none">PH | EN</span></div></div>
 </div></footer>
-<script src="assets/app.js?v=78896a5f" defer></script></body></html>
+<script src="assets/app.js?v=0cbbd6b8" defer></script></body></html>

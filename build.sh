@@ -11,8 +11,7 @@ build(){ # $1=name $2=title
 build shop "Shop & Reserve"
 build farmers "Our Farmers"
 build about "About Us"
-build faq "Help & FAQ"
-build delivery "Delivery & Freshness"
+build help "Help & Info"
 build product "Standard Strawberry Box"
 # index.html is standalone — stamp it in place
 stamp < index.html > index.html.tmp && mv index.html.tmp index.html

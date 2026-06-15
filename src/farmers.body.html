@@ -17,14 +17,14 @@
   </div>
 </div></section>
 
-<section id="farm-detail" style="padding-top:0"><div class="wrap">
-  <div class="farm-tabs" role="tablist" aria-label="Choose a farm">
-    <button class="farm-tab active" data-farm="a" type="button" role="tab" aria-selected="true">Farm A — Berry Farm</button>
-    <button class="farm-tab" data-farm="b" type="button" role="tab" aria-selected="false">Farm B — Sun Harvest</button>
+<section id="farm-detail" data-seg="farm" style="padding-top:0"><div class="wrap">
+  <div class="seg-tabs" role="tablist" aria-label="Choose a farm">
+    <button class="seg-tab active" data-id="a" type="button" role="tab" aria-selected="true">Farm A — Berry Farm</button>
+    <button class="seg-tab" data-id="b" type="button" role="tab" aria-selected="false">Farm B — Sun Harvest</button>
   </div>
 
   <!-- ===== Farm A ===== -->
-  <div class="farm-panel" data-farm="a" role="tabpanel">
+  <div class="seg-panel" data-id="a" role="tabpanel">
     <div class="detail-hero">
       <div class="ph" data-img="people"></div>
       <div class="dh-info">
@@ -48,11 +48,13 @@
       <p style="margin-top:14px">Today the current generation continues that tradition, pairing hard-won family knowledge with careful innovation in temperature and humidity control. Every box that leaves the farm carries that history — and the human care behind it.</p>
     </div>
 
-    <div class="sec-head" style="margin-top:52px"><span class="eyebrow muted">Craft</span><h2>Growing method &amp; philosophy</h2></div>
-    <div class="method-grid">
-      <div class="method"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 2c3 5 6 7 6 11a6 6 0 11-12 0c0-4 3-6 6-11z"/></svg></div><h3>Soil &amp; Water</h3><p>A carefully managed soil and water balance, unique to this farm, builds the berry's depth of flavour.</p></div>
-      <div class="method"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 3v9M8 12a3 3 0 106 0V5a3 3 0 10-6 0z"/></svg></div><h3>Temperature Control</h3><p>Greenhouse temperature and humidity are tuned through the season for optimum sweetness.</p></div>
-      <div class="method"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 14l5-9 4 7 3-3 4 5z"/><path d="M3 18h16"/></svg></div><h3>Hand-Picked Selection</h3><p>Each berry is hand-picked at peak ripeness and inspected before it's ever packed.</p></div>
+    <div class="panel-band pink">
+      <div class="sec-head"><span class="eyebrow muted">Craft</span><h2>Growing method &amp; philosophy</h2></div>
+      <div class="method-grid">
+        <div class="method"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 2c3 5 6 7 6 11a6 6 0 11-12 0c0-4 3-6 6-11z"/></svg></div><h3>Soil &amp; Water</h3><p>A carefully managed soil and water balance, unique to this farm, builds the berry's depth of flavour.</p></div>
+        <div class="method"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 3v9M8 12a3 3 0 106 0V5a3 3 0 10-6 0z"/></svg></div><h3>Temperature Control</h3><p>Greenhouse temperature and humidity are tuned through the season for optimum sweetness.</p></div>
+        <div class="method"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 14l5-9 4 7 3-3 4 5z"/><path d="M3 18h16"/></svg></div><h3>Hand-Picked Selection</h3><p>Each berry is hand-picked at peak ripeness and inspected before it's ever packed.</p></div>
+      </div>
     </div>
 
     <div class="bigquote" style="margin-top:52px">"We grow the strawberry we'd want to give our own family — nothing less leaves this farm."<span class="by">— Tanaka-san, Farm A</span></div>
@@ -72,7 +74,7 @@
   </div>
 
   <!-- ===== Farm B ===== -->
-  <div class="farm-panel" data-farm="b" role="tabpanel" hidden>
+  <div class="seg-panel" data-id="b" role="tabpanel" hidden>
     <div class="detail-hero">
       <div class="ph soft" data-img="people"></div>
       <div class="dh-info">
@@ -96,11 +98,13 @@
       <p style="margin-top:14px">Their approach pairs advanced cultivation with old-fashioned patience — light, climate, and selection tuned so that every Tochiotome and Skyberry is chosen for shine and flavour before it is ever packed.</p>
     </div>
 
-    <div class="sec-head" style="margin-top:52px"><span class="eyebrow muted">Craft</span><h2>Growing method &amp; philosophy</h2></div>
-    <div class="method-grid">
-      <div class="method"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 2l2.5 5 5.5.8-4 4 1 5.5L11 14.5 6 17l1-5.5-4-4 5.5-.8z"/></svg></div><h3>Variety Selection</h3><p>Only the varieties that travel and taste best — Tochiotome for balance, Skyberry for size and shine.</p></div>
-      <div class="method"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 3v9M8 12a3 3 0 106 0V5a3 3 0 10-6 0z"/></svg></div><h3>Climate Tuning</h3><p>Light and humidity are adjusted through the season for even ripening and deep, uniform colour.</p></div>
-      <div class="method"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 14l5-9 4 7 3-3 4 5z"/><path d="M3 18h16"/></svg></div><h3>Careful Selection</h3><p>Every berry is graded by shape, shine, and sweetness before it earns a place in the box.</p></div>
+    <div class="panel-band pink">
+      <div class="sec-head"><span class="eyebrow muted">Craft</span><h2>Growing method &amp; philosophy</h2></div>
+      <div class="method-grid">
+        <div class="method"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 2l2.5 5 5.5.8-4 4 1 5.5L11 14.5 6 17l1-5.5-4-4 5.5-.8z"/></svg></div><h3>Variety Selection</h3><p>Only the varieties that travel and taste best — Tochiotome for balance, Skyberry for size and shine.</p></div>
+        <div class="method"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 3v9M8 12a3 3 0 106 0V5a3 3 0 10-6 0z"/></svg></div><h3>Climate Tuning</h3><p>Light and humidity are adjusted through the season for even ripening and deep, uniform colour.</p></div>
+        <div class="method"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 14l5-9 4 7 3-3 4 5z"/><path d="M3 18h16"/></svg></div><h3>Careful Selection</h3><p>Every berry is graded by shape, shine, and sweetness before it earns a place in the box.</p></div>
+      </div>
     </div>
 
     <div class="bigquote" style="margin-top:52px">"A beautiful berry earns its place on the table before the first bite."<span class="by">— Sato-san, Farm B</span></div>
