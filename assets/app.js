@@ -1,26 +1,51 @@
 // Ichigo — shared interactions: scroll reveals, mobile nav, header, parallax
 (function(){
   // ---- scroll-reveal (Apple-like staggered fade/slide) ----
+  // Enable the hidden-then-reveal state only now that JS is confirmed running.
+  // (CSS keeps everything visible unless html.reveal-js is present, so a JS
+  //  failure or an observer miss can never leave content permanently hidden.)
+  var docEl = document.documentElement;
+  docEl.classList.add('reveal-js');
+
+  function reveal(el){ el.classList.add('in'); }
+  function revealAll(){ // absolute safety net — nothing stays hidden
+    document.querySelectorAll('[data-reveal]:not(.in)').forEach(reveal);
+    if(io) io.disconnect();
+  }
+
+  // threshold low + no negative bottom margin: previously
+  // rootMargin '-8%' + threshold 0.12 meant elements near the page bottom
+  // could never be scrolled high enough to trigger, so they stayed invisible.
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
-      if(e.isIntersecting){
-        // stagger siblings sharing a [data-stagger] parent
-        e.target.classList.add('in');
-        io.unobserve(e.target);
-      }
+      if(e.isIntersecting){ reveal(e.target); io.unobserve(e.target); }
     });
-  }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
+  }, {threshold:0.04, rootMargin:'0px 0px 0px 0px'});
 
   function wire(){
-    document.querySelectorAll('[data-reveal]').forEach(function(el){ io.observe(el); });
     // auto-stagger children inside [data-stagger]
     document.querySelectorAll('[data-stagger]').forEach(function(group){
       Array.prototype.forEach.call(group.children, function(child, i){
         if(child.hasAttribute('data-reveal')) child.style.setProperty('--d', (i*0.08)+'s');
       });
     });
+    document.querySelectorAll('[data-reveal]').forEach(function(el){ io.observe(el); });
+    // reveal anything already on-screen at load (incl. above the fold)
+    requestAnimationFrame(function(){
+      var vh = window.innerHeight;
+      document.querySelectorAll('[data-reveal]:not(.in)').forEach(function(el){
+        if(el.getBoundingClientRect().top < vh*0.96) reveal(el);
+      });
+    });
   }
   if(document.readyState!=='loading') wire(); else document.addEventListener('DOMContentLoaded', wire);
+
+  // bottom-of-page guard: when the user can't scroll any further, reveal the rest
+  window.addEventListener('scroll', function(){
+    if(window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) revealAll();
+  }, {passive:true});
+  // last-resort timer: guarantee full visibility even if every signal above is missed
+  window.addEventListener('load', function(){ setTimeout(revealAll, 3500); });
 
   // ---- mobile nav ----
   document.addEventListener('click', function(ev){

@@ -118,13 +118,17 @@ footer{background:var(--cream-2);border-top:1px solid var(--line);padding:60px 0
 .pays{display:flex;gap:7px;align-items:center}
 .pays span{font-size:.66rem;font-weight:600;padding:5px 10px;border-radius:6px;background:var(--cream);border:1px solid var(--line);color:var(--greige-deep)}
 
-/* ---------- scroll-reveal animation system (Apple-like) ---------- */
-[data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0s);will-change:opacity,transform}
-[data-reveal="left"]{transform:translateX(-30px)}
-[data-reveal="right"]{transform:translateX(30px)}
-[data-reveal="scale"]{transform:scale(.94)}
-[data-reveal].in{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){[data-reveal]{opacity:1;transform:none;transition:none}}
+/* ---------- scroll-reveal animation system (Apple-like) ----------
+   Progressive enhancement: content is fully visible by default. The
+   hidden-then-reveal state is scoped to html.reveal-js, which app.js
+   only adds when JS is running — so if JS fails or the observer misses
+   an element, the content is still shown (never permanently invisible). */
+html.reveal-js [data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0s);will-change:opacity,transform}
+html.reveal-js [data-reveal="left"]{transform:translateX(-30px)}
+html.reveal-js [data-reveal="right"]{transform:translateX(30px)}
+html.reveal-js [data-reveal="scale"]{transform:scale(.94)}
+html.reveal-js [data-reveal].in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){html.reveal-js [data-reveal]{opacity:1;transform:none;transition:none}}
 /* hero load stagger (no observer needed) */
 .rise{opacity:0;transform:translateY(20px);animation:rise 1s var(--ease) forwards}
 @keyframes rise{to{opacity:1;transform:none}}
@@ -599,3 +603,37 @@ footer{background:var(--cream-2);border-top:1px solid var(--line);padding:60px 0
 .timeline.light .tl-card h3{color:var(--ink);font-size:.98rem}
 .timeline.light .tl-card p{color:var(--greige-deep)}
 @media(max-width:760px){.timeline.light::before{background:linear-gradient(180deg,transparent,rgba(158,142,126,.5) 6%,rgba(158,142,126,.5) 94%,transparent)}}
+
+/* ===== A/B COMPARE: proposed "How it works" journey rail (jr-*) — self-contained; remove with its markup in index.html when a direction is chosen ===== */
+.jr-divider{display:flex;align-items:center;justify-content:center;padding:34px 0 0;background:var(--cream)}
+.jr-divider span{font:600 .7rem/1 Outfit,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--greige-deep);background:#fff;border:1px dashed var(--line);padding:9px 20px;border-radius:999px}
+.jr-sec{padding:72px 0 100px;background:linear-gradient(180deg,var(--cream),var(--cream-2))}
+.jr-sec .wrap{max-width:1180px;margin:0 auto;padding:0 48px}
+.jr-head{text-align:center;max-width:46em;margin:0 auto 52px}
+.jr-eyebrow{font:600 .74rem/1 Outfit,sans-serif;letter-spacing:.26em;text-transform:uppercase;color:var(--red)}
+.jr-head h2{font-family:'Libre Baskerville',serif;font-weight:400;font-size:clamp(2.1rem,3.4vw,2.9rem);line-height:1.12;margin:14px 0}
+.jr-head h2 em{color:var(--red);font-style:italic}
+.jr-head p{color:var(--greige-deep);font-size:1.06rem;line-height:1.6}
+.jr-panel{position:relative;background:#fff;border:1px solid var(--line);border-radius:26px;padding:42px 46px 46px;box-shadow:0 40px 90px -50px rgba(43,36,32,.5)}
+.jr-route{position:relative;height:188px;margin-bottom:14px}
+.jr-end{position:absolute;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:13px}
+.jr-end.from{left:6px}.jr-end.to{right:6px;flex-direction:row-reverse;text-align:right}
+.jr-flag{width:54px;height:54px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:var(--cream);border:1px solid var(--line);flex:none}
+.jr-end .k{font:600 .68rem/1.3 Outfit,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--greige-deep)}
+.jr-end .v{font-family:'Libre Baskerville',serif;font-size:1.18rem;color:var(--ink);margin-top:3px}
+.jr-arc{position:absolute;left:150px;right:150px;top:0;bottom:0}
+.jr-arc>svg{width:100%;height:100%;overflow:visible}
+.jr-rail{position:relative;margin-top:8px}
+.jr-railline{position:absolute;left:11%;right:11%;top:21px;height:2px;background:linear-gradient(90deg,var(--cream-2),rgba(217,64,80,.45),var(--cream-2))}
+.jr-steps{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+.jr-step{text-align:center;padding:0 6px}
+.jr-node{width:44px;height:44px;border-radius:50%;background:var(--red);color:#fff;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;font-family:'Libre Baskerville',serif;font-weight:700;font-size:1.02rem;border:4px solid #fff;box-shadow:0 6px 16px rgba(178,47,64,.4)}
+.jr-step .ic{color:var(--red);margin:0 auto 8px;display:flex;justify-content:center}
+.jr-step h3{font-family:'Libre Baskerville',serif;font-weight:400;font-size:1.16rem;margin-bottom:7px}
+.jr-step p{font-size:.92rem;line-height:1.55;color:var(--greige-deep);max-width:15.5em;margin:0 auto}
+.jr-when{display:inline-block;margin-top:11px;font:600 .72rem/1 Outfit,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--red-deep);background:var(--cream);border:1px solid var(--line);padding:5px 11px;border-radius:999px}
+.jr-ribbon{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:46px;background:linear-gradient(90deg,var(--red),#c4384a);color:#fff;border-radius:16px;padding:18px 26px;box-shadow:0 18px 40px -24px rgba(178,47,64,.7)}
+.jr-ribbon .pulse{width:11px;height:11px;border-radius:50%;background:#fff;box-shadow:0 0 0 6px rgba(255,255,255,.25);flex:none}
+.jr-ribbon b{font-family:'Libre Baskerville',serif;font-weight:400;font-size:1.2rem}
+.jr-ribbon .x{opacity:.4}.jr-ribbon span.t{opacity:.92;font-size:.96rem}
+@media(max-width:880px){.jr-steps{grid-template-columns:repeat(2,1fr);gap:34px}.jr-railline{display:none}.jr-route{height:150px}.jr-arc{left:90px;right:90px}.jr-ribbon{flex-direction:column;gap:8px;text-align:center}.jr-ribbon .x{display:none}}
