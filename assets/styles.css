@@ -643,3 +643,12 @@ a.method.linkcard{display:block;text-decoration:none;color:inherit;border-radius
 a.method.linkcard:hover{transform:translateY(-4px);box-shadow:var(--shadow);background:#fff}
 a.method.linkcard .link{display:inline-block;margin-top:10px;color:var(--red);font-weight:600;font-size:.85rem}
 @media(max-width:600px){.jump-target{scroll-margin-top:126px}}
+
+/* ---- contextual cross-links: shop hero nudge + product buy-box links ---- */
+.shop-nudge{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:20px;font-size:.86rem}
+.shop-nudge a{color:var(--red);font-weight:600}
+.shop-nudge a:hover{text-decoration:underline}
+.shop-nudge span{color:var(--greige)}
+.pd-links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:14px;font-size:.84rem}
+.pd-links a{color:var(--red);font-weight:600}
+.pd-links a:hover{text-decoration:underline}
