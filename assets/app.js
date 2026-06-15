@@ -241,3 +241,33 @@
     onScroll();
   });
 })();
+
+// ---- Help: client-side delivery-area checker (no backend / Shopify app needed) ----
+(function(){
+  var inp=document.getElementById('zipcheck'), btn=document.getElementById('zipbtn'), out=document.getElementById('zipresult');
+  if(!inp||!btn||!out) return;
+  var METRO=['makati','bgc','taguig','ortigas','quezon','qc','pasig','mandaluyong','manila','san juan','paranaque','parañaque','las pinas','las piñas','muntinlupa','pasay','marikina','caloocan','malabon','navotas','valenzuela','pateros'];
+  var NEARBY=['cavite','laguna','rizal','bulacan'];
+  var OTHER=['cebu','davao','iloilo','baguio'];
+  function has(list,v){ return list.some(function(c){ return v.indexOf(c)>=0; }); }
+  function zipTier(z){ z=parseInt(z,10);
+    if(z>=1000&&z<=1799) return 'metro';
+    if((z>=4000&&z<=4199)||(z>=1850&&z<=1990)||(z>=3000&&z<=3099)) return 'nearby';
+    if([6000,8000,5000,2600].indexOf(z)>=0) return 'other';
+    return null;
+  }
+  function check(){
+    var v=(inp.value||'').toLowerCase().trim();
+    if(!v){ out.textContent=''; out.className='zip-result'; return; }
+    var tier=/^\d{3,4}$/.test(v) ? zipTier(v) : null;
+    if(!tier){ tier = has(METRO,v)?'metro' : has(NEARBY,v)?'nearby' : has(OTHER,v)?'other' : null; }
+    var ok=true, msg;
+    if(tier==='metro') msg='✓ Same-day delivery available in Metro Manila.';
+    else if(tier==='nearby') msg='✓ We deliver there — next-day to nearby provinces.';
+    else if(tier==='other') msg='✓ We reach there — 2–3 day delivery (surcharge applies).';
+    else { ok=false; msg="We don't deliver to that area yet — join the waitlist and we'll notify you."; }
+    out.textContent=msg; out.className='zip-result '+(ok?'ok':'no');
+  }
+  btn.addEventListener('click', check);
+  inp.addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); check(); } });
+})();

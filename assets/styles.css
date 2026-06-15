@@ -656,3 +656,8 @@ a.method.linkcard .link{display:inline-block;margin-top:10px;color:var(--red);fo
 /* ---- Philippines delivery-area map (Help page) ---- */
 .phmap{max-width:400px;margin:0 auto;align-self:center}
 .phmap svg{width:100%;height:auto;display:block;overflow:visible}
+
+/* ---- delivery-area checker result ---- */
+.zip-result{margin-top:12px;font-size:.9rem;font-weight:500;line-height:1.5;min-height:1.2em}
+.zip-result.ok{color:#3a8a5a}
+.zip-result.no{color:var(--red-deep)}
