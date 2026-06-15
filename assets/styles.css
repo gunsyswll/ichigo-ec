@@ -652,3 +652,7 @@ a.method.linkcard .link{display:inline-block;margin-top:10px;color:var(--red);fo
 .pd-links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:14px;font-size:.84rem}
 .pd-links a{color:var(--red);font-weight:600}
 .pd-links a:hover{text-decoration:underline}
+
+/* ---- Philippines delivery-area map (Help page) ---- */
+.phmap{max-width:400px;margin:0 auto;align-self:center}
+.phmap svg{width:100%;height:auto;display:block;overflow:visible}
