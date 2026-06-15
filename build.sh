@@ -13,7 +13,8 @@ build farmers "Our Farmers"
 build about "About Us"
 build help "Help & Info"
 build product "Standard Strawberry Box"
-# index.html is standalone — stamp it in place
+# standalone pages (own headers) — stamp in place
 stamp < index.html > index.html.tmp && mv index.html.tmp index.html
 stamp < 404.html > 404.html.tmp && mv 404.html.tmp 404.html
+stamp < launch.html > launch.html.tmp && mv launch.html.tmp launch.html
 echo "stamped v=$VER"
