@@ -10,7 +10,6 @@ build(){ # $1=name $2=title
 }
 build shop "Shop & Reserve"
 build farmers "Our Farmers"
-build farm "Berry Farm"
 build about "About Us"
 build faq "Help & FAQ"
 build delivery "Delivery & Freshness"

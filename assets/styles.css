@@ -613,3 +613,13 @@ html.reveal-js [data-reveal].in{opacity:1;transform:none}
 .ship-banner .sb-x{opacity:.4}
 .ship-banner .sb-t{opacity:.9;font-size:.95rem}
 @media(max-width:760px){.ship-banner{flex-direction:column;gap:9px;text-align:center;margin-top:34px}.ship-banner .sb-x{display:none}}
+
+/* ---- Farmers: Farm A / Farm B tab toggle (merged farm-detail) ---- */
+.farm-tabs{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:0 auto 30px}
+.farm-tab{font-family:'Libre Baskerville',serif;font-size:1.02rem;color:var(--greige-deep);background:#fff;border:1px solid var(--line);padding:12px 26px;border-radius:999px;cursor:pointer;transition:color .25s var(--ease),background .25s var(--ease),border-color .25s var(--ease),box-shadow .25s var(--ease)}
+.farm-tab:hover{border-color:var(--red);color:var(--red)}
+.farm-tab.active{background:var(--red);color:#fff;border-color:var(--red);box-shadow:0 8px 20px -10px rgba(217,64,80,.6)}
+.farm-panel[hidden]{display:none}
+.farm-panel{animation:farmFade .45s var(--ease)}
+@keyframes farmFade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.farm-panel{animation:none}}
