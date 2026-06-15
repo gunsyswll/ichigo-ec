@@ -1,0 +1,93 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--red:#D94050;--red-deep:#B22F40;--cream:#FBF6F1;--cream2:#F3EBE3;--ink:#2B2420;--greige:#6E6256;--line:rgba(110,98,86,.20)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Outfit,sans-serif;color:var(--ink);background:
+  radial-gradient(140% 100% at 85% -10%, #ffffff, var(--cream) 55%, var(--cream2));
+  -webkit-font-smoothing:antialiased}
+.board{position:relative;width:1464px;min-height:4413px;padding:60px}
+.head{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;height:110px;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:34px}
+.head .l .file{font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--red);font-weight:600;font-family:Outfit}
+.head .l h1{font-family:'Libre Baskerville',serif;font-weight:400;font-size:2.5rem;margin:6px 0 6px}
+.head .l p{color:var(--greige);max-width:46em;font-size:1.02rem;line-height:1.5}
+.head .r{text-align:right;color:var(--greige);font-size:.8rem;letter-spacing:.04em;flex:none}
+.head .r .brand{font-family:'Libre Baskerville',serif;color:var(--red);font-size:1.15rem;letter-spacing:.04em}
+.stage{position:relative}
+.shot{position:absolute;left:0;top:0;width:720px}
+.shot img{width:720px;display:block;border-radius:14px;border:1px solid var(--line);
+  box-shadow:0 30px 70px -34px rgba(43,36,32,.55)}
+.pin{position:absolute;right:-15px;transform:translateY(-50%);
+  width:30px;height:30px;border-radius:50%;background:var(--red);color:#fff;
+  font-family:'Libre Baskerville',serif;font-size:.86rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 12px rgba(178,47,64,.5);border:2.5px solid #fff;z-index:5}
+svg.leaders{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;z-index:2;pointer-events:none}
+.gut{position:absolute;left:784px;top:0;width:560px}
+.bub{position:absolute;left:0;width:560px;display:flex;gap:14px;align-items:flex-start;
+  background:#fff;border:1px solid var(--line);border-left:4px solid var(--red);
+  border-radius:13px;padding:15px 18px 15px 16px;
+  box-shadow:0 14px 34px -22px rgba(43,36,32,.5)}
+.bub .bnum{flex:none;width:26px;height:26px;border-radius:50%;background:var(--cream2);color:var(--red-deep);
+  font-family:'Libre Baskerville',serif;font-weight:700;font-size:.82rem;
+  display:flex;align-items:center;justify-content:center;margin-top:1px}
+.bub h4{font-family:'Libre Baskerville',serif;font-weight:400;font-size:1.04rem;margin-bottom:4px;line-height:1.25}
+.bub p{font-size:.9rem;line-height:1.5;color:var(--greige)}
+</style></head>
+<body>
+<div class="board">
+  <div class="head">
+    <div class="l"><div class="file">index.html</div><h1>Home</h1><p>The storefront&#x27;s front door — sets the premium-but-approachable tone and funnels visitors to reserve the next arrival.</p></div>
+    <div class="r"><div class="brand">Ichigo ／苺</div><div>Website Walkthrough</div></div>
+  </div>
+  <div class="stage" id="stage">
+    <div class="shot" id="shot"><img src="../shots/index.png" id="shotimg"><div class="pin" style="top:20.0px">1</div><div class="pin" style="top:42.5px">2</div><div class="pin" style="top:254.5px">3</div><div class="pin" style="top:498.7px">4</div><div class="pin" style="top:571.5px">5</div><div class="pin" style="top:841.2px">6</div><div class="pin" style="top:1214.7px">7</div><div class="pin" style="top:1505.2px">8</div><div class="pin" style="top:1854.0px">9</div><div class="pin" style="top:2367.8px">10</div><div class="pin" style="top:2829.9px">11</div><div class="pin" style="top:3059.7px">12</div><div class="pin" style="top:3313.4px">13</div><div class="pin" style="top:3702.4px">14</div><div class="pin" style="top:4039.9px">15</div></div>
+    <svg class="leaders" id="leaders"></svg>
+    <div class="gut" id="gut"><div class="bub" data-n="1" data-y="20.0"><div class="bnum">1</div><div class="btxt"><h4>Announcement bar</h4><p>Rotating promo line for the current drop — new arrival, pre-orders open, limited boxes.</p></div></div><div class="bub" data-n="2" data-y="42.5"><div class="bnum">2</div><div class="btxt"><h4>Header &amp; navigation</h4><p>Logo, primary menu (Shop/Reserve, Subscription, Farmers, How It Works, FAQ), account + cart, and the Reserve Now button. Persistent on every page.</p></div></div><div class="bub" data-n="3" data-y="254.5"><div class="bnum">3</div><div class="btxt"><h4>Hero</h4><p>First impression: the headline promise, lead copy, two CTAs (Reserve Next Arrival / Join Waitlist) and trust badges over the hero image.</p></div></div><div class="bub" data-n="4" data-y="498.7"><div class="bnum">4</div><div class="btxt"><h4>Next-arrival strip</h4><p>At-a-glance lot facts — arrival date, reservation deadline, delivery window and boxes available — with a Reserve CTA.</p></div></div><div class="bub" data-n="5" data-y="571.5"><div class="bnum">5</div><div class="btxt"><h4>Keyword marquee</h4><p>Scrolling ribbon of brand cues (varieties, Chiba, cold-chain, 頒布会, single-origin) for rhythm and texture.</p></div></div><div class="bub" data-n="6" data-y="841.2"><div class="bnum">6</div><div class="btxt"><h4>Choose your box</h4><p>Three featured products — Standard Box, Premium Gift Box and the 頒布会 Club — as image cards linking to product pages.</p></div></div><div class="bub" data-n="7" data-y="1214.7"><div class="bnum">7</div><div class="btxt"><h4>Why it&#x27;s different</h4><p>Short value points on what sets Japanese strawberries apart: carefully grown, peak-ripeness, cold-chain.</p></div></div><div class="bub" data-n="8" data-y="1505.2"><div class="bnum">8</div><div class="btxt"><h4>Brand statement</h4><p>A bold full-bleed &#x27;Grown in Japan. Loved in the Philippines&#x27; moment that frames the &#x27;little luxury&#x27; positioning.</p></div></div><div class="bub" data-n="9" data-y="1854.0"><div class="bnum">9</div><div class="btxt"><h4>Meet the farmers</h4><p>&#x27;A farmer you know&#x27; — two grower cards that open their stories. The 親近感 / closeness pillar.</p></div></div><div class="bub" data-n="10" data-y="2367.8"><div class="bnum">10</div><div class="btxt"><h4>How it works · the journey</h4><p>Animated Chiba → your-door map plus the step timeline: Reserve → Harvested &amp; Flown → Quality-Checked → Delivered.</p></div></div><div class="bub" data-n="11" data-y="2829.9"><div class="bnum">11</div><div class="btxt"><h4>頒布会 Club band</h4><p>Promo for the monthly subscription club — a new seasonal lot at your door every month.</p></div></div><div class="bub" data-n="12" data-y="3059.7"><div class="bnum">12</div><div class="btxt"><h4>Trust &amp; service cards</h4><p>Reassurance trio: official import &amp; local management, delivery &amp; freshness, and the quality guarantee.</p></div></div><div class="bub" data-n="13" data-y="3313.4"><div class="bnum">13</div><div class="btxt"><h4>Newsletter capture</h4><p>Email sign-up so customers never miss a small, fast-selling arrival.</p></div></div><div class="bub" data-n="14" data-y="3702.4"><div class="bnum">14</div><div class="btxt"><h4>FAQ teaser</h4><p>The most common pre-purchase questions as expandable accordions, with a link to the full FAQ.</p></div></div><div class="bub" data-n="15" data-y="4039.9"><div class="bnum">15</div><div class="btxt"><h4>Footer</h4><p>Full sitemap — shop, information, policies and account links — plus payment methods (GCash / Maya / Visa / Mastercard).</p></div></div></div>
+  </div>
+</div>
+<script>
+const SHOT_W=720, GUT_X=784, GAP=18;
+function layout(){
+  const gut=document.getElementById('gut');
+  const bubs=[...gut.querySelectorAll('.bub')];
+  // desired center y = marker y; place top = y - h/2, then resolve overlaps downward
+  let prevBottom=0;
+  bubs.sort((a,b)=>(+a.dataset.y)-(+b.dataset.y));
+  bubs.forEach(b=>{
+    const h=b.offsetHeight;
+    let top=(+b.dataset.y)-h/2;
+    if(top<prevBottom+GAP) top=prevBottom+GAP;
+    if(top<0) top=0;
+    b.style.top=top+'px';
+    prevBottom=top+h;
+  });
+  // grow stage / board if bubbles run past the shot
+  const stage=document.getElementById('stage');
+  const shotH=document.getElementById('shotimg').offsetHeight;
+  const need=Math.max(shotH, prevBottom)+4;
+  stage.style.height=need+'px';
+  // draw leaders marker -> bubble
+  const svg=document.getElementById('leaders');
+  svg.setAttribute('viewBox',`0 0 ${stage.offsetWidth} ${need}`);
+  svg.style.height=need+'px';
+  let paths='';
+  document.querySelectorAll('.pin').forEach(pin=>{
+    const n=pin.textContent.trim();
+    const bub=gut.querySelector(`.bub[data-n="${n}"]`);
+    if(!bub) return;
+    const my=parseFloat(pin.style.top);            // marker center y (within shot)
+    const mx=SHOT_W;                                // marker sits at right edge of shot
+    const by=bub.offsetTop+22;                      // bubble anchor near its number
+    const bx=GUT_X;                                 // bubble left edge
+    const midx=(mx+bx)/2;
+    paths+=`<path d="M ${mx} ${my} C ${midx} ${my}, ${midx} ${by}, ${bx-2} ${by}" `
+         +`fill="none" stroke="#D94050" stroke-width="1.6" stroke-opacity=".55"/>`;
+    paths+=`<circle cx="${mx}" cy="${my}" r="3.2" fill="#D94050"/>`;
+  });
+  svg.innerHTML=paths;
+  document.body.dataset.ready="1";
+}
+window.addEventListener('load',()=>{ if(document.fonts&&document.fonts.ready){document.fonts.ready.then(()=>setTimeout(layout,60));} else setTimeout(layout,120); });
+</script>
+</body></html>

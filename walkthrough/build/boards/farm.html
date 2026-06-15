@@ -1,0 +1,93 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--red:#D94050;--red-deep:#B22F40;--cream:#FBF6F1;--cream2:#F3EBE3;--ink:#2B2420;--greige:#6E6256;--line:rgba(110,98,86,.20)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Outfit,sans-serif;color:var(--ink);background:
+  radial-gradient(140% 100% at 85% -10%, #ffffff, var(--cream) 55%, var(--cream2));
+  -webkit-font-smoothing:antialiased}
+.board{position:relative;width:1464px;min-height:2690px;padding:60px}
+.head{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;height:110px;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:34px}
+.head .l .file{font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--red);font-weight:600;font-family:Outfit}
+.head .l h1{font-family:'Libre Baskerville',serif;font-weight:400;font-size:2.5rem;margin:6px 0 6px}
+.head .l p{color:var(--greige);max-width:46em;font-size:1.02rem;line-height:1.5}
+.head .r{text-align:right;color:var(--greige);font-size:.8rem;letter-spacing:.04em;flex:none}
+.head .r .brand{font-family:'Libre Baskerville',serif;color:var(--red);font-size:1.15rem;letter-spacing:.04em}
+.stage{position:relative}
+.shot{position:absolute;left:0;top:0;width:720px}
+.shot img{width:720px;display:block;border-radius:14px;border:1px solid var(--line);
+  box-shadow:0 30px 70px -34px rgba(43,36,32,.55)}
+.pin{position:absolute;right:-15px;transform:translateY(-50%);
+  width:30px;height:30px;border-radius:50%;background:var(--red);color:#fff;
+  font-family:'Libre Baskerville',serif;font-size:.86rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 12px rgba(178,47,64,.5);border:2.5px solid #fff;z-index:5}
+svg.leaders{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;z-index:2;pointer-events:none}
+.gut{position:absolute;left:784px;top:0;width:560px}
+.bub{position:absolute;left:0;width:560px;display:flex;gap:14px;align-items:flex-start;
+  background:#fff;border:1px solid var(--line);border-left:4px solid var(--red);
+  border-radius:13px;padding:15px 18px 15px 16px;
+  box-shadow:0 14px 34px -22px rgba(43,36,32,.5)}
+.bub .bnum{flex:none;width:26px;height:26px;border-radius:50%;background:var(--cream2);color:var(--red-deep);
+  font-family:'Libre Baskerville',serif;font-weight:700;font-size:.82rem;
+  display:flex;align-items:center;justify-content:center;margin-top:1px}
+.bub h4{font-family:'Libre Baskerville',serif;font-weight:400;font-size:1.04rem;margin-bottom:4px;line-height:1.25}
+.bub p{font-size:.9rem;line-height:1.5;color:var(--greige)}
+</style></head>
+<body>
+<div class="board">
+  <div class="head">
+    <div class="l"><div class="file">farm.html</div><h1>Farm Detail</h1><p>A deep-dive on a single farm — story, method, and the boxes it grows.</p></div>
+    <div class="r"><div class="brand">Ichigo ／苺</div><div>Website Walkthrough</div></div>
+  </div>
+  <div class="stage" id="stage">
+    <div class="shot" id="shot"><img src="../shots/farm.png" id="shotimg"><div class="pin" style="top:75.4px">1</div><div class="pin" style="top:264.1px">2</div><div class="pin" style="top:506.0px">3</div><div class="pin" style="top:718.6px">4</div><div class="pin" style="top:948.9px">5</div><div class="pin" style="top:1202.6px">6</div><div class="pin" style="top:1562.1px">7</div><div class="pin" style="top:1900.4px">8</div><div class="pin" style="top:2149.9px">9</div></div>
+    <svg class="leaders" id="leaders"></svg>
+    <div class="gut" id="gut"><div class="bub" data-n="1" data-y="75.4"><div class="bnum">1</div><div class="btxt"><h4>Breadcrumb</h4><p>Back-link to the Farmers list for easy navigation.</p></div></div><div class="bub" data-n="2" data-y="264.1"><div class="bnum">2</div><div class="btxt"><h4>Farm hero</h4><p>Farm name, location (Chiba) and a quick-facts panel (specialties, season, philosophy line).</p></div></div><div class="bub" data-n="3" data-y="506.0"><div class="bnum">3</div><div class="btxt"><h4>The story</h4><p>The grower&#x27;s background and what drives the farm.</p></div></div><div class="bub" data-n="4" data-y="718.6"><div class="bnum">4</div><div class="btxt"><h4>Growing method &amp; philosophy</h4><p>How the berries are grown — the craft points that justify the price.</p></div></div><div class="bub" data-n="5" data-y="948.9"><div class="bnum">5</div><div class="btxt"><h4>Grower&#x27;s quote</h4><p>A pull-quote in the farmer&#x27;s own voice — the emotional, human proof point.</p></div></div><div class="bub" data-n="6" data-y="1202.6"><div class="bnum">6</div><div class="btxt"><h4>Inside the farm</h4><p>A photo gallery of field, harvest and berries.</p></div></div><div class="bub" data-n="7" data-y="1562.1"><div class="bnum">7</div><div class="btxt"><h4>Boxes from this farm</h4><p>The products this grower supplies, each with a Reserve action.</p></div></div><div class="bub" data-n="8" data-y="1900.4"><div class="bnum">8</div><div class="btxt"><h4>Meet the other farmer</h4><p>Cross-link to the second grower to keep visitors browsing.</p></div></div><div class="bub" data-n="9" data-y="2149.9"><div class="bnum">9</div><div class="btxt"><h4>Closing CTA</h4><p>&#x27;Bring this farm&#x27;s strawberries home&#x27; — a final reserve prompt.</p></div></div></div>
+  </div>
+</div>
+<script>
+const SHOT_W=720, GUT_X=784, GAP=18;
+function layout(){
+  const gut=document.getElementById('gut');
+  const bubs=[...gut.querySelectorAll('.bub')];
+  // desired center y = marker y; place top = y - h/2, then resolve overlaps downward
+  let prevBottom=0;
+  bubs.sort((a,b)=>(+a.dataset.y)-(+b.dataset.y));
+  bubs.forEach(b=>{
+    const h=b.offsetHeight;
+    let top=(+b.dataset.y)-h/2;
+    if(top<prevBottom+GAP) top=prevBottom+GAP;
+    if(top<0) top=0;
+    b.style.top=top+'px';
+    prevBottom=top+h;
+  });
+  // grow stage / board if bubbles run past the shot
+  const stage=document.getElementById('stage');
+  const shotH=document.getElementById('shotimg').offsetHeight;
+  const need=Math.max(shotH, prevBottom)+4;
+  stage.style.height=need+'px';
+  // draw leaders marker -> bubble
+  const svg=document.getElementById('leaders');
+  svg.setAttribute('viewBox',`0 0 ${stage.offsetWidth} ${need}`);
+  svg.style.height=need+'px';
+  let paths='';
+  document.querySelectorAll('.pin').forEach(pin=>{
+    const n=pin.textContent.trim();
+    const bub=gut.querySelector(`.bub[data-n="${n}"]`);
+    if(!bub) return;
+    const my=parseFloat(pin.style.top);            // marker center y (within shot)
+    const mx=SHOT_W;                                // marker sits at right edge of shot
+    const by=bub.offsetTop+22;                      // bubble anchor near its number
+    const bx=GUT_X;                                 // bubble left edge
+    const midx=(mx+bx)/2;
+    paths+=`<path d="M ${mx} ${my} C ${midx} ${my}, ${midx} ${by}, ${bx-2} ${by}" `
+         +`fill="none" stroke="#D94050" stroke-width="1.6" stroke-opacity=".55"/>`;
+    paths+=`<circle cx="${mx}" cy="${my}" r="3.2" fill="#D94050"/>`;
+  });
+  svg.innerHTML=paths;
+  document.body.dataset.ready="1";
+}
+window.addEventListener('load',()=>{ if(document.fonts&&document.fonts.ready){document.fonts.ready.then(()=>setTimeout(layout,60));} else setTimeout(layout,120); });
+</script>
+</body></html>

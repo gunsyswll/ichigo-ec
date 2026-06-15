@@ -1,0 +1,93 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--red:#D94050;--red-deep:#B22F40;--cream:#FBF6F1;--cream2:#F3EBE3;--ink:#2B2420;--greige:#6E6256;--line:rgba(110,98,86,.20)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Outfit,sans-serif;color:var(--ink);background:
+  radial-gradient(140% 100% at 85% -10%, #ffffff, var(--cream) 55%, var(--cream2));
+  -webkit-font-smoothing:antialiased}
+.board{position:relative;width:1464px;min-height:2292px;padding:60px}
+.head{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;height:110px;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:34px}
+.head .l .file{font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--red);font-weight:600;font-family:Outfit}
+.head .l h1{font-family:'Libre Baskerville',serif;font-weight:400;font-size:2.5rem;margin:6px 0 6px}
+.head .l p{color:var(--greige);max-width:46em;font-size:1.02rem;line-height:1.5}
+.head .r{text-align:right;color:var(--greige);font-size:.8rem;letter-spacing:.04em;flex:none}
+.head .r .brand{font-family:'Libre Baskerville',serif;color:var(--red);font-size:1.15rem;letter-spacing:.04em}
+.stage{position:relative}
+.shot{position:absolute;left:0;top:0;width:720px}
+.shot img{width:720px;display:block;border-radius:14px;border:1px solid var(--line);
+  box-shadow:0 30px 70px -34px rgba(43,36,32,.55)}
+.pin{position:absolute;right:-15px;transform:translateY(-50%);
+  width:30px;height:30px;border-radius:50%;background:var(--red);color:#fff;
+  font-family:'Libre Baskerville',serif;font-size:.86rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 12px rgba(178,47,64,.5);border:2.5px solid #fff;z-index:5}
+svg.leaders{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;z-index:2;pointer-events:none}
+.gut{position:absolute;left:784px;top:0;width:560px}
+.bub{position:absolute;left:0;width:560px;display:flex;gap:14px;align-items:flex-start;
+  background:#fff;border:1px solid var(--line);border-left:4px solid var(--red);
+  border-radius:13px;padding:15px 18px 15px 16px;
+  box-shadow:0 14px 34px -22px rgba(43,36,32,.5)}
+.bub .bnum{flex:none;width:26px;height:26px;border-radius:50%;background:var(--cream2);color:var(--red-deep);
+  font-family:'Libre Baskerville',serif;font-weight:700;font-size:.82rem;
+  display:flex;align-items:center;justify-content:center;margin-top:1px}
+.bub h4{font-family:'Libre Baskerville',serif;font-weight:400;font-size:1.04rem;margin-bottom:4px;line-height:1.25}
+.bub p{font-size:.9rem;line-height:1.5;color:var(--greige)}
+</style></head>
+<body>
+<div class="board">
+  <div class="head">
+    <div class="l"><div class="file">delivery.html</div><h1>Delivery &amp; Freshness</h1><p>Sets delivery expectations and reassures on freshness — key for a pre-paid, perishable product.</p></div>
+    <div class="r"><div class="brand">Ichigo ／苺</div><div>Website Walkthrough</div></div>
+  </div>
+  <div class="stage" id="stage">
+    <div class="shot" id="shot"><img src="../shots/delivery.png" id="shotimg"><div class="pin" style="top:158.1px">1</div><div class="pin" style="top:276.2px">2</div><div class="pin" style="top:491.1px">3</div><div class="pin" style="top:810.8px">4</div><div class="pin" style="top:1157.6px">5</div><div class="pin" style="top:1502.2px">6</div><div class="pin" style="top:1752.2px">7</div></div>
+    <svg class="leaders" id="leaders"></svg>
+    <div class="gut" id="gut"><div class="bub" data-n="1" data-y="158.1"><div class="bnum">1</div><div class="btxt"><h4>Page hero + stats</h4><p>&#x27;Delivery &amp; Freshness&#x27; headline with the key figures up top.</p></div></div><div class="bub" data-n="2" data-y="276.2"><div class="bnum">2</div><div class="btxt"><h4>Quick stats row</h4><p>Delivery areas, lead time, shipping fee and the freshness guarantee, at a glance.</p></div></div><div class="bub" data-n="3" data-y="491.1"><div class="bnum">3</div><div class="btxt"><h4>Delivery area</h4><p>Serviced regions with a coverage note / area checker.</p></div></div><div class="bub" data-n="4" data-y="810.8"><div class="bnum">4</div><div class="btxt"><h4>Shipping schedule</h4><p>A weekly timeline from the reservation deadline through to delivery.</p></div></div><div class="bub" data-n="5" data-y="1157.6"><div class="bnum">5</div><div class="btxt"><h4>Freshness guarantee</h4><p>The promise — and exactly what happens if a box arrives less than perfect.</p></div></div><div class="bub" data-n="6" data-y="1502.2"><div class="bnum">6</div><div class="btxt"><h4>Storage &amp; handling</h4><p>How to keep the berries at their best, with a downloadable guide.</p></div></div><div class="bub" data-n="7" data-y="1752.2"><div class="bnum">7</div><div class="btxt"><h4>Closing CTA</h4><p>A reserve prompt once expectations are set.</p></div></div></div>
+  </div>
+</div>
+<script>
+const SHOT_W=720, GUT_X=784, GAP=18;
+function layout(){
+  const gut=document.getElementById('gut');
+  const bubs=[...gut.querySelectorAll('.bub')];
+  // desired center y = marker y; place top = y - h/2, then resolve overlaps downward
+  let prevBottom=0;
+  bubs.sort((a,b)=>(+a.dataset.y)-(+b.dataset.y));
+  bubs.forEach(b=>{
+    const h=b.offsetHeight;
+    let top=(+b.dataset.y)-h/2;
+    if(top<prevBottom+GAP) top=prevBottom+GAP;
+    if(top<0) top=0;
+    b.style.top=top+'px';
+    prevBottom=top+h;
+  });
+  // grow stage / board if bubbles run past the shot
+  const stage=document.getElementById('stage');
+  const shotH=document.getElementById('shotimg').offsetHeight;
+  const need=Math.max(shotH, prevBottom)+4;
+  stage.style.height=need+'px';
+  // draw leaders marker -> bubble
+  const svg=document.getElementById('leaders');
+  svg.setAttribute('viewBox',`0 0 ${stage.offsetWidth} ${need}`);
+  svg.style.height=need+'px';
+  let paths='';
+  document.querySelectorAll('.pin').forEach(pin=>{
+    const n=pin.textContent.trim();
+    const bub=gut.querySelector(`.bub[data-n="${n}"]`);
+    if(!bub) return;
+    const my=parseFloat(pin.style.top);            // marker center y (within shot)
+    const mx=SHOT_W;                                // marker sits at right edge of shot
+    const by=bub.offsetTop+22;                      // bubble anchor near its number
+    const bx=GUT_X;                                 // bubble left edge
+    const midx=(mx+bx)/2;
+    paths+=`<path d="M ${mx} ${my} C ${midx} ${my}, ${midx} ${by}, ${bx-2} ${by}" `
+         +`fill="none" stroke="#D94050" stroke-width="1.6" stroke-opacity=".55"/>`;
+    paths+=`<circle cx="${mx}" cy="${my}" r="3.2" fill="#D94050"/>`;
+  });
+  svg.innerHTML=paths;
+  document.body.dataset.ready="1";
+}
+window.addEventListener('load',()=>{ if(document.fonts&&document.fonts.ready){document.fonts.ready.then(()=>setTimeout(layout,60));} else setTimeout(layout,120); });
+</script>
+</body></html>
