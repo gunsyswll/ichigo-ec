@@ -139,6 +139,11 @@
     tabs.forEach(function(x){x.classList.remove('active')}); t.classList.add('active');
     filter=t.getAttribute('data-filter'); page=1; render(true); }); });
   render(false);
+  // arriving at shop.html#club (the "Subscription" nav/footer link) shows the subscription plans
+  function applyClubHash(){
+    if(location.hash==='#club'){ var st=document.querySelector('.filters a[data-filter="subscription"]'); if(st) st.click(); }
+  }
+  applyClubHash(); window.addEventListener('hashchange', applyClubHash);
 })();
 
 // ---- inject a visible floating + spinning strawberry into the bold sections ----
