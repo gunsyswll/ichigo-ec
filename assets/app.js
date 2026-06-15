@@ -228,14 +228,16 @@
   });
 })();
 
-// ---- Help page: jump-nav tabs over stacked sections (click to jump + scroll-spy) ----
+// ---- pinned jump-nav over stacked sections (Help, About, …): click to jump + scroll-spy ----
 (function(){
-  var bar=document.getElementById('help-tabs'); if(!bar) return;
-  var tabs=[].slice.call(bar.querySelectorAll('.seg-tab'));
-  var secs=tabs.map(function(t){ return document.getElementById(t.getAttribute('data-spy')); });
-  function setActive(i){ tabs.forEach(function(t,j){ var on=j===i; t.classList.toggle('active',on); t.setAttribute('aria-current', on?'true':'false'); }); }
-  tabs.forEach(function(t,i){ t.addEventListener('click',function(){ setActive(i); }); });
-  function onScroll(){ var y=window.scrollY+170, idx=0; secs.forEach(function(s,i){ if(s && s.offsetTop<=y) idx=i; }); setActive(idx); }
-  window.addEventListener('scroll', function(){ requestAnimationFrame(onScroll); }, {passive:true});
-  onScroll();
+  [].slice.call(document.querySelectorAll('.jump-tabs')).forEach(function(bar){
+    var tabs=[].slice.call(bar.querySelectorAll('.seg-tab'));
+    var secs=tabs.map(function(t){ return document.getElementById(t.getAttribute('data-spy')); });
+    if(!tabs.length) return;
+    function setActive(i){ tabs.forEach(function(t,j){ var on=j===i; t.classList.toggle('active',on); t.setAttribute('aria-current', on?'true':'false'); }); }
+    tabs.forEach(function(t,i){ t.addEventListener('click',function(){ setActive(i); }); });
+    function onScroll(){ var y=window.scrollY+170, idx=0; secs.forEach(function(s,i){ if(s && s.offsetTop<=y) idx=i; }); setActive(idx); }
+    window.addEventListener('scroll', function(){ requestAnimationFrame(onScroll); }, {passive:true});
+    onScroll();
+  });
 })();

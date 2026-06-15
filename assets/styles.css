@@ -636,3 +636,10 @@ html.reveal-js [data-reveal].in{opacity:1;transform:none}
 .help-sec{padding:54px 0;scroll-margin-top:140px}
 .help-sec.faq-sec{border-top:1px solid var(--line)}
 @media(max-width:600px){.help-sec{scroll-margin-top:126px}}
+
+/* ---- jump-nav target sections (About) + clickable team/farm cards ---- */
+.jump-target{scroll-margin-top:140px}
+a.method.linkcard{display:block;text-decoration:none;color:inherit;border-radius:var(--r);padding:22px 18px;transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s var(--ease)}
+a.method.linkcard:hover{transform:translateY(-4px);box-shadow:var(--shadow);background:#fff}
+a.method.linkcard .link{display:inline-block;margin-top:10px;color:var(--red);font-weight:600;font-size:.85rem}
+@media(max-width:600px){.jump-target{scroll-margin-top:126px}}

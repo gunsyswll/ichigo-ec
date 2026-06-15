@@ -2,10 +2,17 @@
   <div class="crumb"><a href="index.html">Home</a> / About</div>
   <h1>Bringing Japan's Finest<br><span class="r">Strawberries to the Philippines</span></h1>
   <p>The trusted partner for premium Japanese strawberries — sourced direct, imported officially, delivered fresh.</p>
-  <div class="page-tabs"><a class="active" href="#story">About Us</a><a href="#importer">Official Importer</a><a href="#journey">Japan → Philippines</a></div>
 </div></section>
 
-<section id="story"><div class="wrap">
+<!-- pinned jump-nav -->
+<div class="jump-tabs" id="about-tabs" role="navigation" aria-label="About sections">
+  <a class="seg-tab active" href="#story" data-spy="story">Our Story</a>
+  <a class="seg-tab" href="#importer" data-spy="importer">Official Importer</a>
+  <a class="seg-tab" href="#team" data-spy="team">Our Farms &amp; Team</a>
+  <a class="seg-tab" href="#journey" data-spy="journey">Japan → Philippines</a>
+</div>
+
+<section id="story" class="jump-target"><div class="wrap">
   <div class="titleline" data-reveal><h2>Our Story &amp; Mission</h2></div>
   <div class="story-grid">
     <div class="ph soft" data-reveal="left"></div>
@@ -25,7 +32,7 @@
   </div>
 </div></section>
 
-<section id="importer" style="background:var(--cream-2)"><div class="wrap">
+<section id="importer" class="jump-target" style="background:var(--cream-2)"><div class="wrap">
   <div class="titleline" data-reveal><h2>Officially Imported &amp; Managed in the Philippines</h2></div>
   <p data-reveal style="color:var(--greige-deep);max-width:52em;margin-bottom:30px">A single official import partner handles sourcing, customs, cold-chain, and delivery — so what reaches you is traceable, compliant, and accountable, not grey-market.</p>
   <div class="cred-grid" data-stagger>
@@ -39,7 +46,17 @@
   </div>
 </div></section>
 
-<section id="journey"><div class="wrap">
+<!-- moved here: directly under the Officially Imported block; founders -> the two farms, linked to the Farmers page -->
+<section id="team" class="jump-target" style="background:var(--pink)"><div class="wrap">
+  <div class="sec-head" data-reveal><span class="eyebrow muted">Our growers &amp; team</span><h2>The people behind the brand</h2></div>
+  <div class="method-grid" data-stagger>
+    <a class="method linkcard" href="farmers.html#farm-a" data-reveal><div class="ph soft" data-img="people" style="aspect-ratio:1/1;border-radius:50%;width:90px;margin:0 auto 14px"></div><h3>Farm A — Berry Farm</h3><p>Tanaka Family · Chiba, Japan</p><span class="link">View farm story →</span></a>
+    <a class="method linkcard" href="farmers.html#farm-b" data-reveal><div class="ph" data-img="people" style="aspect-ratio:1/1;border-radius:50%;width:90px;margin:0 auto 14px"></div><h3>Farm B — Sun Harvest</h3><p>Sato Family · Chiba, Japan</p><span class="link">View farm story →</span></a>
+    <div class="method" data-reveal><div class="ph grey" style="aspect-ratio:1/1;border-radius:50%;width:90px;margin:0 auto 14px"></div><h3>Japan Partner</h3><p>JP Sourcing Lead</p></div>
+  </div>
+</div></section>
+
+<section id="journey" class="jump-target"><div class="wrap">
   <div class="titleline" data-reveal><h2>From Japan to the Philippines</h2></div>
   <div class="timeline light" data-stagger>
     <div class="tl-step" data-reveal><div class="tl-card"><h3>Harvest in Japan</h3><p>Picked at peak ripeness</p></div><div class="tl-dot"><span class="tl-no">1</span></div></div>
@@ -51,15 +68,6 @@
   </div>
   <div class="ph soft" data-reveal style="aspect-ratio:16/6;border-radius:var(--r);margin-top:20px"></div>
   <p data-reveal style="text-align:center;margin-top:18px;color:var(--greige-deep)">Average door-to-door time: <b style="color:var(--red)">36–48 hours</b> from Japanese farm to PH customer.</p>
-</div></section>
-
-<section style="background:var(--pink)"><div class="wrap">
-  <div class="sec-head" data-reveal><span class="eyebrow muted">Our team</span><h2>The people behind the brand</h2></div>
-  <div class="method-grid" data-stagger>
-    <div class="method" data-reveal><div class="ph soft" style="aspect-ratio:1/1;border-radius:50%;width:90px;margin:0 auto 14px"></div><h3>Founder Name</h3><p>Co-founder &amp; CEO</p></div>
-    <div class="method" data-reveal><div class="ph" style="aspect-ratio:1/1;border-radius:50%;width:90px;margin:0 auto 14px"></div><h3>Founder Name</h3><p>Co-founder &amp; COO</p></div>
-    <div class="method" data-reveal><div class="ph grey" style="aspect-ratio:1/1;border-radius:50%;width:90px;margin:0 auto 14px"></div><h3>Japan Partner</h3><p>JP Sourcing Lead</p></div>
-  </div>
 </div></section>
 
 <section style="padding-top:0;margin-top:84px"><div class="wrap"><div class="cta-band" data-reveal="scale">
