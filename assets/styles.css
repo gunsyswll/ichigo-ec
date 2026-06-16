@@ -43,9 +43,11 @@ img{max-width:100%;display:block}
 .ph .berry{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:40%;max-width:110px;opacity:.45}
 
 /* announcement + header */
-.announce{background:var(--ink);color:var(--cream);text-align:center;font-size:.82rem;letter-spacing:.02em;padding:9px 16px}
+.announce{background:var(--ink);color:var(--cream);text-align:center;font-size:.82rem;letter-spacing:.02em;padding:9px 16px;padding-top:calc(9px + env(safe-area-inset-top));padding-left:calc(16px + env(safe-area-inset-left));padding-right:calc(16px + env(safe-area-inset-right))}
 .announce a{color:#E8A0A6;font-weight:600}
-header{position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);background:rgba(251,246,241,.85);border-bottom:1px solid var(--line);transition:height .3s var(--ease)}
+header{position:sticky;top:0;z-index:100;-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);background:rgba(251,246,241,.9);border-bottom:1px solid var(--line);transition:height .3s var(--ease)}
+header.scrolled{padding-top:env(safe-area-inset-top)}
+@supports not ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){header{background:rgba(251,246,241,.98)}}
 .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
 .brand{font-family:'Libre Baskerville';font-size:1.45rem;display:flex;align-items:center;gap:.5em;letter-spacing:.02em}
 .brand b{color:var(--red);font-weight:700}
@@ -351,10 +353,14 @@ html.reveal-js [data-reveal].in{opacity:1;transform:none}
   .hide-mobile{display:none!important}      /* header Reserve-Now button: burger + hero CTA cover it */
   .nav{height:64px}.brand{font-size:1.25rem}
   .nav-right{gap:10px}.icon-btn{width:34px;height:34px}
-  .announce{font-size:.74rem;padding:8px 12px}
+  .announce{font-size:.74rem;padding:8px 12px;padding-top:calc(8px + env(safe-area-inset-top))}
   .as-data{gap:18px}.badges{gap:18px}
   .arrival-strip{padding:24px}.band{padding:28px 22px}
   section{padding:60px 0}.hero{padding:40px 0 50px}
+  /* slimmer, more elegant pills on small screens */
+  .btn{padding:11px 18px;font-size:.84rem}
+  .hero-cta{gap:10px}.hero-cta .btn{flex:1 1 auto;justify-content:center}
+  .tagfloat,.st-berry .tagfloat{font-size:.68rem;padding:6px 11px;box-shadow:0 8px 20px -12px rgba(0,0,0,.35)}
 }
 
 /* marquee storytelling strip */

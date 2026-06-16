@@ -59,7 +59,7 @@
   var lastY=-1;
   function onScroll(){
     var y=window.scrollY; if(y===lastY) return; lastY=y;
-    var h=document.querySelector('header'); if(h) h.style.boxShadow = y>10 ? '0 6px 20px -16px rgba(43,36,32,.5)':'none';
+    var h=document.querySelector('header'); if(h){ h.style.boxShadow = y>10 ? '0 6px 20px -16px rgba(43,36,32,.5)':'none'; h.classList.toggle('scrolled', y>4); }
     var vh=window.innerHeight;
     pxEls.forEach(function(el){
       var r=el.getBoundingClientRect(); if(r.bottom<-120||r.top>vh+120) return;
