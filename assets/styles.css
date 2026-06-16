@@ -360,9 +360,6 @@ html.reveal-js [data-reveal].in{opacity:1;transform:none}
   .btn{padding:11px 18px;font-size:.84rem}
   .hero-cta{gap:10px}.hero-cta .btn{flex:1 1 auto;justify-content:center}
   .tagfloat,.st-berry .tagfloat{font-size:.68rem;padding:6px 11px;box-shadow:0 8px 20px -12px rgba(0,0,0,.35)}
-  /* About-page sticky tabs: smaller + flush under the header (notch-aware) */
-  .seg-tab{font-size:.8rem;padding:8px 15px}
-  .jump-tabs{top:calc(63px + env(safe-area-inset-top));gap:7px;padding:9px 12px}
 }
 
 /* marquee storytelling strip */
@@ -669,3 +666,11 @@ a.method.linkcard .link{display:inline-block;margin-top:10px;color:var(--red);fo
 .zip-result{margin-top:12px;font-size:.9rem;font-weight:500;line-height:1.5;min-height:1.2em}
 .zip-result.ok{color:#3a8a5a}
 .zip-result.no{color:var(--red-deep)}
+
+/* === mobile overrides placed last so they beat later component defs (CSS source order) === */
+@media(max-width:640px){
+  /* About-page tabs: single swipeable row, static so there's no sticky header↔tab gap */
+  .jump-tabs{position:static;flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;gap:8px;padding:10px 14px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .jump-tabs::-webkit-scrollbar{display:none}
+  .seg-tab{flex:0 0 auto;white-space:nowrap;font-size:.8rem;padding:8px 16px}
+}
