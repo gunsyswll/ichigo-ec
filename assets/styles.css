@@ -669,8 +669,8 @@ a.method.linkcard .link{display:inline-block;margin-top:10px;color:var(--red);fo
 
 /* === mobile overrides placed last so they beat later component defs (CSS source order) === */
 @media(max-width:640px){
-  /* About-page tabs: single swipeable row, static so there's no sticky header↔tab gap */
-  .jump-tabs{position:static;flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;gap:8px;padding:10px 14px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  /* About-page tabs: sticky single swipeable row, pinned flush under the notch-aware header */
+  .jump-tabs{position:sticky;top:calc(63px + env(safe-area-inset-top));flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;gap:8px;padding:10px 14px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
   .jump-tabs::-webkit-scrollbar{display:none}
   .seg-tab{flex:0 0 auto;white-space:nowrap;font-size:.8rem;padding:8px 16px}
 }

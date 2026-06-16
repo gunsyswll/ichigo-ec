@@ -234,7 +234,10 @@
     var tabs=[].slice.call(bar.querySelectorAll('.seg-tab'));
     var secs=tabs.map(function(t){ return document.getElementById(t.getAttribute('data-spy')); });
     if(!tabs.length) return;
-    function setActive(i){ tabs.forEach(function(t,j){ var on=j===i; t.classList.toggle('active',on); t.setAttribute('aria-current', on?'true':'false'); }); }
+    var lastIdx=-1;
+    function setActive(i){ if(i===lastIdx) return; lastIdx=i;
+      tabs.forEach(function(t,j){ var on=j===i; t.classList.toggle('active',on); t.setAttribute('aria-current', on?'true':'false'); });
+      var at=tabs[i]; if(at && bar.scrollWidth>bar.clientWidth+4) bar.scrollTo({left:Math.max(0,at.offsetLeft-16),behavior:'smooth'}); }
     tabs.forEach(function(t,i){ t.addEventListener('click',function(){ setActive(i); }); });
     function onScroll(){ var y=window.scrollY+170, idx=0; secs.forEach(function(s,i){ if(s && s.offsetTop<=y) idx=i; }); setActive(idx); }
     window.addEventListener('scroll', function(){ requestAnimationFrame(onScroll); }, {passive:true});
