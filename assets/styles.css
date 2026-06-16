@@ -45,9 +45,8 @@ img{max-width:100%;display:block}
 /* announcement + header */
 .announce{background:var(--ink);color:var(--cream);text-align:center;font-size:.82rem;letter-spacing:.02em;padding:9px 16px;padding-top:calc(9px + env(safe-area-inset-top));padding-left:calc(16px + env(safe-area-inset-left));padding-right:calc(16px + env(safe-area-inset-right))}
 .announce a{color:#E8A0A6;font-weight:600}
-header{position:sticky;top:0;z-index:100;-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);background:rgba(251,246,241,.9);border-bottom:1px solid var(--line);transition:height .3s var(--ease)}
+header{position:sticky;top:0;z-index:100;background:#FBF6F1;border-bottom:1px solid var(--line);transition:height .3s var(--ease)}
 header.scrolled{padding-top:env(safe-area-inset-top)}
-@supports not ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){header{background:rgba(251,246,241,.98)}}
 .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
 .brand{font-family:'Libre Baskerville';font-size:1.45rem;display:flex;align-items:center;gap:.5em;letter-spacing:.02em}
 .brand b{color:var(--red);font-weight:700}
@@ -361,6 +360,9 @@ html.reveal-js [data-reveal].in{opacity:1;transform:none}
   .btn{padding:11px 18px;font-size:.84rem}
   .hero-cta{gap:10px}.hero-cta .btn{flex:1 1 auto;justify-content:center}
   .tagfloat,.st-berry .tagfloat{font-size:.68rem;padding:6px 11px;box-shadow:0 8px 20px -12px rgba(0,0,0,.35)}
+  /* About-page sticky tabs: smaller + flush under the header (notch-aware) */
+  .seg-tab{font-size:.8rem;padding:8px 15px}
+  .jump-tabs{top:calc(63px + env(safe-area-inset-top));gap:7px;padding:9px 12px}
 }
 
 /* marquee storytelling strip */
@@ -638,7 +640,7 @@ html.reveal-js [data-reveal].in{opacity:1;transform:none}
 @media(max-width:600px){.panel-band{padding:32px 22px}}
 
 /* ---- Help page: sticky jump-nav over stacked Delivery / FAQ sections ---- */
-.jump-tabs{position:sticky;top:72px;z-index:50;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;background:rgba(251,246,241,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:13px 16px}
+.jump-tabs{position:sticky;top:71px;z-index:50;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;background:#FBF6F1;border-bottom:1px solid var(--line);padding:13px 16px}
 .help-sec{padding:54px 0;scroll-margin-top:140px}
 .help-sec.faq-sec{border-top:1px solid var(--line)}
 @media(max-width:600px){.help-sec{scroll-margin-top:126px}}
