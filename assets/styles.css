@@ -674,3 +674,79 @@ a.method.linkcard .link{display:inline-block;margin-top:10px;color:var(--red);fo
   .jump-tabs::-webkit-scrollbar{display:none}
   .seg-tab{flex:0 0 auto;white-space:nowrap;font-size:.8rem;padding:8px 16px}
 }
+
+/* ===== mark8: product detail — full p24 build ===== */
+.pd-rating{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--greige-deep);margin-bottom:8px}
+.pd-rating .stars{color:var(--red);letter-spacing:1px}
+.pd-rating b{color:var(--ink);font-weight:600}
+.pd-rating a{color:var(--greige-deep);text-decoration:underline;text-underline-offset:2px}
+.pd-info p.desc{margin:8px 0 16px}
+.pd-badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.pd-badges span{font-size:.78rem;font-weight:500;color:var(--greige-deep);background:var(--cream-2);border:1px solid var(--line);border-radius:100px;padding:6px 13px}
+.pd-price{display:flex;align-items:baseline;gap:12px;margin:0}
+.pd-price b{font-family:'Libre Baskerville';font-size:1.9rem;color:var(--red);font-weight:700}
+.pd-price s{color:var(--greige);font-size:1.05rem}
+.pd-price .save{font-style:normal;font-size:.72rem;font-weight:700;letter-spacing:.04em;color:#fff;background:var(--red);border-radius:6px;padding:3px 8px}
+.pd-vat{font-size:.8rem;color:var(--greige-deep);margin:6px 0 18px}
+.pd-facts{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:14px}
+.pd-facts .f{background:var(--cream-2);padding:13px 16px}
+.pd-facts .f label{display:block;font-size:.67rem;letter-spacing:.08em;text-transform:uppercase;color:var(--greige-deep);margin-bottom:5px}
+.pd-facts .f b{font-family:'Libre Baskerville';font-size:1rem}
+.pd-facts .f b.hot{color:var(--red)}
+.pd-addr{display:inline-block;font-size:.84rem;color:var(--red);font-weight:500;margin-bottom:14px}
+.pd-qtyrow{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:8px 0 16px}
+.pd-qtyrow .qty{margin:0}
+.wish{width:46px;height:46px;border:1px solid var(--line);border-radius:50%;background:var(--cream);display:grid;place-items:center;cursor:pointer;color:var(--greige-deep);transition:.2s;flex:none}
+.wish:hover,.wish.on{border-color:var(--red);color:var(--red)}
+.pd-cta{display:flex;flex-direction:column;gap:10px}
+.pd-trust{font-size:.8rem;color:var(--greige-deep);margin-top:12px;text-align:center}
+
+/* in-page tabs (sticky under header) */
+.pd-tabs{position:sticky;top:72px;z-index:40;background:rgba(251,246,241,.94);backdrop-filter:blur(8px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;gap:8px;padding:12px 32px;max-width:1200px;margin:18px auto 0;overflow-x:auto}
+.pd-tabs a{white-space:nowrap;font-size:.86rem;font-weight:500;color:var(--greige-deep);padding:8px 16px;border-radius:100px;transition:.2s}
+.pd-tabs a:hover,.pd-tabs a.on{background:var(--red);color:#fff}
+
+/* checklist (overview + what's inside) */
+.checklist{display:flex;flex-direction:column;gap:14px}
+.checklist .ci{display:flex;gap:14px;align-items:flex-start}
+.checklist .ci .ck{width:32px;height:32px;border-radius:9px;background:var(--pink);color:var(--red);display:grid;place-items:center;flex:none;font-size:.95rem}
+.checklist .ci b{display:block;font-size:.96rem}
+.checklist .ci span{font-size:.84rem;color:var(--greige-deep)}
+
+.lead-sub{color:var(--greige-deep);font-style:italic}
+.glance-h{font-size:1.15rem;margin:28px 0 4px}
+
+/* what's inside specs */
+.inside-specs{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-top:20px}
+.inside-specs .s{background:var(--cream);padding:13px 16px;font-size:.88rem}
+.inside-specs .s label{color:var(--greige-deep);display:block;font-size:.72rem;margin-bottom:3px}
+.inside-specs .s b{font-weight:600}
+
+/* reviews */
+.rev-summary{display:grid;grid-template-columns:auto 1fr;gap:44px;align-items:center;border:1px solid var(--line);border-radius:var(--r);padding:28px 30px;background:var(--cream-2);margin-bottom:22px}
+.rev-score{text-align:center;min-width:120px}
+.rev-score .big{font-family:'Libre Baskerville';font-size:3rem;color:var(--red);line-height:1}
+.rev-score .stars{color:var(--red);letter-spacing:2px;margin:6px 0}
+.rev-score small{color:var(--greige-deep);font-size:.8rem}
+.rev-bars{display:flex;flex-direction:column;gap:8px}
+.rev-bar{display:flex;align-items:center;gap:12px;font-size:.8rem;color:var(--greige-deep)}
+.rev-bar span:first-child{width:22px}.rev-bar span:last-child{width:34px;text-align:right}
+.rev-bar .track{flex:1;height:7px;background:var(--line);border-radius:4px;overflow:hidden}
+.rev-bar .fill{height:100%;background:var(--red);border-radius:4px}
+.rev-card{border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;background:var(--cream)}
+.rev-card .rc-top{display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--greige-deep);margin-bottom:8px}
+.rev-card .rc-top .stars{color:var(--red);letter-spacing:1px}
+.rev-card .rc-top .vf{color:#3a8a5a;font-weight:600}
+.rev-card h4{font-size:1.05rem;margin-bottom:6px}
+.rev-card p{font-size:.92rem;color:var(--greige-deep)}
+.rev-card .rc-foot{font-size:.78rem;color:var(--greige);margin-top:12px}
+
+/* sticky reserve bar */
+.pd-sticky{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(251,246,241,.97);backdrop-filter:blur(8px);border-top:1px solid var(--line);box-shadow:0 -10px 30px -18px rgba(43,36,32,.5);transform:translateY(110%);transition:transform .35s var(--ease)}
+.pd-sticky.show{transform:none}
+.pd-sticky .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:12px;padding-bottom:calc(12px + env(safe-area-inset-bottom))}
+.pd-sticky .ps-l{font-size:.95rem;font-weight:500}
+.pd-sticky .ps-l b{font-family:'Libre Baskerville';color:var(--red);font-size:1.2rem;margin-left:10px}
+
+@media(max-width:760px){.rev-summary{grid-template-columns:1fr;gap:22px}}
+@media(max-width:560px){.pd-facts,.inside-specs{grid-template-columns:1fr}.pd-tabs{top:64px}.pd-sticky .ps-l{font-size:.84rem}}
