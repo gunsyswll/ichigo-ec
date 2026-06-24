@@ -3,6 +3,12 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.0.4 — 2026-06-24
+- Gift Box: distinct gift product page (`main-product-gift` + `product.gift` template) with
+  gift options — recipient, message (200-char), ribbon, deliver-on date, wooden box — as
+  line-item properties that flow to cart/order/checkout. Assigned to the Premium Gift Box product.
+- Newsletter (#11) confirmed already wired (Shopify customer-capture form); no change needed.
+
 ## v1.0.3 — 2026-06-24
 - Product page: subscription selector (one-time vs recurring selling plans) — renders
   automatically once a subscription app creates a selling plan on the product. Passes
