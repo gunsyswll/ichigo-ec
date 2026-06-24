@@ -1,0 +1,304 @@
+{%- comment -%}
+  Gift product page. Adapted from main-product.liquid, wired to {{ product }}.
+  Reuses the standard add-to-cart form machinery (variant select / quantity /
+  Reserve button / sold-out handling) and adds a GIFT OPTIONS block that captures
+  Shopify line-item properties (properties[...]) — these flow to cart, order and
+  checkout automatically, no app needed. Editorial blocks remain editable section
+  settings so the page works before product metafields exist.
+{%- endcomment -%}
+{%- assign variant = product.selected_or_first_available_variant -%}
+
+<div class="wrap"><div class="crumb" style="padding-top:24px"><a href="{{ routes.root_url }}">Home</a> / <a href="{{ routes.all_products_collection_url }}">Shop</a> / {{ product.title }}</div></div>
+
+<!-- ===== Gallery + Buy box ===== -->
+<div class="wrap"><div class="pd">
+  <div class="pd-gallery" data-reveal="left">
+    {%- if product.media.size > 0 -%}
+      {%- for media in product.media limit: 3 -%}
+        <div class="ph img{% if forloop.first %} main{% endif %}" style="background-image:url('{{ media | image_url: width: 1000 }}')">
+          {%- if forloop.first -%}<span class="tag tag-gift" style="position:absolute;top:14px;left:14px">🎁 Gift</span>{%- endif -%}
+        </div>
+      {%- endfor -%}
+    {%- else -%}
+      <div class="ph soft main"><svg class="berry" viewBox="0 0 64 64" fill="none" stroke="rgba(110,98,86,.5)" stroke-width="2.2"><path d="M32 20c8-10 22-8 22-8s2 14-8 22-22 18-22 18S14 42 14 32s10-12 18-12z"/></svg></div>
+      <div class="ph"></div><div class="ph soft"></div>
+    {%- endif -%}
+  </div>
+
+  <div class="pd-info" data-reveal="right">
+    <span class="eyebrow">{{ section.settings.gift_eyebrow | default: 'A Gift Worth Giving' }}</span>
+    <h1 style="margin-top:8px">{{ product.title }}</h1>
+    <p class="desc">{{ section.settings.gift_intro | default: 'A premium box, wrapped to give. Add a message, choose a ribbon, and we ship it ready to gift — straight to them or to you.' }}</p>
+    {%- if section.settings.badges != blank -%}
+      <div class="pd-badges">{%- assign badges = section.settings.badges | split: ',' -%}{%- for b in badges -%}<span>{{ b | strip }}</span>{%- endfor -%}</div>
+    {%- endif -%}
+
+    <div class="pd-price">
+      <b id="pd-price">{{ variant.price | money }}</b>
+      {%- if variant.compare_at_price > variant.price -%}
+        <s id="pd-compare">{{ variant.compare_at_price | money }}</s>
+      {%- endif -%}
+    </div>
+    <div class="pd-vat">VAT included{% if section.settings.shipping_note != blank %} · {{ section.settings.shipping_note }}{% endif %}</div>
+
+    {%- if section.settings.show_facts -%}
+      <div class="pd-facts">
+        {%- if section.settings.fact1_label != blank -%}<div class="f"><label>{{ section.settings.fact1_label }}</label><b class="hot">{{ section.settings.fact1_value }}</b></div>{%- endif -%}
+        {%- if section.settings.fact2_label != blank -%}<div class="f"><label>{{ section.settings.fact2_label }}</label><b>{{ section.settings.fact2_value }}</b></div>{%- endif -%}
+        {%- if section.settings.fact3_label != blank -%}<div class="f"><label>{{ section.settings.fact3_label }}</label><b>{{ section.settings.fact3_value }}</b></div>{%- endif -%}
+        <div class="f"><label>Availability</label><b class="hot">{% if product.available %}In stock{% else %}Sold out{% endif %}</b></div>
+      </div>
+    {%- endif -%}
+
+    {%- form 'product', product, id: 'product-form' -%}
+      {%- if product.variants.size > 1 -%}
+        <div class="pd-variants">
+          <label class="pd-variant-label" for="variant-select">Option</label>
+          <select id="variant-select" name="id" class="pd-variant-select">
+            {%- for v in product.variants -%}
+              <option value="{{ v.id }}" {% if v == variant %}selected="selected"{% endif %} {% unless v.available %}disabled="disabled"{% endunless %}>
+                {{ v.title }} — {{ v.price | money }}{% unless v.available %} (Sold out){% endunless %}
+              </option>
+            {%- endfor -%}
+          </select>
+        </div>
+      {%- else -%}
+        <input type="hidden" name="id" value="{{ variant.id }}">
+      {%- endif -%}
+
+      {%- comment -%} ===== GIFT OPTIONS — Shopify line-item properties ===== {%- endcomment -%}
+      <div class="gift-opts">
+        <div class="gift-opts-head">
+          <span class="gift-opts-title">🎁 {{ section.settings.gift_block_title | default: 'Gift options' }}</span>
+          {%- if section.settings.gift_block_note != blank -%}<span class="gift-opts-sub">{{ section.settings.gift_block_note }}</span>{%- endif -%}
+        </div>
+
+        <div class="gift-field">
+          <label for="gift-recipient">Recipient name <span class="gift-opt">(optional)</span></label>
+          <input type="text" id="gift-recipient" name="properties[Recipient name]" maxlength="80" placeholder="Who is this gift for?">
+        </div>
+
+        <div class="gift-field">
+          <label for="gift-message">Gift message <span class="gift-opt">(optional)</span></label>
+          <textarea id="gift-message" name="properties[Gift message]" maxlength="200" rows="3" placeholder="Write a short note — we'll print it on the gift card." oninput="document.getElementById('gift-msg-count').textContent=this.value.length"></textarea>
+          <div class="gift-hint"><span id="gift-msg-count">0</span>/200 characters</div>
+        </div>
+
+        <div class="gift-field">
+          <label for="gift-ribbon">Ribbon color</label>
+          <select id="gift-ribbon" name="properties[Ribbon]" class="pd-variant-select">
+            <option value="Red">Red</option>
+            <option value="Cream">Cream</option>
+            <option value="None">None</option>
+          </select>
+        </div>
+
+        <div class="gift-field">
+          <label for="gift-date">Deliver on <span class="gift-opt">(optional)</span></label>
+          <input type="date" id="gift-date" name="properties[Deliver on]" class="pd-variant-select">
+        </div>
+
+        <label class="gift-toggle" for="gift-box">
+          <input type="checkbox" id="gift-box" name="properties[Wooden gift box]" value="Yes">
+          <span><b>Wooden gift box</b><span>Upgrade the keepsake presentation</span></span>
+        </label>
+      </div>
+
+      {%- if product.selling_plan_groups.size > 0 -%}
+        <div class="pd-purchase">
+          <label class="po-opt"><input type="radio" name="selling_plan" value="" checked> <span><b>One-time purchase</b> — {{ product.price | money }}</span></label>
+          {%- for group in product.selling_plan_groups -%}{%- for plan in group.selling_plans -%}
+            <label class="po-opt"><input type="radio" name="selling_plan" value="{{ plan.id }}"> <span><b>{{ plan.name }}</b>{%- for a in variant.selling_plan_allocations -%}{%- if a.selling_plan_id == plan.id -%} — {{ a.per_delivery_price | money }} / delivery{%- endif -%}{%- endfor -%}</span></label>
+          {%- endfor -%}{%- endfor -%}
+          <p class="po-note">Subscriptions renew automatically — you're billed &amp; shipped each cycle, and can cancel anytime from your account.</p>
+        </div>
+      {%- endif -%}
+
+      <div class="pd-qtyrow">
+        <div class="qty">
+          <span style="font-size:.88rem;color:var(--greige-deep)">Quantity</span>
+          <div class="ctrl">
+            <button type="button" data-q="-1" aria-label="Decrease">−</button>
+            <input type="number" id="quantity" name="quantity" value="1" min="1" inputmode="numeric" aria-label="Quantity">
+            <button type="button" data-q="1" aria-label="Increase">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pd-cta">
+        {%- if product.available -%}
+          <button type="submit" name="add" class="btn btn-red btn-block" style="padding:16px">{{ section.settings.cta_label | default: 'Add Gift to Cart' }}</button>
+        {%- else -%}
+          <button type="submit" name="add" class="btn btn-ghost btn-block" style="padding:16px" disabled>Sold Out</button>
+        {%- endif -%}
+      </div>
+    {%- endform -%}
+
+    <p class="pd-trust">🎀 Wrapped &amp; ready to give · 🛡️ Freshness 100% guaranteed · Secure checkout</p>
+    <div class="pd-links"><a href="/pages/help#help-delivery">Delivery &amp; freshness →</a><a href="/pages/help#help-faq">Gift FAQ →</a></div>
+  </div>
+</div></div>
+
+<!-- ===== In-page tabs ===== -->
+<nav class="pd-tabs" id="pdtabs">
+  <a href="#overview" class="on">Overview</a>
+  {%- if section.settings.show_strawberry -%}<a href="#strawberry">The Strawberry</a>{%- endif -%}
+  {%- if section.settings.show_farmer -%}<a href="#farmer">The Farmer</a>{%- endif -%}
+  {%- if section.settings.show_inside -%}<a href="#inside">What's Inside</a>{%- endif -%}
+</nav>
+
+<!-- ===== Overview ===== -->
+<section id="overview"><div class="wrap split2">
+  <div data-reveal="left">
+    <span class="eyebrow">Overview</span>
+    <h2 style="font-size:1.9rem;margin:10px 0 14px">{{ section.settings.overview_heading | default: 'A Box Designed to Be Given' }}</h2>
+    <div style="color:var(--greige-deep)">{{ product.description }}</div>
+  </div>
+  {%- if section.settings.overview_check != blank -%}
+  <div class="checklist" data-reveal="right">
+    {%- assign rows = section.settings.overview_check | newline_to_br | split: '<br />' -%}
+    {%- for row in rows -%}
+      {%- assign parts = row | strip | split: '|' -%}
+      {%- if parts[0] != blank -%}<div class="ci"><span class="ck">✓</span><div><b>{{ parts[0] | strip }}</b><span>{{ parts[1] | strip }}</span></div></div>{%- endif -%}
+    {%- endfor -%}
+  </div>
+  {%- endif -%}
+</div></section>
+
+<!-- ===== The Strawberry ===== -->
+{%- if section.settings.show_strawberry -%}
+<section id="strawberry" style="background:var(--cream-2)"><div class="wrap">
+  <span class="eyebrow">The Strawberry</span>
+  <h2 style="font-size:2rem;margin:10px 0 4px">{{ section.settings.berry_name }}</h2>
+  {%- if section.settings.berry_sub != blank -%}<p class="lead-sub">{{ section.settings.berry_sub }}</p>{%- endif -%}
+  <div class="split2" style="margin-top:30px">
+    <div class="ph soft{% if section.settings.berry_image %} img{% endif %}" data-reveal="left" style="aspect-ratio:1/.82;border-radius:var(--r){% if section.settings.berry_image %};background-image:url('{{ section.settings.berry_image | image_url: width: 900 }}'){% endif %}"></div>
+    <div data-reveal="right">{{ section.settings.berry_body }}</div>
+  </div>
+</div></section>
+{%- endif -%}
+
+<!-- ===== The Farmer ===== -->
+{%- if section.settings.show_farmer -%}
+<section id="farmer"><div class="wrap">
+  <span class="eyebrow">The Farmer</span>
+  <div class="split2" style="margin-top:18px;align-items:start">
+    <div class="ph{% if section.settings.farmer_image %} img{% endif %}" data-reveal="left" style="aspect-ratio:1/1.05;border-radius:var(--r){% if section.settings.farmer_image %};background-image:url('{{ section.settings.farmer_image | image_url: width: 900 }}'){% endif %}"></div>
+    <div data-reveal="right">
+      <h2 style="font-size:1.9rem;margin-bottom:4px">{{ section.settings.farmer_name }}</h2>
+      {%- if section.settings.farmer_meta != blank -%}<p class="lead-sub" style="font-style:normal;color:var(--red);font-weight:600;font-size:.82rem;letter-spacing:.04em">{{ section.settings.farmer_meta }}</p>{%- endif -%}
+      <div style="margin-top:16px;color:var(--greige-deep)">{{ section.settings.farmer_body }}</div>
+    </div>
+  </div>
+  {%- if section.settings.farmer_quote != blank -%}
+  <div class="bigquote" data-reveal style="margin-top:34px">{{ section.settings.farmer_quote }}{% if section.settings.farmer_quote_by != blank %}<span class="by">{{ section.settings.farmer_quote_by }}</span>{% endif %}</div>
+  {%- endif -%}
+  <div class="pd-links" style="margin-top:18px"><a href="/pages/farmers">Read full farm story →</a></div>
+</div></section>
+{%- endif -%}
+
+<!-- ===== What's Inside ===== -->
+{%- if section.settings.show_inside -%}
+<section id="inside" style="background:var(--cream-2)"><div class="wrap split2">
+  <div class="ph soft{% if section.settings.inside_image %} img{% endif %}" data-reveal="left" style="aspect-ratio:1/.86;border-radius:var(--r){% if section.settings.inside_image %};background-image:url('{{ section.settings.inside_image | image_url: width: 900 }}'){% endif %}"></div>
+  <div data-reveal="right">
+    <h2 style="font-size:1.9rem;margin-bottom:18px">What's Inside the Gift Box</h2>
+    {%- if section.settings.inside_check != blank -%}
+    <div class="checklist">
+      {%- assign rows = section.settings.inside_check | newline_to_br | split: '<br />' -%}
+      {%- for row in rows -%}
+        {%- assign parts = row | strip | split: '|' -%}
+        {%- if parts[0] != blank -%}<div class="ci"><span class="ck">🍓</span><div><b>{{ parts[0] | strip }}</b><span>{{ parts[1] | strip }}</span></div></div>{%- endif -%}
+      {%- endfor -%}
+    </div>
+    {%- endif -%}
+  </div>
+</div></section>
+{%- endif -%}
+
+<!-- ===== Sticky reserve bar ===== -->
+<div class="pd-sticky" id="pdsticky"><div class="wrap">
+  <div class="ps-l">{{ product.title }} <b>{{ variant.price | money }}</b></div>
+  <button class="btn btn-red" style="padding:12px 28px" {% unless product.available %}disabled{% endunless %} onclick="document.getElementById('product-form').querySelector('[name=add]').click()">{% if product.available %}Add Gift to Cart →{% else %}Sold Out{% endif %}</button>
+</div></div>
+
+<script>
+(function(){
+  var qv=document.getElementById('quantity');
+  document.querySelectorAll('[data-q]').forEach(function(b){b.addEventListener('click',function(){
+    var n=Math.max(1,(parseInt(qv.value,10)||1)+(+b.dataset.q));qv.value=n;});});
+  var sel=document.getElementById('variant-select');
+  if(sel){
+    var variants={{ product.variants | json }};
+    var priceEl=document.getElementById('pd-price'),cmpEl=document.getElementById('pd-compare');
+    sel.addEventListener('change',function(){
+      var v=variants.filter(function(x){return x.id==sel.value;})[0];
+      if(!v)return;
+      if(priceEl)priceEl.textContent=(v.price/100).toLocaleString(undefined,{style:'currency',currency:'{{ cart.currency.iso_code | default: "PHP" }}'});
+    });
+  }
+  var sticky=document.getElementById('pdsticky'),pd=document.querySelector('.pd');
+  function onScroll(){if(!pd)return;var past=pd.getBoundingClientRect().bottom<0;sticky.classList.toggle('show',past);}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  var tabs=[].slice.call(document.querySelectorAll('#pdtabs a'));
+  var secs=tabs.map(function(t){return document.querySelector(t.getAttribute('href'));});
+  window.addEventListener('scroll',function(){
+    var y=window.scrollY+140,act=0;
+    secs.forEach(function(s,i){if(s&&s.offsetTop<=y)act=i;});
+    tabs.forEach(function(t,i){t.classList.toggle('on',i===act);});
+  },{passive:true});
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Gift product",
+  "settings": [
+    { "type": "header", "content": "Gift intro" },
+    { "type": "text", "id": "gift_eyebrow", "label": "Eyebrow", "default": "A Gift Worth Giving" },
+    { "type": "textarea", "id": "gift_intro", "label": "Intro copy", "default": "A premium box, wrapped to give. Add a message, choose a ribbon, and we ship it ready to gift — straight to them or to you." },
+    { "type": "text", "id": "cta_label", "label": "Add-to-cart button label", "default": "Add Gift to Cart" },
+
+    { "type": "header", "content": "Gift options block" },
+    { "type": "text", "id": "gift_block_title", "label": "Gift options title", "default": "Gift options" },
+    { "type": "text", "id": "gift_block_note", "label": "Gift options note", "default": "Personalize the box — all details print on the gift card." },
+
+    { "type": "header", "content": "Buy box" },
+    { "type": "text", "id": "badges", "label": "Badges (comma-separated)", "default": "🎁 Gift Ready, 🍓 Amaou, ❄ Cold Chain" },
+    { "type": "text", "id": "shipping_note", "label": "Shipping note", "default": "Free shipping over ₱5,000" },
+    { "type": "checkbox", "id": "show_facts", "label": "Show fact grid", "default": true },
+    { "type": "text", "id": "fact1_label", "label": "Fact 1 label", "default": "Next Arrival" },
+    { "type": "text", "id": "fact1_value", "label": "Fact 1 value", "default": "March 15, 2025" },
+    { "type": "text", "id": "fact2_label", "label": "Fact 2 label", "default": "Order Deadline" },
+    { "type": "text", "id": "fact2_value", "label": "Fact 2 value", "default": "March 12, 2025" },
+    { "type": "text", "id": "fact3_label", "label": "Fact 3 label", "default": "Delivery Window" },
+    { "type": "text", "id": "fact3_value", "label": "Fact 3 value", "default": "March 16–17" },
+
+    { "type": "header", "content": "Overview" },
+    { "type": "text", "id": "overview_heading", "label": "Overview heading", "default": "A Box Designed to Be Given" },
+    { "type": "textarea", "id": "overview_check", "label": "Checklist (one per line, Title | Detail)", "default": "Gift-ready presentation | Ribbon-tied and packed to hand over as-is.\nPersonal gift card | Your message printed and tucked inside.\n12 hand-picked berries | Single harvest day, graded before packing.\n2–8°C door to door | Cold chain from greenhouse to their fridge." },
+
+    { "type": "header", "content": "The Strawberry" },
+    { "type": "checkbox", "id": "show_strawberry", "label": "Show section", "default": true },
+    { "type": "text", "id": "berry_name", "label": "Variety name", "default": "Amaou（あまおう）" },
+    { "type": "text", "id": "berry_sub", "label": "Subtitle", "default": "akai (red) · marui (round) · ookii (big) · umai (delicious)" },
+    { "type": "image_picker", "id": "berry_image", "label": "Image" },
+    { "type": "richtext", "id": "berry_body", "label": "Body", "default": "<p>Amaou was developed in Fukuoka in 2005 after a decade of cross-breeding. It's protected — only farms registered with JA Fukuoka can grow and sell it under the name.</p><p>Berries average 25–40 g each, with a deep red exterior. Brix 12–14° vs. 7–9° for most imported strawberries.</p>" },
+
+    { "type": "header", "content": "The Farmer" },
+    { "type": "checkbox", "id": "show_farmer", "label": "Show section", "default": true },
+    { "type": "text", "id": "farmer_name", "label": "Farm name", "default": "Tanaka Family · Berry Farm" },
+    { "type": "text", "id": "farmer_meta", "label": "Meta line", "default": "YAME, FUKUOKA · PARTNERED SINCE 2021" },
+    { "type": "image_picker", "id": "farmer_image", "label": "Image" },
+    { "type": "richtext", "id": "farmer_body", "label": "Body", "default": "<p><b>A second-generation farm focused on one variety done well.</b></p><p>The Tanaka family started Berry Farm in 1992. 2.5 hectares — small enough that every plant is hand-inspected.</p>" },
+    { "type": "text", "id": "farmer_quote", "label": "Quote", "default": "\"We don't try to be the biggest farm in Yame. We try to be the one our customers actually remember.\"" },
+    { "type": "text", "id": "farmer_quote_by", "label": "Quote attribution", "default": "— Tanaka-san, Berry Farm" },
+
+    { "type": "header", "content": "What's Inside" },
+    { "type": "checkbox", "id": "show_inside", "label": "Show section", "default": true },
+    { "type": "image_picker", "id": "inside_image", "label": "Image" },
+    { "type": "textarea", "id": "inside_check", "label": "Checklist (one per line, Title | Detail)", "default": "12 × Amaou strawberries | Single harvest day at Berry Farm.\nWooden keepsake box | Optional upgrade, ribbon-tied.\nPersonal gift card | Your message, printed inside.\n2 × gel ice packs | Below −5°C at dispatch, 24h transit.\nIndividual cup tray | No stacking, no bruising." }
+  ],
+  "presets": [{ "name": "Gift product" }]
+}
+{% endschema %}

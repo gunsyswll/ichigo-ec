@@ -813,3 +813,20 @@ a.method.linkcard .link{display:inline-block;margin-top:10px;color:var(--red);fo
 .po-opt:has(input:checked){border-color:var(--red,#D94050);background:rgba(217,64,80,.05)}
 .po-opt input{accent-color:var(--red,#D94050)}
 .po-note{font-size:.8rem;color:var(--greige-deep,#6f6258);margin:2px 2px 0}
+/* gift options block */
+.gift-opts{margin:18px 0 4px;padding:18px;border:1.5px solid var(--line);border-radius:var(--r);background:var(--pink)}
+.gift-opts-head{margin-bottom:14px}
+.gift-opts-title{display:block;font-weight:700;font-size:.98rem;color:var(--ink)}
+.gift-opts-sub{display:block;font-size:.8rem;color:var(--greige-deep);margin-top:3px}
+.gift-field{margin-bottom:13px}
+.gift-field label{display:block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--greige-deep);margin-bottom:7px}
+.gift-field label .gift-opt{letter-spacing:0;text-transform:none;font-weight:400}
+.gift-field input[type=text],.gift-field textarea{width:100%;font-family:Outfit;font-size:.95rem;padding:13px 16px;border-radius:var(--r);border:1.5px solid var(--line);background:var(--cream);color:var(--ink);resize:vertical}
+.gift-field input[type=text]:focus,.gift-field textarea:focus,.gift-opts .pd-variant-select:focus{outline:none;border-color:var(--red)}
+.gift-field input::placeholder,.gift-field textarea::placeholder{color:var(--greige)}
+.gift-hint{font-size:.74rem;color:var(--greige-deep);text-align:right;margin-top:5px}
+.gift-toggle{display:flex;align-items:center;gap:10px;padding:13px 15px;border:1px solid var(--greige);border-radius:10px;cursor:pointer;background:var(--cream);margin-top:2px}
+.gift-toggle:has(input:checked){border-color:var(--red);background:rgba(217,64,80,.06)}
+.gift-toggle input{accent-color:var(--red);width:18px;height:18px;flex-shrink:0}
+.gift-toggle b{display:block;font-size:.92rem;color:var(--ink)}
+.gift-toggle span span{display:block;font-size:.78rem;color:var(--greige-deep)}
