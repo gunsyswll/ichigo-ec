@@ -806,3 +806,10 @@ a.method.linkcard .link{display:inline-block;margin-top:10px;color:var(--red);fo
   .cart-foot{flex-direction:column}
   .cart-summary{margin-left:0;max-width:none;width:100%}
 }
+
+/* subscription purchase options (v1.0.3) */
+.pd-purchase{display:flex;flex-direction:column;gap:8px;margin:18px 0}
+.po-opt{display:flex;align-items:center;gap:10px;padding:13px 15px;border:1px solid var(--greige,#9E8E7E);border-radius:10px;cursor:pointer;font-size:.95rem}
+.po-opt:has(input:checked){border-color:var(--red,#D94050);background:rgba(217,64,80,.05)}
+.po-opt input{accent-color:var(--red,#D94050)}
+.po-note{font-size:.8rem;color:var(--greige-deep,#6f6258);margin:2px 2px 0}
