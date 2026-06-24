@@ -1,0 +1,63 @@
+{%- comment -%} Live cart. Loops {{ cart.items }}, allows qty update + remove, posts to checkout. {%- endcomment -%}
+<section class="page-hero"><div class="wrap">
+  <div class="crumb"><a href="{{ routes.root_url }}">Home</a> / Cart</div>
+  <h1>Your <span class="r">Cart</span></h1>
+</div></section>
+
+<section style="padding:20px 0 84px"><div class="wrap">
+  {%- if cart.item_count > 0 -%}
+    <form action="{{ routes.cart_url }}" method="post" class="cart-form">
+      <table class="cart-table">
+        <thead>
+          <tr><th>Product</th><th class="ca-price">Price</th><th class="ca-qty">Quantity</th><th class="ca-total">Total</th></tr>
+        </thead>
+        <tbody>
+          {%- for item in cart.items -%}
+            <tr class="cart-row">
+              <td class="ci-product">
+                <a class="ci-thumb" href="{{ item.url }}">
+                  {%- if item.image -%}<img src="{{ item.image | image_url: width: 160 }}" alt="{{ item.title | escape }}" width="80" height="80" loading="lazy">{%- endif -%}
+                </a>
+                <div class="ci-meta">
+                  <a href="{{ item.url }}"><b>{{ item.product.title }}</b></a>
+                  {%- unless item.variant.title contains 'Default' -%}<span class="ci-variant">{{ item.variant.title }}</span>{%- endunless -%}
+                  <a class="ci-remove" href="{{ item.url_to_remove }}">Remove</a>
+                </div>
+              </td>
+              <td class="ca-price" data-label="Price">{{ item.original_price | money }}</td>
+              <td class="ca-qty" data-label="Quantity">
+                <div class="ctrl">
+                  <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" inputmode="numeric" aria-label="Quantity for {{ item.product.title | escape }}">
+                </div>
+              </td>
+              <td class="ca-total" data-label="Total">{{ item.original_line_price | money }}</td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+
+      <div class="cart-foot">
+        <button type="submit" name="update" class="btn btn-ghost">Update cart</button>
+        <div class="cart-summary">
+          <div class="cart-subtotal"><span>Subtotal</span><b>{{ cart.total_price | money }}</b></div>
+          <p class="cart-note">Taxes and shipping calculated at checkout.</p>
+          <button type="submit" name="checkout" class="btn btn-red btn-block" style="padding:16px">Checkout →</button>
+        </div>
+      </div>
+    </form>
+  {%- else -%}
+    <div class="cart-empty" data-reveal>
+      <h2>Your cart is empty</h2>
+      <p>No boxes reserved yet. Browse the latest strawberry boxes from Japan.</p>
+      <a class="btn btn-red" href="{{ routes.all_products_collection_url }}">Browse boxes</a>
+    </div>
+  {%- endif -%}
+</div></section>
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": [],
+  "presets": [{ "name": "Cart" }]
+}
+{% endschema %}

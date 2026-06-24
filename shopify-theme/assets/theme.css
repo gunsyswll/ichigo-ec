@@ -750,3 +750,59 @@ a.method.linkcard .link{display:inline-block;margin-top:10px;color:var(--red);fo
 
 @media(max-width:760px){.rev-summary{grid-template-columns:1fr;gap:22px}}
 @media(max-width:560px){.pd-facts,.inside-specs{grid-template-columns:1fr}.pd-tabs{top:64px}.pd-sticky .ps-l{font-size:.84rem}}
+
+/* ===== Live commerce: product images, cart, variant select ===== */
+/* real product image inside .card .ph and .ph.img background blocks */
+.card .ph .card-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.card .ph:has(.card-img)::after{display:none}
+.ph.img{background-size:cover;background-position:center;background-repeat:no-repeat}
+
+/* product variant selector */
+.pd-variants{margin:6px 0 4px}
+.pd-variant-label{display:block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--greige-deep);margin-bottom:7px}
+.pd-variant-select{width:100%;font-family:Outfit;font-size:.95rem;padding:13px 16px;border-radius:var(--r);border:1.5px solid var(--line);background:var(--cream);color:var(--ink);cursor:pointer}
+.pd-variant-select:focus{outline:none;border-color:var(--red)}
+/* quantity number input reuses the .ctrl pill */
+.qty .ctrl input[type=number]{width:54px;text-align:center;font-weight:600;font-family:Outfit;border:none;background:var(--cream);color:var(--ink);font-size:.95rem;-moz-appearance:textfield}
+.qty .ctrl input[type=number]::-webkit-outer-spin-button,.qty .ctrl input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+
+/* ===== Cart ===== */
+.cart-table{width:100%;border-collapse:collapse;margin-top:8px}
+.cart-table thead th{text-align:left;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--greige-deep);font-weight:600;padding:0 0 14px;border-bottom:1px solid var(--line)}
+.cart-table thead .ca-price,.cart-table thead .ca-total{text-align:right}
+.cart-table thead .ca-qty{text-align:center}
+.cart-row td{padding:20px 0;border-bottom:1px solid var(--line);vertical-align:middle;font-size:.92rem}
+.ci-product{display:flex;gap:16px;align-items:center}
+.ci-thumb{flex:none;width:80px;height:80px;border-radius:12px;overflow:hidden;background:var(--cream-2);display:block}
+.ci-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.ci-meta{display:flex;flex-direction:column;gap:4px}
+.ci-meta b{font-size:1rem}
+.ci-meta a:hover b{color:var(--red)}
+.ci-variant{font-size:.82rem;color:var(--greige-deep)}
+.ci-remove{font-size:.8rem;color:var(--greige-deep);text-decoration:underline;text-underline-offset:2px;margin-top:2px}
+.ci-remove:hover{color:var(--red)}
+.ca-price,.ca-total{text-align:right;font-family:'Libre Baskerville';color:var(--ink)}
+.ca-total{color:var(--red)}
+.ca-qty{text-align:center}
+.ca-qty .ctrl{display:inline-flex;border:1px solid var(--line);border-radius:100px;overflow:hidden}
+.ca-qty .ctrl input[type=number]{width:62px;text-align:center;font-weight:600;font-family:Outfit;border:none;background:var(--cream);color:var(--ink);padding:10px 0;-moz-appearance:textfield}
+.ca-qty .ctrl input[type=number]::-webkit-outer-spin-button,.ca-qty .ctrl input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.cart-foot{display:flex;justify-content:space-between;align-items:flex-start;gap:30px;margin-top:30px;flex-wrap:wrap}
+.cart-summary{margin-left:auto;min-width:300px;max-width:360px;flex:1}
+.cart-subtotal{display:flex;justify-content:space-between;align-items:baseline;font-size:1.05rem;padding-bottom:6px}
+.cart-subtotal b{font-family:'Libre Baskerville';font-size:1.5rem;color:var(--red)}
+.cart-note{font-size:.8rem;color:var(--greige-deep);margin:0 0 16px}
+.cart-empty{text-align:center;padding:60px 0 40px;display:flex;flex-direction:column;align-items:center;gap:14px}
+.cart-empty h2{font-size:1.8rem}
+.cart-empty p{color:var(--greige-deep);max-width:420px}
+.cart-empty .btn{margin-top:6px}
+@media(max-width:680px){
+  .cart-table thead{display:none}
+  .cart-row{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;padding:18px 0;border-bottom:1px solid var(--line)}
+  .cart-row td{padding:0;border:none}
+  .ci-product{grid-column:1/3}
+  .ca-price,.ca-qty,.ca-total{text-align:left}
+  .ca-price::before,.ca-qty::before,.ca-total::before{content:attr(data-label);display:block;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--greige-deep);margin-bottom:4px}
+  .cart-foot{flex-direction:column}
+  .cart-summary{margin-left:0;max-width:none;width:100%}
+}

@@ -1,0 +1,48 @@
+{%- comment -%} Live collection grid. Mirrors the page-shop design, wired to {{ collection.products }}. {%- endcomment -%}
+<section class="page-hero"><div class="wrap">
+  <div class="crumb"><a href="{{ routes.root_url }}">Home</a> / {{ collection.title | default: 'Shop' }}</div>
+  <h1>{% if section.settings.heading != blank %}{{ section.settings.heading }}{% else %}{{ collection.title }}{% endif %}</h1>
+  {%- if section.settings.subtext != blank -%}<p>{{ section.settings.subtext }}</p>{%- endif -%}
+</div></section>
+
+<section style="padding:40px 0 84px"><div class="wrap">
+  <div class="shop-bar">
+    <span>Showing <b style="color:var(--ink)">{{ collection.products_count }}</b> {{ collection.products_count | pluralize: 'product', 'products' }}</span>
+  </div>
+  {%- if collection.products.size > 0 -%}
+    {%- paginate collection.products by 12 -%}
+    <div class="shop-grid" data-stagger>
+      {%- for product in collection.products -%}
+        {%- render 'product-card', product: product -%}
+      {%- endfor -%}
+    </div>
+    {%- if paginate.pages > 1 -%}
+      <div class="pager">
+        {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}">‹</a>{%- endif -%}
+        {%- for part in paginate.parts -%}
+          {%- if part.is_link -%}<a href="{{ part.url }}">{{ part.title }}</a>
+          {%- else -%}<a class="active" href="#">{{ part.title }}</a>{%- endif -%}
+        {%- endfor -%}
+        {%- if paginate.next -%}<a href="{{ paginate.next.url }}">›</a>{%- endif -%}
+      </div>
+    {%- endif -%}
+    {%- endpaginate -%}
+  {%- else -%}
+    <div class="cart-empty" data-reveal>
+      <h2>No products yet</h2>
+      <p>New strawberry boxes are landing soon. Check back before the next arrival.</p>
+      <a class="btn btn-red" href="{{ routes.root_url }}">Back to home</a>
+    </div>
+  {%- endif -%}
+</div></section>
+
+{% schema %}
+{
+  "name": "Collection grid",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading (defaults to collection title)" },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Browse all available strawberry boxes." }
+  ],
+  "presets": [{ "name": "Collection grid" }]
+}
+{% endschema %}

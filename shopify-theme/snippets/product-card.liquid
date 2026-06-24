@@ -1,15 +1,47 @@
 {%- comment -%}
-  Reusable box-grid card. Drop-in for a real product loop later.
-  Params: url, ph_class ('soft'|''), tag, tag_class, title, desc, price,
-          price_sm, meta, btn_label, btn_class. All optional.
+  Real product card. Param: product (a Shopify product object).
+  Reuses the existing .card / .ph / .card-body design classes.
+  The "Reserve" button links to the product page (add-to-cart lives there).
 {%- endcomment -%}
-<a class="card" href="{{ url | default: routes.all_products_collection_url }}" data-reveal>
-  <div class="ph {{ ph_class }}">{% if tag != blank %}<span class="card-tag {{ tag_class | default: 'tag-pre' }}">{{ tag }}</span>{% endif %}{% render 'berry-icon', tone: ph_class %}</div>
-  <div class="card-body">
-    <h3>{{ title }}</h3>
-    {% if desc != blank %}<p class="desc">{{ desc }}</p>{% endif %}
-    {% if price != blank %}<div class="price">{{ price }}{% if price_sm != blank %} <span class="sm">{{ price_sm }}</span>{% endif %}</div>{% endif %}
-    {% if meta != blank %}<div class="meta">{{ meta }}</div>{% endif %}
-    <span class="btn {{ btn_class | default: 'btn-red' }}">{{ btn_label | default: 'Reserve Now' }}</span>
+{%- liquid
+  assign on_sale = false
+  if product.compare_at_price > product.price
+    assign on_sale = true
+  endif
+-%}
+{%- if product.available -%}
+  <a class="card" href="{{ product.url }}" data-reveal>
+    <div class="ph{% unless product.featured_image %} soft{% endunless %}">
+      {%- if on_sale -%}<span class="card-tag tag-new">Sale</span>{%- endif -%}
+      {%- if product.featured_image -%}
+        {{ product.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'card-img', alt: product.title }}
+      {%- else -%}
+        <svg class="berry" viewBox="0 0 64 64" fill="none" stroke="rgba(110,98,86,.6)" stroke-width="2.2"><path d="M32 20c8-10 22-8 22-8s2 14-8 22-22 18-22 18S14 42 14 32s10-12 18-12z"/></svg>
+      {%- endif -%}
+    </div>
+    <div class="card-body">
+      <h3>{{ product.title }}</h3>
+      {%- if product.description != blank -%}<p class="desc">{{ product.description | strip_html | truncatewords: 14 }}</p>{%- endif -%}
+      <div class="price">
+        {{ product.price | money }}
+        {%- if on_sale -%}<span class="sm"><s>{{ product.compare_at_price | money }}</s></span>{%- endif -%}
+      </div>
+      <span class="btn btn-red">Reserve</span>
+    </div>
+  </a>
+{%- else -%}
+  <div class="card sold" data-reveal>
+    <div class="ph grey">
+      {%- if product.featured_image -%}
+        {{ product.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'card-img', alt: product.title }}
+      {%- endif -%}
+      <span class="soldflag"><span>SOLD OUT</span></span>
+    </div>
+    <div class="card-body">
+      <h3>{{ product.title }}</h3>
+      {%- if product.description != blank -%}<p class="desc">{{ product.description | strip_html | truncatewords: 14 }}</p>{%- endif -%}
+      <div class="price">{{ product.price | money }}</div>
+      <a class="btn btn-ghost" href="{{ product.url }}">View</a>
+    </div>
   </div>
-</a>
+{%- endif -%}
