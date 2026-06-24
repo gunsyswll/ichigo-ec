@@ -1,13 +1,13 @@
 {%- comment -%} Live collection grid. Mirrors the page-shop design, wired to {{ collection.products }}. {%- endcomment -%}
 <section class="page-hero"><div class="wrap">
-  <div class="crumb"><a href="{{ routes.root_url }}">Home</a> / {{ collection.title | default: 'Shop' }}</div>
-  <h1>{% if section.settings.heading != blank %}{{ section.settings.heading }}{% else %}{{ collection.title }}{% endif %}</h1>
+  <div class="crumb"><a href="{{ routes.root_url }}">Home</a> / Shop</div>
+  <h1>{{ section.settings.heading | default: 'Our Strawberry Boxes' }}</h1>
   {%- if section.settings.subtext != blank -%}<p>{{ section.settings.subtext }}</p>{%- endif -%}
 </div></section>
 
 <section style="padding:40px 0 84px"><div class="wrap">
   <div class="shop-bar">
-    <span>Showing <b style="color:var(--ink)">{{ collection.products_count }}</b> {{ collection.products_count | pluralize: 'product', 'products' }}</span>
+    <span>Showing <b style="color:var(--ink)">{{ collection.products.size }}</b> {{ collection.products.size | pluralize: 'product', 'products' }}</span>
   </div>
   {%- if collection.products.size > 0 -%}
     {%- paginate collection.products by 12 -%}
