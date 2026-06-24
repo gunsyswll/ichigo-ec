@@ -1,6 +1,6 @@
 <section id="club">
   <div class="wrap"><div class="band" data-reveal="scale">
-    <div class="band-top"><div><span class="eyebrow">{{ section.settings.eyebrow }}</span><h2>{{ section.settings.heading }}</h2></div><a class="btn btn-white" href="{{ section.settings.cta_url | default: '/collections/all' }}">{{ section.settings.cta_label }}</a></div>
+    <div class="band-top"><div><span class="eyebrow">{{ section.settings.eyebrow }}</span><h2>{{ section.settings.heading }}</h2></div><a class="btn btn-white" href="{{ section.settings.cta_url | default: '/products/japanese-strawberry-club' }}">{{ section.settings.cta_label }}</a></div>
     <div class="band-feats">
       {%- for block in section.blocks -%}
       <div class="f" {{ block.shopify_attributes }}><b>{{ block.settings.title }}</b><span>{{ block.settings.text }}</span></div>

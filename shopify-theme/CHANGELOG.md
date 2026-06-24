@@ -3,6 +3,14 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.0.2 — 2026-06-24
+- Really fix the product count: wrap the grid in `{% paginate %}` and use
+  `paginate.items`. The magic "all" collection only exposes `products` *inside* a
+  paginate block, so `products.size`/`products_count` read 0 outside it.
+- Subscription links (header / footer / homepage club band) now point to the Club
+  product `/products/japanese-strawberry-club` so it's purchasable and checks out
+  (one-time; recurring billing still needs a subscription app).
+
 ## v1.0.1 — 2026-06-24
 - Fix collection page heading/breadcrumb: no longer shows the JA auto-collection
   title "商品" (now an editable heading, default "Our Strawberry Boxes" + "Shop" crumb).
