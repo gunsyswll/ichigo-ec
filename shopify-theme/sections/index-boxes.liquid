@@ -3,7 +3,7 @@
     <div class="sec-head" data-reveal><span class="eyebrow">{{ section.settings.eyebrow }}</span><h2>{{ section.settings.heading }}</h2><p>{{ section.settings.subtext }}</p></div>
     <div class="box-grid" data-stagger>
       {%- for block in section.blocks -%}
-        {%- assign url = block.settings.url | default: '/pages/shop' -%}
+        {%- assign url = block.settings.url | default: '/collections/all' -%}
         <a class="card" href="{{ url }}" data-reveal {{ block.shopify_attributes }}><div class="ph {{ block.settings.ph_class }}"><span class="card-tag {{ block.settings.tag_class }}">{{ block.settings.tag }}</span>
         {%- if block.settings.icon == 'box' -%}<svg class="berry" viewBox="0 0 64 64" fill="none" stroke="rgba(110,98,86,.6)" stroke-width="2.2"><rect x="14" y="22" width="36" height="28" rx="3"/><path d="M14 30h36M32 22v28"/></svg>
         {%- elsif block.settings.ph_class contains 'soft' -%}<svg class="berry" viewBox="0 0 64 64" fill="none" stroke="rgba(110,98,86,.6)" stroke-width="2.2"><path d="M32 20c8-10 22-8 22-8s2 14-8 22-22 18-22 18S14 42 14 32s10-12 18-12z"/></svg>
