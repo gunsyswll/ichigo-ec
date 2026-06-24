@@ -3,6 +3,12 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.0.5 — 2026-06-24
+- Genericized placeholder farm/product copy (5 sections): removed invented specifics —
+  grower names, Yame/Fukuoka, Amaou/Skyberry varieties, founding dates, hectares, Brix,
+  and mismatched ₱ prices. Kept the one confirmed fact (Chiba, Japan) + generic craft/
+  cold-chain language. Real farm details to be filled back in when supplied.
+
 ## v1.0.4 — 2026-06-24
 - Gift Box: distinct gift product page (`main-product-gift` + `product.gift` template) with
   gift options — recipient, message (200-char), ribbon, deliver-on date, wooden box — as
