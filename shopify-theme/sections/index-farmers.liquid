@@ -1,0 +1,38 @@
+<section class="farmers" id="farmers">
+  <div class="wrap">
+    <div class="sec-head" data-reveal><span class="eyebrow">{{ section.settings.eyebrow }}</span><h2>{{ section.settings.heading }}</h2><p>{{ section.settings.subtext }}</p></div>
+    <div class="farmer-grid" data-stagger>
+      {%- for block in section.blocks -%}
+      <a class="farmer" href="{{ block.settings.url | default: '/pages/farmers' }}" data-reveal="{{ block.settings.reveal }}" {{ block.shopify_attributes }}><div class="ph {{ block.settings.ph_class }}"></div><div class="farmer-info"><span class="loc">{{ block.settings.loc }}</span><h3>{{ block.settings.title }}</h3><p>{{ block.settings.text }}</p><span class="link">{{ block.settings.link_label }}</span></div></a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Meet the farmers",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Meet the farmers behind each box" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Not a far-away fruit — a farmer you know" },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "We work with two growers only, so we can tell their full story." }
+  ],
+  "blocks": [
+    { "type": "farmer", "name": "Farmer", "settings": [
+      { "type": "text", "id": "loc", "label": "Location", "default": "Farm A · Chiba, Japan" },
+      { "type": "text", "id": "title", "label": "Title", "default": "Berry Farm" },
+      { "type": "textarea", "id": "text", "label": "Text", "default": "The Tanaka family, est. 1992 — third-generation Amaou growers focused on flavour, sweetness, and careful temperature control." },
+      { "type": "text", "id": "link_label", "label": "Link label", "default": "View Farm Story →" },
+      { "type": "url", "id": "url", "label": "Link URL" },
+      { "type": "select", "id": "ph_class", "label": "Photo tone", "default": "", "options": [ {"value":"","label":"Bold"},{"value":"soft","label":"Soft"} ] },
+      { "type": "select", "id": "reveal", "label": "Reveal direction", "default": "left", "options": [ {"value":"left","label":"From left"},{"value":"right","label":"From right"} ] }
+    ] }
+  ],
+  "presets": [
+    { "name": "Meet the farmers", "blocks": [
+      { "type": "farmer", "settings": { "loc": "Farm A · Chiba, Japan", "title": "Berry Farm", "text": "The Tanaka family, est. 1992 — third-generation Amaou growers focused on flavour, sweetness, and careful temperature control.", "link_label": "View Farm Story →", "ph_class": "", "reveal": "left" } },
+      { "type": "farmer", "settings": { "loc": "Farm B · Chiba, Japan", "title": "Sun Harvest", "text": "The Sato family, est. 1985 — perfecting the Tochiotome berry with advanced cultivation and selection for beautiful colour.", "link_label": "View Farm Story →", "ph_class": "soft", "reveal": "right" } }
+    ] }
+  ]
+}
+{% endschema %}

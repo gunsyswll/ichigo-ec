@@ -1,0 +1,38 @@
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head" data-reveal><span class="eyebrow muted">{{ section.settings.eyebrow }}</span><h2>{{ section.settings.heading }}</h2></div>
+    <div style="max-width:820px;margin:0 auto" data-reveal>
+      {%- for block in section.blocks -%}
+      <details class="q"{% if forloop.first %} open{% endif %} {{ block.shopify_attributes }}><summary>{{ block.settings.q }}</summary><div class="a">{{ block.settings.a }}</div></details>
+      {%- endfor -%}
+    </div>
+    <div class="faq-foot"><a class="btn btn-outline-red" href="{{ section.settings.cta_url | default: '/pages/help#help-faq' }}">{{ section.settings.cta_label }}</a></div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Good to know" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently asked questions" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "View All FAQs →" },
+    { "type": "url", "id": "cta_url", "label": "Button URL" }
+  ],
+  "blocks": [
+    { "type": "qa", "name": "Q&A", "settings": [
+      { "type": "text", "id": "q", "label": "Question", "default": "When will the strawberries be delivered?" },
+      { "type": "textarea", "id": "a", "label": "Answer", "default": "Delivery follows each Japan arrival. Once you reserve, you'll see the exact delivery window — typically 1–2 days after the berries land and clear customs." }
+    ] }
+  ],
+  "presets": [
+    { "name": "FAQ", "blocks": [
+      { "type": "qa", "settings": { "q": "When will the strawberries be delivered?", "a": "Delivery follows each Japan arrival. Once you reserve, you'll see the exact delivery window — typically 1–2 days after the berries land and clear customs." } },
+      { "type": "qa", "settings": { "q": "What happens if the strawberries arrive damaged?", "a": "Our freshness guarantee covers you: contact us within 24 hours with a photo and we'll arrange a replacement or full refund." } },
+      { "type": "qa", "settings": { "q": "How does the subscription (Club) work?", "a": "The 頒布会 Club is three monthly deliveries, each a different seasonal variety chosen by the farmers. Reserve once, enjoy three arrivals." } },
+      { "type": "qa", "settings": { "q": "Can I choose the delivery date?", "a": "Delivery is tied to each Japan arrival to guarantee freshness, but you can select your preferred window at checkout where available." } },
+      { "type": "qa", "settings": { "q": "Can I send this as a gift?", "a": "Yes — the Premium Gift Box is made for it, and you can ship to any address in our delivery area with a personal note." } }
+    ] }
+  ]
+}
+{% endschema %}

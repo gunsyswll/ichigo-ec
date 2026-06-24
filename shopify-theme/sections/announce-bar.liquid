@@ -1,0 +1,12 @@
+<div class="announce">{{ section.settings.text }}&nbsp;<a href="{{ section.settings.link_url }}">{{ section.settings.link_label }}</a></div>
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [
+    { "type": "text", "id": "text", "label": "Message", "default": "New arrival from Japan · Pre-orders now open · Limited boxes available" },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "Reserve Now →" },
+    { "type": "url", "id": "link_url", "label": "Link URL" }
+  ]
+}
+{% endschema %}

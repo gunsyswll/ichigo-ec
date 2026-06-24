@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>{{ page_title }}{% unless page_title contains shop.name %} · {{ shop.name }}{% endunless %}</title>
+{% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+{{ 'theme.css' | asset_url | stylesheet_tag }}
+{%- comment -%} Shopify assets are flat: map the JS-injected photo filenames to their CDN URLs. {%- endcomment -%}
+<style>:root{--str-one-img:url('{{ "str-one.jpg" | asset_url }}');--red:{{ settings.color_accent }};--cream:{{ settings.color_bg }};--greige:{{ settings.color_greige }}}</style>
+<script>
+window.ICHIGO_IMG={
+  "str-bunch":"{{ 'str-bunch.jpg' | asset_url }}","str-farm":"{{ 'str-farm.jpg' | asset_url }}",
+  "str-red":"{{ 'str-red.jpg' | asset_url }}","str-one":"{{ 'str-one.jpg' | asset_url }}",
+  "str-hold":"{{ 'str-hold.jpg' | asset_url }}","hold-bunch":"{{ 'hold-bunch.jpg' | asset_url }}",
+  "hold-plant":"{{ 'hold-plant.jpg' | asset_url }}","hold-box":"{{ 'hold-box.jpg' | asset_url }}",
+  "hand-berry":"{{ 'hand-berry.jpg' | asset_url }}"
+};
+(function(d){d.documentElement.classList.add('reveal-js');setTimeout(function(){var n=d.querySelectorAll('[data-reveal]:not(.in)');for(var i=0;i<n.length;i++)n[i].classList.add('in')},4000)})(document);
+</script>
+{{ content_for_header }}
+</head>
+<body>
+{% section 'announce-bar' %}
+{% section 'header' %}
+<main id="MainContent" role="main">
+{{ content_for_layout }}
+</main>
+{% section 'footer' %}
+<script src="{{ 'theme.js' | asset_url }}" defer></script>
+</body>
+</html>

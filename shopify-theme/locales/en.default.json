@@ -1,0 +1,28 @@
+{
+  "general": {
+    "404": {
+      "title": "Page not found",
+      "subtext": "This one rolled off the table."
+    },
+    "newsletter": {
+      "label": "Email Address",
+      "button": "Join the List",
+      "success": "Thanks — you're on the list."
+    },
+    "accessibility": {
+      "skip_to_content": "Skip to content"
+    }
+  },
+  "products": {
+    "product": {
+      "reserve": "Reserve Now",
+      "sold_out": "Sold Out",
+      "join_waitlist": "Join Waitlist"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Your cart"
+    }
+  }
+}

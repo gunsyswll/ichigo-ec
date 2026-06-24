@@ -1,0 +1,28 @@
+<div class="wrap"><div class="arrival-strip" data-reveal>
+  <div class="as-title">{{ section.settings.title }}<small>{{ section.settings.subtitle }}</small></div>
+  <div class="as-data">
+    <div class="d"><label>Arrival Date</label><b class="hot">{{ section.settings.arrival_date }}</b></div>
+    <div class="d"><label>Reservation Deadline</label><b>{{ section.settings.deadline }}</b></div>
+    <div class="d"><label>Delivery Window</label><b>{{ section.settings.delivery }}</b></div>
+    <div class="d"><label>Available Boxes</label><b>{{ section.settings.available }}</b></div>
+  </div>
+  <a class="btn btn-red" href="{{ section.settings.cta_url | default: routes.all_products_collection_url }}">{{ section.settings.cta_label }}</a>
+</div></div>
+<div class="marquee"><div class="marquee-track"><span>Amaou<b>·</b></span><span>Tochiotome<b>·</b></span><span>Skyberry<b>·</b></span><span>15° Brix<b>·</b></span><span>Chiba<b>·</b></span><span>Cold-Chain Fresh<b>·</b></span><span>頒布会 Club<b>·</b></span><span>Single-Origin<b>·</b></span><span>Reserved by the Lot<b>·</b></span><span>Amaou<b>·</b></span><span>Tochiotome<b>·</b></span><span>Skyberry<b>·</b></span><span>15° Brix<b>·</b></span><span>Chiba<b>·</b></span><span>Cold-Chain Fresh<b>·</b></span><span>頒布会 Club<b>·</b></span><span>Single-Origin<b>·</b></span><span>Reserved by the Lot<b>·</b></span></div></div>
+
+{% schema %}
+{
+  "name": "Arrival strip",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Next Arrival from Japan" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Reserve your box from this week's incoming harvest." },
+    { "type": "text", "id": "arrival_date", "label": "Arrival date", "default": "March 15, 2025" },
+    { "type": "text", "id": "deadline", "label": "Reservation deadline", "default": "March 12, 2025" },
+    { "type": "text", "id": "delivery", "label": "Delivery window", "default": "March 16–17" },
+    { "type": "text", "id": "available", "label": "Available boxes", "default": "Limited" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "View Available Boxes" },
+    { "type": "url", "id": "cta_url", "label": "Button URL" }
+  ],
+  "presets": [{ "name": "Arrival strip" }]
+}
+{% endschema %}

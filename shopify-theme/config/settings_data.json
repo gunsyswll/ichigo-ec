@@ -1,0 +1,18 @@
+{
+  "current": {
+    "color_accent": "#D94050",
+    "color_bg": "#FBF6F1",
+    "color_greige": "#9E8E7E",
+    "font_heading": "libre_baskerville_n4",
+    "font_body": "assistant_n4"
+  },
+  "presets": {
+    "Ichigo": {
+      "color_accent": "#D94050",
+      "color_bg": "#FBF6F1",
+      "color_greige": "#9E8E7E",
+      "font_heading": "libre_baskerville_n4",
+      "font_body": "assistant_n4"
+    }
+  }
+}

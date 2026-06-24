@@ -1,0 +1,15 @@
+{%- comment -%}
+  Reusable box-grid card. Drop-in for a real product loop later.
+  Params: url, ph_class ('soft'|''), tag, tag_class, title, desc, price,
+          price_sm, meta, btn_label, btn_class. All optional.
+{%- endcomment -%}
+<a class="card" href="{{ url | default: routes.all_products_collection_url }}" data-reveal>
+  <div class="ph {{ ph_class }}">{% if tag != blank %}<span class="card-tag {{ tag_class | default: 'tag-pre' }}">{{ tag }}</span>{% endif %}{% render 'berry-icon', tone: ph_class %}</div>
+  <div class="card-body">
+    <h3>{{ title }}</h3>
+    {% if desc != blank %}<p class="desc">{{ desc }}</p>{% endif %}
+    {% if price != blank %}<div class="price">{{ price }}{% if price_sm != blank %} <span class="sm">{{ price_sm }}</span>{% endif %}</div>{% endif %}
+    {% if meta != blank %}<div class="meta">{{ meta }}</div>{% endif %}
+    <span class="btn {{ btn_class | default: 'btn-red' }}">{{ btn_label | default: 'Reserve Now' }}</span>
+  </div>
+</a>

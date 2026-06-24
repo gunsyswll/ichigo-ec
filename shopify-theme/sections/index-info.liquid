@@ -1,0 +1,35 @@
+<section style="padding-top:0">
+  <div class="wrap info-grid" data-stagger>
+    {%- for block in section.blocks -%}
+    <div class="info" data-reveal {{ block.shopify_attributes }}><div class="ic">
+      {%- case block.settings.icon -%}
+      {%- when 'shield-check' -%}<svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 2l8 4v6c0 5-4 8-8 9-4-1-8-4-8-9V6z"/><path d="M8 11l2 2 4-4"/></svg>
+      {%- when 'truck' -%}<svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 13l3-7h9l3 7M3 13v4h16v-4M3 13h16"/></svg>
+      {%- when 'check' -%}<svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="8"/><path d="M7 11l3 3 5-6"/></svg>
+      {%- endcase -%}
+    </div><h3>{{ block.settings.title }}</h3><p>{{ block.settings.text }}</p><a class="link" href="{{ block.settings.url | default: '#' }}">{{ block.settings.link_label }}</a></div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Info trio",
+  "blocks": [
+    { "type": "info", "name": "Info", "settings": [
+      { "type": "select", "id": "icon", "label": "Icon", "default": "shield-check", "options": [ {"value":"shield-check","label":"Shield check"},{"value":"truck","label":"Truck"},{"value":"check","label":"Check"} ] },
+      { "type": "text", "id": "title", "label": "Title", "default": "Officially Imported & Managed in the Philippines" },
+      { "type": "textarea", "id": "text", "label": "Text", "default": "One trusted local importer handles sourcing, customs, and delivery." },
+      { "type": "text", "id": "link_label", "label": "Link label", "default": "Learn More →" },
+      { "type": "url", "id": "url", "label": "Link URL" }
+    ] }
+  ],
+  "presets": [
+    { "name": "Info trio", "blocks": [
+      { "type": "info", "settings": { "icon": "shield-check", "title": "Officially Imported & Managed in the Philippines", "text": "One trusted local importer handles sourcing, customs, and delivery.", "link_label": "Learn More →" } },
+      { "type": "info", "settings": { "icon": "truck", "title": "Delivery & Freshness", "text": "Cold-chain handling and a clear schedule so berries arrive at their best.", "link_label": "Learn More →" } },
+      { "type": "info", "settings": { "icon": "check", "title": "Quality Guarantee", "text": "If your strawberries arrive less than perfect, we'll make it right.", "link_label": "Learn More →" } }
+    ] }
+  ]
+}
+{% endschema %}
