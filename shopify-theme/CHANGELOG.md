@@ -3,6 +3,12 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.0.6 — 2026-06-29
+- How-it-works journey map: rebuilt Japan from real GeoJSON prefecture data with **Chiba
+  highlighted in place**; added a cropped/zoomed/hovering Chiba callout with the strawberry
+  farm inside; mapped the route Chiba farm → **Narita Airport** (animated truck) → Manila →
+  warehouse → your door; repositioned + title-cased all map labels (JAPAN/PHILIPPINES kept caps).
+
 ## v1.0.5 — 2026-06-24
 - Genericized placeholder farm/product copy (5 sections): removed invented specifics —
   grower names, Yame/Fukuoka, Amaou/Skyberry varieties, founding dates, hectares, Brix,
