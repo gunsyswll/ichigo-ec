@@ -751,3 +751,33 @@ a.method.linkcard .link{display:inline-block;margin-top:10px;color:var(--red);fo
 
 @media(max-width:760px){.rev-summary{grid-template-columns:1fr;gap:22px}}
 @media(max-width:560px){.pd-facts,.inside-specs{grid-template-columns:1fr}.pd-tabs{top:64px}.pd-sticky .ps-l{font-size:.84rem}}
+
+/* ============ client-review Jul 2026: slim newsletter · footer social · news/events · follow ============ */
+.news{padding:56px 0}                    /* slimmed newsletter frame (client: 枠をスリム化) */
+.news-slim{padding:0 0 6px}              /* compact mid-page newsletter strip */
+
+.foot-social{display:flex;gap:10px;align-items:center}
+.foot-social a{width:34px;height:34px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--greige-deep);transition:.2s}
+.foot-social a:hover{border-color:var(--red);color:var(--red);transform:translateY(-2px)}
+
+.article-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.article-card{background:var(--cream);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:.3s var(--ease)}
+.article-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-sm)}
+.article-card .thumb{aspect-ratio:16/10;background:var(--pink);display:grid;place-items:center;color:rgba(217,64,80,.4)}
+.article-card .thumb svg{width:46px;height:46px}
+.article-body{padding:22px 24px 26px;display:flex;flex-direction:column;flex:1}
+.article-body .meta{display:flex;gap:10px;align-items:center;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--greige-deep);margin-bottom:10px}
+.article-body .tag-news{color:var(--red);font-weight:600}
+.article-body h3{font-size:1.12rem;line-height:1.3;margin-bottom:8px}
+.article-body p{font-size:.86rem;color:var(--greige-deep);margin-bottom:14px}
+.article-body .link{margin-top:auto;color:var(--red);font-weight:600;font-size:.85rem}
+
+.follow-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+.follow-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.ig-tile{aspect-ratio:1;border-radius:12px;background:var(--cream);display:grid;place-items:center;color:rgba(217,64,80,.35);border:1px solid var(--line)}
+.ig-tile svg{width:34px;height:34px}
+.follow-note{font-size:.82rem;color:var(--greige-deep);margin-top:14px}
+
+@media(max-width:1080px) and (min-width:921px){nav.links{gap:20px;font-size:.85rem}}
+@media(max-width:760px){.article-grid{grid-template-columns:1fr}.foot-bottom{justify-content:center}}
+@media(max-width:560px){.follow-grid{grid-template-columns:1fr 1fr}}
