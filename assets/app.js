@@ -274,3 +274,77 @@
   btn.addEventListener('click', check);
   inp.addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); check(); } });
 })();
+
+// ---- "Get notified" demo popup ----
+// Production: replace this demo popup with the Shopify Forms app popup.
+// Lightweight vanilla modal that stands in for the Shopify Forms signup.
+// Triggered by any [data-open-notify] element; auto-opens once on the homepage
+// (body[data-notify-auto]) after a delay, gated by sessionStorage so it never re-nags.
+(function(){
+  if(document.getElementById('notify-modal')) return;
+  var m=document.createElement('div');
+  m.id='notify-modal'; m.className='nm-overlay'; m.setAttribute('aria-hidden','true');
+  m.innerHTML=''+
+    '<div class="nm-dialog" role="dialog" aria-modal="true" aria-labelledby="nm-title">'+
+      '<button class="nm-close" type="button" data-close-notify aria-label="Close">&times;</button>'+
+      '<span class="eyebrow muted">Never miss an arrival</span>'+
+      '<h2 id="nm-title">Get notified before the next arrival</h2>'+
+      '<p class="nm-lead">Lots are small and sell out. Join the list for arrival alerts, pre-order reminders, and how-to-enjoy notes.</p>'+
+      '<form class="news-form nm-form" novalidate>'+
+        '<div class="news-row"><input type="text" placeholder="Your Name"><input type="email" placeholder="Email Address"></div>'+
+        '<div class="checks"><span style="font-weight:500;color:var(--ink)">I’m interested in:</span>'+
+          '<label><input type="checkbox"> Next Arrival</label>'+
+          '<label><input type="checkbox"> Gift Box</label>'+
+          '<label><input type="checkbox"> Subscription</label></div>'+
+        '<button class="btn btn-red" type="submit" style="align-self:flex-start;margin-top:4px">Join the List</button>'+
+      '</form>'+
+      '<p class="nm-thanks" hidden>Thanks — you’re on the list. <em>(Demo only — no data is stored.)</em></p>'+
+    '</div>';
+  document.body.appendChild(m);
+
+  var dialog=m.querySelector('.nm-dialog');
+  var lastFocus=null;
+  function focusables(){ return m.querySelectorAll('button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])'); }
+  function open(){
+    if(m.classList.contains('open')) return;
+    lastFocus=document.activeElement;
+    m.classList.add('open'); m.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+    var f=focusables()[0]; if(f) f.focus();
+    document.addEventListener('keydown', onKey);
+  }
+  function close(){
+    if(!m.classList.contains('open')) return;
+    m.classList.remove('open'); m.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+    document.removeEventListener('keydown', onKey);
+    if(lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  function onKey(e){
+    if(e.key==='Escape'){ close(); return; }
+    if(e.key==='Tab'){ // simple focus trap
+      var f=focusables(); if(!f.length) return;
+      var first=f[0], last=f[f.length-1];
+      if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+    }
+  }
+  document.addEventListener('click', function(e){
+    var t=e.target.closest('[data-open-notify]');
+    if(t){ e.preventDefault(); open(); return; }
+    if(e.target.closest('[data-close-notify]')){ e.preventDefault(); close(); return; }
+    if(e.target===m){ close(); } // click outside the dialog
+  });
+  m.querySelector('form').addEventListener('submit', function(e){
+    e.preventDefault();
+    dialog.querySelector('.nm-form').hidden=true;
+    dialog.querySelector('.nm-lead').hidden=true;
+    dialog.querySelector('.nm-thanks').hidden=false;
+  });
+
+  // auto-open once on the homepage (first visit this session)
+  if(document.body.hasAttribute('data-notify-auto') && !sessionStorage.getItem('ichigo_notify_seen')){
+    setTimeout(function(){ open(); }, 8000);
+    sessionStorage.setItem('ichigo_notify_seen','1');
+  }
+})();
