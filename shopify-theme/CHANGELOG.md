@@ -3,6 +3,27 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.1.0 — 2026-07-07
+- Client-review rounds 1 + 2 ported from the static preview into the Liquid theme:
+  1. **Removed all 頒布会 text** — arrival marquee, Club eyebrow (now just "The Strawberry
+     Club"), FAQ answer, and the homepage FAQ block in `index.json`. English "Strawberry Club"
+     kept throughout.
+  2. **Removed the "quality you can taste" band** (`index-why`) from the homepage — dropped
+     from `templates/index.json` sections + order. The `index-why.liquid` file is left in
+     place, unused.
+  3. **Merged the nav** — one **Strawberry Club** tab (→ `/pages/shop#club`) replaces the
+     old "Subscription" tab in `header.liquid`.
+  4. **News & Events teaser** — new `sections/index-news.liquid`, registered before the FAQ.
+     Pulls the latest 3 posts from the built-in **News blog** (`blogs.news`) with a graceful,
+     clearly-labelled *sample* fallback when the blog is empty. "View all →" links to
+     `blogs.news.url` (default `/blogs/news`). Styling ported into `assets/theme.css`.
+  5. **Footer social** — Instagram + Facebook links added to `footer.liquid` (placeholder
+     handles, no X/Twitter). `<!-- TODO real ichigo handle -->` left for the real URLs.
+  6. **Newsletter section removed from the homepage** (`index-newsletter` dropped from
+     `index.json`). The "Get notified" popup will be handled by the **Shopify Forms app**
+     (installed in Admin — injects the popup); `index-newsletter.liquid` is left unused so
+     the demo JS popup is not ported/duplicated.
+
 ## v1.0.6 — 2026-06-29
 - How-it-works journey map: rebuilt Japan from real GeoJSON prefecture data with **Chiba
   highlighted in place**; added a cropped/zoomed/hovering Chiba callout with the strawberry
