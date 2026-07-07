@@ -781,3 +781,21 @@ a.method.linkcard .link{display:inline-block;margin-top:10px;color:var(--red);fo
 @media(max-width:1080px) and (min-width:921px){nav.links{gap:20px;font-size:.85rem}}
 @media(max-width:760px){.article-grid{grid-template-columns:1fr}.foot-bottom{justify-content:center}}
 @media(max-width:560px){.follow-grid{grid-template-columns:1fr 1fr}}
+
+/* ---- Get-notified demo popup (Shopify Forms placeholder) ---- */
+.nm-overlay{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(43,36,32,.52);backdrop-filter:blur(4px);opacity:0;transition:opacity .25s var(--ease)}
+.nm-overlay.open{display:flex;opacity:1}
+.nm-dialog{position:relative;width:100%;max-width:480px;background:var(--cream);border-radius:var(--r);border:1px solid var(--line);box-shadow:var(--shadow);padding:38px 36px 34px;transform:translateY(14px) scale(.98);transition:transform .28s var(--ease)}
+.nm-overlay.open .nm-dialog{transform:none}
+.nm-dialog .eyebrow{display:block;margin-bottom:12px}
+.nm-dialog h2{font-size:clamp(1.5rem,2.4vw,1.9rem);line-height:1.15}
+.nm-dialog .nm-lead{margin:12px 0 20px;color:var(--greige-deep);font-size:.94rem}
+.nm-dialog .news-form{max-width:none}
+.nm-dialog input{background:var(--cream);flex:1;padding:14px 18px;border-radius:100px;border:1.5px solid var(--line);font-family:'Outfit';font-size:.93rem}
+.nm-dialog input:focus{outline:none;border-color:var(--red)}
+.nm-close{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--cream);color:var(--greige-deep);font-size:1.5rem;line-height:1;cursor:pointer;display:grid;place-items:center;transition:.2s}
+.nm-close:hover{border-color:var(--ink);color:var(--ink)}
+.nm-thanks{color:var(--ink);font-weight:500;padding:8px 0}
+.nm-thanks em{color:var(--greige-deep);font-weight:400;font-style:italic}
+@media(prefers-reduced-motion:reduce){.nm-overlay,.nm-dialog{transition:none}}
+@media(max-width:480px){.nm-dialog{padding:32px 22px 26px}}
