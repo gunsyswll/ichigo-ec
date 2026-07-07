@@ -12,17 +12,6 @@
       "block_order": ["b1", "b2", "b3"],
       "settings": {}
     },
-    "why": {
-      "type": "index-why",
-      "blocks": {
-        "w1": { "type": "item", "settings": { "icon": "plant", "title": "Carefully Grown", "text": "Raised on two family farms with decades of strawberry craft." } },
-        "w2": { "type": "item", "settings": { "icon": "star", "title": "Beautifully Sweet", "text": "Picked at full Brix the morning before shipping — never early." } },
-        "w3": { "type": "item", "settings": { "icon": "box", "title": "Gift-Worthy Quality", "text": "Grand-grade fruit, beautifully boxed — a treat worth giving." } },
-        "w4": { "type": "item", "settings": { "icon": "clock", "title": "Limited by Season", "text": "Available only by the lot, only while the harvest is at its best." } }
-      },
-      "block_order": ["w1", "w2", "w3", "w4"],
-      "settings": {}
-    },
     "statement": { "type": "index-statement", "settings": {} },
     "farmers": {
       "type": "index-farmers",
@@ -55,13 +44,13 @@
       "block_order": ["i1", "i2", "i3"],
       "settings": {}
     },
-    "newsletter": { "type": "index-newsletter", "settings": {} },
+    "news": { "type": "index-news", "settings": {} },
     "faq": {
       "type": "index-faq",
       "blocks": {
         "q1": { "type": "qa", "settings": { "q": "When will the strawberries be delivered?", "a": "Delivery follows each Japan arrival. Once you reserve, you'll see the exact delivery window — typically 1–2 days after the berries land and clear customs." } },
         "q2": { "type": "qa", "settings": { "q": "What happens if the strawberries arrive damaged?", "a": "Our freshness guarantee covers you: contact us within 24 hours with a photo and we'll arrange a replacement or full refund." } },
-        "q3": { "type": "qa", "settings": { "q": "How does the subscription (Club) work?", "a": "The 頒布会 Club is three monthly deliveries, each a different seasonal variety chosen by the farmers. Reserve once, enjoy three arrivals." } },
+        "q3": { "type": "qa", "settings": { "q": "How does the subscription (Club) work?", "a": "The Strawberry Club is three monthly deliveries, each a different seasonal variety chosen by the farmers. Reserve once, enjoy three arrivals." } },
         "q4": { "type": "qa", "settings": { "q": "Can I choose the delivery date?", "a": "Delivery is tied to each Japan arrival to guarantee freshness, but you can select your preferred window at checkout where available." } },
         "q5": { "type": "qa", "settings": { "q": "Can I send this as a gift?", "a": "Yes — the Premium Gift Box is made for it, and you can ship to any address in our delivery area with a personal note." } }
       },
@@ -69,5 +58,5 @@
       "settings": {}
     }
   },
-  "order": ["hero", "arrival", "boxes", "why", "statement", "farmers", "howitworks", "club", "info", "newsletter", "faq"]
+  "order": ["hero", "arrival", "boxes", "statement", "farmers", "howitworks", "club", "info", "news", "faq"]
 }
