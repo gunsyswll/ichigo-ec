@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Page not found — Ichigo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/ichigo-ec/assets/styles.css?v=clubjul7b">
+<style>
+  .nf{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px 24px;position:relative;overflow:hidden}
+  .nf .brand{position:absolute;top:30px;left:50%;transform:translateX(-50%);font-family:'Libre Baskerville';font-size:1.4rem;display:flex;align-items:center;gap:.5em}
+  .nf .brand b{color:var(--red)} .nf .brand .seed{width:9px;height:9px;background:var(--red);border-radius:50% 50% 50% 0;transform:rotate(45deg)}
+  .nf-berry{width:150px;height:auto;margin-bottom:8px;animation:nfFloat 5s ease-in-out infinite}
+  .nf-berry svg{display:block;width:100%;filter:drop-shadow(0 24px 34px rgba(178,47,64,.28))}
+  @keyframes nfFloat{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-16px) rotate(6deg)}}
+  .nf h1{font-family:'Libre Baskerville';font-size:clamp(3.4rem,12vw,6rem);line-height:1;color:var(--red);letter-spacing:.02em;margin:6px 0 2px}
+  .nf h2{font-family:'Libre Baskerville';font-size:clamp(1.25rem,5vw,2rem);line-height:1.2;margin:8px 0 14px;max-width:13em}
+  .nf p{max-width:30em;color:var(--greige-deep);line-height:1.65}
+  .nf-cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:30px}
+  .nf-links{margin-top:30px;font-size:.85rem;color:var(--greige-deep)}
+  .nf-links a{color:var(--red);font-weight:600;margin:0 8px;position:relative}
+  .nf-links a:hover{text-decoration:underline}
+  .nf-seeds{position:absolute;inset:0;pointer-events:none;z-index:-1}
+  .nf-seeds span{position:absolute;width:9px;height:14px;background:var(--red);opacity:.10;border-radius:50% 50% 50% 50%/60% 60% 40% 40%}
+</style>
+</head>
+<body>
+<main class="nf">
+  <a class="brand" href="/ichigo-ec/"><span class="seed"></span> <b>Ichigo</b><span style="color:var(--greige);font-size:.92rem;font-family:Outfit;letter-spacing:.1em">／苺</span></a>
+
+  <div class="nf-seeds">
+    <span style="top:18%;left:14%;transform:rotate(20deg)"></span>
+    <span style="top:30%;left:82%;transform:rotate(-30deg)"></span>
+    <span style="top:66%;left:10%;transform:rotate(40deg)"></span>
+    <span style="top:74%;left:86%;transform:rotate(-12deg)"></span>
+    <span style="top:50%;left:50%;transform:rotate(8deg)"></span>
+  </div>
+
+  <div class="nf-berry">
+    <svg viewBox="0 0 120 152" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#2f7e48" d="M58 8h4v15h-4z"/>
+      <path fill="#43985a" d="M60 16c-5 11-15 14-23 12 9 8 9 14 5 20 9-4 14-3 18 3 4-6 9-7 18-3-4-6-4-12 5-20-8 2-18-1-23-12z"/>
+      <path fill="#D94050" d="M60 40C29 36 15 61 21 89c6 28 29 51 39 55 10-4 33-27 39-55 6-28-9-53-39-49z"/>
+      <path fill="#B22F40" opacity=".30" d="M60 40c30-4 45 21 39 49-6 28-29 51-39 55z"/>
+      <ellipse cx="42" cy="66" rx="9" ry="15" fill="#fff" opacity=".20" transform="rotate(-22 42 66)"/>
+      <g fill="#ffe9b0">
+        <ellipse cx="40" cy="72" rx="1.7" ry="2.9" transform="rotate(20 40 72)"/><ellipse cx="54" cy="66" rx="1.7" ry="2.9" transform="rotate(-15 54 66)"/>
+        <ellipse cx="68" cy="68" rx="1.7" ry="2.9" transform="rotate(12 68 68)"/><ellipse cx="82" cy="76" rx="1.7" ry="2.9" transform="rotate(-22 82 76)"/>
+        <ellipse cx="34" cy="92" rx="1.7" ry="2.9" transform="rotate(18 34 92)"/><ellipse cx="48" cy="86" rx="1.7" ry="2.9" transform="rotate(-10 48 86)"/>
+        <ellipse cx="62" cy="84" rx="1.7" ry="2.9" transform="rotate(8 62 84)"/><ellipse cx="76" cy="88" rx="1.7" ry="2.9" transform="rotate(-18 76 88)"/>
+        <ellipse cx="88" cy="98" rx="1.7" ry="2.9" transform="rotate(15 88 98)"/><ellipse cx="44" cy="108" rx="1.7" ry="2.9" transform="rotate(-12 44 108)"/>
+        <ellipse cx="58" cy="104" rx="1.7" ry="2.9" transform="rotate(6 58 104)"/><ellipse cx="72" cy="106" rx="1.7" ry="2.9" transform="rotate(-16 72 106)"/>
+      </g>
+    </svg>
+  </div>
+
+  <h1>404</h1>
+  <h2>This one rolled off the table.</h2>
+  <p>The page you’re looking for isn’t on the shelf — but a punnet of peak-season Japanese strawberries is only a click away.</p>
+
+  <div class="nf-cta">
+    <a class="btn btn-red" href="/ichigo-ec/">← Back to home</a>
+    <a class="btn btn-ghost" href="/ichigo-ec/shop.html">Browse the shop</a>
+  </div>
+
+  <div class="nf-links">
+    Lost? Try
+    <a href="/ichigo-ec/shop.html">Shop</a>·
+    <a href="/ichigo-ec/farmers.html">Farmers</a>·
+    <a href="/ichigo-ec/help.html#help-faq">FAQ</a>·
+    <a href="/ichigo-ec/about.html">About</a>
+  </div>
+
+  <!-- TODO: real ichigo IG/FB handle -->
+  <div class="foot-social" style="justify-content:center;margin-top:22px"><a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a><a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5H17V3.6c-.29-.04-1.3-.13-2.47-.13-2.44 0-4.11 1.49-4.11 4.22v2.36H7.7V13h2.72v8z"/></svg></a></div>
+</main>
+</body>
+</html>
