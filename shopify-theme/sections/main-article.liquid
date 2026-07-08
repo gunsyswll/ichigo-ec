@@ -1,0 +1,47 @@
+{%- comment -%}
+  Single blog article. Renders the built-in blog article ({{ article }}) with a
+  breadcrumb, meta row (tag / date / author), featured image, the admin body
+  ({{ article.content }}) inside the shared .post prose container, and a back
+  link to the blog index. Fixes the 404 from the homepage "Read more" links,
+  which point at /blogs/news/<handle> — Shopify needs an article template to
+  render them.
+{%- endcomment -%}
+<section class="page-hero">
+  <div class="wrap">
+    <div class="crumb">
+      <a href="{{ routes.root_url }}">Home</a> /
+      <a href="{{ blog.url }}">{{ blog.title }}</a> /
+      {{ article.title }}
+    </div>
+    <h1>{{ article.title }}</h1>
+    <div class="post-meta">
+      {%- if article.tags.size > 0 -%}<span class="tag-news">{{ article.tags.first | capitalize }}</span>{%- else -%}<span class="tag-news">News</span>{%- endif -%}
+      {%- if section.settings.show_date -%}<span>{{ article.published_at | date: "%b %-d, %Y" }}</span>{%- endif -%}
+      {%- if section.settings.show_author and article.author != blank -%}<span>{{ article.author }}</span>{%- endif -%}
+    </div>
+  </div>
+</section>
+
+<section style="padding:44px 0 84px">
+  <div class="post">
+    {%- if article.image -%}
+      <figure class="post-fig">
+        {{ article.image | image_url: width: 1600 | image_tag: loading: "eager", alt: article.title | escape }}
+      </figure>
+    {%- endif -%}
+
+    {{ article.content }}
+
+    <p style="margin-top:40px"><a class="inline" href="{{ blog.url }}">← News に戻る</a></p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Article",
+  "settings": [
+    { "type": "checkbox", "id": "show_date", "label": "Show published date", "default": true },
+    { "type": "checkbox", "id": "show_author", "label": "Show author", "default": false }
+  ]
+}
+{% endschema %}
