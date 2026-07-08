@@ -52,7 +52,15 @@ def extract_body(path):
     body = m.group(1).strip()
     # convert asset-relative refs to absolute GitHub Pages URLs so images resolve in the blog
     body = body.replace('src="assets/', 'src="https://gunsyswll.github.io/ichigo-ec/assets/')
-    return body
+    # Promote the leading hero figure to the article's featured image (article.image)
+    # and strip it from the body, so the homepage News thumbnail fills in and the
+    # article template's own featured-image hero isn't duplicated by the body's.
+    hero = None
+    fm = re.match(r'\s*<figure class="post-fig">.*?<img[^>]*\bsrc="([^"]+)"[^>]*>.*?</figure>', body, re.S)
+    if fm:
+        hero = fm.group(1)
+        body = body[fm.end():].lstrip("\n \t")
+    return body, hero
 
 
 def req(url, token, method="GET", payload=None):
@@ -66,7 +74,7 @@ def req(url, token, method="GET", payload=None):
 
 def main():
     env = load_env()
-    store = env["SHOPIFY_STORE"]
+    store = env["SHOPIFY_STORE"].replace("https://","").replace("http://","").rstrip("/")
     tok = json.loads(urllib.request.urlopen(urllib.request.Request(
         f"https://{store}/admin/oauth/access_token",
         data=json.dumps({"client_id": env["SHOPIFY_CLIENTID"],
@@ -84,10 +92,12 @@ def main():
     by_handle = {a.get("handle"): a["id"] for a in existing}
 
     for path, title, handle, excerpt, tags in ARTICLES:
-        body = extract_body(path)
+        body, hero = extract_body(path)
         art = {"title": title, "author": "Ichigo", "handle": handle,
                "body_html": body, "summary_html": excerpt, "tags": tags,
                "published": True}
+        if hero:
+            art["image"] = {"src": hero}
         if handle in by_handle:
             aid = by_handle[handle]
             req(f"https://{store}/admin/api/{API}/blogs/{bid}/articles/{aid}.json",
