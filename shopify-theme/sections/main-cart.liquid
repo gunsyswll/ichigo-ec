@@ -21,13 +21,18 @@
                 <div class="ci-meta">
                   <a href="{{ item.url }}"><b>{{ item.product.title }}</b></a>
                   {%- unless item.variant.title contains 'Default' -%}<span class="ci-variant">{{ item.variant.title }}</span>{%- endunless -%}
-                  <a class="ci-remove" href="{{ item.url_to_remove }}">Remove</a>
+                  <a class="ci-remove" href="{{ item.url_to_remove }}" aria-label="Remove {{ item.product.title | escape }}" title="Remove {{ item.product.title | escape }}">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2m2 0v14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V6"/><path d="M10 11v6M14 11v6"/></svg>
+                    <span>Remove</span>
+                  </a>
                 </div>
               </td>
               <td class="ca-price" data-label="Price">{{ item.original_price | money }}</td>
               <td class="ca-qty" data-label="Quantity">
                 <div class="ctrl">
+                  <button type="button" class="qty-btn" data-step="-1" aria-label="Decrease quantity for {{ item.product.title | escape }}">&minus;</button>
                   <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" inputmode="numeric" aria-label="Quantity for {{ item.product.title | escape }}">
+                  <button type="button" class="qty-btn" data-step="1" aria-label="Increase quantity for {{ item.product.title | escape }}">+</button>
                 </div>
               </td>
               <td class="ca-total" data-label="Total">{{ item.original_line_price | money }}</td>
@@ -53,6 +58,26 @@
     </div>
   {%- endif -%}
 </div></section>
+
+<script>
+  (function () {
+    var form = document.querySelector('.cart-form');
+    if (!form) return;
+    var updateBtn = form.querySelector('button[name="update"]');
+    var t;
+    // Steppers adjust the qty input, then auto-apply (debounced so rapid
+    // clicks batch into one update). No-JS fallback: type a number + Update cart.
+    form.addEventListener('click', function (e) {
+      var btn = e.target.closest('.qty-btn');
+      if (!btn) return;
+      var input = btn.parentElement.querySelector('input[name="updates[]"]');
+      var step = parseInt(btn.getAttribute('data-step'), 10) || 0;
+      input.value = Math.max(0, (parseInt(input.value, 10) || 0) + step);
+      clearTimeout(t);
+      t = setTimeout(function () { updateBtn.click(); }, 600);
+    });
+  })();
+</script>
 
 {% schema %}
 {
