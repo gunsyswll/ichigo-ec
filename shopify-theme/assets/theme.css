@@ -34,7 +34,7 @@ img{max-width:100%;display:block}
 .btn-white:hover{transform:translateY(-2px);box-shadow:0 14px 30px -12px rgba(0,0,0,.4)}
 .btn-block{width:100%}
 
-/* placeholder photo blocks (swap for まつけん's shots) */
+/* placeholder photo blocks (swap for real farm shots) */
 .ph{position:relative;overflow:hidden;background:radial-gradient(120% 120% at 70% 20%,#E8A0A6 0%,#D94050 38%,#9c4a4f 78%,#6E6256 100%)}
 .ph.soft{background:radial-gradient(120% 120% at 30% 25%,#F3EBE3 0%,#d9c7b6 55%,#9E8E7E 100%)}
 .ph.grey{background:#ECE6DF}

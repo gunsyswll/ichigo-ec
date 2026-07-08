@@ -1,5 +1,5 @@
 <header><div class="wrap nav">
-  <a class="brand" href="{{ routes.root_url }}"><span class="seed"></span> <b>{{ section.settings.brand | default: 'Ichigo' }}</b><span style="color:var(--greige);font-size:.92rem;font-family:Outfit;letter-spacing:.1em">／苺</span></a>
+  <a class="brand" href="{{ routes.root_url }}"><span class="seed"></span> <b>{{ section.settings.brand | default: 'Ichigo' }}</b></a>
   <nav class="links">
     {%- for link in linklists[section.settings.menu].links -%}
       <a href="{{ link.url }}">{{ link.title }}</a>
