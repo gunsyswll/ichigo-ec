@@ -1,0 +1,30 @@
+{%- comment -%}
+  Wishlist page. Saved boxes live in the browser (localStorage, key ichigo_wl_v1)
+  and are rendered into #wishlist-root by wishlist.js — no app, no account needed.
+{%- endcomment -%}
+<section class="page-hero"><div class="wrap">
+  <div class="crumb"><a href="{{ routes.root_url }}">Home</a> / Wishlist</div>
+  <h1>Your <span class="r">Wishlist</span></h1>
+  {%- if section.settings.subtext != blank -%}<p>{{ section.settings.subtext }}</p>{%- endif -%}
+</div></section>
+
+<section style="padding:40px 0 84px"><div class="wrap">
+  <div id="wishlist-root"></div>
+  <noscript>
+    <div class="cart-empty">
+      <h2>JavaScript required</h2>
+      <p>Your wishlist is saved in your browser. Please enable JavaScript to view and manage your saved strawberry boxes.</p>
+      <a class="btn btn-red" href="{{ routes.all_products_collection_url }}">Browse boxes</a>
+    </div>
+  </noscript>
+</div></section>
+
+{% schema %}
+{
+  "name": "Wishlist",
+  "settings": [
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Boxes you've saved for later. Your wishlist is stored on this device." }
+  ],
+  "presets": [{ "name": "Wishlist" }]
+}
+{% endschema %}

@@ -9,6 +9,7 @@
   </nav>
   <div class="nav-right">
     <a class="icon-btn" href="{{ routes.account_url }}" aria-label="Account"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></a>
+    <a class="icon-btn" href="/pages/wishlist" aria-label="Wishlist"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7.5-4.7-10-9.4C.7 9 1.5 5.6 4.5 4.6 6.7 3.9 9 4.8 10.2 6.6L12 9l1.8-2.4C15 4.8 17.3 3.9 19.5 4.6c3 1 3.8 4.4 2.5 7C19.5 16.3 12 21 12 21z"/></svg><span class="dot wl-dot" data-wl-count style="display:none">0</span></a>
     <a class="icon-btn" href="{{ routes.cart_url }}" aria-label="Cart"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6h15l-1.5 9h-12L6 6zM6 6l-1-3H2"/><circle cx="9" cy="20" r="1.3"/><circle cx="18" cy="20" r="1.3"/></svg><span class="dot">{{ cart.item_count }}</span></a>
     <a class="btn btn-red hide-mobile" href="{{ routes.all_products_collection_url }}" style="padding:11px 20px">{{ section.settings.cta_label | default: 'Reserve Now' }}</a>
     <div class="burger"><span></span><span></span><span></span></div>

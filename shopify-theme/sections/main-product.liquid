@@ -91,6 +91,8 @@
           <button type="submit" name="add" class="btn btn-ghost btn-block" style="padding:16px" disabled>Sold Out</button>
         {%- endif -%}
       </div>
+
+      {%- render 'wishlist-button', product: product -%}
     {%- endform -%}
 
     {%- comment -%} App blocks (e.g. Swym Wishlist "Add to Wishlist" heart) go here, under the CTA. {%- endcomment -%}

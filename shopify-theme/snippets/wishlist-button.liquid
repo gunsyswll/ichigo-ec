@@ -1,0 +1,20 @@
+{%- comment -%}
+  Wishlist toggle button. Param: product (required). Optional: compact (icon only).
+  Saved/not state is applied client-side by wishlist.js from localStorage — the
+  server always renders the "Save" state; the script flips it on load.
+{%- endcomment -%}
+<button
+  type="button"
+  class="wl-btn{% if compact %} wl-btn--compact{% endif %}"
+  data-wl-toggle
+  data-handle="{{ product.handle }}"
+  data-id="{{ product.id }}"
+  data-title="{{ product.title | escape }}"
+  data-price="{{ product.price | money | escape }}"
+  data-image="{{ product.featured_image | image_url: width: 400 | escape }}"
+  data-url="{{ product.url }}"
+  aria-pressed="false"
+  aria-label="Save {{ product.title | escape }} to your wishlist">
+  <svg class="wl-heart" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7.5-4.7-10-9.4C.7 9 1.5 5.6 4.5 4.6 6.7 3.9 9 4.8 10.2 6.6L12 9l1.8-2.4C15 4.8 17.3 3.9 19.5 4.6c3 1 3.8 4.4 2.5 7C19.5 16.3 12 21 12 21z"/></svg>
+  {%- unless compact -%}<span class="wl-label" data-wl-label>Save</span>{%- endunless -%}
+</button>
