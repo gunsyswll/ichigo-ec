@@ -9,6 +9,7 @@
     assign on_sale = true
   endif
 -%}
+<div class="card-wrap">
 {%- if product.available -%}
   <a class="card" href="{{ product.url }}" data-reveal>
     <div class="ph{% unless product.featured_image %} soft{% endunless %}">
@@ -45,3 +46,5 @@
     </div>
   </div>
 {%- endif -%}
+  {%- render 'wishlist-button', product: product, compact: true -%}
+</div>
