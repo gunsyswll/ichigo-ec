@@ -120,6 +120,10 @@
   var cards=[].slice.call(grid.querySelectorAll('[data-cat]')).map(function(el){
     var card=el.closest('.card')||el; card.setAttribute('data-cat', el.getAttribute('data-cat')); return card;
   });
+  // Only the static demo shop grid has [data-cat] cards + filter tabs. The real
+  // collection grid renders real products (no data-cat) and is counted/paginated
+  // server-side — bail so we don't overwrite "Showing N products" with "0–0 of 0".
+  if(!cards.length) return;
   var PER=6, filter='all', page=1;
   function matches(){ return cards.filter(function(c){ return filter==='all' || (' '+c.getAttribute('data-cat')+' ').indexOf(' '+filter+' ')>=0; }); }
   function render(scroll){
