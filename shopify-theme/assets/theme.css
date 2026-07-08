@@ -876,3 +876,11 @@ a.method.linkcard .link{display:inline-block;margin-top:10px;color:var(--red);fo
 .pagination a:hover{border-color:var(--red);color:var(--red)}
 .pagination .current{background:var(--red);color:#fff;border-color:var(--red)}
 @media(max-width:760px){.post{padding:0 22px}}
+
+/* Follow-us / SNS section (ported from static index) */
+.follow-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+.follow-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.ig-tile{aspect-ratio:1;border-radius:12px;background:var(--cream);display:grid;place-items:center;color:rgba(217,64,80,.35);border:1px solid var(--line)}
+.ig-tile svg{width:34px;height:34px}
+.follow-note{font-size:.82rem;color:var(--greige-deep);margin-top:14px}
+@media(max-width:560px){.follow-grid{grid-template-columns:1fr 1fr}}

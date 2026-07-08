@@ -1,62 +1,268 @@
 {
   "sections": {
-    "hero": { "type": "index-hero", "settings": {} },
-    "arrival": { "type": "index-arrival", "settings": {} },
+    "hero": {
+      "type": "index-hero",
+      "settings": {}
+    },
+    "arrival": {
+      "type": "index-arrival",
+      "settings": {}
+    },
     "boxes": {
       "type": "index-boxes",
       "blocks": {
-        "b1": { "type": "card", "settings": { "title": "Standard Strawberry Box", "desc": "Two punnets of peak-season berries — the everyday little luxury.", "price": "From ₱2,800", "meta": "Next Arrival: March 15", "tag": "Pre-order", "tag_class": "tag-pre", "ph_class": "soft", "icon": "berry", "btn_label": "Reserve Now", "btn_class": "btn-red" } },
-        "b2": { "type": "card", "settings": { "title": "Premium Gift Box", "desc": "Hand-selected grand-grade berries in a furoshiki-wrapped box.", "price": "From ₱4,800", "meta": "Next Arrival: March 15", "tag": "Gift", "tag_class": "tag-gift", "ph_class": "", "icon": "berry", "btn_label": "Reserve Now", "btn_class": "btn-red" } },
-        "b3": { "type": "card", "settings": { "title": "Japanese Strawberry Club", "desc": "A different lot & variety each month, chosen by the farmers.", "price": "From ₱7,200", "price_sm": "/ 3 deliveries", "meta": "3 Scheduled Deliveries", "tag": "Subscription", "tag_class": "tag-sub", "ph_class": "soft", "icon": "box", "btn_label": "View Subscription", "btn_class": "btn-outline-red" } }
+        "b1": {
+          "type": "card",
+          "settings": {
+            "title": "Standard Strawberry Box",
+            "desc": "Two punnets of peak-season berries — the everyday little luxury.",
+            "price": "From ₱2,800",
+            "meta": "Next Arrival: March 15",
+            "tag": "Pre-order",
+            "tag_class": "tag-pre",
+            "ph_class": "soft",
+            "icon": "berry",
+            "btn_label": "Reserve Now",
+            "btn_class": "btn-red"
+          }
+        },
+        "b2": {
+          "type": "card",
+          "settings": {
+            "title": "Premium Gift Box",
+            "desc": "Hand-selected grand-grade berries in a furoshiki-wrapped box.",
+            "price": "From ₱4,800",
+            "meta": "Next Arrival: March 15",
+            "tag": "Gift",
+            "tag_class": "tag-gift",
+            "ph_class": "",
+            "icon": "berry",
+            "btn_label": "Reserve Now",
+            "btn_class": "btn-red"
+          }
+        },
+        "b3": {
+          "type": "card",
+          "settings": {
+            "title": "Japanese Strawberry Club",
+            "desc": "A different lot & variety each month, chosen by the farmers.",
+            "price": "From ₱7,200",
+            "price_sm": "/ 3 deliveries",
+            "meta": "3 Scheduled Deliveries",
+            "tag": "Subscription",
+            "tag_class": "tag-sub",
+            "ph_class": "soft",
+            "icon": "box",
+            "btn_label": "View Subscription",
+            "btn_class": "btn-outline-red"
+          }
+        }
       },
-      "block_order": ["b1", "b2", "b3"],
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ],
       "settings": {}
     },
-    "statement": { "type": "index-statement", "settings": {} },
+    "statement": {
+      "type": "index-statement",
+      "settings": {}
+    },
     "farmers": {
       "type": "index-farmers",
       "blocks": {
-        "f1": { "type": "farmer", "settings": { "loc": "Farm A · Chiba, Japan", "title": "Berry Farm", "text": "The Tanaka family, est. 1992 — third-generation Amaou growers focused on flavour, sweetness, and careful temperature control.", "link_label": "View Farm Story →", "ph_class": "", "reveal": "left", "url": "/pages/farmers#farm-a" } },
-        "f2": { "type": "farmer", "settings": { "loc": "Farm B · Chiba, Japan", "title": "Sun Harvest", "text": "The Sato family, est. 1985 — perfecting the Tochiotome berry with advanced cultivation and selection for beautiful colour.", "link_label": "View Farm Story →", "ph_class": "soft", "reveal": "right", "url": "/pages/farmers#farm-b" } }
+        "f1": {
+          "type": "farmer",
+          "settings": {
+            "loc": "Farm A · Chiba, Japan",
+            "title": "Berry Farm",
+            "text": "The Tanaka family, est. 1992 — third-generation Amaou growers focused on flavour, sweetness, and careful temperature control.",
+            "link_label": "View Farm Story →",
+            "ph_class": "",
+            "reveal": "left",
+            "url": "/pages/farmers#farm-a"
+          }
+        },
+        "f2": {
+          "type": "farmer",
+          "settings": {
+            "loc": "Farm B · Chiba, Japan",
+            "title": "Sun Harvest",
+            "text": "The Sato family, est. 1985 — perfecting the Tochiotome berry with advanced cultivation and selection for beautiful colour.",
+            "link_label": "View Farm Story →",
+            "ph_class": "soft",
+            "reveal": "right",
+            "url": "/pages/farmers#farm-b"
+          }
+        }
       },
-      "block_order": ["f1", "f2"],
+      "block_order": [
+        "f1",
+        "f2"
+      ],
       "settings": {}
     },
-    "howitworks": { "type": "index-howitworks", "settings": {} },
+    "howitworks": {
+      "type": "index-howitworks",
+      "settings": {}
+    },
     "club": {
       "type": "index-club",
       "blocks": {
-        "c1": { "type": "feat", "settings": { "title": "3 Scheduled Deliveries", "text": "One box a month, for three months." } },
-        "c2": { "type": "feat", "settings": { "title": "Selected Seasonal", "text": "A different variety & lot each time." } },
-        "c3": { "type": "feat", "settings": { "title": "Priority Access", "text": "Reserved before the general sale." } },
-        "c4": { "type": "feat", "settings": { "title": "Perfect for Gifting", "text": "…or a standing treat for yourself." } }
+        "c1": {
+          "type": "feat",
+          "settings": {
+            "title": "3 Scheduled Deliveries",
+            "text": "One box a month, for three months."
+          }
+        },
+        "c2": {
+          "type": "feat",
+          "settings": {
+            "title": "Selected Seasonal",
+            "text": "A different variety & lot each time."
+          }
+        },
+        "c3": {
+          "type": "feat",
+          "settings": {
+            "title": "Priority Access",
+            "text": "Reserved before the general sale."
+          }
+        },
+        "c4": {
+          "type": "feat",
+          "settings": {
+            "title": "Perfect for Gifting",
+            "text": "…or a standing treat for yourself."
+          }
+        }
       },
-      "block_order": ["c1", "c2", "c3", "c4"],
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
       "settings": {}
     },
     "info": {
       "type": "index-info",
       "blocks": {
-        "i1": { "type": "info", "settings": { "icon": "shield-check", "title": "Officially Imported & Managed in the Philippines", "text": "One trusted local importer handles sourcing, customs, and delivery.", "link_label": "Learn More →", "url": "/pages/about" } },
-        "i2": { "type": "info", "settings": { "icon": "truck", "title": "Delivery & Freshness", "text": "Cold-chain handling and a clear schedule so berries arrive at their best.", "link_label": "Learn More →", "url": "/pages/help#help-delivery" } },
-        "i3": { "type": "info", "settings": { "icon": "check", "title": "Quality Guarantee", "text": "If your strawberries arrive less than perfect, we'll make it right.", "link_label": "Learn More →", "url": "/pages/help#help-delivery" } }
+        "i1": {
+          "type": "info",
+          "settings": {
+            "icon": "shield-check",
+            "title": "Officially Imported & Managed in the Philippines",
+            "text": "One trusted local importer handles sourcing, customs, and delivery.",
+            "link_label": "Learn More →",
+            "url": "/pages/about"
+          }
+        },
+        "i2": {
+          "type": "info",
+          "settings": {
+            "icon": "truck",
+            "title": "Delivery & Freshness",
+            "text": "Cold-chain handling and a clear schedule so berries arrive at their best.",
+            "link_label": "Learn More →",
+            "url": "/pages/help#help-delivery"
+          }
+        },
+        "i3": {
+          "type": "info",
+          "settings": {
+            "icon": "check",
+            "title": "Quality Guarantee",
+            "text": "If your strawberries arrive less than perfect, we'll make it right.",
+            "link_label": "Learn More →",
+            "url": "/pages/help#help-delivery"
+          }
+        }
       },
-      "block_order": ["i1", "i2", "i3"],
+      "block_order": [
+        "i1",
+        "i2",
+        "i3"
+      ],
       "settings": {}
     },
-    "news": { "type": "index-news", "settings": {} },
+    "news": {
+      "type": "index-news",
+      "settings": {}
+    },
     "faq": {
       "type": "index-faq",
       "blocks": {
-        "q1": { "type": "qa", "settings": { "q": "When will the strawberries be delivered?", "a": "Delivery follows each Japan arrival. Once you reserve, you'll see the exact delivery window — typically 1–2 days after the berries land and clear customs." } },
-        "q2": { "type": "qa", "settings": { "q": "What happens if the strawberries arrive damaged?", "a": "Our freshness guarantee covers you: contact us within 24 hours with a photo and we'll arrange a replacement or full refund." } },
-        "q3": { "type": "qa", "settings": { "q": "How does the subscription (Club) work?", "a": "The Strawberry Club is three monthly deliveries, each a different seasonal variety chosen by the farmers. Reserve once, enjoy three arrivals." } },
-        "q4": { "type": "qa", "settings": { "q": "Can I choose the delivery date?", "a": "Delivery is tied to each Japan arrival to guarantee freshness, but you can select your preferred window at checkout where available." } },
-        "q5": { "type": "qa", "settings": { "q": "Can I send this as a gift?", "a": "Yes — the Premium Gift Box is made for it, and you can ship to any address in our delivery area with a personal note." } }
+        "q1": {
+          "type": "qa",
+          "settings": {
+            "q": "When will the strawberries be delivered?",
+            "a": "Delivery follows each Japan arrival. Once you reserve, you'll see the exact delivery window — typically 1–2 days after the berries land and clear customs."
+          }
+        },
+        "q2": {
+          "type": "qa",
+          "settings": {
+            "q": "What happens if the strawberries arrive damaged?",
+            "a": "Our freshness guarantee covers you: contact us within 24 hours with a photo and we'll arrange a replacement or full refund."
+          }
+        },
+        "q3": {
+          "type": "qa",
+          "settings": {
+            "q": "How does the subscription (Club) work?",
+            "a": "The Strawberry Club is three monthly deliveries, each a different seasonal variety chosen by the farmers. Reserve once, enjoy three arrivals."
+          }
+        },
+        "q4": {
+          "type": "qa",
+          "settings": {
+            "q": "Can I choose the delivery date?",
+            "a": "Delivery is tied to each Japan arrival to guarantee freshness, but you can select your preferred window at checkout where available."
+          }
+        },
+        "q5": {
+          "type": "qa",
+          "settings": {
+            "q": "Can I send this as a gift?",
+            "a": "Yes — the Premium Gift Box is made for it, and you can ship to any address in our delivery area with a personal note."
+          }
+        }
       },
-      "block_order": ["q1", "q2", "q3", "q4", "q5"],
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5"
+      ],
       "settings": {}
+    },
+    "follow": {
+      "type": "index-follow",
+      "settings": {
+        "eyebrow": "@ichigo",
+        "heading": "Follow us",
+        "subtext": "Daily berries, arrivals, and behind-the-farm moments.",
+        "instagram_url": "https://instagram.com",
+        "facebook_url": "https://facebook.com",
+        "note": "Instagram feed coming soon."
+      }
     }
   },
-  "order": ["hero", "arrival", "boxes", "statement", "farmers", "howitworks", "club", "info", "news", "faq"]
+  "order": [
+    "hero",
+    "arrival",
+    "boxes",
+    "statement",
+    "farmers",
+    "howitworks",
+    "club",
+    "info",
+    "news",
+    "faq",
+    "follow"
+  ]
 }
