@@ -93,6 +93,13 @@
       </div>
     {%- endform -%}
 
+    {%- comment -%} App blocks (e.g. Swym Wishlist "Add to Wishlist" heart) go here, under the CTA. {%- endcomment -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == '@app' -%}
+        <div class="pd-app-block" {{ block.shopify_attributes }}>{%- render block -%}</div>
+      {%- endif -%}
+    {%- endfor -%}
+
     <p class="pd-trust">🛡️ Freshness 100% guaranteed · Secure checkout · 24-hour issue window</p>
     <div class="pd-links"><a href="/pages/help#help-delivery">Delivery &amp; freshness →</a><a href="/pages/help#help-faq">Reservation FAQ →</a></div>
   </div>
@@ -249,6 +256,7 @@
     { "type": "image_picker", "id": "inside_image", "label": "Image" },
     { "type": "textarea", "id": "inside_check", "label": "Checklist (one per line, Title | Detail)", "default": "Premium strawberries | Picked at peak ripeness at Farm A.\nInsulated outer box | EPS foam, reflective foil lining.\nGel ice packs | Kept cold from dispatch through transit.\nIndividual cup tray | No stacking, no bruising.\nQC photo card + farm note | Harvest details for your box." }
   ],
+  "blocks": [{ "type": "@app" }],
   "presets": [{ "name": "Product" }]
 }
 {% endschema %}
