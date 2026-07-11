@@ -255,13 +255,13 @@
   "order": [
     "hero",
     "arrival",
+    "news",
     "boxes",
     "statement",
     "farmers",
     "howitworks",
     "club",
     "info",
-    "news",
     "faq",
     "follow"
   ]
