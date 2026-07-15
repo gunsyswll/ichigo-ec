@@ -946,3 +946,7 @@ a.method.linkcard .link{display:inline-block;margin-top:10px;color:var(--red);fo
 .card-wrap .wl-btn--compact:hover{background:#fff;color:var(--red);transform:scale(1.08)}
 .card-wrap .wl-btn--compact.is-saved{background:#fff;color:var(--red)}
 .card-wrap .wl-btn--compact.is-saved .wl-heart{fill:var(--red)}
+
+/* News/blog thumbnails — lock the 16:10 aspect so vertical + horizontal photos crop uniformly */
+.article-card .thumb{position:relative;overflow:hidden}
+.article-card .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
