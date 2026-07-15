@@ -10,59 +10,6 @@
     },
     "boxes": {
       "type": "index-boxes",
-      "blocks": {
-        "b1": {
-          "type": "card",
-          "settings": {
-            "title": "Standard Strawberry Box",
-            "desc": "Two punnets of peak-season berries — the everyday little luxury.",
-            "price": "From ₱2,800",
-            "meta": "Next Arrival: March 15",
-            "tag": "Pre-order",
-            "tag_class": "tag-pre",
-            "ph_class": "soft",
-            "icon": "berry",
-            "btn_label": "Reserve Now",
-            "btn_class": "btn-red"
-          }
-        },
-        "b2": {
-          "type": "card",
-          "settings": {
-            "title": "Premium Gift Box",
-            "desc": "Hand-selected grand-grade berries in a furoshiki-wrapped box.",
-            "price": "From ₱4,800",
-            "meta": "Next Arrival: March 15",
-            "tag": "Gift",
-            "tag_class": "tag-gift",
-            "ph_class": "",
-            "icon": "berry",
-            "btn_label": "Reserve Now",
-            "btn_class": "btn-red"
-          }
-        },
-        "b3": {
-          "type": "card",
-          "settings": {
-            "title": "Japanese Strawberry Club",
-            "desc": "A different lot & variety each month, chosen by the farmers.",
-            "price": "From ₱7,200",
-            "price_sm": "/ 3 deliveries",
-            "meta": "3 Scheduled Deliveries",
-            "tag": "Subscription",
-            "tag_class": "tag-sub",
-            "ph_class": "soft",
-            "icon": "box",
-            "btn_label": "View Subscription",
-            "btn_class": "btn-outline-red"
-          }
-        }
-      },
-      "block_order": [
-        "b1",
-        "b2",
-        "b3"
-      ],
       "settings": {}
     },
     "statement": {

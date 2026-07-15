@@ -2,15 +2,13 @@
   <div class="wrap">
     <div class="sec-head" data-reveal><span class="eyebrow">{{ section.settings.eyebrow }}</span><h2>{{ section.settings.heading }}</h2><p>{{ section.settings.subtext }}</p></div>
     <div class="box-grid" data-stagger>
-      {%- for block in section.blocks -%}
-        {%- assign url = block.settings.url | default: '/collections/all' -%}
-        <a class="card" href="{{ url }}" data-reveal {{ block.shopify_attributes }}><div class="ph {{ block.settings.ph_class }}"><span class="card-tag {{ block.settings.tag_class }}">{{ block.settings.tag }}</span>
-        {%- if block.settings.icon == 'box' -%}<svg class="berry" viewBox="0 0 64 64" fill="none" stroke="rgba(110,98,86,.6)" stroke-width="2.2"><rect x="14" y="22" width="36" height="28" rx="3"/><path d="M14 30h36M32 22v28"/></svg>
-        {%- elsif block.settings.ph_class contains 'soft' -%}<svg class="berry" viewBox="0 0 64 64" fill="none" stroke="rgba(110,98,86,.6)" stroke-width="2.2"><path d="M32 20c8-10 22-8 22-8s2 14-8 22-22 18-22 18S14 42 14 32s10-12 18-12z"/></svg>
-        {%- else -%}<svg class="berry" viewBox="0 0 64 64" fill="none" stroke="rgba(255,255,255,.85)" stroke-width="2.2"><path d="M32 20c8-10 22-8 22-8s2 14-8 22-22 18-22 18S14 42 14 32s10-12 18-12z"/></svg>{%- endif -%}
-        </div><div class="card-body"><h3>{{ block.settings.title }}</h3><p class="desc">{{ block.settings.desc }}</p><div class="price">{{ block.settings.price }} {% if block.settings.price_sm != blank %}<span class="sm">{{ block.settings.price_sm }}</span>{% endif %}</div><div class="meta">{{ block.settings.meta }}</div><span class="btn {{ block.settings.btn_class }}">{{ block.settings.btn_label }}</span></div></a>
-      {%- endfor -%}
+      {%- paginate collections.all.products by 4 -%}
+        {%- for product in collections.all.products -%}
+          {%- render 'product-card', product: product -%}
+        {%- endfor -%}
+      {%- endpaginate -%}
     </div>
+    <div style="text-align:center;margin-top:40px" data-reveal><a class="btn btn-red" href="/collections/all">View all boxes</a></div>
   </div>
 </section>
 
@@ -22,36 +20,8 @@
     { "type": "text", "id": "heading", "label": "Heading", "default": "Choose your strawberry box" },
     { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "From a personal treat to a premium gift, select the box that fits your occasion." }
   ],
-  "blocks": [
-    {
-      "type": "card",
-      "name": "Box card",
-      "settings": [
-        { "type": "text", "id": "title", "label": "Title", "default": "Standard Strawberry Box" },
-        { "type": "text", "id": "desc", "label": "Description", "default": "Two punnets of peak-season berries — the everyday little luxury." },
-        { "type": "text", "id": "price", "label": "Price", "default": "From ₱2,800" },
-        { "type": "text", "id": "price_sm", "label": "Price small note" },
-        { "type": "text", "id": "meta", "label": "Meta", "default": "Next Arrival: March 15" },
-        { "type": "text", "id": "tag", "label": "Tag label", "default": "Pre-order" },
-        { "type": "select", "id": "tag_class", "label": "Tag style", "default": "tag-pre", "options": [
-          { "value": "tag-pre", "label": "Pre-order" }, { "value": "tag-gift", "label": "Gift" }, { "value": "tag-sub", "label": "Subscription" }, { "value": "tag-new", "label": "New" } ] },
-        { "type": "select", "id": "ph_class", "label": "Photo tone", "default": "soft", "options": [ { "value": "soft", "label": "Soft" }, { "value": "", "label": "Bold" } ] },
-        { "type": "select", "id": "icon", "label": "Icon", "default": "berry", "options": [ { "value": "berry", "label": "Berry" }, { "value": "box", "label": "Box" } ] },
-        { "type": "text", "id": "btn_label", "label": "Button label", "default": "Reserve Now" },
-        { "type": "select", "id": "btn_class", "label": "Button style", "default": "btn-red", "options": [ { "value": "btn-red", "label": "Red" }, { "value": "btn-outline-red", "label": "Outline red" } ] },
-        { "type": "url", "id": "url", "label": "Link URL" }
-      ]
-    }
-  ],
   "presets": [
-    {
-      "name": "Choose your box",
-      "blocks": [
-        { "type": "card", "settings": { "title": "Standard Strawberry Box", "desc": "Two punnets of peak-season berries — the everyday little luxury.", "price": "From ₱2,800", "meta": "Next Arrival: March 15", "tag": "Pre-order", "tag_class": "tag-pre", "ph_class": "soft", "icon": "berry", "btn_label": "Reserve Now", "btn_class": "btn-red" } },
-        { "type": "card", "settings": { "title": "Premium Gift Box", "desc": "Hand-selected grand-grade berries in a furoshiki-wrapped box.", "price": "From ₱4,800", "meta": "Next Arrival: March 15", "tag": "Gift", "tag_class": "tag-gift", "ph_class": "", "icon": "berry", "btn_label": "Reserve Now", "btn_class": "btn-red" } },
-        { "type": "card", "settings": { "title": "Japanese Strawberry Club", "desc": "A different lot & variety each month, chosen by the farmers.", "price": "From ₱7,200", "price_sm": "/ 3 deliveries", "meta": "3 Scheduled Deliveries", "tag": "Subscription", "tag_class": "tag-sub", "ph_class": "soft", "icon": "box", "btn_label": "View Subscription", "btn_class": "btn-outline-red" } }
-      ]
-    }
+    { "name": "Choose your box" }
   ]
 }
 {% endschema %}
