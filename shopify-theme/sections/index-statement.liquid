@@ -9,7 +9,7 @@
     <div class="st-berry" data-reveal="right">
       <span class="tagfloat t1">{{ section.settings.tag1 }}</span>
       <div class="ph3d" data-noimg style="background-image:url('{% if section.settings.image %}{{ section.settings.image | image_url: width: 900 }}{% else %}{{ 'str-red.jpg' | asset_url }}{% endif %}')"></div>
-      <span class="tagfloat t2">{{ section.settings.tag2 }}</span>
+      {% if section.settings.tag2 != blank %}<span class="tagfloat t2">{{ section.settings.tag2 }}</span>{% endif %}
     </div>
   </div>
 </section>
@@ -18,14 +18,14 @@
 {
   "name": "Statement",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "A little luxury, not a formal gift" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "A little luxury from Japan" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Grown in Japan.<br><em>Loved</em> in the<br>Philippines." },
-    { "type": "textarea", "id": "text", "label": "Text", "default": "One bite and you taste the difference — single-origin berries, picked at their sweetest and rushed to your door. Reserve a box for the moment you deserve it." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "One bite and you will taste the difference — a perfect balance of sweetness and tanginess. Reserve a box for the moment you deserve." },
     { "type": "text", "id": "cta_label", "label": "Button label", "default": "Reserve your box →" },
     { "type": "url", "id": "cta_url", "label": "Button URL" },
     { "type": "image_picker", "id": "image", "label": "Feature image (defaults to str-red.jpg)" },
     { "type": "text", "id": "tag1", "label": "Float tag 1", "default": "15° Brix sweetness" },
-    { "type": "text", "id": "tag2", "label": "Float tag 2", "default": "Single-origin · Japan" }
+    { "type": "text", "id": "tag2", "label": "Float tag 2 (blank = hidden)", "default": "" }
   ],
   "presets": [{ "name": "Statement" }]
 }

@@ -50,7 +50,7 @@ if st not in (200,201): print(f"CREATE THEME FAIL {st}: {str(resp)[:300]}"); rai
 tid=resp["theme"]["id"]; print(f"created unpublished theme id={tid}")
 
 # 3) upload valid theme files only
-root=Path.home()/"ichigo-ec/shopify-theme"
+root=Path(__file__).resolve().parent/"shopify-theme"
 VALID={"assets","config","layout","locales","sections","snippets","templates","blocks"}
 BIN={".jpg",".jpeg",".png",".webp",".gif",".ico",".woff",".woff2",".ttf",".otf"}
 files=[p for p in root.rglob("*") if p.is_file() and ".git" not in p.parts and p.relative_to(root).parts[0] in VALID]

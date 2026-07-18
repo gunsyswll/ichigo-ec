@@ -1,6 +1,6 @@
 <section id="club">
   <div class="wrap"><div class="band" data-reveal="scale">
-    <div class="band-top"><div><span class="eyebrow">{{ section.settings.eyebrow }}</span><h2>{{ section.settings.heading }}</h2></div><a class="btn btn-white" href="{{ section.settings.cta_url | default: '/products/japanese-strawberry-club' }}">{{ section.settings.cta_label }}</a></div>
+    <div class="band-top"><div><span class="eyebrow">{{ section.settings.eyebrow }}</span><h2>{{ section.settings.heading }}</h2>{% if section.settings.subtext != blank %}<p class="band-sub">{{ section.settings.subtext }}</p>{% endif %}</div><a class="btn btn-white" href="{{ section.settings.cta_url | default: '/products/japanese-strawberry-club' }}">{{ section.settings.cta_label }}</a></div>
     <div class="band-feats">
       {%- for block in section.blocks -%}
       <div class="f" {{ block.shopify_attributes }}><b>{{ block.settings.title }}</b><span>{{ block.settings.text }}</span></div>
@@ -13,23 +13,23 @@
 {
   "name": "Club / Hanpukai",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Strawberry Club" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Ichigo Club" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "A new lot at your door, every month." },
+    { "type": "text", "id": "subtext", "label": "Subtext", "default": "A special subscription plan for our Ichigo lovers." },
     { "type": "text", "id": "cta_label", "label": "Button label", "default": "View Subscription Plan →" },
     { "type": "url", "id": "cta_url", "label": "Button URL" }
   ],
   "blocks": [
     { "type": "feat", "name": "Feature", "settings": [
       { "type": "text", "id": "title", "label": "Title", "default": "3 Scheduled Deliveries" },
-      { "type": "text", "id": "text", "label": "Text", "default": "One box a month, for three months." }
+      { "type": "text", "id": "text", "label": "Text", "default": "One delivery a month, for three months." }
     ] }
   ],
   "presets": [
     { "name": "Club / Hanpukai", "blocks": [
-      { "type": "feat", "settings": { "title": "3 Scheduled Deliveries", "text": "One box a month, for three months." } },
-      { "type": "feat", "settings": { "title": "Selected Seasonal", "text": "A different variety & lot each time." } },
-      { "type": "feat", "settings": { "title": "Priority Access", "text": "Reserved before the general sale." } },
-      { "type": "feat", "settings": { "title": "Perfect for Gifting", "text": "…or a standing treat for yourself." } }
+      { "type": "feat", "settings": { "title": "3 Scheduled Deliveries", "text": "One delivery a month, for three months." } },
+      { "type": "feat", "settings": { "title": "Selected Seasonal", "text": "A different variety and lot each time." } },
+      { "type": "feat", "settings": { "title": "Priority Access", "text": "Reserved before the general sale." } }
     ] }
   ]
 }

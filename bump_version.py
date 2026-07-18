@@ -10,7 +10,7 @@ Usage:  python3 bump_version.py            # apply current VERSION (no bump)
 import os, sys, json, subprocess
 from pathlib import Path
 THEME=186906968344
-ROOT=Path.home()/"ichigo-ec"; TDIR=ROOT/"shopify-theme"; VF=TDIR/"VERSION"; SS=TDIR/"config/settings_schema.json"
+ROOT=Path(__file__).resolve().parent; TDIR=ROOT/"shopify-theme"; VF=TDIR/"VERSION"; SS=TDIR/"config/settings_schema.json"
 ver=(VF.read_text().strip() if VF.exists() else "1.0.0")
 maj,minr,pat=(int(x) for x in ver.split("."))
 lvl=sys.argv[1] if len(sys.argv)>1 else None
@@ -43,7 +43,7 @@ print(f"settings_schema pushed: [{st}]")
 # git commit + tag
 os.chdir(ROOT)
 subprocess.run(["git","add","shopify-theme/VERSION","shopify-theme/CHANGELOG.md","shopify-theme/config/settings_schema.json"])
-subprocess.run(["git","-c","user.name=LAU WAI LEUNG","-c","user.email=lau.wai-leung@j-doc.jp","commit","-q","-m",f"release: ichigo-preview v{ver}\n\nCo-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>"])
+subprocess.run(["git","-c","user.name=LAU WAI LEUNG","-c","user.email=lau.wai-leung@j-doc.jp","commit","-q","-m",f"release: ichigo-preview v{ver}\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>"])
 subprocess.run(["git","tag","-f",f"v{ver}"])
 print(f"git committed + tagged v{ver}")
 print("BUMP_DONE")

@@ -61,14 +61,14 @@
           "type": "feat",
           "settings": {
             "title": "3 Scheduled Deliveries",
-            "text": "One box a month, for three months."
+            "text": "One delivery a month, for three months."
           }
         },
         "c2": {
           "type": "feat",
           "settings": {
             "title": "Selected Seasonal",
-            "text": "A different variety & lot each time."
+            "text": "A different variety and lot each time."
           }
         },
         "c3": {
@@ -77,20 +77,12 @@
             "title": "Priority Access",
             "text": "Reserved before the general sale."
           }
-        },
-        "c4": {
-          "type": "feat",
-          "settings": {
-            "title": "Perfect for Gifting",
-            "text": "…or a standing treat for yourself."
-          }
         }
       },
       "block_order": [
         "c1",
         "c2",
-        "c3",
-        "c4"
+        "c3"
       ],
       "settings": {}
     },
@@ -160,7 +152,7 @@
           "type": "qa",
           "settings": {
             "q": "How does the subscription (Club) work?",
-            "a": "The Strawberry Club is three monthly deliveries, each a different seasonal variety chosen by the farmers. Reserve once, enjoy three arrivals."
+            "a": "The Ichigo Club is three monthly deliveries, each a different seasonal variety chosen by the farmers. Reserve once, enjoy three arrivals."
           }
         },
         "q4": {
