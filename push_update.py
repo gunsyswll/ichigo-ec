@@ -12,9 +12,11 @@ ROOT = Path(__file__).resolve().parent
 TDIR = ROOT / "shopify-theme"
 
 if len(sys.argv) > 2 and sys.argv[1] == "--since":
-    out = subprocess.run(["git", "-C", str(ROOT), "diff", "--name-only", sys.argv[2], "--", "shopify-theme/"],
-                         capture_output=True, text=True).stdout.split()
-    keys = [p.split("shopify-theme/", 1)[1] for p in out]
+    r = subprocess.run(["git", "-C", str(ROOT), "diff", "--name-only", sys.argv[2], "--", "shopify-theme/"],
+                       capture_output=True, text=True)
+    if r.returncode != 0:
+        print(f"git diff failed for ref '{sys.argv[2]}':\n{r.stderr.strip()}"); raise SystemExit(1)
+    keys = [p.split("shopify-theme/", 1)[1] for p in r.stdout.split()]
 else:
     keys = sys.argv[1:]
 if not keys:
