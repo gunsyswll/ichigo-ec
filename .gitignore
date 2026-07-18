@@ -2,3 +2,6 @@ wireframe.pdf
 *.pdf
 *.png
 _maptest.html
+
+# Live theme-editor state — pulled/pushed surgically, never snapshotted in git
+shopify-theme/config/settings_data.json
