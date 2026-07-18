@@ -16,7 +16,9 @@ if len(sys.argv) > 2 and sys.argv[1] == "--since":
                        capture_output=True, text=True)
     if r.returncode != 0:
         print(f"git diff failed for ref '{sys.argv[2]}':\n{r.stderr.strip()}"); raise SystemExit(1)
-    keys = [p.split("shopify-theme/", 1)[1] for p in r.stdout.split()]
+    VALID = {"assets", "config", "layout", "locales", "sections", "snippets", "templates", "blocks"}
+    keys = [k for k in (p.split("shopify-theme/", 1)[1] for p in r.stdout.split())
+            if k.split("/", 1)[0] in VALID]
 else:
     keys = sys.argv[1:]
 if not keys:
