@@ -3,6 +3,34 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.2.0 — 2026-07-18
+- Client copy-review pass (`Ichigo_site_review.docx` 校閲ログ, 27 items) applied to the homepage:
+  1. **Direction fixed everywhere** — "delivered fresh **to** the Philippines" (hero heading,
+     footer blurb).
+  2. **New hero lead** — trusted farmers, "flown cold-chain within 48 hours of picking",
+     "a little luxury from Japan".
+  3. **"Box" generalized** — arrival CTA "View Available Strawberries", shop section
+     "Choose your strawberries" / "select the product", farmers eyebrow "behind each
+     strawberry", Club feature "One delivery a month".
+  4. **Strawberry Club → Ichigo Club** — header nav, Club eyebrow, FAQ answer
+     (descriptive "strawberry" wording elsewhere kept, per the review note).
+  5. **Statement section** — eyebrow "A little luxury from Japan", new body (sweetness/
+     tanginess), "Single-origin · Japan" float tag removed (tag2 now blank-hidden).
+  6. **Farmers section** — "Special strawberries come from special farmers." / "Quality
+     first — we've selected the finest farmers from all over Japan."
+  7. **Journey generalized Chiba → Japan** — eyebrow "The journey", heading "From Japan to
+     your door", subtext, step 1 (no Chiba/lot's), map caption + SVG labels ("Our Farm /
+     Japan") — the in-map label the review deferred to "design side" is code here, so done.
+  8. **Steps** — step 3 drops "punnet by punnet" → "Each order, customs-cleared in Manila
+     and quality-inspected."; step 4 → "within two days of leaving the field."
+  9. **Club band** — new subtext "A special subscription plan for our Ichigo lovers.",
+     "variety and lot" (no "&"), **"Perfect for Gifting" feature removed** → 3-column band
+     (`.band-feats` 4→3), new `.band-sub` style.
+- Out of scope per the review doc (pending client data): marquee varieties, product cards,
+  farmer cards (Tanaka/Sato etc.), news dummy cards.
+- Tooling: `bump_version.py` / `push_shopify.py` resolve the repo root from their own file
+  location (repo now lives at `~/projects/ichigo-ec` on the Mac server).
+
 ## v1.1.0 — 2026-07-07
 - Client-review rounds 1 + 2 ported from the static preview into the Liquid theme:
   1. **Removed all 頒布会 text** — arrival marquee, Club eyebrow (now just "The Strawberry
