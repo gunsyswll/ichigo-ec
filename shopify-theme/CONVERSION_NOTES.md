@@ -124,6 +124,22 @@ Status re-verified against `CHANGELOG.md` and the current theme files (2026-07-1
    which fingerprints URLs automatically. The manual `?v=` build step from the static
    site was dropped in the conversion and never needed reintroducing.
 
+## Theme-authoring gotchas (learned the hard way)
+
+- **Never write `"default": ""`** on a text/textarea setting in `config/settings_schema.json` or a
+  section `{% schema %}`. The Asset API rejects the whole file with
+  `422 setting with id="X" default can't be blank`. Omit the `default` key entirely instead.
+  Bit us on the v1.2.0 push (2026-07-18) and again on v1.3.0 (2026-07-19).
+- **`config/settings_data.json` is live theme-editor state, not source.** Static sections
+  (header/footer/announce bar) render from its *saved values*, which override section-file defaults —
+  so a copy fix in a `.liquid` file can appear to do nothing. Patch it surgically (fetch live →
+  replace the one string → PUT). It is gitignored and untracked on purpose; `push_update.py --all`
+  excludes it.
+- **`role="img"` makes an element's whole subtree presentational.** Putting it on a `.ph` photo
+  container hides any badge or caption nested inside from screen readers. Put it on an empty child.
+- **Binary assets need base64.** The Asset API takes text as `value` and images/fonts as
+  `attachment`; `assets/` holds 9 JPEGs, so any "push every file" loop must branch on file type.
+
 ## Pushing the theme
 
 There's no Shopify CLI in this environment — everything goes through the **Admin Asset
