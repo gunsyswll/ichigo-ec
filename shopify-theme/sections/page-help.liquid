@@ -317,7 +317,7 @@ c23 -89 24 -84 -28 -115 -12 -8 -18 -28 -22 -70 -3 -33 -11 -69 -18 -80 -8
   <div class="sec-head" data-reveal style="margin-bottom:30px"><span class="eyebrow muted">Good to know</span><h2>Frequently Asked Questions</h2></div>
   <div style="max-width:560px;margin:0 auto 36px;position:relative">
     <label for="faq-search" class="visually-hidden">Search FAQs</label>
-    <input type="search" id="faq-search" placeholder="Search FAQs… (e.g. delivery, refund, gift)" style="width:100%;padding:16px 20px 16px 48px;border-radius:100px;border:1.5px solid var(--line);background:var(--cream);font-family:Outfit;font-size:.95rem">
+    <input type="search" id="faq-search" placeholder="Search FAQs…" style="width:100%;padding:16px 20px 16px 48px;border-radius:100px;border:1.5px solid var(--line);background:var(--cream);font-family:Outfit;font-size:.95rem">
     <p id="faq-search-status" role="status" aria-live="polite" style="margin-top:10px;font-size:.85rem;color:var(--greige-deep);text-align:center"></p>
     <svg style="position:absolute;left:18px;top:16px" width="18" height="18" fill="none" stroke="var(--greige)" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M13 13l4 4"/></svg>
   </div>
@@ -393,7 +393,7 @@ c23 -89 24 -84 -28 -115 -12 -8 -18 -28 -22 -70 -3 -33 -11 -69 -18 -80 -8
     });
     if(!q){ status.textContent=''; items.forEach(function(d,i){ d.open = i===0; }); }
     else status.textContent = hits ? hits+' of '+items.length+' answers match "'+inp.value.trim()+'"'
-                                   : 'No answers match "'+inp.value.trim()+'". Try "delivery", "gift" or "refund".';
+                                   : 'No answers match "'+inp.value.trim()+'". Try a different word.';
   }
   inp.addEventListener('input', apply);
   inp.addEventListener('search', apply);
