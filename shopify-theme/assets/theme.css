@@ -279,6 +279,7 @@ html.reveal-js [data-reveal].in{opacity:1;transform:none}
 .statband .s b{font-family:'Libre Baskerville';font-size:1.9rem;color:var(--red);display:block}
 .statband .s label{font-size:.78rem;color:var(--greige-deep)}
 .cred-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.cred-grid.cred-2{grid-template-columns:repeat(2,1fr)}
 .cred{border:1px solid var(--line);border-radius:12px;padding:22px;background:var(--cream)}
 .cred .ic{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--red);color:var(--red);display:grid;place-items:center;margin-bottom:12px}
 .cred b{display:block;margin-bottom:5px}.cred p{font-size:.82rem;color:var(--greige-deep)}
@@ -334,6 +335,7 @@ html.reveal-js [data-reveal].in{opacity:1;transform:none}
 }
 @media(max-width:560px){
   .why-grid,.shop-grid,.method-grid,.cred-grid,.info-grid,.journey-grid,.band-feats,.statband,.qfacts,.week,.pd-gallery,.promise{grid-template-columns:1fr}
+  .cred-grid.cred-2{grid-template-columns:1fr}
   .news-row{flex-direction:column}.band,.cta-band,.cta-band{padding:30px 24px}
 }
 

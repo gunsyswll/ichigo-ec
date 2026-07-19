@@ -3,6 +3,46 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.3.0 — 2026-07-19
+Follow-up to the 2026-07-19 site audit (69 agents, 55 verified-open findings). This release covers
+only what needed no client data or owner decision; the rest is queued in the vault at
+`Brain/Pending/ichigo-ec.md`.
+- **Unverified credential claims removed** (owner decision, 2026-07-19) — the About page's
+  `Licensed — Registered importer of record` and `FDA Compliant — Meets local food-safety standards`
+  cards are gone from `page-about.liquid` and all three static copies (`about.html`,
+  `src/about.body.html`, `beta/about.html`). Neither was substantiated, and both sat above four
+  empty certification-logo slots. `.cred-grid` gains a `cred-2` modifier so the remaining two cards
+  (Cold Chain, Customs Cleared) fill the row correctly at every breakpoint.
+  *Still standing, not covered by this decision: the About counters (Founded 2023 / 2 Partner Farms
+  / 1200+ Boxes Delivered / 800+ Happy Customers) and the product page's `4.8 / 5 · 124 reviews`,
+  on a store with zero real orders.*
+- **SEO** — meta description (page_description → product → article → new setting fallback),
+  `<link rel="canonical">`, Open Graph + Twitter card tags, JSON-LD `Product` on product templates,
+  and a favicon link. New **SEO & Social** settings group (`meta_description`,
+  `social_share_image`, `favicon`), all empty by default so nothing placeholder ships.
+- **Accessibility** — skip-to-content link (reusing the locale string that already existed);
+  exactly one `<h1>` per page (hero's two h1s merged; the farm-panel titles that alternated as a
+  second live h1 via the tab switcher demoted; an h2→h4 skip on Help fixed); accessible names on
+  the CSS-background product gallery, with `role="img"` on an empty child rather than the container
+  — on the container it makes the subtree presentational and hides the Sale/Gift badge.
+- **Dead links and placeholder values** — Privacy/Terms/Cookie/Legal Notice links now hide when
+  unset instead of rendering `href="#"` (only the Privacy Policy is actually set in Admin, so three
+  were dead); `support@example.ph` and Messenger `@example.ph` became empty-default settings that
+  hide their contact card; Instagram/Facebook icons likewise hide until real handles are supplied.
+- **Content correctness** — `product.html` placed the farm in Yame, Fukuoka while the rest of the
+  site says Chiba, and asserted "only farms registered with JA Fukuoka can grow and sell" Amaou;
+  Amaou is a Fukuoka JA trademark and cannot apply to a Chiba farm. Genericized following v1.0.5's
+  approach and the legal claim dropped.
+- **Orphan cleanup** — deleted `index-why.liquid`, `index-newsletter.liquid` and
+  `page-product.liquid`. The last one is the reason: unwired but schema-registered, so the theme
+  editor's "Add section" picker still offered the pre-v1.0.5 fabricated farm copy (Tanaka / Yame /
+  Brix / 2.5 hectares) that v1.0.5 stripped from its five siblings.
+- **Collection page** — native sort dropdown (`collection.sort_options`, GET form, works without JS).
+- Tooling: `push_update.py --all` full-tree redeploy — excludes `config/settings_data.json`, and
+  sends binary assets as base64 `attachment` (`assets/` holds 9 JPEGs; `read_text()` crashed on the
+  first). `settings_data.json` untracked from git. `CONVERSION_NOTES.md` platform checklist
+  reconciled against this changelog and its push section rewritten to the mechanism actually in use.
+
 ## v1.2.0 — 2026-07-18
 - Client copy-review pass (`Ichigo_site_review.docx` 校閲ログ, 27 items) applied to the homepage:
   1. **Direction fixed everywhere** — "delivered fresh **to** the Philippines" (hero heading,
