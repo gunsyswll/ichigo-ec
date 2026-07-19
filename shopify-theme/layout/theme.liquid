@@ -63,8 +63,14 @@
 <link rel="icon" href="{{ settings.favicon | image_url: width: 32, height: 32, crop: 'center' }}" sizes="32x32">
 {%- endif -%}
 
-{%- if template.name == 'product' -%}
-  {%- comment -%} JSON-LD Product structured data (product pages only). {%- endcomment -%}
+{%- if template.name == 'product' and settings.product_schema_enabled -%}
+  {%- comment -%}
+    JSON-LD Product structured data (product pages only), OFF BY DEFAULT.
+    Gated deliberately: this republishes product.description as a machine-readable claim, and the
+    live catalogue still carries invented specifics (farm names, "Fukuoka" origin, Brix figures)
+    pending real client data. Turn it on in Theme settings > SEO & Social once the product copy is
+    true — see Brain/Pending/ichigo-ec.md #20.
+  {%- endcomment -%}
   {%- assign ld_variant = product.selected_or_first_available_variant -%}
   {%- assign ld_price = ld_variant.price | money_without_currency | remove: ',' -%}
   <script type="application/ld+json">

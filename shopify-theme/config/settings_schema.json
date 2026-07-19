@@ -82,6 +82,13 @@
         "id": "favicon",
         "label": "Favicon",
         "info": "Shown in browser tabs and bookmarks. Recommended a square image, at least 32×32px."
+      },
+      {
+        "type": "checkbox",
+        "id": "product_schema_enabled",
+        "label": "Publish Product structured data (JSON-LD)",
+        "info": "Off until the product copy is verified. When on, each product page publishes its title, description, price and availability as machine-readable data for search engines — including anything inaccurate.",
+        "default": false
       }
     ]
   }
