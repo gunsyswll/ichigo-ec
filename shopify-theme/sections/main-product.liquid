@@ -14,12 +14,15 @@
     {%- if product.media.size > 0 -%}
       {%- for media in product.media limit: 3 -%}
         <div class="ph img{% if forloop.first %} main{% endif %}" style="background-image:url('{{ media | image_url: width: 1000 }}')">
+          {%- comment -%} role="img" sits on an empty child, not the container: role="img" makes its
+          whole subtree presentational, which would hide the Sale badge below from screen readers. {%- endcomment -%}
+          <span role="img" aria-label="{{ product.title | escape }}{% if product.media.size > 1 %} — photo {{ forloop.index }} of {{ product.media.size }}{% endif %}"></span>
           {%- if forloop.first and product.compare_at_price > product.price -%}<span class="tag" style="position:absolute;top:14px;left:14px">Sale</span>{%- endif -%}
         </div>
       {%- endfor -%}
     {%- else -%}
-      <div class="ph soft main"><svg class="berry" viewBox="0 0 64 64" fill="none" stroke="rgba(110,98,86,.5)" stroke-width="2.2"><path d="M32 20c8-10 22-8 22-8s2 14-8 22-22 18-22 18S14 42 14 32s10-12 18-12z"/></svg></div>
-      <div class="ph"></div><div class="ph soft"></div>
+      <div class="ph soft main" aria-hidden="true"><svg class="berry" viewBox="0 0 64 64" fill="none" stroke="rgba(110,98,86,.5)" stroke-width="2.2"><path d="M32 20c8-10 22-8 22-8s2 14-8 22-22 18-22 18S14 42 14 32s10-12 18-12z"/></svg></div>
+      <div class="ph" aria-hidden="true"></div><div class="ph soft" aria-hidden="true"></div>
     {%- endif -%}
   </div>
 
@@ -140,7 +143,7 @@
   <h2 style="font-size:2rem;margin:10px 0 4px">{{ section.settings.berry_name }}</h2>
   {%- if section.settings.berry_sub != blank -%}<p class="lead-sub">{{ section.settings.berry_sub }}</p>{%- endif -%}
   <div class="split2" style="margin-top:30px">
-    <div class="ph soft{% if section.settings.berry_image %} img{% endif %}" data-reveal="left" style="aspect-ratio:1/.82;border-radius:var(--r){% if section.settings.berry_image %};background-image:url('{{ section.settings.berry_image | image_url: width: 900 }}'){% endif %}"></div>
+    <div class="ph soft{% if section.settings.berry_image %} img{% endif %}" data-reveal="left" style="aspect-ratio:1/.82;border-radius:var(--r){% if section.settings.berry_image %};background-image:url('{{ section.settings.berry_image | image_url: width: 900 }}'){% endif %}" {% if section.settings.berry_image %}role="img" aria-label="{{ section.settings.berry_name | escape }}"{% else %}aria-hidden="true"{% endif %}></div>
     <div data-reveal="right">{{ section.settings.berry_body }}</div>
   </div>
 </div></section>
@@ -151,7 +154,7 @@
 <section id="farmer"><div class="wrap">
   <span class="eyebrow">The Farmer</span>
   <div class="split2" style="margin-top:18px;align-items:start">
-    <div class="ph{% if section.settings.farmer_image %} img{% endif %}" data-reveal="left" style="aspect-ratio:1/1.05;border-radius:var(--r){% if section.settings.farmer_image %};background-image:url('{{ section.settings.farmer_image | image_url: width: 900 }}'){% endif %}"></div>
+    <div class="ph{% if section.settings.farmer_image %} img{% endif %}" data-reveal="left" style="aspect-ratio:1/1.05;border-radius:var(--r){% if section.settings.farmer_image %};background-image:url('{{ section.settings.farmer_image | image_url: width: 900 }}'){% endif %}" {% if section.settings.farmer_image %}role="img" aria-label="{{ section.settings.farmer_name | escape }}"{% else %}aria-hidden="true"{% endif %}></div>
     <div data-reveal="right">
       <h2 style="font-size:1.9rem;margin-bottom:4px">{{ section.settings.farmer_name }}</h2>
       {%- if section.settings.farmer_meta != blank -%}<p class="lead-sub" style="font-style:normal;color:var(--red);font-weight:600;font-size:.82rem;letter-spacing:.04em">{{ section.settings.farmer_meta }}</p>{%- endif -%}
@@ -168,7 +171,7 @@
 <!-- ===== What's Inside ===== -->
 {%- if section.settings.show_inside -%}
 <section id="inside" style="background:var(--cream-2)"><div class="wrap split2">
-  <div class="ph soft{% if section.settings.inside_image %} img{% endif %}" data-reveal="left" style="aspect-ratio:1/.86;border-radius:var(--r){% if section.settings.inside_image %};background-image:url('{{ section.settings.inside_image | image_url: width: 900 }}'){% endif %}"></div>
+  <div class="ph soft{% if section.settings.inside_image %} img{% endif %}" data-reveal="left" style="aspect-ratio:1/.86;border-radius:var(--r){% if section.settings.inside_image %};background-image:url('{{ section.settings.inside_image | image_url: width: 900 }}'){% endif %}" {% if section.settings.inside_image %}role="img" aria-label="What's inside {{ product.title | escape }}"{% else %}aria-hidden="true"{% endif %}></div>
   <div data-reveal="right">
     <h2 style="font-size:1.9rem;margin-bottom:18px">What's Inside the Box</h2>
     {%- if section.settings.inside_check != blank -%}

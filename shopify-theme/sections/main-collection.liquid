@@ -9,6 +9,17 @@
   {%- paginate collection.products by 12 -%}
   <div class="shop-bar">
     <span>Showing <b style="color:var(--ink)">{{ paginate.items }}</b> {{ paginate.items | pluralize: 'product', 'products' }}</span>
+    {%- assign current_sort = collection.sort_by | default: collection.default_sort_by -%}
+    <form action="{{ collection.url }}" method="get" style="display:contents">
+      <label>Sort by
+        <select name="sort_by" onchange="this.form.submit()">
+          {%- for option in collection.sort_options -%}
+            <option value="{{ option.value }}"{% if option.value == current_sort %} selected{% endif %}>{{ option.name }}</option>
+          {%- endfor -%}
+        </select>
+      </label>
+      <noscript><button class="btn btn-ghost" type="submit" style="padding:8px 16px;font-size:.82rem;margin-left:8px">Sort</button></noscript>
+    </form>
   </div>
   {%- if paginate.items > 0 -%}
     <div class="shop-grid" data-stagger>

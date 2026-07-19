@@ -78,42 +78,86 @@ a section name (editable position/visibility); their rich inner copy is in the s
 markup rather than per-field settings, because those pages are dense editorial layouts.
 
 ## Still needs Shopify-platform setup before it's a working store
-1. **Pages** — create Shopify Pages with handles `about`, `farmers`, `help`, `shop`,
-   `launch` and assign each the matching template (`page.about`, `page.farmers`,
-   `page.help`, `page.shop`, `page.launch`). Nav/footer links point at `/pages/<handle>`.
-2. **Products & collections** — the shop/product/box cards are static design placeholders
-   linking to `routes.all_products_collection_url`. Create real products, a default
-   collection, and (optionally) refactor `page-shop`/`page-product` to loop over
-   `collection.products` / use the `product` object + an add-to-cart `{% form 'product' %}`.
-   The `snippets/product-card.liquid` is provided as a drop-in for that loop.
-3. **Pre-order / subscription apps** — "Reserve / Pre-order" and the 頒布会 Club are
-   business flows, not built-in Shopify. Install a pre-order app (e.g. for the
-   reserve-by-arrival model) and a subscription app (Shopify Subscriptions / Recharge)
-   and wire the CTAs to them.
-4. **Metafields** — the product page surfaces facts (arrival date, deadline, delivery
-   window, availability, Brix, farm, variety, spec tables). Model these as product
-   metafields and bind them in `page-product` for real per-product data.
-5. **Newsletter** — `index-newsletter` uses the native `{% form 'customer' %}` (adds a
-   customer tagged `newsletter`). Connect to your email tool if you want a dedicated list.
-6. **Policies** — set Privacy/Terms/Refund/Shipping in Settings → Policies; the footer
-   auto-links them (`shop.privacy_policy.url`, etc.) with sensible fallbacks.
-7. **Cache-busting** — Shopify's `asset_url` filter fingerprints assets automatically,
-   so the manual `?v=` build step from the static site is no longer needed.
+
+Status re-verified against `CHANGELOG.md` and the current theme files (2026-07-19).
+
+1. **Pages** — DONE (v1.0.0). Nav pages `about` / `farmers` / `help` / `shop` were created
+   in Shopify Admin and assigned their templates (`page.about`, `page.farmers`,
+   `page.help`, `page.shop`); nav/footer links resolve to `/pages/<handle>`. The
+   pre-launch countdown page (`templates/page.launch.liquid` + `layout/launch.liquid`)
+   ships in the theme too but is deliberately not linked from primary nav — its own Page
+   (handle `launch`) still needs creating/confirming in Admin whenever the pre-launch
+   campaign is scheduled to go live.
+2. **Products & collections** — DONE (v1.0.0; product-count/heading bugs fixed in
+   v1.0.1/v1.0.2). 4 real products, a working `/collections/all` product list (correctly
+   wrapped in `{% paginate %}`), product pages with add-to-cart, and cart → native
+   Shopify checkout. `snippets/product-card.liquid` is the drop-in card the collection
+   loop uses.
+3. **Pre-order / subscription apps** — OPEN. "Reserve / Pre-order" and the Ichigo Club are
+   business flows, not built-in Shopify. `sections/main-product.liquid` and
+   `sections/main-product-gift.liquid` already render a one-time/recurring selling-plan
+   picker (`product.selling_plan_groups`) and pass `selling_plan` to the cart, but it's a
+   no-op until a subscription app (Shopify Subscriptions / Recharge) actually creates a
+   selling plan on the product — and a pre-order app is still needed for the
+   reserve-by-arrival model. Install both and wire the CTAs to them.
+4. **Metafields** — OPEN. The product page still surfaces facts (arrival date, deadline,
+   delivery window, availability, Brix, farm, variety, spec tables) from placeholder
+   defaults — see the comments in `sections/main-product.liquid` and
+   `sections/main-product-gift.liquid` ("settings so the page works before product
+   metafields exist"). Model these as real product metafields and bind them for
+   per-product data.
+5. **Newsletter** — DONE (capture confirmed wired v1.0.4; mechanism changed in v1.1.0).
+   A native `{% form 'customer' %}` capture (adds a customer tagged `newsletter`) was
+   built into `index-newsletter.liquid` and confirmed working in v1.0.4. In v1.1.0 the
+   homepage section was dropped from `templates/index.json` in favor of the **Shopify
+   Forms app** (installed in Admin) driving the "Get notified" popup instead, so the two
+   capture paths wouldn't double up. No further theme work needed here; just confirm the
+   Forms app (or an ESP integration) is pointed at a real list in Admin.
+6. **Policies** — OPEN. `footer.liquid` already links `shop.privacy_policy.url` /
+   `terms_of_service.url` / `refund_policy.url` / `shipping_policy.url` with sensible
+   fallbacks, but the policies themselves still need to be written and saved under
+   Settings → Policies — once they are, the footer links resolve automatically with no
+   theme change required.
+7. **Cache-busting** — DONE (v1.0.0, structural rather than a task). Every theme asset
+   reference goes through Shopify's `asset_url` filter (`layout/theme.liquid`,
+   `layout/launch.liquid`, and every section that references an image/CSS/JS asset),
+   which fingerprints URLs automatically. The manual `?v=` build step from the static
+   site was dropped in the conversion and never needed reintroducing.
 
 ## Pushing the theme
 
-The `shopify` CLI was not installed in this environment, so validation was done by
-self-checks (all template/section/config JSON parses; layout contains
-`{{ content_for_header }}` + `{{ content_for_layout }}`; every section referenced by a
-template exists; SVG maps verified byte-identical). To push, install the Shopify CLI,
-then from this directory:
+There's no Shopify CLI in this environment — everything goes through the **Admin Asset
+API** directly, authenticated with a custom-app client-credentials token. The token is
+fetched fresh on every run via the `client_credentials` grant, using store/client
+credentials read from `~/.ichigo-shopify.env` (`SHOPIFY_STORE`, `SHOPIFY_CLIENTID`,
+`SHOPIFY_SECRET`). Reference that file **by name only** — never print or inline the token
+value (or the client secret) in chat, logs, or commits.
 
-```
-cd ~/ichigo-ec/shopify-theme
-shopify login --store <your-store>.myshopify.com
-shopify theme check        # fix anything it flags
-shopify theme push         # or: shopify theme dev   (live local preview)
-```
+Three scripts, three jobs, all run from the repo root (`~/projects/ichigo-ec`):
 
-`shopify theme push` uploads as a new unpublished theme by default; publish it from the
-Shopify admin (Online Store → Themes) once you've reviewed it.
+- **`push_shopify.py`** — creates a **new, unpublished** theme from the full
+  `shopify-theme/` tree (safe: zero impact on the live storefront until someone publishes
+  it from Admin). Use this for a from-scratch preview/review pass.
+- **`push_update.py`** — updates the **live** Ichigo-preview theme (id `186906968344`) in
+  place, one asset at a time via `PUT .../themes/{id}/assets.json`:
+  - `python3 push_update.py <path> [<path> ...]` — push specific files, paths relative to
+    `shopify-theme/` (e.g. `sections/index-hero.liquid`).
+  - `python3 push_update.py --since <git-ref>` — push every `shopify-theme/` file changed
+    since `<git-ref>`.
+  - `python3 push_update.py --all` — full-tree redeploy: every file under
+    `assets/ config/ layout/ locales/ sections/ snippets/ templates/ blocks/`.
+    **`config/settings_data.json` is always excluded from `--all`** — it holds live
+    theme-editor state (colors, section settings, block content the client has configured
+    in Online Store → Customize), and overwriting it from the repo would clobber those
+    saved settings (this happened on 2026-07-18). Push it explicitly by filename only if
+    you genuinely mean to.
+- **`bump_version.py [major|minor|patch]`** — bumps `shopify-theme/VERSION`, syncs it into
+  `config/settings_schema.json` (`theme_info.theme_version`), renames the live theme to
+  `Ichigo-preview · vX.Y.Z`, and pushes the updated `settings_schema.json` asset. Run
+  after a batch of changes lands. Never touches the separate, always-untouched **Rise**
+  theme.
+
+Validation before any push is still self-check based (no `shopify theme check` available
+here): every template/section/config JSON file parses, `layout/theme.liquid` contains
+`{{ content_for_header }}` + `{{ content_for_layout }}`, every section referenced by a
+template exists, and the SVG maps are byte-identical to source.

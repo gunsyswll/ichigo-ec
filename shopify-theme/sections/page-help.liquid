@@ -261,9 +261,9 @@ c23 -89 24 -84 -28 -115 -12 -8 -18 -28 -22 -70 -3 -33 -11 -69 -18 -80 -8
 -28 48 -41 36 -40 -38z"/>
 </g><circle class="geo-pulse" cx="520" cy="315" r="34"/><circle class="geo-node" cx="520" cy="315" r="15"/><text class="geo-lbl hot" x="558" y="302" style="font-size:36px">Metro Manila</text><text class="geo-lbl sub" x="558" y="348" style="font-size:25px">+ nearby provinces</text></svg></div>
       <div class="areas" data-reveal="right">
-        <h4>Metro Manila</h4><p>Makati · BGC · Ortigas · QC · Pasig · Mandaluyong · Manila · San Juan · Parañaque · Las Piñas · Muntinlupa <span style="display:block;font-size:.78rem;margin-top:4px">Same-day available</span></p>
-        <h4>Nearby Provinces</h4><p>Cavite · Laguna · Rizal · Bulacan <span style="display:block;font-size:.78rem;margin-top:4px">Next-day delivery</span></p>
-        <h4>Other Cities (limited)</h4><p>Cebu · Davao · Iloilo · Baguio <span style="display:block;font-size:.78rem;margin-top:4px">2–3 day delivery, surcharge applies</span></p>
+        <h3 style="color:var(--red);font-size:.95rem;margin:16px 0 6px">Metro Manila</h3><p>Makati · BGC · Ortigas · QC · Pasig · Mandaluyong · Manila · San Juan · Parañaque · Las Piñas · Muntinlupa <span style="display:block;font-size:.78rem;margin-top:4px">Same-day available</span></p>
+        <h3 style="color:var(--red);font-size:.95rem;margin:16px 0 6px">Nearby Provinces</h3><p>Cavite · Laguna · Rizal · Bulacan <span style="display:block;font-size:.78rem;margin-top:4px">Next-day delivery</span></p>
+        <h3 style="color:var(--red);font-size:.95rem;margin:16px 0 6px">Other Cities (limited)</h3><p>Cebu · Davao · Iloilo · Baguio <span style="display:block;font-size:.78rem;margin-top:4px">2–3 day delivery, surcharge applies</span></p>
         <div style="display:flex;gap:10px;margin-top:18px"><input id="zipcheck" type="text" placeholder="Enter ZIP code or city" style="flex:1;padding:13px 18px;border-radius:100px;border:1.5px solid var(--line);background:var(--cream)"><button class="btn btn-red" id="zipbtn" type="button">Check</button></div><div id="zipresult" class="zip-result" role="status" aria-live="polite"></div>
       </div>
     </div>
@@ -361,9 +361,9 @@ c23 -89 24 -84 -28 -115 -12 -8 -18 -28 -22 -70 -3 -33 -11 -69 -18 -80 -8
   <div class="panel-band pink" style="margin-top:48px">
     <div class="sec-head" style="margin-bottom:30px"><h2>Still have questions?</h2><p>We're happy to help — reach us however's easiest.</p></div>
     <div class="info-grid">
-      <div class="info" style="text-align:center"><div class="ic" style="margin:0 auto 16px"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="4" width="16" height="12" rx="2"/><path d="M2 6l8 5 8-5"/></svg></div><b style="display:block;font-family:Libre Baskerville;font-size:1.1rem">Email Us</b><p>support@example.ph · within 24h</p></div>
+      {%- if section.settings.contact_email != blank -%}<div class="info" style="text-align:center"><div class="ic" style="margin:0 auto 16px"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="4" width="16" height="12" rx="2"/><path d="M2 6l8 5 8-5"/></svg></div><b style="display:block;font-family:Libre Baskerville;font-size:1.1rem">Email Us</b><p>{{ section.settings.contact_email }} · within 24h</p></div>{%- endif -%}
       <div class="info" style="text-align:center"><div class="ic" style="margin:0 auto 16px"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 4h16v10H7l-5 4z"/></svg></div><b style="display:block;font-family:Libre Baskerville;font-size:1.1rem">Live Chat</b><p>Mon–Sat, 9am–6pm · avg 2 mins</p></div>
-      <div class="info" style="text-align:center"><div class="ic" style="margin:0 auto 16px"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="10" cy="10" r="8"/><path d="M6 11l3 3 5-6"/></svg></div><b style="display:block;font-family:Libre Baskerville;font-size:1.1rem">Messenger</b><p>@example.ph · fastest response</p></div>
+      {%- if section.settings.contact_messenger != blank -%}<div class="info" style="text-align:center"><div class="ic" style="margin:0 auto 16px"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="10" cy="10" r="8"/><path d="M6 11l3 3 5-6"/></svg></div><b style="display:block;font-family:Libre Baskerville;font-size:1.1rem">Messenger</b><p>{{ section.settings.contact_messenger }} · fastest response</p></div>{%- endif -%}
     </div>
   </div>
 </div></section>
@@ -376,7 +376,11 @@ c23 -89 24 -84 -28 -115 -12 -8 -18 -28 -22 -70 -3 -33 -11 -69 -18 -80 -8
 {% schema %}
 {
   "name": "Help page",
-  "settings": [],
+  "settings": [
+    { "type": "header", "content": "Contact details" },
+    { "type": "text", "id": "contact_email", "label": "Support email" },
+    { "type": "text", "id": "contact_messenger", "label": "Messenger handle" }
+  ],
   "presets": [{ "name": "Help page" }]
 }
 {% endschema %}

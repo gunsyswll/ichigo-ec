@@ -57,5 +57,33 @@
         "info": "Design uses Outfit for body text (loaded via Google Fonts in the layout)."
       }
     ]
+  },
+  {
+    "name": "SEO & Social",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Search & social sharing defaults"
+      },
+      {
+        "type": "textarea",
+        "id": "meta_description",
+        "label": "Default meta description",
+        "info": "Used for the homepage and any page that has no page/product/article description of its own.",
+        "default": ""
+      },
+      {
+        "type": "image_picker",
+        "id": "social_share_image",
+        "label": "Default social share image",
+        "info": "Used for og:image / Twitter card when a page has no product or article image of its own. Recommended 1200×630px."
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "Shown in browser tabs and bookmarks. Recommended a square image, at least 32×32px."
+      }
+    ]
   }
 ]

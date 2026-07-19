@@ -1,8 +1,7 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <h1 class="rise r2">{{ section.settings.heading_1 }}</h1>
-      <h1 class="rise r2" style="color:var(--red)">{{ section.settings.heading_2 }}</h1>
+      <h1 class="rise r2">{{ section.settings.heading_1 }}<br><span style="color:var(--red)">{{ section.settings.heading_2 }}</span></h1>
       <p class="lead rise r3">{{ section.settings.lead }}</p>
       <div class="hero-cta rise r4"><a class="btn btn-red" href="{{ section.settings.cta1_url | default: '/collections/all' }}">{{ section.settings.cta1_label }}</a><a class="btn btn-ghost" href="{{ section.settings.cta2_url | default: '/collections/all' }}">{{ section.settings.cta2_label }}</a></div>
       <div class="badges rise r5">
