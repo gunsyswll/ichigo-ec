@@ -60,8 +60,8 @@
         "c1": {
           "type": "feat",
           "settings": {
-            "title": "3 Scheduled Deliveries",
-            "text": "One delivery a month, for three months."
+            "title": "Monthly Deliveries",
+            "text": "One delivery a month, ongoing — pause or cancel anytime."
           }
         },
         "c2": {
@@ -152,7 +152,7 @@
           "type": "qa",
           "settings": {
             "q": "How does the subscription (Club) work?",
-            "a": "The Ichigo Club is three monthly deliveries, each a different seasonal variety chosen by the farmers. Reserve once, enjoy three arrivals."
+            "a": "The Ichigo Club delivers once a month, each time a different seasonal variety chosen by the farmers. It continues month to month, and you can pause, skip or cancel anytime from your account."
           }
         },
         "q4": {
