@@ -5,3 +5,4 @@ _maptest.html
 
 # Live theme-editor state — pulled/pushed surgically, never snapshotted in git
 shopify-theme/config/settings_data.json
+docs/node_modules/
