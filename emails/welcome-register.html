@@ -1,6 +1,16 @@
-<!-- Ichigo — Welcome / register email (v2, premium/editorial, matches site theme).
+<!-- Ichigo — Welcome / newsletter-signup email (v2, premium/editorial, matches site theme).
      Email-safe: tables + inline CSS. Serif heads = Libre Baskerville→Georgia fallback.
-     Palette: red #D94050 · cream #FBF6F1 · cream-2 #F3EBE3 · ink #2B2420 · greige #6E6256. -->
+     Palette: red #D94050 · cream #FBF6F1 · cream-2 #F3EBE3 · ink #2B2420 · greige #6E6256.
+
+     WIRED 2026-07-20:
+     · Images now load from the SHOPIFY CDN, not gunsyswll.github.io — GitHub Pages is being
+       retired, and it was hosting every image in these emails. Sent mail lives for years; a
+       dead image host would have silently broken already-delivered mail.
+     · Links point at https://0ydzis-vt.myshopify.com — the placeholder domain ichigo.example never existed.
+       ⚠️ UPDATE THESE when the custom domain is connected (Pending/ichigo-ec).
+     · Store is still password-protected, so these links only work for staff until launch.
+     Paste into Shopify Email (uses {{ unsubscribe_url }}, a marketing variable — these are
+     marketing emails, not the core notification templates in Settings > Notifications). -->
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0;padding:0;background:#FBF6F1;">
   <tr>
     <td align="center" style="padding:32px 12px;">
@@ -16,7 +26,7 @@
         <!-- Full-bleed hero -->
         <tr>
           <td style="padding:0;">
-            <img src="https://gunsyswll.github.io/ichigo-ec/assets/img/str-bunch.jpg" width="600" alt="Ripe Japanese strawberries" style="display:block;width:100%;max-width:600px;height:auto;">
+            <img src="https://cdn.shopify.com/s/files/1/0988/8700/8536/t/2/assets/str-bunch.jpg" width="600" alt="Ripe Japanese strawberries" style="display:block;width:100%;max-width:600px;height:auto;">
           </td>
         </tr>
 
@@ -48,7 +58,7 @@
         <!-- CTA -->
         <tr>
           <td align="center" style="padding:34px 48px 10px;">
-            <a href="https://ichigo.example/collections/all" style="display:inline-block;background:#D94050;color:#ffffff;font-family:'Outfit','Helvetica Neue',Arial,sans-serif;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:16px 40px;border-radius:100px;">Explore the collection</a>
+            <a href="https://0ydzis-vt.myshopify.com/collections/all" style="display:inline-block;background:#D94050;color:#ffffff;font-family:'Outfit','Helvetica Neue',Arial,sans-serif;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:16px 40px;border-radius:100px;">Explore the collection</a>
           </td>
         </tr>
 
