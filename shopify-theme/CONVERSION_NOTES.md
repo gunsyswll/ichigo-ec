@@ -124,6 +124,23 @@ Status re-verified against `CHANGELOG.md` and the current theme files (2026-07-1
    which fingerprints URLs automatically. The manual `?v=` build step from the static
    site was dropped in the conversion and never needed reintroducing.
 
+## ⛔ The static site is RETIRED (owner decision, 2026-07-20)
+
+**The Shopify Liquid theme is the only maintained surface.** GitHub Pages publication of the static
+prototype is being switched off, and from this date the root-level static pages are **not updated**:
+
+    index.html · shop.html · product.html · about.html · farmers.html · help.html
+    news*.html · launch.html · 404.html · src/*.body.html · partials/ · beta/ · assets/
+
+They are kept only as the historical design reference. **Do not edit them, and do not treat them as
+the source of truth** — they already diverge from the live theme:
+- the v1.2.0 client copy review (27 items, 2026-07-18) was applied to `shopify-theme/` only
+- they carry a complete parallel **₱ price list** (₱2,800 / ₱4,800 / ₱7,200 …) that contradicts the
+  real JPY catalogue and the live presentment prices
+- `beta/` is a near-verbatim duplicate of the same pages, doubling the stale surface
+
+Anything that needs to change now changes in `shopify-theme/` and is pushed with `push_update.py`.
+
 ## Theme-authoring gotchas (learned the hard way)
 
 - **Never write `"default": ""`** on a text/textarea setting in `config/settings_schema.json` or a
