@@ -39,7 +39,11 @@
         <s id="pd-compare">{{ variant.compare_at_price | money }}</s>
       {%- endif -%}
     </div>
-    <div class="pd-vat">VAT included{% if section.settings.shipping_note != blank %} · {{ section.settings.shipping_note }}{% endif %}</div>
+    {%- comment -%} Tax status is a per-market legal claim, not a constant: a JP-registered seller
+       shipping to PH should not assert "VAT included" unconditionally. Editable, empty default. {%- endcomment -%}
+    {%- if section.settings.tax_note != blank or section.settings.shipping_note != blank -%}
+    <div class="pd-vat">{{ section.settings.tax_note }}{% if section.settings.tax_note != blank and section.settings.shipping_note != blank %} · {% endif %}{{ section.settings.shipping_note }}</div>
+    {%- endif -%}
 
     {%- if section.settings.show_facts -%}
       <div class="pd-facts">
@@ -225,43 +229,195 @@
 {
   "name": "Product",
   "settings": [
-    { "type": "header", "content": "Buy box" },
-    { "type": "text", "id": "badges", "label": "Badges (comma-separated)", "default": "🍓 Premium Variety, 🌾 Single Farm, ❄ Cold Chain" },
-    { "type": "text", "id": "shipping_note", "label": "Shipping note", "default": "Cold-chain delivery to your door" },
-    { "type": "checkbox", "id": "show_facts", "label": "Show fact grid", "default": true },
-    { "type": "text", "id": "fact1_label", "label": "Fact 1 label", "default": "Next Arrival" },
-    { "type": "text", "id": "fact1_value", "label": "Fact 1 value", "default": "March 15, 2025" },
-    { "type": "text", "id": "fact2_label", "label": "Fact 2 label", "default": "Reservation Deadline" },
-    { "type": "text", "id": "fact2_value", "label": "Fact 2 value", "default": "March 12, 2025" },
-    { "type": "text", "id": "fact3_label", "label": "Fact 3 label", "default": "Delivery Window" },
-    { "type": "text", "id": "fact3_value", "label": "Fact 3 value", "default": "March 16–17" },
-
-    { "type": "header", "content": "Overview" },
-    { "type": "text", "id": "overview_heading", "label": "Overview heading", "default": "About This Box" },
-    { "type": "textarea", "id": "overview_check", "label": "Checklist (one per line, Title | Detail)", "default": "Hand-picked berries | Picked at peak ripeness, graded by size and color before packing.\nPremium seasonal variety | Sweeter than supermarket fruit by a wide margin.\nCold chain door to door | Temperature-controlled from greenhouse to your fridge, photo-documented." },
-
-    { "type": "header", "content": "The Strawberry" },
-    { "type": "checkbox", "id": "show_strawberry", "label": "Show section", "default": true },
-    { "type": "text", "id": "berry_name", "label": "Variety name", "default": "Premium Seasonal Variety" },
-    { "type": "text", "id": "berry_sub", "label": "Subtitle", "default": "red · round · big · delicious" },
-    { "type": "image_picker", "id": "berry_image", "label": "Image" },
-    { "type": "richtext", "id": "berry_body", "label": "Body", "default": "<p>We work with premium seasonal Japanese strawberry varieties, grown with patience and care for flavour and sweetness.</p><p>Each berry has a deep red exterior and is far sweeter than most imported strawberries.</p>" },
-
-    { "type": "header", "content": "The Farmer" },
-    { "type": "checkbox", "id": "show_farmer", "label": "Show section", "default": true },
-    { "type": "text", "id": "farmer_name", "label": "Farm name", "default": "Farm A" },
-    { "type": "text", "id": "farmer_meta", "label": "Meta line", "default": "CHIBA, JAPAN · FAMILY-RUN GREENHOUSE" },
-    { "type": "image_picker", "id": "farmer_image", "label": "Image" },
-    { "type": "richtext", "id": "farmer_body", "label": "Body", "default": "<p><b>A family-run greenhouse focused on doing one craft well.</b></p><p>The family behind Farm A grows on a small scale — small enough that every plant is hand-inspected.</p>" },
-    { "type": "text", "id": "farmer_quote", "label": "Quote", "default": "\"We don't try to be the biggest farm. We try to be the one our customers actually remember.\"" },
-    { "type": "text", "id": "farmer_quote_by", "label": "Quote attribution", "default": "— our grower, Farm A" },
-
-    { "type": "header", "content": "What's Inside" },
-    { "type": "checkbox", "id": "show_inside", "label": "Show section", "default": true },
-    { "type": "image_picker", "id": "inside_image", "label": "Image" },
-    { "type": "textarea", "id": "inside_check", "label": "Checklist (one per line, Title | Detail)", "default": "Premium strawberries | Picked at peak ripeness at Farm A.\nInsulated outer box | EPS foam, reflective foil lining.\nGel ice packs | Kept cold from dispatch through transit.\nIndividual cup tray | No stacking, no bruising.\nQC photo card + farm note | Harvest details for your box." }
+    {
+      "type": "header",
+      "content": "Buy box"
+    },
+    {
+      "type": "text",
+      "id": "badges",
+      "label": "Badges (comma-separated)",
+      "default": "🍓 Premium Variety, 🌾 Single Farm, ❄ Cold Chain"
+    },
+    {
+      "type": "text",
+      "id": "tax_note",
+      "label": "Tax note",
+      "info": "e.g. \"VAT included\". Leave empty if the claim isn't true for the markets you sell to — the line hides when both this and the shipping note are empty."
+    },
+    {
+      "type": "text",
+      "id": "shipping_note",
+      "label": "Shipping note",
+      "default": "Cold-chain delivery to your door"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_facts",
+      "label": "Show fact grid",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "fact1_label",
+      "label": "Fact 1 label",
+      "default": "Next Arrival"
+    },
+    {
+      "type": "text",
+      "id": "fact1_value",
+      "label": "Fact 1 value",
+      "default": "March 15, 2025"
+    },
+    {
+      "type": "text",
+      "id": "fact2_label",
+      "label": "Fact 2 label",
+      "default": "Reservation Deadline"
+    },
+    {
+      "type": "text",
+      "id": "fact2_value",
+      "label": "Fact 2 value",
+      "default": "March 12, 2025"
+    },
+    {
+      "type": "text",
+      "id": "fact3_label",
+      "label": "Fact 3 label",
+      "default": "Delivery Window"
+    },
+    {
+      "type": "text",
+      "id": "fact3_value",
+      "label": "Fact 3 value",
+      "default": "March 16–17"
+    },
+    {
+      "type": "header",
+      "content": "Overview"
+    },
+    {
+      "type": "text",
+      "id": "overview_heading",
+      "label": "Overview heading",
+      "default": "About This Box"
+    },
+    {
+      "type": "textarea",
+      "id": "overview_check",
+      "label": "Checklist (one per line, Title | Detail)",
+      "default": "Hand-picked berries | Picked at peak ripeness, graded by size and color before packing.\nPremium seasonal variety | Sweeter than supermarket fruit by a wide margin.\nCold chain door to door | Temperature-controlled from greenhouse to your fridge, photo-documented."
+    },
+    {
+      "type": "header",
+      "content": "The Strawberry"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_strawberry",
+      "label": "Show section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "berry_name",
+      "label": "Variety name",
+      "default": "Premium Seasonal Variety"
+    },
+    {
+      "type": "text",
+      "id": "berry_sub",
+      "label": "Subtitle",
+      "default": "red · round · big · delicious"
+    },
+    {
+      "type": "image_picker",
+      "id": "berry_image",
+      "label": "Image"
+    },
+    {
+      "type": "richtext",
+      "id": "berry_body",
+      "label": "Body",
+      "default": "<p>We work with premium seasonal Japanese strawberry varieties, grown with patience and care for flavour and sweetness.</p><p>Each berry has a deep red exterior and is far sweeter than most imported strawberries.</p>"
+    },
+    {
+      "type": "header",
+      "content": "The Farmer"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_farmer",
+      "label": "Show section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "farmer_name",
+      "label": "Farm name",
+      "default": "Farm A"
+    },
+    {
+      "type": "text",
+      "id": "farmer_meta",
+      "label": "Meta line",
+      "default": "CHIBA, JAPAN · FAMILY-RUN GREENHOUSE"
+    },
+    {
+      "type": "image_picker",
+      "id": "farmer_image",
+      "label": "Image"
+    },
+    {
+      "type": "richtext",
+      "id": "farmer_body",
+      "label": "Body",
+      "default": "<p><b>A family-run greenhouse focused on doing one craft well.</b></p><p>The family behind Farm A grows on a small scale — small enough that every plant is hand-inspected.</p>"
+    },
+    {
+      "type": "text",
+      "id": "farmer_quote",
+      "label": "Quote",
+      "default": "\"We don't try to be the biggest farm. We try to be the one our customers actually remember.\""
+    },
+    {
+      "type": "text",
+      "id": "farmer_quote_by",
+      "label": "Quote attribution",
+      "default": "— our grower, Farm A"
+    },
+    {
+      "type": "header",
+      "content": "What's Inside"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_inside",
+      "label": "Show section",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "inside_image",
+      "label": "Image"
+    },
+    {
+      "type": "textarea",
+      "id": "inside_check",
+      "label": "Checklist (one per line, Title | Detail)",
+      "default": "Premium strawberries | Picked at peak ripeness at Farm A.\nInsulated outer box | EPS foam, reflective foil lining.\nGel ice packs | Kept cold from dispatch through transit.\nIndividual cup tray | No stacking, no bruising.\nQC photo card + farm note | Harvest details for your box."
+    }
   ],
-  "blocks": [{ "type": "@app" }],
-  "presets": [{ "name": "Product" }]
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product"
+    }
+  ]
 }
 {% endschema %}

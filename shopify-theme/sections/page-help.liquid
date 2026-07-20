@@ -18,7 +18,14 @@
   <div class="qfacts" data-reveal style="background:var(--cream);box-shadow:var(--shadow-sm)">
     <div class="qf"><label>Delivery Areas</label><b>Metro Manila</b><small>+ select cities</small></div>
     <div class="qf"><label>Lead Time</label><b>1–2 days</b><small>after arrival</small></div>
-    <div class="qf"><label>Shipping Fee</label><b>From ₱250</b><small>based on area</small></div>
+    {%- comment -%}
+      Editable, not hardcoded: this figure has to track the real delivery-profile rate, and it is
+      quoted in whatever currency the buyer's market presents. A literal "₱250" silently goes wrong
+      the moment either the rate or the presentment currency changes. Empty default → the tile hides.
+    {%- endcomment -%}
+    {%- if section.settings.shipping_fee != blank -%}
+      <div class="qf"><label>Shipping Fee</label><b>{{ section.settings.shipping_fee }}</b><small>{{ section.settings.shipping_fee_note | default: 'based on area' }}</small></div>
+    {%- endif -%}
     <div class="qf"><label>Freshness</label><b>100% Guarantee</b><small>or refund</small></div>
   </div>
 
@@ -410,6 +417,9 @@ c23 -89 24 -84 -28 -115 -12 -8 -18 -28 -22 -70 -3 -33 -11 -69 -18 -80 -8
     { "type": "text", "id": "contact_messenger", "label": "Messenger handle" },
     { "type": "url", "id": "contact_support_url", "label": "\"Contact Support\" button link" },
     { "type": "url", "id": "contact_chat_url", "label": "\"Chat with Us\" button link" },
+    { "type": "header", "content": "Delivery facts" },
+    { "type": "text", "id": "shipping_fee", "label": "Shipping fee headline", "info": "e.g. \"From ₱250\". Keep it in step with Settings > Shipping and with the currency buyers actually see. Leave empty to hide the tile." },
+    { "type": "text", "id": "shipping_fee_note", "label": "Shipping fee caption", "info": "Small print under the fee. Defaults to \"based on area\"." },
     { "type": "header", "content": "Downloads" },
     { "type": "url", "id": "guide_pdf_url", "label": "Storage & Recipe Guide (PDF)", "info": "Upload the PDF under Content > Files, then paste its link here. The download button stays hidden until then." }
   ],

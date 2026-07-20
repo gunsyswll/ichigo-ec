@@ -85,7 +85,12 @@
     "offers": {
       "@type": "Offer",
       "url": {{ canonical_url | json }},
-      "priceCurrency": {{ shop.currency | json }},
+      {%- comment -%}
+        Must be the PRESENTMENT currency, not shop.currency. shop.currency is the store's fixed base
+        (JPY) while variant.price below is rendered in whatever currency the buyer's market resolves
+        to (PHP today) — pairing them published "JPY 2300", a real price 4× off.
+      {%- endcomment -%}
+      "priceCurrency": {{ cart.currency.iso_code | default: shop.currency | json }},
       "price": {{ ld_price | json }},
       "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
       "itemCondition": "https://schema.org/NewCondition"
