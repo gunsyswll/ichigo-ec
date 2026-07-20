@@ -33,9 +33,18 @@ function shot(n, caption) {
     out.push(new Paragraph({
       alignment: AlignmentType.CENTER,
       spacing: { before: 160, after: 60 },
+      // Aspect ratio is read from the PNG header rather than assumed — the captures are
+      // cropped to remove the browser chrome, so their ratio is not the raw window ratio.
       children: [new ImageRun({
         data: buf, type: ext === 'jpeg' ? 'jpg' : ext,
-        transformation: { width: 560, height: Math.round(560 * 795 / 1546) },
+        transformation: (() => {
+          const W_PT = 600;
+          if (ext === 'png' && buf.length > 24 && buf.readUInt32BE(12) === 0x49484452) {
+            const w = buf.readUInt32BE(16), h = buf.readUInt32BE(20);
+            return { width: W_PT, height: Math.round(W_PT * h / w) };
+          }
+          return { width: W_PT, height: Math.round(W_PT * 0.55) };
+        })(),
       })],
     }));
   } else {
