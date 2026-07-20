@@ -1,0 +1,87 @@
+{% capture email_title %}Welcome to Ichigo{% endcapture %}
+{% capture email_body %}Your Ichigo account is ready &mdash; faster checkout the next time a lot opens.{% endcapture %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{{ email_title }}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body style="margin:0;padding:0;background:#FBF6F1;">
+
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0;padding:0;background:#FBF6F1;">
+  <tr>
+    <td align="center" style="padding:32px 12px;">
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:600px;max-width:100%;background:#ffffff;border:1px solid rgba(110,98,86,.18);border-radius:2px;">
+
+        <!-- Wordmark -->
+        <tr>
+          <td align="center" style="padding:30px 24px 26px;border-bottom:1px solid rgba(110,98,86,.14);">
+            <span style="font-family:'Libre Baskerville',Georgia,'Times New Roman',serif;font-size:23px;font-weight:bold;color:#D94050;letter-spacing:1px;">Ichigo</span>
+          </td>
+        </tr>
+
+        <!-- Full-bleed hero -->
+        <tr>
+          <td style="padding:0;">
+            <img src="https://cdn.shopify.com/s/files/1/0988/8700/8536/t/2/assets/str-bunch.jpg" width="600" alt="Ripe Japanese strawberries" style="display:block;width:100%;max-width:600px;height:auto;">
+          </td>
+        </tr>
+
+        <!-- Editorial content -->
+        <tr>
+          <td align="center" style="padding:44px 48px 8px;">
+            <div style="font-family:'Outfit','Helvetica Neue',Arial,sans-serif;font-size:11px;letter-spacing:.26em;text-transform:uppercase;font-weight:600;color:#D94050;">A warm welcome</div>
+            <h1 style="margin:16px 0 0;font-family:'Libre Baskerville',Georgia,'Times New Roman',serif;font-size:32px;line-height:1.18;color:#2B2420;font-weight:bold;">Thank you for<br>joining us{% if customer.first_name %}, {{ customer.first_name }}{% endif %}.</h1>
+            <div style="width:44px;height:2px;background:#D94050;margin:22px auto 0;line-height:2px;">&nbsp;</div>
+          </td>
+        </tr>
+        <tr>
+          <td align="center" style="padding:20px 52px 4px;font-family:'Outfit','Helvetica Neue',Arial,sans-serif;font-size:15px;line-height:1.7;color:#6E6256;">
+            Your account is ready. Our strawberries arrive in small, single-farm lots, flown from Japan at peak ripeness &mdash; and they sell out quickly, so having an account means a faster checkout when a lot opens.
+          </td>
+        </tr>
+
+        <!-- Refined feature rows -->
+        <tr>
+          <td style="padding:26px 52px 8px;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-family:'Outfit','Helvetica Neue',Arial,sans-serif;font-size:14.5px;line-height:1.6;">
+              <tr><td style="padding:14px 0;border-top:1px solid rgba(110,98,86,.16);"><span style="font-family:'Libre Baskerville',Georgia,serif;color:#2B2420;font-size:15px;">Faster checkout</span>&nbsp; <span style="color:#9E8E7E;">&mdash;</span>&nbsp; <span style="color:#6E6256;">your details saved for the next arrival.</span></td></tr>
+              <tr><td style="padding:14px 0;border-top:1px solid rgba(110,98,86,.16);"><span style="font-family:'Libre Baskerville',Georgia,serif;color:#2B2420;font-size:15px;">Your reservations</span>&nbsp; <span style="color:#9E8E7E;">&mdash;</span>&nbsp; <span style="color:#6E6256;">track orders and delivery windows in one place.</span></td></tr>
+              <tr><td style="padding:14px 0;border-top:1px solid rgba(110,98,86,.16);border-bottom:1px solid rgba(110,98,86,.16);"><span style="font-family:'Libre Baskerville',Georgia,serif;color:#2B2420;font-size:15px;">Arrival alerts</span>&nbsp; <span style="color:#9E8E7E;">&mdash;</span>&nbsp; <span style="color:#6E6256;">opt in any time to hear when a lot opens.</span></td></tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- CTA -->
+        <tr>
+          <td align="center" style="padding:34px 48px 10px;">
+            <a href="{{ shop.url }}/collections/all" style="display:inline-block;background:#D94050;color:#ffffff;font-family:'Outfit','Helvetica Neue',Arial,sans-serif;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:16px 40px;border-radius:100px;">Explore the collection</a>
+          </td>
+        </tr>
+
+        <!-- Sign-off -->
+        <tr>
+          <td align="center" style="padding:22px 48px 40px;font-family:'Libre Baskerville',Georgia,serif;font-size:15px;color:#2B2420;font-style:italic;">
+            With care,<br><span style="color:#D94050;">&mdash; The Ichigo team</span>
+          </td>
+        </tr>
+
+        <!-- Footer -->
+        <tr>
+          <td align="center" style="background:#F3EBE3;padding:26px 48px;font-family:'Outfit','Helvetica Neue',Arial,sans-serif;">
+            <div style="font-family:'Libre Baskerville',Georgia,serif;font-size:17px;color:#D94050;letter-spacing:.5px;">Ichigo</div>
+            <div style="font-size:12px;color:#6E6256;margin-top:6px;">Premium Japanese strawberries, delivered fresh.</div>
+            <div style="font-size:11px;color:#9E8E7E;margin-top:14px;line-height:1.6;">You're receiving this because you created an Ichigo account.<br>Questions? Just reply to this email.</div>
+          </td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+
+
+  </body>
+</html>
