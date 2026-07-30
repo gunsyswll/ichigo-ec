@@ -1,0 +1,55 @@
+{
+  "sections": {
+    "1783520151ae8aff0e": {
+      "type": "apps",
+      "settings": {}
+    },
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "overview_first": true,
+        "badges": "🍓 Premium Variety, 🌾 Single Farm, ❄ Cold Chain",
+        "shipping_note": "Cold-chain delivery to your door",
+        "show_facts": true,
+        "fact1_label": "Next Arrival",
+        "fact1_value": "March 15, 2025",
+        "fact2_label": "Reservation Deadline",
+        "fact2_value": "March 12, 2025",
+        "fact3_label": "Delivery Window",
+        "fact3_value": "March 16–17",
+        "overview_heading": "About This Box",
+        "overview_check": "Hand-picked berries | Picked at peak ripeness, graded by size and color before packing.\nPremium seasonal variety | Sweeter than supermarket fruit by a wide margin.\nCold chain door to door | Temperature-controlled from greenhouse to your fridge, photo-documented.",
+        "show_strawberry": true,
+        "berry_name": "Premium Seasonal Variety",
+        "berry_sub": "red · round · big · delicious",
+        "berry_body": "<p>We work with premium seasonal Japanese strawberry varieties, grown with patience and care for flavour and sweetness.</p><p>Each berry has a deep red exterior and is far sweeter than most imported strawberries.</p>",
+        "show_farmer": true,
+        "farmer_name": "Farm A",
+        "farmer_meta": "CHIBA, JAPAN · FAMILY-RUN GREENHOUSE",
+        "farmer_body": "<p><strong>A family-run greenhouse focused on doing one craft well.</strong></p><p>The family behind Farm A grows on a small scale — small enough that every plant is hand-inspected.</p>",
+        "farmer_quote": "\"We don't try to be the biggest farm. We try to be the one our customers actually remember.\"",
+        "farmer_quote_by": "— our grower, Farm A",
+        "show_inside": true,
+        "inside_check": "Premium strawberries | Picked at peak ripeness at Farm A.\nInsulated outer box | EPS foam, reflective foil lining.\nGel ice packs | Kept cold from dispatch through transit.\nIndividual cup tray | No stacking, no bruising.\nQC photo card + farm note | Harvest details for your box."
+      }
+    },
+    "1783520220a3971886": {
+      "type": "apps",
+      "blocks": {
+        "wishlist_plus_advanced_pdp_button_yzFygF": {
+          "type": "shopify://apps/wishlist-plus/blocks/advanced-pdp-button/80c3b1fc-3a8f-407e-8367-ffdeebb8b612",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "wishlist_plus_advanced_pdp_button_yzFygF"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "1783520151ae8aff0e",
+    "main",
+    "1783520220a3971886"
+  ]
+}

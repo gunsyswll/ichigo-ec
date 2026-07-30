@@ -6,7 +6,29 @@
 {%- endcomment -%}
 {%- assign variant = product.selected_or_first_available_variant -%}
 
+{%- capture overview_html -%}
+<!-- ===== Overview ===== -->
+<section id="overview"><div class="wrap split2">
+  <div data-reveal="left">
+    <span class="eyebrow">Overview</span>
+    <h2 style="font-size:1.9rem;margin:10px 0 14px">{{ section.settings.overview_heading | default: 'About This Box' }}</h2>
+    <div style="color:var(--greige-deep)">{{ product.description }}</div>
+  </div>
+  {%- if section.settings.overview_check != blank -%}
+  <div class="checklist" data-reveal="right">
+    {%- assign rows = section.settings.overview_check | newline_to_br | split: '<br />' -%}
+    {%- for row in rows -%}
+      {%- assign parts = row | strip | split: '|' -%}
+      {%- if parts[0] != blank -%}<div class="ci"><span class="ck">✓</span><div><b>{{ parts[0] | strip }}</b><span>{{ parts[1] | strip }}</span></div></div>{%- endif -%}
+    {%- endfor -%}
+  </div>
+  {%- endif -%}
+</div></section>
+{%- endcapture -%}
+
 <div class="wrap"><div class="crumb" style="padding-top:24px"><a href="{{ routes.root_url }}">Home</a> / <a href="{{ routes.all_products_collection_url }}">Shop</a> / {{ product.title }}</div></div>
+
+{%- if section.settings.overview_first -%}{{ overview_html }}{%- endif -%}
 
 <!-- ===== Gallery + Buy box ===== -->
 <div class="wrap"><div class="pd">
@@ -28,7 +50,7 @@
 
   <div class="pd-info" data-reveal="right">
     <h1>{{ product.title }}</h1>
-    {%- if product.description != blank -%}<p class="desc">{{ product.description | strip_html | truncatewords: 38 }}</p>{%- endif -%}
+    {%- if product.description != blank and section.settings.overview_first != true -%}<p class="desc">{{ product.description | strip_html | truncatewords: 38 }}</p>{%- endif -%}
     {%- if section.settings.badges != blank -%}
       <div class="pd-badges">{%- assign badges = section.settings.badges | split: ',' -%}{%- for b in badges -%}<span>{{ b | strip }}</span>{%- endfor -%}</div>
     {%- endif -%}
@@ -122,23 +144,7 @@
   {%- if section.settings.show_inside -%}<a href="#inside">What's Inside</a>{%- endif -%}
 </nav>
 
-<!-- ===== Overview ===== -->
-<section id="overview"><div class="wrap split2">
-  <div data-reveal="left">
-    <span class="eyebrow">Overview</span>
-    <h2 style="font-size:1.9rem;margin:10px 0 14px">{{ section.settings.overview_heading | default: 'About This Box' }}</h2>
-    <div style="color:var(--greige-deep)">{{ product.description }}</div>
-  </div>
-  {%- if section.settings.overview_check != blank -%}
-  <div class="checklist" data-reveal="right">
-    {%- assign rows = section.settings.overview_check | newline_to_br | split: '<br />' -%}
-    {%- for row in rows -%}
-      {%- assign parts = row | strip | split: '|' -%}
-      {%- if parts[0] != blank -%}<div class="ci"><span class="ck">✓</span><div><b>{{ parts[0] | strip }}</b><span>{{ parts[1] | strip }}</span></div></div>{%- endif -%}
-    {%- endfor -%}
-  </div>
-  {%- endif -%}
-</div></section>
+{%- unless section.settings.overview_first -%}{{ overview_html }}{%- endunless -%}
 
 <!-- ===== The Strawberry ===== -->
 {%- if section.settings.show_strawberry -%}
@@ -296,6 +302,12 @@
     {
       "type": "header",
       "content": "Overview"
+    },
+    {
+      "type": "checkbox",
+      "id": "overview_first",
+      "label": "Show 'About This Box' above the gallery and price",
+      "default": false
     },
     {
       "type": "text",

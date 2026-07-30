@@ -2,7 +2,6 @@
 <section class="page-hero"><div class="wrap">
   <div class="crumb"><a href="{{ routes.root_url }}">Home</a> / Help</div>
   <h1>How can we <span class="r">help?</span></h1>
-  <p>Delivery details, freshness, and answers to common questions — all in one place.</p>
 </div></section>
 
 <!-- jump nav: stays visible, scrolls to the matching section -->
@@ -335,10 +334,12 @@ c23 -89 24 -84 -28 -115 -12 -8 -18 -28 -22 -70 -3 -33 -11 -69 -18 -80 -8
         <a href="#c2" style="display:flex;justify-content:space-between;padding:14px 18px;font-size:.9rem;border-top:1px solid var(--line)">Delivery <span style="color:var(--greige)">4</span></a>
         <a href="#c3" style="display:flex;justify-content:space-between;padding:14px 18px;font-size:.9rem;border-top:1px solid var(--line)">Products &amp; Quality <span style="color:var(--greige)">3</span></a>
       </div>
+      {%- if section.settings.contact_support_url != blank or section.settings.contact_chat_url != blank -%}
       <div style="background:var(--pink);border-radius:var(--r);padding:22px;margin-top:18px;text-align:center">
         <b style="display:block;margin-bottom:6px">Still need help?</b><p style="font-size:.84rem;color:var(--greige-deep);margin-bottom:14px">Our team replies within 24 hours.</p>
         {%- if section.settings.contact_support_url != blank -%}<a class="btn btn-red btn-block" href="{{ section.settings.contact_support_url }}" style="margin-bottom:8px">Contact Support</a>{%- endif -%}{%- if section.settings.contact_chat_url != blank -%}<a class="btn btn-outline-red btn-block" href="{{ section.settings.contact_chat_url }}">Chat with Us</a>{%- endif -%}
       </div>
+      {%- endif -%}
     </aside>
     <div>
       <div id="c1"><div class="eyebrow" style="margin-bottom:8px">Category 01</div><div class="titleline"><h2 style="font-size:1.5rem">Ordering &amp; Reservation</h2></div>
@@ -363,14 +364,16 @@ c23 -89 24 -84 -28 -115 -12 -8 -18 -28 -22 -70 -3 -33 -11 -69 -18 -80 -8
     </div>
   </div>
 
+  {%- if section.settings.contact_email != blank or section.settings.live_chat_hours != blank or section.settings.contact_messenger != blank -%}
   <div class="panel-band pink" style="margin-top:48px">
     <div class="sec-head" style="margin-bottom:30px"><h2>Still have questions?</h2><p>We're happy to help — reach us however's easiest.</p></div>
     <div class="info-grid">
       {%- if section.settings.contact_email != blank -%}<div class="info" style="text-align:center"><div class="ic" style="margin:0 auto 16px"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="4" width="16" height="12" rx="2"/><path d="M2 6l8 5 8-5"/></svg></div><b style="display:block;font-family:Libre Baskerville;font-size:1.1rem">Email Us</b><p>{{ section.settings.contact_email }} · within 24h</p></div>{%- endif -%}
-      <div class="info" style="text-align:center"><div class="ic" style="margin:0 auto 16px"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 4h16v10H7l-5 4z"/></svg></div><b style="display:block;font-family:Libre Baskerville;font-size:1.1rem">Live Chat</b><p>Mon–Sat, 9am–6pm · avg 2 mins</p></div>
+      {%- if section.settings.live_chat_hours != blank -%}<div class="info" style="text-align:center"><div class="ic" style="margin:0 auto 16px"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 4h16v10H7l-5 4z"/></svg></div><b style="display:block;font-family:Libre Baskerville;font-size:1.1rem">Live Chat</b><p>{{ section.settings.live_chat_hours }}</p></div>{%- endif -%}
       {%- if section.settings.contact_messenger != blank -%}<div class="info" style="text-align:center"><div class="ic" style="margin:0 auto 16px"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="10" cy="10" r="8"/><path d="M6 11l3 3 5-6"/></svg></div><b style="display:block;font-family:Libre Baskerville;font-size:1.1rem">Messenger</b><p>{{ section.settings.contact_messenger }} · fastest response</p></div>{%- endif -%}
     </div>
   </div>
+  {%- endif -%}
 </div></section>
 
 <section style="padding-top:0;margin-top:20px"><div class="wrap"><div class="cta-band" data-reveal="scale">
@@ -415,6 +418,7 @@ c23 -89 24 -84 -28 -115 -12 -8 -18 -28 -22 -70 -3 -33 -11 -69 -18 -80 -8
     { "type": "paragraph", "content": "Every field here is empty by default and its link or card is hidden until you fill it — nothing placeholder is ever shown to a customer." },
     { "type": "text", "id": "contact_email", "label": "Support email" },
     { "type": "text", "id": "contact_messenger", "label": "Messenger handle" },
+    { "type": "text", "id": "live_chat_hours", "label": "Live Chat hours line", "info": "e.g. \"Mon–Sat, 9am–6pm · avg 2 mins\". Leave empty until a live-chat app is actually installed — the card stays hidden until then." },
     { "type": "url", "id": "contact_support_url", "label": "\"Contact Support\" button link" },
     { "type": "url", "id": "contact_chat_url", "label": "\"Chat with Us\" button link" },
     { "type": "header", "content": "Delivery facts" },

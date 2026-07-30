@@ -641,7 +641,7 @@ html.reveal-js [data-reveal].in{opacity:1;transform:none}
 @media(max-width:600px){.panel-band{padding:32px 22px}}
 
 /* ---- Help page: sticky jump-nav over stacked Delivery / FAQ sections ---- */
-.jump-tabs{position:sticky;top:71px;z-index:50;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;background:#FBF6F1;border-bottom:1px solid var(--line);padding:13px 16px}
+.jump-tabs{position:sticky;top:calc(var(--header-h,72px) - 1px);z-index:50;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;background:#FBF6F1;border-bottom:1px solid var(--line);padding:13px 16px}
 .help-sec{padding:54px 0;scroll-margin-top:140px}
 .help-sec.faq-sec{border-top:1px solid var(--line)}
 @media(max-width:600px){.help-sec{scroll-margin-top:126px}}
@@ -674,7 +674,7 @@ a.method.linkcard .link{display:inline-block;margin-top:10px;color:var(--red);fo
 /* === mobile overrides placed last so they beat later component defs (CSS source order) === */
 @media(max-width:640px){
   /* About-page tabs: sticky single swipeable row, pinned flush under the notch-aware header */
-  .jump-tabs{position:sticky;top:calc(63px + env(safe-area-inset-top));flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;gap:8px;padding:10px 14px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .jump-tabs{position:sticky;top:calc(var(--header-h,64px) - 1px);flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;gap:8px;padding:10px 14px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
   .jump-tabs::-webkit-scrollbar{display:none}
   .seg-tab{flex:0 0 auto;white-space:nowrap;font-size:.8rem;padding:8px 16px}
 }
@@ -706,7 +706,7 @@ a.method.linkcard .link{display:inline-block;margin-top:10px;color:var(--red);fo
 .pd-trust{font-size:.8rem;color:var(--greige-deep);margin-top:12px;text-align:center}
 
 /* in-page tabs (sticky under header) */
-.pd-tabs{position:sticky;top:72px;z-index:40;background:rgba(251,246,241,.94);backdrop-filter:blur(8px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;gap:8px;padding:12px 32px;max-width:1200px;margin:18px auto 0;overflow-x:auto}
+.pd-tabs{position:sticky;top:calc(var(--header-h,72px) - 1px);z-index:40;background:rgba(251,246,241,.94);backdrop-filter:blur(8px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;justify-content:center;gap:8px;padding:12px 32px;margin:0;overflow-x:auto}
 .pd-tabs a{white-space:nowrap;font-size:.86rem;font-weight:500;color:var(--greige-deep);padding:8px 16px;border-radius:100px;transition:.2s}
 .pd-tabs a:hover,.pd-tabs a.on{background:var(--red);color:#fff}
 
@@ -753,7 +753,7 @@ a.method.linkcard .link{display:inline-block;margin-top:10px;color:var(--red);fo
 .pd-sticky .ps-l b{font-family:'Libre Baskerville';color:var(--red);font-size:1.2rem;margin-left:10px}
 
 @media(max-width:760px){.rev-summary{grid-template-columns:1fr;gap:22px}}
-@media(max-width:560px){.pd-facts,.inside-specs{grid-template-columns:1fr}.pd-tabs{top:64px}.pd-sticky .ps-l{font-size:.84rem}}
+@media(max-width:560px){.pd-facts,.inside-specs{grid-template-columns:1fr}.pd-sticky .ps-l{font-size:.84rem}}
 
 /* ===== Live commerce: product images, cart, variant select ===== */
 /* real product image inside .card .ph and .ph.img background blocks */

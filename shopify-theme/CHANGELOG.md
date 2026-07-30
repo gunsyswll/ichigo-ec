@@ -3,6 +3,35 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.4.0 — 2026-07-31
+Client feedback round 2 (9 items, `~/Downloads/ichigo-site_feedback.pdf`; client-facing answers
+in `docs/site-feedback-answers-2026-07-31-ja.md`). Note: several of the client's screenshots
+show the pre-v1.3.0 build — the live theme was already past some of the complaints.
+- **Item 1 — sticky sub-navs flush under the header.** The About jump-tabs and product pd-tabs
+  offsets are now driven by a `--header-h` CSS variable measured from the real header box in
+  `theme.js` (updated on scroll/resize/load), replacing the hardcoded 71/72/63/64px that could
+  drift from the actual header height. The product tab bar loses its floating-island styling
+  (`max-width:1200px;margin:18px auto 0` → full-bleed, centered pills) so it welds to the header
+  when stuck.
+- **Item 2 — copy removed**: Help hero subtitle, Farmers hero subtitle, and the "close enough to
+  the airport…" clause of the Farmers map caption (sentence now ends "…east of Tokyo.").
+- **Item 4 — no placeholder contact channels.** The hardcoded Live Chat card is gated behind a
+  new `live_chat_hours` setting; the "Still need help?" sidebar box and the "Still have
+  questions?" band hide entirely when no channel is configured.
+- **Items 6/7 — nav IA.** Header fallback: Shop / Reserve → `/pages/shop` (the designed grid
+  page), Ichigo Club → `/products/japanese-strawberry-club`.
+- **Item 6 — Club page order.** New `overview_first` setting on the product section renders the
+  "About This Box" block above the gallery/buy box and suppresses the duplicate truncated
+  description; new `templates/product.club.json` (cloned from the live editor-managed
+  product.json incl. app sections, so the Wishlist Plus block survives) enables it, assigned to
+  the Club product via `template_suffix`.
+- **Item 8 — Follow band placements.** Same index-follow band added under Home's News & Events
+  (`follow_news` instance, no "coming soon" note) and above the Shop page footer; the section's
+  hardcoded `id="follow"` became `follow-{{ section.id }}` so multiple instances stay valid.
+- **Item 5 (store-side, not in-repo).** The Shopify Subscriptions app embed was appending an
+  unstyled purchase-options widget after the footer on the Club page; disabled in
+  settings_data (surgical PUT — theme's native selling-plan selector already covers it).
+
 ## v1.3.0 — 2026-07-19
 Follow-up to the 2026-07-19 site audit (69 agents, 55 verified-open findings). This release covers
 only what needed no client data or owner decision; the rest is queued in the vault at

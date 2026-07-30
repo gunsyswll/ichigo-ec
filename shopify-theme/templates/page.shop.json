@@ -1,1 +1,23 @@
-{ "sections": { "main": { "type": "page-shop", "settings": {} } }, "order": ["main"] }
+{
+  "sections": {
+    "main": {
+      "type": "page-shop",
+      "settings": {}
+    },
+    "follow": {
+      "type": "index-follow",
+      "settings": {
+        "eyebrow": "@ichigo",
+        "heading": "Follow us",
+        "subtext": "Daily berries, arrivals, and behind-the-farm moments.",
+        "instagram_url": "https://instagram.com",
+        "facebook_url": "https://facebook.com",
+        "note": "Instagram feed coming soon."
+      }
+    }
+  },
+  "order": [
+    "main",
+    "follow"
+  ]
+}
