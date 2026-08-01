@@ -162,7 +162,9 @@
     {sel:'.hero',        css:'width:340px;height:340px;right:-90px;bottom:-120px;opacity:.5'},
     {sel:'.statement',   css:'width:300px;height:300px;left:-110px;top:-90px;opacity:.5'},
     {sel:'.page-hero',   css:'width:300px;height:300px;right:-100px;bottom:-130px;opacity:.45'},
-    {sel:'#club .band',  css:'width:260px;height:260px;right:24px;bottom:-110px;opacity:.55'},
+    // pushed clear of the fourth feature column — at right:24/bottom:-110 the berry sat directly
+    // under "Perfect for Gifting" and its sub-line, which made both unreadable
+    {sel:'#club .band',  css:'width:260px;height:260px;right:-40px;bottom:-170px;opacity:.42'},
     {sel:'.farmers',     css:'width:320px;height:320px;left:-110px;top:20px;opacity:.85'},
     {sel:'.news',        css:'width:260px;height:260px;left:-90px;bottom:-110px;opacity:.4'}
   ];
