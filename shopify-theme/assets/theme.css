@@ -6,13 +6,17 @@
 :root{
   --red:#D94050;--red-deep:#B22F40;--red-dark:#8f2433;
   --cream:#FBF6F1;--cream-2:#F3EBE3;--pink:#FCEDEC;
-  --greige:#9E8E7E;--greige-deep:#6E6256;--ink:#2B2420;
+  --greige:#9E8E7E;--greige-deep:#4A403A;--ink:#2B2420;
   --line:rgba(110,98,86,.18);--shadow:0 18px 50px -22px rgba(43,36,32,.45);
   --shadow-sm:0 8px 24px -14px rgba(43,36,32,.4);--r:14px;
   --ease:cubic-bezier(.2,.7,.2,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+/* Client feedback 2026-08-01: body and UI text read too small. The type scale is
+   entirely rem-based, so lifting the root 16px -> 17.6px scales it uniformly (+10%)
+   without disturbing the proportions. px-based chrome (header height, gutters) is
+   deliberately unaffected. */
+html{scroll-behavior:smooth;font-size:110%}
 body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 h1,h2,h3,h4,.serif{font-family:'Libre Baskerville',serif;font-weight:400;letter-spacing:-.01em}
@@ -59,7 +63,7 @@ nav.links a:hover::after,nav.links a.active::after{width:100%}
 .nav-right{display:flex;align-items:center;gap:16px}
 .icon-btn{width:36px;height:36px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--greige-deep);position:relative;transition:.2s}
 .icon-btn:hover{border-color:var(--ink);color:var(--ink)}
-.icon-btn .dot{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:.6rem;width:15px;height:15px;border-radius:50%;display:grid;place-items:center;font-weight:700}
+.icon-btn .dot{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:.68rem;width:15px;height:15px;border-radius:50%;display:grid;place-items:center;font-weight:700}
 .burger{display:none;flex-direction:column;gap:5px;cursor:pointer}
 .burger span{width:23px;height:2px;background:var(--ink);border-radius:2px}
 
@@ -72,8 +76,8 @@ section{padding:84px 0}
 
 /* page hero (interior pages) */
 .page-hero{background:var(--pink);padding:54px 0;text-align:center}
-.crumb{font-size:.8rem;color:var(--greige-deep);margin-bottom:18px}
-.crumb a:hover{color:var(--red)}
+/* .crumb removed 2026-08-01 (client): the visible Home / Shop rows are gone;
+   the trail now ships as BreadcrumbList JSON-LD from snippets/breadcrumb-schema.liquid */
 .page-hero h1{font-size:clamp(2.1rem,3.8vw,3.1rem);line-height:1.12}
 .page-hero h1 .r{color:var(--red)}
 .page-hero p{margin:16px auto 0;color:var(--greige-deep);max-width:44em}
@@ -92,7 +96,7 @@ section{padding:84px 0}
 .card{background:var(--cream);border-radius:var(--r);overflow:hidden;border:1px solid var(--line);transition:.3s var(--ease);display:flex;flex-direction:column}
 .card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
 .card .ph{aspect-ratio:1/.78}
-.card-tag{position:absolute;top:13px;left:13px;z-index:2;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;padding:5px 10px;border-radius:6px;color:#fff}
+.card-tag{position:absolute;top:13px;left:13px;z-index:2;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;padding:5px 10px;border-radius:6px;color:#fff}
 .tag-pre{background:var(--red)}.tag-gift{background:var(--red-deep)}.tag-sub{background:#7a2230}.tag-new{background:#3a8a5a}.tag-out{background:var(--greige-deep)}
 .card-body{padding:22px;display:flex;flex-direction:column;gap:8px;flex:1}
 .card h3{font-size:1.18rem}
@@ -615,7 +619,7 @@ html.reveal-js [data-reveal].in{opacity:1;transform:none}
 
 
 /* ---- How-it-works: day-tag pills + freshness banner (dark .shipmap block) ---- */
-.tl-when{display:inline-block;margin-top:9px;font:600 .62rem/1 Outfit,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#EAD0A4;border:1px solid rgba(234,208,164,.42);padding:4px 10px;border-radius:999px}
+.tl-when{display:inline-block;margin-top:9px;font:600 .7rem/1 Outfit,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#EAD0A4;border:1px solid rgba(234,208,164,.42);padding:4px 10px;border-radius:999px}
 .ship-banner{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;max-width:1000px;margin:46px auto 0;background:linear-gradient(90deg,var(--red),#c4384a);color:#fff;border-radius:16px;padding:17px 26px;box-shadow:0 18px 44px -22px rgba(217,64,80,.6)}
 .ship-banner .sb-pulse{width:11px;height:11px;border-radius:50%;background:#fff;box-shadow:0 0 0 6px rgba(255,255,255,.22);flex:none}
 .ship-banner b{font-family:'Libre Baskerville';font-weight:400;font-size:1.16rem}

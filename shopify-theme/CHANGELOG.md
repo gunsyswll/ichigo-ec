@@ -3,6 +3,31 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.5.0 — 2026-08-01
+Client feedback round 3 (3 items, relayed by LAU).
+- **Item 1 — "text size is a little bit too small."** The type scale is entirely rem-based, so
+  the root moves 16px → 17.6px (`html{font-size:110%}`) and every size scales +10% with its
+  proportions intact. Measured effect on the pages that carry the most small text: 10.6px → 11.6,
+  11.5px → 12.7, 12.5px → 13.8. px-based chrome (header height, gutters, card padding) is
+  deliberately unaffected, so nothing reflows — verified across 7 pages × 4 viewports
+  (1440/1280/768/390): no new horizontal scroll, no clipped text, no console errors, results
+  identical to the pre-change build. Four labels that would still have sat under the 11px legible
+  floor were raised individually (`.card-tag`, `.icon-btn .dot`, `.tl-when`).
+- **Item 2 — "don't like the grey colour used in the description / remark text."** That grey is
+  the `--greige-deep` token, and 81 of its 82 uses are text colour, so the token itself moves:
+  `#6E6256` → `#4A403A`. Warmer and darker — reads as soft ink rather than grey — and contrast on
+  cream goes 5.5:1 → 9.4:1. Three alternatives were rendered for the owner to choose from
+  (#574B41 / #4A403A / #3D342E); swap the token value if a different one is picked.
+- **Item 3 — "remove the Home / Shop breadcrumbs."** The 11 visible `.crumb` rows are removed
+  (product, product-gift, collection, cart, wishlist, blog, article, about, farmers, help, shop),
+  along with the now-dead `.crumb` CSS and two wrapper divs left empty by the removal.
+  **SEO note:** those rows carried *no* structured data, so Google could not read them as a
+  breadcrumb trail — their only value was the internal link to Home. `snippets/breadcrumb-schema.liquid`
+  now emits a proper schema.org BreadcrumbList (rendered from `layout/theme.liquid`), which is what
+  Google actually consumes to show a breadcrumb path in search results. Depth is per template:
+  product/article get Home > parent > leaf, collection/blog/page get Home > leaf, index emits
+  nothing. JSON validity and depth verified for all five template cases.
+
 ## v1.4.0 — 2026-07-31
 Client feedback round 2 (9 items, `~/Downloads/ichigo-site_feedback.pdf`; client-facing answers
 in `docs/site-feedback-answers-2026-07-31-ja.md`). Note: several of the client's screenshots

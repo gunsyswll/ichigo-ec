@@ -1,0 +1,76 @@
+{%- comment -%}
+  BreadcrumbList structured data — no visible output.
+
+  Client asked (2026-08-01) to remove the visible "Home / Shop / …" rows. Those rows were
+  plain text with no markup, so Google could not read them as a breadcrumb trail; their only
+  SEO value was the internal link back to Home. This snippet emits the trail as schema.org
+  BreadcrumbList instead, which is what Google actually consumes to render a breadcrumb path
+  in a search result. Net effect: the page loses a visual row and gains a machine-readable
+  trail it never had.
+
+  Depth is per template:
+    product  Home > Shop > <product>       article  Home > <blog> > <article>
+    collection Home > <collection>         blog     Home > <blog>
+    page     Home > <page>                 index / everything else: nothing (no parent).
+{%- endcomment -%}
+
+{%- liquid
+  assign bc_mid_name = ''
+  assign bc_mid_url = ''
+  assign bc_leaf = ''
+
+  case template.name
+    when 'product'
+      assign bc_mid_name = 'Shop'
+      assign bc_mid_url = routes.all_products_collection_url
+      assign bc_leaf = product.title
+    when 'article'
+      assign bc_mid_name = blog.title
+      assign bc_mid_url = blog.url
+      assign bc_leaf = article.title
+    when 'collection'
+      assign bc_leaf = collection.title
+    when 'blog'
+      assign bc_leaf = blog.title
+    when 'page'
+      assign bc_leaf = page.title
+  endcase
+-%}
+
+{%- if bc_leaf != blank -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": {{ shop.url | append: routes.root_url | json }}
+      },
+      {%- if bc_mid_name != blank %}
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": {{ bc_mid_name | json }},
+        "item": {{ shop.url | append: bc_mid_url | json }}
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": {{ bc_leaf | json }},
+        "item": {{ canonical_url | json }}
+      }
+      {%- else %}
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": {{ bc_leaf | json }},
+        "item": {{ canonical_url | json }}
+      }
+      {%- endif %}
+    ]
+  }
+  </script>
+{%- endif -%}

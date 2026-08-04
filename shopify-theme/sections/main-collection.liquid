@@ -1,6 +1,5 @@
 {%- comment -%} Live collection grid. Mirrors the page-shop design, wired to {{ collection.products }}. {%- endcomment -%}
 <section class="page-hero"><div class="wrap">
-  <div class="crumb"><a href="{{ routes.root_url }}">Home</a> / Shop</div>
   <h1>{{ section.settings.heading | default: 'Our Strawberry Boxes' }}</h1>
   {%- if section.settings.subtext != blank -%}<p>{{ section.settings.subtext }}</p>{%- endif -%}
 </div></section>

@@ -8,11 +8,6 @@
 {%- endcomment -%}
 <section class="page-hero">
   <div class="wrap">
-    <div class="crumb">
-      <a href="{{ routes.root_url }}">Home</a> /
-      <a href="{{ blog.url }}">{{ blog.title }}</a> /
-      {{ article.title }}
-    </div>
     <h1>{{ article.title }}</h1>
     <div class="post-meta">
       {%- if article.tags.size > 0 -%}<span class="tag-news">{{ article.tags.first | capitalize }}</span>{%- else -%}<span class="tag-news">News</span>{%- endif -%}
