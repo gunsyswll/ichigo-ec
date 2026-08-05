@@ -567,6 +567,24 @@ html.reveal-js [data-reveal].in{opacity:1;transform:none}
 .geo-lbl{fill:#2B2420;font-family:'Libre Baskerville';font-size:13px}
 .geo-lbl.hot{fill:var(--red)}
 .geo-lbl.sub{fill:#9a6a5f;font-family:Outfit;font-size:10px}
+/* SVG label legibility (client feedback 2026-08-01, item 1 — these sit inside a viewBox, so the
+   declared size is in user units and the ON-SCREEN size is declared x (rendered width / viewBox
+   width). Measured, not guessed:
+     .phmap  (Delivery Area, viewBox 1024) renders at a fixed 300px => scale 0.293 at every
+             viewport, so "36px" was painting at 10.5px and "25px" at 7.3px. Constant bump.
+     .geomap (journey, viewBox 500) scales with the column: 2.0x at >=1024 (13px -> 26px, fine)
+             down to 0.70x at 390 (13px -> 9px). Two steps, only where it actually falls short. */
+/* The map caption has never had a rule: it inherits .shipmap's cream onto the ivory geomap
+   panel, i.e. cream on cream (~1.1:1) — invisible. Same defect found on the static preview. */
+.geo-cap{position:absolute;z-index:2;top:16px;left:20px;font-size:.72rem;letter-spacing:.16em;
+  text-transform:uppercase;font-weight:600;color:var(--greige-deep)}
+/* Overlaid it sits on the "Airport" label once the map drops below ~480px, so on narrow
+   screens it becomes a line above the map instead of a layer on top of it. */
+@media(max-width:600px){.geo-cap{position:static;display:block;padding:14px 16px 2px}}
+.phmap .geo-lbl{font-size:51px}
+.phmap .geo-lbl.sub{font-size:43px}
+@media(max-width:600px){.geomap .geo-lbl{font-size:16px}.geomap .geo-lbl.sub{font-size:14px}}
+@media(max-width:430px){.geomap .geo-lbl{font-size:17px}.geomap .geo-lbl.sub{font-size:15px}}
 .geo-veh circle{fill:#241317}
 
 /* ===== journey timeline (zigzag graph, on the dark shipmap section) ===== */

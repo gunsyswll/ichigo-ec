@@ -3,6 +3,26 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.5.1 — 2026-08-05
+Follow-up to v1.5.0 item 1: the root type lift is rem-based, so it never reached text inside the
+SVG maps. Their declared size is in user units — actual size on screen is
+`declared x (rendered width / viewBox width)` — so the numbers in the file were misleading.
+- **Delivery Area map (`.phmap`, viewBox 1024).** Renders at a fixed 300px at *every* viewport
+  (scale 0.293), so "Metro Manila" at 36px was painting at **10.5px** and "+ nearby provinces" at
+  25px was painting at **7.3px** — the smallest text on the site. The two inline sizes move out of
+  the markup into `.phmap .geo-lbl` (51px / 43px) → **14.9px / 12.6px** on screen at all widths.
+- **Journey map (`.geomap`, viewBox 500).** Scales with its column: 2.0x at ≥1024 (13px → 26px,
+  already fine) but 0.70x at 390 (13px → **9px**). Two mobile steps only where it falls short:
+  16/14px under 600, 17/15px under 430 → **11.8px / 10.4px** at 390. 19/17px was tried first and
+  clipped "Warehouse" off the left edge and "Airport" off the right, so 17/15 is the measured
+  ceiling — the journey map cannot carry larger labels at 390px without a layout redesign.
+- **`.geo-cap` had no CSS rule at all** and inherited `.shipmap`'s cream onto the ivory map panel —
+  cream on cream, invisible. Now styled. Overlaid it collides with the "Airport" label below 480px,
+  so under 600px it reflows to a line above the map instead of a layer on top of it.
+QA: both maps screenshotted at 1280 and 390 (no clipping, no label collisions); the 7-page ×
+4-viewport layout scan is unchanged from v1.5.0; per-page type/colour re-checked — root 17.6px,
+min HTML text 11.6px, zero elements on the old grey.
+
 ## v1.5.0 — 2026-08-01
 Client feedback round 3 (3 items, relayed by LAU).
 - **Item 1 — "text size is a little bit too small."** The type scale is entirely rem-based, so
