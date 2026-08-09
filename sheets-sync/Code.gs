@@ -39,6 +39,19 @@ const TOKEN_TTL_MS = 4 * 60 * 1000; // cache token ~4min
 const CACHE_SKU_TTL = 6 * 60 * 60; // seconds (6h)
 const NOTIF_INTERVAL_MS = 60 * 60 * 1000; // 1 hour
 
+
+/**
+ * Config の [vendor, fileId] 行を返す。ヘッダしか無い/空でも [] を返す。
+ * Fable QA fix: getRange(..., 0, ...) は Apps Script で例外になる。Config がまだ空の
+ * 初回起動でのみ踏むので、テストで最も見落とされる経路。
+ */
+function readConfigRows(configSheet) {
+  if (!configSheet) return [];
+  const lastRow = configSheet.getLastRow();
+  if (lastRow < 2) return [];
+  return configSheet.getRange(2, 1, lastRow - 1, 2).getValues();
+}
+
 /* ---------- Helper Functions ---------- */
 
 /**
@@ -172,7 +185,7 @@ function getLocationGid() {
 function reportStuckSending() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const configSheet = ss.getSheetByName('Config');
-  const cfgRows = configSheet.getRange(2, 1, configSheet.getLastRow() - 1, 2).getValues(); // [vendor, fileId]
+  const cfgRows = readConfigRows(configSheet); // [vendor, fileId]
   const stuckEntries = [];
   cfgRows.forEach(([ , fileId]) => {
     const farmSS = SpreadsheetApp.openById(fileId);
@@ -261,7 +274,7 @@ function syncProductsFromShopify() {
   if (allRows.length) prodSheet.getRange(2, 1, allRows.length, allRows[0].length).setValues(allRows);
   // Update each farm's 商品一覧 sheet
   const configSheet = ss.getSheetByName('Config');
-  const cfgData = configSheet.getRange(2, 1, configSheet.getLastRow() - 1, 2).getValues();
+  const cfgData = readConfigRows(configSheet);
   cfgData.forEach(([vendor, fileId]) => {
     const farmSS = SpreadsheetApp.openById(fileId);
     const listSheet = farmSS.getSheetByName('商品一覧');
@@ -287,7 +300,7 @@ function pushPendingAdjustments() {
     const locationId = getLocationGid();
     const ss = SpreadsheetApp.getActiveSpreadsheet(); // master
     const configSheet = ss.getSheetByName('Config');
-    const cfgRows = configSheet.getRange(2, 1, configSheet.getLastRow() - 1, 2).getValues(); // [vendor, fileId]
+    const cfgRows = readConfigRows(configSheet); // [vendor, fileId]
     cfgRows.forEach(([ , fileId]) => {
       const farmSS = SpreadsheetApp.openById(fileId);
       const inputSheet = farmSS.getSheetByName('入荷入力');
