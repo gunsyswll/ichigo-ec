@@ -43,6 +43,7 @@ function setupSalesSheets() {
       salesSheet = farm.insertSheet('販売履歴');
       // Header row (5 columns: 日付, SKU, 数量, 備考, キー)
       salesSheet.getRange(1, 1, 1, 5).setValues([['日付', 'SKU', '数量', '備考', 'キー']]);
+      salesSheet.getRange('A2:A').setNumberFormat('yyyy-mm-dd hh:mm');
     } else {
       // Ensure キー column header exists
       const lastCol = salesSheet.getLastColumn();
@@ -68,6 +69,7 @@ function setupSalesSheets() {
       const formula =
         '=IFERROR(QUERY({IFERROR(QUERY(入荷入力!A2:D,"select A,B,C,D where B is not null",0),{"","","",""});IFERROR(QUERY(販売履歴!A2:D,"select A,B,C,D where B is not null",0),{"","","",""})},"select Col1,Col2,Col3,Col4 where Col2 is not null order by Col1 desc",0),"（まだデータがありません）")';
       ledgerSheet.getRange('A2').setFormula(formula);
+      ledgerSheet.getRange('A2:A').setNumberFormat('yyyy-mm-dd hh:mm');
     } else {
       // Ensure formula exists (in case sheet existed without it)
       const formulaCell = ledgerSheet.getRange('A2');
@@ -117,6 +119,7 @@ function syncSalesHistory() {
         // Create sheet on-the-fly (should already exist via setupSalesSheets)
         const newSheet = farm.insertSheet('販売履歴');
         newSheet.getRange(1, 1, 1, 5).setValues([['日付', 'SKU', '数量', '備考', 'キー']]);
+        newSheet.getRange('A2:A').setNumberFormat('yyyy-mm-dd hh:mm');
         salesSheet = newSheet;
       }
       // Build existing key set from column E (キー)
@@ -198,7 +201,11 @@ query ($cursor: String) {
           const uniqueKey = `${baseName}|${li.sku}${isCancellation ? '|C' : ''}`;
           if (existingKeys.has(uniqueKey)) continue; // already recorded
 
-          const dateStr = isCancellation ? cancelledAt : createdAt;
+          // Fable QA fix 2026-08-10: write a real Date, NOT the ISO string.
+          // Sheets' QUERY() requires a homogeneous column type; an ISO STRING sitting in a column
+          // whose other source (入荷入力) holds real dates is treated as the minority type and comes
+          // out BLANK in 在庫台帳. Measured: the #1002 row appeared with an empty 日付.
+          const dateStr = new Date(isCancellation ? cancelledAt : createdAt);
           const signedQty = isCancellation ? li.quantity : -li.quantity;
 
           let remark = baseName; // order.name already includes '#'
