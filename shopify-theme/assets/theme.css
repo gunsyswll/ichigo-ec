@@ -716,6 +716,7 @@ a.method.linkcard .link{display:inline-block;margin-top:10px;color:var(--red);fo
 .pd-vat{font-size:.8rem;color:var(--greige-deep);margin:6px 0 18px}
 .pd-facts{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:14px}
 .pd-facts .f{background:var(--cream-2);padding:13px 16px}
+.pd-facts .f:only-child{grid-column:1/-1}
 .pd-facts .f label{display:block;font-size:.67rem;letter-spacing:.08em;text-transform:uppercase;color:var(--greige-deep);margin-bottom:5px}
 .pd-facts .f b{font-family:'Libre Baskerville';font-size:1rem}
 .pd-facts .f b.hot{color:var(--red)}

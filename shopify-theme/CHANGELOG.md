@@ -3,6 +3,39 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.5.2 — 2026-08-11
+実画面フロー図を作るために店を一周して見つかった、コード側で直せる2件。
+
+- **定期プランの金額が出ていなかった（Club の「Deliver every month」）。** 原因は
+  `selling_plan_allocation` に `selling_plan_id` というプロパティが存在しないこと —
+  `{% if a.selling_plan_id == plan.id %}` は永久に偽になり、価格の分岐に一度も入らなかった。
+  正しくは `a.selling_plan.id`。お客様は毎月いくら請求されるか分からないまま定期を選べる状態だった。
+  `main-product.liquid` / `main-product-gift.liquid` の両方に同じ誤りがあった。
+- **商品ページの日付が2025年のまま全商品に出ていた。** これはテンプレートの設定漏れではなく
+  **セクションスキーマの `default`**（"March 15, 2025" ほか）だったので、値を保存していない
+  すべての商品が同じ日付を継承していた。既定値を空にし、`fact*_value` が空なら行ごと描画しない
+  ガードを追加。`product.club.json` に保存済みだった同じ日付も消した。
+  → 実在しない日付を出すより出さないほうが正しい、という判断。実際の日付が決まれば
+  テーマ設定に入れるだけで戻る。
+- 上に伴い、fact が1つだけ（Availability のみ）になったときにグリッドが崩れないよう
+  `.pd-facts .f:only-child{grid-column:1/-1}` を追加。
+- ついでに「One-time purchase」の金額を `product.price`（全バリアントの最安値）から
+  `variant.price`（選択中のバリアント）に変更。単一バリアントでは同じだが、将来バリアントを
+  増やしたときに定期側の表示と食い違わなくなる。
+
+- **⚠️ 実は商品ページだけではなかった。** 1商品で直ったのを確認して終わらせず全9商品を検査したところ、
+  Club とギフト以外は**まだ2025年のまま**だった。原因は **git と実テーマの乖離** —
+  リポジトリの `templates/product.json` は `{}` なのに、**ライブ側にはテーマエディタで保存された
+  日付が入っていた**（`fact1_value: "March 15, 2025"` ほか）。スキーマ既定値を空にしても、保存済みの
+  値は上書きされない。ライブの `templates/product.json` / `templates/index.json` を Admin API で
+  読み、値を空にして書き戻したうえで、**リポジトリ側もライブの内容に同期**した。
+- 同じ日付はトップページの arrival strip（`index-arrival.liquid`、スキーマ既定値＋index.json 保存値）と
+  Shop ページのヒーロー（`page-shop.liquid` に**ベタ書き**）にも出ていた。前者は空ガード＋値クリア、
+  後者は設定項目化（`next_arrival` / `reservation_deadline`、空なら非表示）に変更。
+- 検証は全ページ横断で実施: `/` `/pages/shop` `/pages/help` `/pages/about` `/collections/all` と
+  全9商品ページの本文から `2025` と `March \d+` が消えたことを確認（Judge.me の内部キー
+  `all_reviews_widget_v2025_*` は顧客に見えないため対象外）。1カラムになったブロックの見た目も実画面で確認。
+
 ## v1.5.1 — 2026-08-05
 Follow-up to v1.5.0 item 1: the root type lift is rem-based, so it never reached text inside the
 SVG maps. Their declared size is in user units — actual size on screen is

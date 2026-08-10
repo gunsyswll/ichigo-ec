@@ -3,8 +3,8 @@
   <h1>Shop &amp; <span class="r">Reserve</span></h1>
   <p>Browse all available strawberry boxes. Reserve your box before the next arrival.</p>
   <div class="stats">
-    <div class="stat"><label>Next Arrival</label><b>Mar 15, 2025</b></div>
-    <div class="stat"><label>Reservation Deadline</label><b>Mar 12, 2025</b></div>
+    {%- if section.settings.next_arrival != blank -%}<div class="stat"><label>Next Arrival</label><b>{{ section.settings.next_arrival }}</b></div>{%- endif -%}
+    {%- if section.settings.reservation_deadline != blank -%}<div class="stat"><label>Reservation Deadline</label><b>{{ section.settings.reservation_deadline }}</b></div>{%- endif -%}
     <div class="stat"><label>Available Boxes</label><b>Limited</b></div>
   </div>
   <div class="shop-nudge"><a href="{{ routes.root_url }}#journey">How it works · 36–48h fresh →</a><span>·</span><a href="/pages/help">Questions? Visit Help →</a></div>
@@ -49,7 +49,9 @@
 {
   "name": "Shop page",
   "settings": [
-    { "type": "paragraph", "content": "Shows the real store catalog (collections.all) via the product-card snippet. No static tiles." }
+    { "type": "paragraph", "content": "Shows the real store catalog (collections.all) via the product-card snippet. No static tiles." },
+    { "type": "text", "id": "next_arrival", "label": "Next arrival (blank = hidden)" },
+    { "type": "text", "id": "reservation_deadline", "label": "Reservation deadline (blank = hidden)" }
   ],
   "presets": [{ "name": "Shop page" }]
 }

@@ -2,19 +2,74 @@
   "sections": {
     "hero": {
       "type": "index-hero",
-      "settings": {}
+      "settings": {
+        "heading_1": "Premium Japanese<br>strawberries,",
+        "heading_2": "<em>delivered fresh</em><br>to the Philippines.",
+        "lead": "Bring the freshest strawberries, grown and picked by trusted farmers in Japan. Flown cold-chain within 48 hours of picking. A little luxury from Japan, reaching your door at its sweetest.",
+        "cta1_label": "Reserve Next Arrival →",
+        "cta1_url": "",
+        "cta2_label": "Join the Waitlist",
+        "cta2_url": "",
+        "badge1_t": "Official",
+        "badge1_s": "Import Partner",
+        "badge2_t": "Limited",
+        "badge2_s": "Seasonal Arrival",
+        "badge3_t": "Freshness",
+        "badge3_s": "Checked"
+      }
     },
     "arrival": {
       "type": "index-arrival",
-      "settings": {}
+      "settings": {
+        "title": "Next Arrival from Japan",
+        "subtitle": "Reserve your box from this week's harvest.",
+        "arrival_date": "",
+        "deadline": "",
+        "delivery": "",
+        "available": "Limited",
+        "cta_label": "View Available Strawberries",
+        "cta_url": ""
+      }
+    },
+    "news": {
+      "type": "index-news",
+      "settings": {
+        "eyebrow": "Latest from Ichigo",
+        "heading": "News & Events",
+        "subtext": "Announcements, pop-up events, and seasonal stories.",
+        "cta_label": "View all →"
+      }
+    },
+    "follow_news": {
+      "type": "index-follow",
+      "settings": {
+        "eyebrow": "@ichigo",
+        "heading": "Follow us",
+        "subtext": "Daily berries, arrivals, and behind-the-farm moments.",
+        "instagram_url": "https://instagram.com",
+        "facebook_url": "https://facebook.com",
+        "note": "Instagram feed coming soon."
+      }
     },
     "boxes": {
       "type": "index-boxes",
-      "settings": {}
+      "settings": {
+        "eyebrow": "Shop & Reserve",
+        "heading": "Choose your strawberries",
+        "subtext": "From a personal treat to a premium gift, select the product that fits your occasion."
+      }
     },
     "statement": {
       "type": "index-statement",
-      "settings": {}
+      "settings": {
+        "eyebrow": "A little luxury from Japan",
+        "heading": "Grown in Japan.<br><em>Loved</em> in the<br>Philippines.",
+        "text": "One bite and you will taste the difference — a perfect balance of sweetness and tanginess. Reserve a box for the moment you deserve.",
+        "cta_label": "Reserve your box →",
+        "cta_url": "",
+        "tag1": "15° Brix sweetness",
+        "tag2": ""
+      }
     },
     "farmers": {
       "type": "index-farmers",
@@ -26,9 +81,9 @@
             "title": "Berry Farm",
             "text": "The Tanaka family, est. 1992 — third-generation Amaou growers focused on flavour, sweetness, and careful temperature control.",
             "link_label": "View Farm Story →",
+            "url": "/pages/farmers#farm-a",
             "ph_class": "",
-            "reveal": "left",
-            "url": "/pages/farmers#farm-a"
+            "reveal": "left"
           }
         },
         "f2": {
@@ -38,9 +93,9 @@
             "title": "Sun Harvest",
             "text": "The Sato family, est. 1985 — perfecting the Tochiotome berry with advanced cultivation and selection for beautiful colour.",
             "link_label": "View Farm Story →",
+            "url": "/pages/farmers#farm-b",
             "ph_class": "soft",
-            "reveal": "right",
-            "url": "/pages/farmers#farm-b"
+            "reveal": "right"
           }
         }
       },
@@ -48,11 +103,19 @@
         "f1",
         "f2"
       ],
-      "settings": {}
+      "settings": {
+        "eyebrow": "Meet the farmers behind each strawberry",
+        "heading": "Special strawberries come from special farmers.",
+        "subtext": "Quality first — we've selected the finest farmers from all over Japan."
+      }
     },
     "howitworks": {
       "type": "index-howitworks",
-      "settings": {}
+      "settings": {
+        "eyebrow": "The journey",
+        "heading": "From Japan to your door",
+        "subtext": "Our strawberries are grown in Japan — and travel by truck, plane, and van to reach you at their freshest."
+      }
     },
     "club": {
       "type": "index-club",
@@ -84,7 +147,13 @@
         "c2",
         "c3"
       ],
-      "settings": {}
+      "settings": {
+        "eyebrow": "The Ichigo Club",
+        "heading": "A new lot at your door, every month.",
+        "subtext": "A special subscription plan for our Ichigo lovers.",
+        "cta_label": "View Subscription Plan →",
+        "cta_url": ""
+      }
     },
     "info": {
       "type": "index-info",
@@ -126,20 +195,6 @@
         "i3"
       ],
       "settings": {}
-    },
-    "news": {
-      "type": "index-news",
-      "settings": {}
-    },
-    "follow_news": {
-      "type": "index-follow",
-      "settings": {
-        "eyebrow": "@ichigo",
-        "heading": "Follow us",
-        "subtext": "Daily berries, arrivals, and behind-the-farm moments.",
-        "instagram_url": "https://instagram.com",
-        "facebook_url": "https://facebook.com"
-      }
     },
     "faq": {
       "type": "index-faq",
@@ -187,17 +242,11 @@
         "q4",
         "q5"
       ],
-      "settings": {}
-    },
-    "follow": {
-      "type": "index-follow",
       "settings": {
-        "eyebrow": "@ichigo",
-        "heading": "Follow us",
-        "subtext": "Daily berries, arrivals, and behind-the-farm moments.",
-        "instagram_url": "https://instagram.com",
-        "facebook_url": "https://facebook.com",
-        "note": "Instagram feed coming soon."
+        "eyebrow": "Good to know",
+        "heading": "Frequently asked questions",
+        "cta_label": "View All FAQs →",
+        "cta_url": ""
       }
     }
   },
@@ -212,7 +261,6 @@
     "howitworks",
     "club",
     "info",
-    "faq",
-    "follow"
+    "faq"
   ]
 }
