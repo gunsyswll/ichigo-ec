@@ -49,6 +49,17 @@
 
   <div class="pd-info" data-reveal="right">
     <h1>{{ product.title }}</h1>
+    {%- liquid
+      assign st = product.metafields.custom.sale_status
+      assign is_coming = false
+      if st == 'coming_soon'
+        assign is_coming = true
+      endif
+    -%}
+    {%- if is_coming -%}<span class="pd-status coming">Coming Soon</span>
+    {%- elsif st == 'preorder' and product.available -%}<span class="pd-status pre">Pre-order</span>
+    {%- elsif product.available -%}<span class="pd-status in">In Stock</span>
+    {%- else -%}<span class="pd-status out">Sold Out</span>{%- endif -%}
     {%- if product.description != blank and section.settings.overview_first != true -%}<p class="desc">{{ product.description | strip_html | truncatewords: 38 }}</p>{%- endif -%}
     {%- if section.settings.badges != blank -%}
       <div class="pd-badges">{%- assign badges = section.settings.badges | split: ',' -%}{%- for b in badges -%}<span>{{ b | strip }}</span>{%- endfor -%}</div>
@@ -67,11 +78,27 @@
     {%- endif -%}
 
     {%- if section.settings.show_facts -%}
+      {%- comment -%} Per-product dates come from metafields; section settings are the fallback. {%- endcomment -%}
+      {%- liquid
+        assign mf = product.metafields.custom
+        assign v1 = section.settings.fact1_value
+        if mf.next_arrival != blank
+          assign v1 = mf.next_arrival.value | date: '%B %-d, %Y'
+        endif
+        assign v2 = section.settings.fact2_value
+        if mf.reservation_deadline != blank
+          assign v2 = mf.reservation_deadline.value | date: '%B %-d, %Y'
+        endif
+        assign v3 = section.settings.fact3_value
+        if mf.delivery_window != blank
+          assign v3 = mf.delivery_window.value
+        endif
+      -%}
       <div class="pd-facts">
-        {%- if section.settings.fact1_label != blank and section.settings.fact1_value != blank -%}<div class="f"><label>{{ section.settings.fact1_label }}</label><b class="hot">{{ section.settings.fact1_value }}</b></div>{%- endif -%}
-        {%- if section.settings.fact2_label != blank and section.settings.fact2_value != blank -%}<div class="f"><label>{{ section.settings.fact2_label }}</label><b>{{ section.settings.fact2_value }}</b></div>{%- endif -%}
-        {%- if section.settings.fact3_label != blank and section.settings.fact3_value != blank -%}<div class="f"><label>{{ section.settings.fact3_label }}</label><b>{{ section.settings.fact3_value }}</b></div>{%- endif -%}
-        <div class="f"><label>Availability</label><b class="hot">{% if product.available %}In stock{% else %}Sold out{% endif %}</b></div>
+        {%- if section.settings.fact1_label != blank and v1 != blank -%}<div class="f"><label>{{ section.settings.fact1_label }}</label><b class="hot">{{ v1 }}</b></div>{%- endif -%}
+        {%- if section.settings.fact2_label != blank and v2 != blank -%}<div class="f"><label>{{ section.settings.fact2_label }}</label><b>{{ v2 }}</b></div>{%- endif -%}
+        {%- if section.settings.fact3_label != blank and v3 != blank -%}<div class="f"><label>{{ section.settings.fact3_label }}</label><b>{{ v3 }}</b></div>{%- endif -%}
+        <div class="f"><label>Availability</label><b class="hot">{% if is_coming %}Coming soon{% elsif product.available %}{% if st == 'preorder' %}Pre-order{% else %}In stock{% endif %}{% else %}Sold out{% endif %}</b></div>
       </div>
     {%- endif -%}
 
@@ -113,8 +140,12 @@
       </div>
 
       <div class="pd-cta">
-        {%- if product.available -%}
-          <button type="submit" name="add" class="btn btn-red btn-block" style="padding:16px">Reserve Now</button>
+        {%- if is_coming -%}
+          <button type="button" class="btn btn-ghost btn-block" style="padding:16px" disabled>Coming Soon</button>
+          <p class="pd-status-note">Reservations open soon — join the waitlist to be notified.</p>
+        {%- elsif product.available -%}
+          <button type="submit" name="add" class="btn btn-red btn-block" style="padding:16px">{% if st == 'preorder' %}Pre-order Now{% else %}Reserve Now{% endif %}</button>
+          {%- if st == 'preorder' and v3 != blank -%}<p class="pd-status-note">Pre-order — ships in the {{ v3 }} delivery window.</p>{%- endif -%}
         {%- else -%}
           <button type="submit" name="add" class="btn btn-ghost btn-block" style="padding:16px" disabled>Sold Out</button>
         {%- endif -%}

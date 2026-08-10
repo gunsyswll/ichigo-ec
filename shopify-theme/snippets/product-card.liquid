@@ -14,6 +14,9 @@
   <a class="card" href="{{ product.url }}" data-reveal>
     <div class="ph{% unless product.featured_image %} soft{% endunless %}">
       {%- if on_sale -%}<span class="card-tag tag-new">Sale</span>{%- endif -%}
+      {%- assign cst = product.metafields.custom.sale_status -%}
+      {%- if cst == 'coming_soon' -%}<span class="card-status coming">Coming Soon</span>
+      {%- elsif cst == 'preorder' -%}<span class="card-status pre">Pre-order</span>{%- endif -%}
       {%- if product.featured_image -%}
         {{ product.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'card-img', alt: product.title }}
       {%- else -%}

@@ -3,6 +3,37 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.5.3 — 2026-08-11
+下書きテーマ「Ichigo WORKING (metafield改修)」に入っていた**商品ごとの予約情報**の実装を本番へ移植。
+下書きをそのまま公開すると v1.5.2 の修正が巻き戻るため、3方向マージ（base=v1.5.2直前 / theirs=下書き /
+ours=現行）で取り込み、競合1件は下書き側を採用した（解決済み値 v1/v2/v3 でガードするほうが正しいため）。
+
+- **商品ごとのメタフィールドで日付を出せるようにした。** `custom.next_arrival` / `reservation_deadline`
+  （date型）/ `delivery_window`（テキスト）を商品ページで読み、**空ならセクション設定にフォールバック、
+  それも空なら行ごと非表示**。定義4件はストア側に作成済みだった。
+- **`custom.sale_status` による状態表示。** `preorder` → バッジ「Pre-order」＋CTA「Pre-order Now」＋
+  「ships in the ◯◯ delivery window」の注記、`coming_soon` → バッジ＋**CTAを無効化**、それ以外は
+  在庫に応じて In Stock / Sold Out。商品カード（`product-card.liquid`）にも同じバッジを追加。
+- **ギフト商品ページ（`main-product-gift.liquid`）にも同じ実装を移植。** 下書きには入っておらず、
+  ギフト商品だけ状態表示が出ない不揃いになっていた。CTAの文言はギフト用を維持しつつ
+  `preorder` のときだけ「Pre-order Gift」にする。
+- CSS: `.pd-status` / `.card-status` / `.pd-status-note` を追加。
+
+**実測検証（本番テーマ・実ストア）**
+| 経路 | 結果 |
+|---|---|
+| `preorder` + 日付3件（通常商品） | バッジ Pre-order / CTA「Pre-order Now」/ 日付3件が商品ごとの値で表示 / 注記あり |
+| `coming_soon` | バッジ Coming Soon / **CTAが disabled** / Availability「Coming soon」 |
+| `preorder` + 日付2件のみ（ギフト商品） | 埋めた2件だけ表示、未設定の1件は行ごと非表示 |
+| 商品カード | 該当商品にだけバッジが出る |
+| 全消去後 | 全9商品で日付・バッジともに消え、Sold Out 判定は維持 |
+
+⚠️ **副産物: 8月8日のセッションが残したテスト値を発見・削除した。** tochiotome / mixed-variety の
+2商品に `preorder` と架空の日付（2026-09-15 ほか）が残っており、今回メタフィールドを読む実装を
+公開した時点で**そのまま本番の商品ページに出る**状態だった。作成時刻（08-08T04:06Z）で当方の
+検証値と区別して特定。検証で使った値も含め、**custom名前空間の値は全商品で0件**にして終了。
+実在しない日付は入れていない。
+
 ## v1.5.2 — 2026-08-11
 実画面フロー図を作るために店を一周して見つかった、コード側で直せる2件。
 
