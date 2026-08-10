@@ -156,10 +156,20 @@ function appendLogRow({sku, delta, result, farmFileId, rowNum, detail}) {
  */
 function notifyAdmin(message) {
   const prop = PropertiesService.getScriptProperties();
+  // Fable QA fix 2026-08-11: ADMIN_EMAIL が未設定なら **送らずに Log へ残す**。
+  // 従来は MailApp.sendEmail(null, ...) が例外になり、呼び出し元（reportStuckSending や
+  // 各エラー経路）ごと実行が落ちていた。「通知できない」ことが「同期が止まる」に化けるのは
+  // 最悪の壊れ方。Ops.gs の dailyHealthCheck は既にこの規則で書かれており、そちらに揃える。
+  const to = prop.getProperty('ADMIN_EMAIL');
+  if (!to) {
+    appendLogRow({sku: '', delta: '', result: 'WARN ADMIN_EMAIL 未設定',
+      farmFileId: '', rowNum: '', detail: 'notify skipped: ' + message});
+    return;
+  }
   const lastTs = Number(prop.getProperty('LAST_NOTIFICATION_TS') || '0');
   const now = Date.now();
   if (now - lastTs < NOTIF_INTERVAL_MS) return; // suppress
-  MailApp.sendEmail(CONFIG.ADMIN_EMAIL, 'Shopify Sync Alert', message);
+  MailApp.sendEmail(to, 'Shopify Sync Alert', message);
   prop.setProperty('LAST_NOTIFICATION_TS', now.toString());
 }
 
@@ -295,6 +305,12 @@ function syncProductsFromShopify() {
     if (filtered.length) {
       listSheet.getRange(2, 1, filtered.length, 3).setValues(filtered.map(r => [r[0], r[1], r[3]]));
     }
+    // Fable QA fix 2026-08-11: 商品名が既定幅で切れて農家がSKUと商品を突き合わせられなかった。
+    // 手で広げても setValues のたびに元へ戻る類ではないが、農家ファイルが増えたときに
+    // 設定し忘れるので、書き込みと同じ場所で毎回そろえる。
+    listSheet.setColumnWidth(1, 110);  // SKU
+    listSheet.setColumnWidth(2, 280);  // 商品名
+    listSheet.setColumnWidth(3, 90);   // 現在庫
   });
   } finally {
     lock.releaseLock();
