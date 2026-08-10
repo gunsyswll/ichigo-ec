@@ -314,7 +314,19 @@ function pushPendingAdjustments() {
         const [date, sku, deltaRaw, memo, stateColE, timestampF] = row;
         // Determine pending rows
         const delta = Number(deltaRaw);
-        if (stateColE || !sku || isNaN(delta) || delta === 0) return; // skip processed or invalid
+        if (stateColE) return;              // 既に処理済み/エラー/保留 — 絶対に触らない
+        if (!sku) return;                    // SKU未入力の行は行ごと未使用とみなす
+        // Fable QA fix 2026-08-10: 入荷数が空欄または0の行を「黙って飛ばす」と、列Eが空のまま
+        // 永久に残り、鮮度監視が永続ALERTを出し続ける（実測。農家が数量を書き忘れる想定は現実的）。
+        // 飛ばさずに理由を列Eへ書いて、農家自身の画面で気づけるようにする。
+        // 直し方は「数量を入れて列Eを消す」— 他のエラー行と同じ手順。
+        if (isNaN(delta) || delta === 0) {
+          inputSheet.getRange(idx + 2, 5).setValue('ERR 入荷数が未入力または0');
+          SpreadsheetApp.flush();
+          appendLogRow({sku: sku, delta: deltaRaw, result: 'ERR 入荷数が未入力または0',
+            farmFileId: fileId, rowNum: idx + 2, detail: 'zero-or-blank quantity'});
+          return;
+        }
         const rowNumber = idx + 2; // actual sheet row
         // Resolve inventoryItemId with qualified SKU query
         const {invItemId, count} = resolveInventoryItemInfo(sku);
