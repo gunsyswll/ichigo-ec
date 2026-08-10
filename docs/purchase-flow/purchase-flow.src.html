@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<title>いちごEC 購入フロー図（実画面版）</title>
+<style>
+@page { size: A4 landscape; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+       color:#1e2430; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+.page { width:297mm; height:210mm; padding:10mm 12mm; page-break-after:always; position:relative;
+        display:flex; flex-direction:column; overflow:hidden; }
+.page:last-child { page-break-after:auto; }
+
+h1 { font-size:23pt; margin:0 0 2mm; letter-spacing:-.02em; }
+h2 { font-size:14.5pt; margin:0 0 3.5mm; padding:2.2mm 4mm; color:#fff; border-radius:2mm; }
+h2.stock{background:#1f3a5f}  h2.pre{background:#8a5a1e}  h2.sub{background:#1d5c3a}  h2.bad{background:#b3241c}
+h3 { font-size:10pt; margin:3.5mm 0 1.8mm; padding-left:2.6mm; border-left:3px solid #c8342b; }
+h3:first-of-type{ margin-top:0 }
+.sub-t { color:#6a7080; font-size:9.5pt; margin:0 0 4mm; }
+
+/* 実画面カード */
+.grid2 { display:flex; flex-wrap:wrap; gap:4mm 5mm; }
+.grid2 > .shot { width:calc(50% - 2.5mm); }
+.shot { display:flex; gap:3.5mm; align-items:flex-start; }
+.shot .im { flex:none; }
+.shot img { display:block; border:1px solid #ccd2db; border-radius:1.4mm; }
+.shot .cap { flex:1; min-width:0; }
+.shot .cap .t { font-size:9.2pt; font-weight:700; margin-bottom:1.4mm; }
+.shot .cap .t small { display:block; font-weight:400; font-size:7.2pt; color:#8b93a3; margin-top:.5mm; }
+.shot ol { margin:0; padding:0; list-style:none; font-size:7.6pt; line-height:1.5; }
+.shot ol li { margin-bottom:1.3mm; padding-left:5.4mm; position:relative; }
+.shot ol li i { position:absolute; left:0; top:.2mm; font-style:normal; font-weight:700; color:#fff;
+                background:#c8342b; width:3.9mm; height:3.9mm; border-radius:50%; font-size:6.2pt;
+                display:flex; align-items:center; justify-content:center; }
+.shot ol li.g i { background:#1d5c3a } .shot ol li.a i { background:#c48410 } .shot ol li.b i { background:#1f3a5f }
+.shot ol li b { color:#b3241c }
+.shot.v { flex-direction:column; gap:2mm }
+.shot.v .im { align-self:center }
+.shot.v .cap { width:100% }
+.p6 table { font-size:7.9pt }
+.p2 .shot ol { font-size:7.2pt; line-height:1.45 }
+.p2 .shot ol li { margin-bottom:1mm }
+.p2 .shot .cap .t { font-size:8.8pt; margin-bottom:1.1mm }
+.p6 th, .p6 td { padding:1.3mm 2mm }
+
+/* 概念フロー（1ページ目） */
+.lane { display:flex; align-items:stretch; margin-bottom:2.6mm; }
+.lane .tag { flex:none; width:32mm; font-size:9.5pt; font-weight:700; padding:2.2mm 2.6mm; border-radius:2mm;
+             color:#fff; text-align:center; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.lane .tag small { font-weight:400; font-size:6.8pt; opacity:.85; margin-top:.7mm }
+.tag.stock{background:#1f3a5f} .tag.pre{background:#8a5a1e} .tag.sub{background:#1d5c3a}
+.lane .mid { flex:1; display:flex; align-items:stretch; }
+.step { flex:1; border:1.2px solid #c9d0da; border-radius:2.2mm; background:#fff; padding:2.2mm 2.8mm; min-width:0; }
+.step b { font-size:9.2pt; display:block; margin-bottom:.8mm }
+.step p { font-size:7.7pt; margin:0; color:#4a5262; line-height:1.5 }
+.step.dim { background:#f4f6f8; border-style:dashed } .step.dim b, .step.dim p { color:#7b8494 }
+.step.hi { border-color:#c8342b; border-width:1.6px; background:#fdf5f4 }
+.arrow { display:flex; align-items:center; padding:0 1.4mm; color:#9aa3b2; font-size:12pt; flex:none }
+.band { border:1.4px solid #1f3a5f; background:#f2f6fb; border-radius:2.4mm; padding:2.6mm 3.4mm }
+.band .lab { font-size:7.8pt; font-weight:700; color:#1f3a5f; margin-bottom:1.8mm; letter-spacing:.04em }
+.band .inner { display:flex; align-items:center }
+.band .cell { flex:1; text-align:center; font-size:8.2pt; background:#fff; border:1px solid #c3d2e6;
+              border-radius:1.6mm; padding:2mm 1mm }
+.band .cell small { display:block; font-size:6.6pt; color:#6a7080; margin-top:.6mm }
+.merge { text-align:center; font-size:8.2pt; color:#6a7080; margin:1.2mm 0 2.2mm }
+
+table { width:100%; border-collapse:collapse; font-size:8.2pt }
+th,td { border:1px solid #d4dae3; padding:1.6mm 2.2mm; text-align:left; vertical-align:top; line-height:1.5 }
+th { background:#eef1f5; font-weight:700; font-size:7.8pt }
+td.c { text-align:center }
+.ok{color:#1d5c3a;font-weight:700} .no{color:#b3241c;font-weight:700} .part{color:#8a5a1e;font-weight:700}
+
+.note { border-left:3.4px solid #c8342b; background:#fdf3f2; padding:2.4mm 3.6mm; font-size:8.4pt;
+        line-height:1.6; border-radius:0 1.6mm 1.6mm 0; margin:2.6mm 0 0 }
+.note.warn{border-color:#c8901e;background:#fdf9ee} .note.good{border-color:#1d5c3a;background:#f0f7f2}
+
+.cols { display:flex; gap:4.5mm } .cols > div { flex:1 }
+.opt { border:1.2px solid #c9d0da; border-radius:2.2mm; padding:2.6mm 3.2mm; height:100% }
+.opt.rec { border-color:#1d5c3a; border-width:1.8px; background:#f4faf6 }
+.opt h4 { margin:0 0 1.2mm; font-size:9.4pt }
+.opt .badge { display:inline-block; font-size:6.6pt; font-weight:700; color:#fff; background:#1d5c3a;
+              padding:.5mm 1.8mm; border-radius:1mm; margin-left:1.4mm; vertical-align:middle }
+.opt .lead { font-size:7.8pt; margin:0; line-height:1.55; color:#4a5262 }
+.opt ul { margin:1.6mm 0 0; padding:0; list-style:none; font-size:7.8pt; line-height:1.55 }
+.opt li { margin-bottom:1mm; padding-left:4.4mm; text-indent:-4.4mm }
+.opt li.pro::before { content:"✔ "; color:#1d5c3a; font-weight:700 }
+.opt li.con::before { content:"✘ "; color:#b3241c; font-weight:700 }
+
+.foot { margin-top:auto; padding-top:2.4mm; font-size:7.2pt; color:#98a0ae; border-top:1px solid #e4e8ee }
+code { font-family:"SF Mono",Menlo,monospace; font-size:.9em; background:#eef1f5; padding:.3mm 1mm; border-radius:.8mm }
+.chip { display:inline-block; font-size:7.2pt; font-weight:700; padding:.5mm 1.8mm; border-radius:1mm; white-space:nowrap }
+.chip.live{background:#e2f1e8;color:#1d5c3a} .chip.todo{background:#fbe9e7;color:#b3241c} .chip.half{background:#fbf1de;color:#8a5a1e}
+.pri { font-weight:700; text-align:center }
+</style></head><body>
+
+<!-- ===== P1 全体像 ===== -->
+<div class="page">
+  <h1>いちごEC　購入フロー図</h1>
+  <p class="sub-t">商品選択 → 決済完了まで／在庫販売・予約販売・サブスク販売　　2026年8月11日、<b>実際の店舗を操作して確認</b></p>
+
+  <div class="note good" style="margin:0 0 4mm">
+    <b>入口は3つ、決済画面は1つ。</b>3つの販売形態で違うのは「商品ページで何を選ばせるか」と「決済のあと何が起きるか」だけです。
+    <b>カートから先は3つとも同じ1本道</b>で、しかも Shopify の決済は<b>1ページ</b>です（連絡先・お届け先・配送方法・支払いが縦に並ぶ）。
+  </div>
+
+  <div class="lane">
+    <div class="tag stock">在庫販売<small>今ある分を売る</small></div>
+    <div class="mid">
+      <div class="step"><b>商品ページ</b><p>在庫が1以上なら購入ボタンが有効</p></div>
+      <div class="arrow">▶</div>
+      <div class="step"><b>数量を選ぶ</b><p>購入オプションは無し</p></div>
+      <div class="arrow">▶</div>
+      <div class="step"><b>Reserve Now</b><p>カートに入る。まだ在庫は減らない</p></div>
+    </div>
+  </div>
+  <div class="lane">
+    <div class="tag pre">予約販売<small>先に売り、後で届ける</small></div>
+    <div class="mid">
+      <div class="step dim"><b>商品ページ</b><p>発送予定日・予約締切・残り枠を表示</p></div>
+      <div class="arrow">▶</div>
+      <div class="step dim"><b>予約枠を1つ取る</b><p>枠＝在庫として登録（推奨案A）</p></div>
+      <div class="arrow">▶</div>
+      <div class="step dim"><b>カートに入れる</b><p>通常商品と同じカート</p></div>
+    </div>
+  </div>
+  <div class="lane">
+    <div class="tag sub">サブスク販売<small>毎月くり返す</small></div>
+    <div class="mid">
+      <div class="step"><b>Club の商品ページ</b><p>Japanese Strawberry Club</p></div>
+      <div class="arrow">▶</div>
+      <div class="step hi"><b>「毎月お届け」を選ぶ</b><p>ここが唯一の分岐点</p></div>
+      <div class="arrow">▶</div>
+      <div class="step"><b>カートに入れる</b><p>定期プランが付いた状態で入る</p></div>
+    </div>
+  </div>
+
+  <p class="merge">▼　ここから先は 3 つとも まったく同じ画面　▼</p>
+
+  <div class="band">
+    <div class="lab">Shopify チェックアウト（共通・作り込み不要）</div>
+    <div class="inner">
+      <div class="cell">カート<small>数量変更・削除</small></div><div class="arrow">▶</div>
+      <div class="cell" style="flex:3.2"><b>チェックアウト（1ページ）</b>
+        <small>連絡先 → お届け先 → 配送方法 → 支払い　※ページ遷移せず、縦に並ぶ</small></div>
+      <div class="arrow">▶</div>
+      <div class="cell" style="background:#1f3a5f;color:#fff;border-color:#1f3a5f"><b>注文成立</b><small style="color:#c9d8ea">在庫が確定的に減る</small></div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:4mm">注文が成立したあと　— ここが3つで分かれる</h3>
+  <table>
+    <tr><th style="width:26mm">　</th><th style="width:38mm">課金</th><th style="width:42mm">在庫が減るタイミング</th><th style="width:42mm">発送</th><th>シートへの反映</th></tr>
+    <tr><td><b>在庫販売</b></td><td>その場で1回</td><td>注文成立の瞬間</td><td>すぐ</td>
+        <td rowspan="3">在庫は10分以内に <code>商品一覧</code> へ、販売は30分以内に <code>販売履歴</code> へ。3形態とも同じ経路です</td></tr>
+    <tr><td><b>予約販売</b></td><td>その場で1回（全額前払い）</td><td>注文成立の瞬間＝予約枠が1つ埋まる</td><td>入荷後（発送予定日に出荷）</td></tr>
+    <tr><td><b>サブスク販売</b></td><td>初回＋毎月自動</td><td><b>毎月の自動注文ごとに減る</b></td><td>毎月くり返し</td></tr>
+  </table>
+
+  <div class="foot">2〜3ページ目は、実際に店舗を操作して撮った画面です。加工は赤枠と番号のみ。</div>
+</div>
+
+<!-- ===== P2 在庫販売 実画面 ===== -->
+<div class="page p2">
+  <h2 class="stock">① 在庫販売　実際の画面と操作　<span style="font-weight:400;font-size:9.5pt">— 商品ページから決済完了まで（稼働中）</span></h2>
+
+  <div class="grid2">
+    <div class="shot">
+      <div class="im"><img src="%%fig_stock_1_product.png%%" style="height:62mm"></div>
+      <div class="cap">
+        <div class="t">1. 商品ページ<small>/products/standard-strawberry-box</small></div>
+        <ol>
+          <li class="a"><i>1</i>予約のように見えるが、これは<b>ただの固定テキスト</b>。中身は通常の在庫販売</li>
+          <li><i>2</i>数量を選ぶ</li>
+          <li><i>3</i>「Reserve Now」でカートに入る。<b>この時点では在庫は減らない</b></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="shot v">
+      <div class="im"><img src="%%fig_stock_2_cart.png%%" style="width:126mm"></div>
+      <div class="cap">
+        <div class="t">2. カート<small>/cart</small></div>
+        <ol>
+          <li><i>1</i>入れた商品と金額</li>
+          <li><i>2</i>数量はここで変えられる（0にすれば削除）</li>
+          <li><i>3</i>「Checkout →」で決済画面へ</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="shot">
+      <div class="im"><img src="%%fig_stock_3_checkout.png%%" style="height:64mm"></div>
+      <div class="cap">
+        <div class="t">3. チェックアウト（上半分）<small>ここから Shopify の画面。デザインは触れません</small></div>
+        <ol>
+          <li class="g"><i>1</i>PayPalなら、住所入力を飛ばして一発で終わる</li>
+          <li><i>2</i>メールアドレス（注文確認の送り先）</li>
+          <li><i>3</i>お届け先。国は Philippines 固定</li>
+          <li class="b"><i>4</i>右側に合計金額が常に出ている</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="shot">
+      <div class="im"><img src="%%fig_stock_4_pay.png%%" style="height:64mm"></div>
+      <div class="cap">
+        <div class="t">4. 配送方法・支払い<small>同じページを下にスクロールしただけ。画面は変わりません</small></div>
+        <ol>
+          <li class="a"><i>1</i>送料は仮の値。「実運賃が未確定」と<b>お客様に見えている</b></li>
+          <li><i>2</i><b>テスト決済の説明がお客様に見えている</b>（本番の決済を入れれば消える）</li>
+          <li class="b"><i>3</i>PayPal も選べる</li>
+          <li><i>4</i>「Pay now」で注文成立＝<b>ここで在庫が確定的に減る</b></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="note good">
+    <b>売り越しが起きない理由。</b>農家が入荷を書いてもコードがShopifyに送るのは<b>「＋5個」という差分だけ</b>で、
+    「在庫を15個にする」という命令はどこにもありません。同期の途中でお客様が1個買っても、その1個は消えません
+    （注文 #1003 で実測確認済み：15→14 のあと同期が走っても 14 のまま）。
+    なお<b>カートは取り置きではない</b>ので、残り1個を2人が同時にカートへ入れたら、先に決済した方だけが買えます。
+  </div>
+
+  <div class="foot">撮影：2026-08-11、公開前のストアを管理者権限で操作。金額は PHP 表示（₱1,500 ＝ 商品 + ₱300 送料 で合計 ₱1,800）。</div>
+</div>
+
+<!-- ===== P3 サブスク 実画面 ===== -->
+<div class="page">
+  <h2 class="sub">③ サブスク販売　実際の画面と操作　<span style="font-weight:400;font-size:9.5pt">— 毎月くり返す（プランは設定済み／ただし現状は購入できません）</span></h2>
+
+  <div class="grid2">
+    <div class="shot v">
+      <div class="im"><img src="%%fig_sub_1_product.png%%" style="height:76mm"></div>
+      <div class="cap">
+        <div class="t">1. Club の商品ページ<small>/products/japanese-strawberry-club</small></div>
+        <ol>
+          <li><i>1</i>「One-time purchase」＝1回だけ買う（初期選択）</li>
+          <li class="g"><i>2</i>「Deliver every month」＝毎月お届け。<b>操作の違いはこの1クリックだけ</b><br>
+              ⚠ ただし<b>金額が表示されていません</b>。お客様は毎月いくら引かれるか分からない状態です</li>
+          <li><i>3</i>選んだ状態で「Reserve Now」＝定期プラン付きでカートへ</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="shot v">
+      <div class="im"><img src="%%fig_sub_2_checkout.png%%" style="height:76mm"></div>
+      <div class="cap">
+        <div class="t">2. チェックアウト<small>カート〜決済画面は在庫販売と同じ。中身だけが変わります</small></div>
+        <ol>
+          <li class="g"><i>1</i>「First shipment」＝初回の配送</li>
+          <li class="g"><i>2</i>「Recurring shipments」＝2回目以降。毎月くり返す旨がここに出る</li>
+          <li><i>3</i><b>決済手段が1つも表示されない。「This store can't accept payments right now.」</b></li>
+          <li><i>4</i>「Pay now」は灰色のまま。<b>押せません</b></li>
+          <li class="b"><i>5</i>毎月かかる金額（₱4,700／月）はここに出る</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>実際に操作して分かったこと：サブスクは、いまこのストアでは購入を完了できません。</b>
+    通常商品なら同じ画面にクレジットカードと PayPal が出るのに、カートに定期商品が入った瞬間に決済手段がゼロになります。
+    いまの決済がテスト用（bogus）で、<b>定期課金に必要なカード情報の保存に対応していない</b>ためです。
+    <b>契約が0件なのはテスト不足ではなく、そもそも決済できないから</b>でした。
+    解消には本番の決済（Shopify Payments）の登録が必要です — これは既に <b>Pending #3</b> にある未着手項目です。
+  </div>
+  <div class="note warn">
+    <b>決済が通るようになった後に効いてくる点：定期の2回目以降も、ふつうの注文として在庫を食います。</b>
+    契約が10件あれば毎月10箱ぶんの在庫が要ります。足りないと自動注文が失敗し、その月の売上が落ちます。
+    毎朝の Health チェックでは検知できません（契約件数は Shopify 側にしかないため）。
+  </div>
+
+  <div class="foot">Club の販売元は <code>Ichigo</code> のため、サブスクの売上は農家ファイルには出ません（Pending #32）。</div>
+</div>
+
+<!-- ===== P4 予約販売 ===== -->
+<div class="page">
+  <h2 class="pre">② 予約販売　<span style="font-weight:400;font-size:9.5pt">— 先に売り、収穫後に届ける（仕組みは未実装。表示だけが予約になっています）</span></h2>
+
+  <div class="shot" style="margin-bottom:3mm">
+    <div class="im"><img src="%%fig_stock_1_product.png%%" style="height:58mm"></div>
+    <div class="cap">
+      <div class="t">いま「予約」に見えている画面（＝在庫販売の画面そのもの）</div>
+      <ol>
+        <li class="a"><i>1</i>「NEXT ARRIVAL / RESERVATION DEADLINE / DELIVERY WINDOW」は<b>テーマの設定に手で書いた固定文字</b>で、
+            商品や在庫とはつながっていません。<b>日付も 2025年のまま</b>です</li>
+        <li><i>3</i>ボタンも「Reserve Now（予約する）」。しかし押した先は通常の購入で、<b>在庫が0になった瞬間に「Sold Out」</b>と出ます</li>
+      </ol>
+      <p style="font-size:7.8pt;line-height:1.55;margin:2mm 0 0;color:#4a5262">
+        つまり<b>お客様は予約だと思って買い、店は在庫販売として売っている</b>状態です。作り方を決めれば、この食い違いは解消できます。</p>
+    </div>
+  </div>
+
+  <h3>作り方は3案。どれを取るかで運用が変わります</h3>
+  <div class="cols">
+    <div><div class="opt rec">
+      <h4>案A　予約枠を在庫として登録<span class="badge">推奨</span></h4>
+      <p class="lead">収穫予定数をそのまま在庫数として入れる。仕組みは今のままで、商品ページに発送予定日を出すだけ。</p>
+      <ul>
+        <li class="pro"><b>追加アプリ・追加費用ゼロ</b></li>
+        <li class="pro">枠が埋まれば自動で受付終了</li>
+        <li class="pro"><b>今の在庫同期と売り越し防止がそのまま効く</b></li>
+        <li class="pro">農家シートも今のまま（枠の残りが在庫数に見える）</li>
+        <li class="con">全額前払いのみ（内金は不可）</li>
+        <li class="con">予約締切は「商品を非公開にする」運用で行う</li>
+      </ul>
+    </div></div>
+    <div><div class="opt">
+      <h4>案B　在庫マイナスを許可</h4>
+      <p class="lead">在庫ポリシーを <code>CONTINUE</code> に変え、0を切っても売れるようにする。マイナス値がそのまま受注残になる。</p>
+      <ul>
+        <li class="pro">枠数を先に決めなくてよい</li>
+        <li class="pro">これも追加費用ゼロ</li>
+        <li class="con"><b>農家の画面に「−7個」と出る</b>（説明が要る）</li>
+        <li class="con">上限が無い。採れなかったら全件キャンセル・返金</li>
+        <li class="con"><b>「売り越しが構造的に起きない」という今の性質を捨てることになる</b></li>
+      </ul>
+    </div></div>
+    <div><div class="opt">
+      <h4>案C　予約アプリを入れる</h4>
+      <p class="lead">内金・分割課金・予約締切の自動化が必要な場合のみ。月額のかかる有料アプリになる。</p>
+      <ul>
+        <li class="pro">内金だけ先に取り、残りは発送時に課金できる</li>
+        <li class="pro">締切・上限・バッジ表示が自動</li>
+        <li class="con">月額費用が発生する</li>
+        <li class="con"><b>課金が2段階になると在庫が減る瞬間がアプリ依存</b>になる。今の同期の前提を検証し直す必要がある</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="note">
+    <b>推奨は案A。</b>いちごは収穫量がある程度読める季節商品なので「今シーズン何箱出せるか」＝予約枠が自然に決まります。
+    枠を在庫として持てば、<b>これまで作った売り越し防止・在庫同期・農家シートを1行も変えずに</b>予約販売ができます。
+    こちらの作業は「商品ページの発送予定日を、商品ごとの値として出す」だけです。
+  </div>
+
+  <div class="foot">お客様側の画面・操作は3案とも同じです。違うのは店側の運用と、在庫がマイナスになるかどうかだけです。</div>
+</div>
+
+<!-- ===== P5 実画面で見つかった問題 ===== -->
+<div class="page">
+  <h2 class="bad">実際に操作して見つかった問題　<span style="font-weight:400;font-size:9.5pt">— 図を描くために店を一周した副産物です</span></h2>
+
+  <table>
+    <tr><th style="width:16mm">優先</th><th style="width:56mm">問題</th><th style="width:74mm">お客様から見えている状態</th><th>直しかた</th></tr>
+    <tr><td class="pri no">高</td>
+        <td><b>サブスクが購入できない</b></td>
+        <td>定期を選ぶと決済手段がゼロになり「This store can't accept payments right now.」と出て、Pay now が押せない</td>
+        <td>本番の決済（Shopify Payments）を登録する。<b>Pending #3</b> の未着手項目そのもの。契約0件の原因はこれ</td></tr>
+    <tr><td class="pri no">高</td>
+        <td><b>予約の表示と中身が食い違っている</b></td>
+        <td>ボタンは「Reserve Now」、項目は「RESERVATION DEADLINE」。しかし在庫が切れると「Sold Out」</td>
+        <td>予約販売の方式を決める（<b>案A</b>なら追加費用も追加コードも無し）</td></tr>
+    <tr><td class="pri part">中</td>
+        <td><b>商品ページの日付が2025年のまま</b></td>
+        <td>「NEXT ARRIVAL March 15, 2025 / RESERVATION DEADLINE March 12, 2025」。<b>1年以上前の日付</b>が全商品に出ている</td>
+        <td>案Aを採るなら、この3項目を商品ごとの値に置き換える作業とまとめて直せます</td></tr>
+    <tr><td class="pri part">中</td>
+        <td><b>定期の金額が出ていない</b></td>
+        <td>「One-time purchase — ₱4,700.00」の下が「Deliver every month」だけ。<b>毎月いくらか書いていない</b></td>
+        <td>テーマ側の表示処理を1箇所直す（当方で対応可能）</td></tr>
+    <tr><td class="pri part">中</td>
+        <td><b>テスト決済の説明がお客様に見えている</b></td>
+        <td>支払い欄に「1 を入れると承認、2 を入れると拒否…」というテスト用の手順が表示されている</td>
+        <td>本番の決済を入れれば自動的に消えます（上の1行目と同じ対応）</td></tr>
+    <tr><td class="pri part">中</td>
+        <td><b>送料が「仮の値」と明記されて見えている</b></td>
+        <td>「Standard shipping ₱300.00 — Provisional rate — pending real courier quotes (2026-07-20)」</td>
+        <td>配送業者が決まり次第、実運賃に置き換える（<b>Pending</b> の配送業者未定と同じ待ち）</td></tr>
+    <tr><td class="pri">低</td>
+        <td>GCash / Maya が決済画面に出ない</td>
+        <td>サイトは4箇所で GCash・Maya を宣伝しているが、決済画面の選択肢はカードと PayPal のみ</td>
+        <td>決済登録時にどこまで対応するかを決める。対応しないなら宣伝表記を落とす</td></tr>
+  </table>
+
+  <div class="note">
+    <b>1行目と2行目は、どちらも「画面を見ただけでは分からない」種類の問題でした。</b>
+    サブスクは設定が正しく入っていて、商品ページも正常に表示され、カートにも入ります。
+    <b>止まるのは決済の直前だけ</b>です。だから実際に最後まで操作しないと分かりませんでした。
+    予約も同じで、表示は完璧に予約販売の顔をしています。
+  </div>
+
+  <div class="foot">確認方法：公開前のストアを管理者権限で開き、実際に商品をカートへ入れて決済画面まで進みました（注文は成立させていません）。</div>
+</div>
+
+<!-- ===== P6 比較・これから ===== -->
+<div class="page p6">
+  <h1 style="font-size:18pt">3つの比較と、これから必要なこと</h1>
+
+  <h3>横並び比較</h3>
+  <table>
+    <tr><th style="width:34mm">　</th><th style="width:64mm">在庫販売</th><th style="width:64mm">予約販売（案A採用時）</th><th>サブスク販売</th></tr>
+    <tr><td><b>お客様の操作</b></td><td>数量を選んで買う</td><td>数量を選んで買う（同じ）</td><td class="part">「毎月お届け」を1クリックしてから買う</td></tr>
+    <tr><td><b>カート〜決済画面</b></td><td colspan="3" class="c ok">3つとも同じ。しかも Shopify の決済は1ページ（作り分け不要）</td></tr>
+    <tr><td><b>使える支払い方法</b></td><td class="ok">カード・PayPal</td><td class="ok">カード・PayPal</td><td class="no">現状ゼロ（購入できない）</td></tr>
+    <tr><td><b>課金</b></td><td>その場で1回</td><td>その場で1回（全額前払い）</td><td>初回＋毎月自動</td></tr>
+    <tr><td><b>在庫が減る瞬間</b></td><td>注文成立</td><td>注文成立（＝予約枠が埋まる）</td><td class="part">毎月の自動注文ごと</td></tr>
+    <tr><td><b>在庫が0になったら</b></td><td>売り切れ表示</td><td>予約受付終了</td><td class="no">その月の自動注文が失敗する</td></tr>
+    <tr><td><b>発送</b></td><td>すぐ</td><td>発送予定日にまとめて</td><td>毎月くり返し</td></tr>
+    <tr><td><b>農家シートへの反映</b></td><td colspan="2" class="c">3つとも同じ（在庫10分・販売履歴30分）</td>
+        <td>同じ。ただし販売元が <code>Ichigo</code> のため農家には出ない</td></tr>
+    <tr><td><b>いまの状態</b></td><td class="c"><span class="chip live">稼働中</span></td>
+        <td class="c"><span class="chip todo">未実装</span></td>
+        <td class="c"><span class="chip todo">決済できない</span></td></tr>
+  </table>
+
+  <h3>これから必要なこと</h3>
+  <table>
+    <tr><th style="width:16mm">優先</th><th style="width:56mm">やること</th><th style="width:30mm">誰が</th><th>理由</th></tr>
+    <tr><td class="pri no">高</td><td>本番の決済（Shopify Payments）を登録する</td><td class="part">オーナー／クライアント</td>
+        <td>これが入るまで<b>サブスクは1件も売れません</b>。テスト決済の文言がお客様に見えている問題も同時に消えます。
+            手順書は <code>docs/shopify-payments-setup-ja.md</code> に作成済み</td></tr>
+    <tr><td class="pri no">高</td><td>予約販売の方式を決める（案A / B / C）</td><td class="part">オーナー</td>
+        <td>表示と中身が食い違っています。<b>案Aなら追加費用も追加コードも無し</b>で一致させられます</td></tr>
+    <tr><td class="pri part">中</td><td>商品ページの2025年の日付を直す</td><td>当方（方式決定後）</td>
+        <td>案Aの作業と同じ場所なので、まとめて対応するのが無駄がありません</td></tr>
+    <tr><td class="pri part">中</td><td>「Deliver every month」に金額を出す</td><td>当方</td>
+        <td>テーマ側の1箇所。決済が通るようになる前に直しておけます</td></tr>
+    <tr><td class="pri part">中</td><td>サブスク契約数ぶんの在庫確保ルール</td><td>管理者の運用</td>
+        <td>契約が増えるほど毎月固定で在庫が要ります。Health 監視では検知できない領域です</td></tr>
+    <tr><td class="pri">低</td><td>ICH-010「3ヶ月前払い」／Club の販売元</td><td class="part">オーナー</td>
+        <td>下書きのまま・プラン未設定。販売元 <code>Ichigo</code> を農家名にするかも保留中</td></tr>
+  </table>
+
+  <div class="note">
+    <b>順番としては、決済の登録がすべての先頭に来ます。</b>
+    サブスクが売れない・テスト決済の文言が出ている・GCash が宣伝どおりに出ない、の3つが同時に解消します。
+    予約販売の方式決定は、それと並行して決めていただければ、こちらの実装作業は決済を待たずに進められます。
+  </div>
+
+  <div class="foot">2026-08-11 · 実店舗の操作＋Shopify Admin API 2025-01 の実測 · 仕様書とコードは ~/projects/ichigo-ec/</div>
+</div>
+
+</body></html>
