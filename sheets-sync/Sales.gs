@@ -72,6 +72,9 @@ function setupSalesSheets() {
       ledgerSheet.getRange('A2:A').setNumberFormat('yyyy-mm-dd hh:mm');
     } else {
       // Ensure formula exists (in case sheet existed without it)
+      // Fable QA fix 2026-08-10: 表示形式は数式の有無に関係なく毎回当てる。
+      // 既存シートに数式だけあって書式が無いと、日付列がシリアル値(46244)のまま表示される（実測）。
+      ledgerSheet.getRange('A2:A').setNumberFormat('yyyy-mm-dd hh:mm');
       const formulaCell = ledgerSheet.getRange('A2');
       if (!formulaCell.getFormula()) {
         const formula =
