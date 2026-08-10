@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<title>いちごEC 購入フロー図</title>
+<style>
+@page { size: A4 landscape; margin: 0; }
+* { box-sizing: border-box; }
+body { margin:0; font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+       color:#1e2430; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+.page { width:297mm; height:210mm; padding:11mm 13mm; page-break-after:always; position:relative;
+        display:flex; flex-direction:column; overflow:hidden; }
+.page:last-child { page-break-after:auto; }
+
+h1 { font-size:24pt; margin:0 0 2mm; letter-spacing:-.02em; }
+h2 { font-size:15pt; margin:0 0 4.5mm; padding:2.4mm 4mm; color:#fff; border-radius:2mm; }
+h2.stock { background:#1f3a5f; } h2.pre { background:#8a5a1e; } h2.sub { background:#1d5c3a; }
+h3 { font-size:10.5pt; margin:4.5mm 0 2mm; padding-left:2.6mm; border-left:3px solid #c8342b; }
+h3:first-of-type { margin-top:0; }
+.sub-t { color:#6a7080; font-size:9.5pt; margin:0 0 5mm; }
+
+/* flow chain */
+.chain { display:flex; align-items:stretch; gap:0; margin:0 0 3mm; }
+.step { flex:1; border:1.2px solid #c9d0da; border-radius:2.2mm; background:#fff;
+        padding:2.6mm 3mm; display:flex; flex-direction:column; min-width:0; }
+.step .n { font-size:7.5pt; font-weight:700; color:#fff; background:#1f3a5f; border-radius:50%;
+           width:5.2mm; height:5.2mm; display:flex; align-items:center; justify-content:center; margin-bottom:1.6mm; }
+.pre .step .n { background:#8a5a1e; } .sub .step .n { background:#1d5c3a; }
+.step > b { font-size:9.6pt; display:block; margin-bottom:1.4mm; line-height:1.35; }
+.step p { font-size:7.9pt; margin:0; color:#4a5262; line-height:1.55; }
+.step p b { color:#1e2430; }
+.step .who { font-size:7pt; color:#8b93a3; margin-top:auto; padding-top:1.6mm; }
+.arrow { display:flex; align-items:center; padding:0 1.6mm; color:#9aa3b2; font-size:13pt; flex:none; }
+.step.hi { border-color:#c8342b; border-width:1.8px; background:#fdf5f4; }
+.step.dim { background:#f4f6f8; border-style:dashed; }
+.step.dim > b, .step.dim p { color:#7b8494; }
+
+/* shared checkout band */
+.band { border:1.4px solid #1f3a5f; background:#f2f6fb; border-radius:2.4mm; padding:3mm 4mm; }
+.band .lab { font-size:8pt; font-weight:700; color:#1f3a5f; margin-bottom:2mm; letter-spacing:.04em; }
+.band .inner { display:flex; gap:0; align-items:center; }
+.band .cell { flex:1; text-align:center; font-size:8.6pt; background:#fff; border:1px solid #c3d2e6;
+              border-radius:1.6mm; padding:2.2mm 1mm; }
+
+/* lanes overview */
+.lane { display:flex; align-items:stretch; gap:0; margin-bottom:3mm; }
+.lane .tag { flex:none; width:34mm; font-size:10pt; font-weight:700; padding:2.6mm 3mm;
+             border-radius:2mm; color:#fff; text-align:center; display:flex; flex-direction:column;
+             align-items:center; justify-content:center; }
+.lane .tag small { font-weight:400; font-size:7pt; opacity:.85; margin-top:.8mm; }
+.tag.stock { background:#1f3a5f; } .tag.pre { background:#8a5a1e; } .tag.sub { background:#1d5c3a; }
+.lane .mid { flex:1; display:flex; gap:0; align-items:stretch; }
+.lane .mid .step { padding:2.2mm 2.8mm; }
+.lane .mid .step > b { margin-bottom:1mm; }
+
+.merge { text-align:center; font-size:8.5pt; color:#6a7080; margin:1.5mm 0 3mm; }
+
+table { width:100%; border-collapse:collapse; font-size:8.4pt; }
+th,td { border:1px solid #d4dae3; padding:1.8mm 2.4mm; text-align:left; vertical-align:top; line-height:1.5; }
+th { background:#eef1f5; font-weight:700; font-size:8pt; }
+td.c { text-align:center; }
+.ok { color:#1d5c3a; font-weight:700; } .no { color:#b3241c; font-weight:700; } .part { color:#8a5a1e; font-weight:700; }
+
+.note { border-left:3.4px solid #c8342b; background:#fdf3f2; padding:2.6mm 4mm; font-size:8.6pt;
+        line-height:1.65; border-radius:0 1.6mm 1.6mm 0; margin:3mm 0 0; }
+.note.warn { border-color:#c8901e; background:#fdf9ee; }
+.note.good { border-color:#1d5c3a; background:#f0f7f2; }
+
+.cols { display:flex; gap:5mm; }
+.cols > div { flex:1; }
+.opt { border:1.2px solid #c9d0da; border-radius:2.2mm; padding:3mm 3.6mm; height:100%; }
+.opt.rec { border-color:#1d5c3a; border-width:1.8px; background:#f4faf6; }
+.opt h4 { margin:0 0 1.4mm; font-size:10pt; }
+.opt .badge { display:inline-block; font-size:7pt; font-weight:700; color:#fff; background:#1d5c3a;
+              padding:.6mm 2mm; border-radius:1mm; margin-left:1.6mm; vertical-align:middle; }
+.opt .lead { font-size:8.2pt; margin:0; line-height:1.6; color:#4a5262; }
+.opt ul { margin:2mm 0 0; padding:0; list-style:none; font-size:8.2pt; line-height:1.6; }
+.opt li { margin-bottom:1.2mm; padding-left:4.6mm; text-indent:-4.6mm; }
+.opt li.pro::before { content:"✔ "; color:#1d5c3a; font-weight:700; }
+.opt li.con::before { content:"✘ "; color:#b3241c; font-weight:700; }
+
+.foot { margin-top:auto; padding-top:3mm; font-size:7.4pt; color:#98a0ae; border-top:1px solid #e4e8ee; }
+code { font-family:"SF Mono",Menlo,monospace; font-size:.9em; background:#eef1f5; padding:.3mm 1mm; border-radius:.8mm; }
+.chip { display:inline-block; font-size:7.4pt; font-weight:700; padding:.5mm 1.8mm; border-radius:1mm; vertical-align:middle; white-space:nowrap; }
+.chip.live { background:#e2f1e8; color:#1d5c3a; }
+.chip.todo { background:#fbe9e7; color:#b3241c; }
+.chip.half { background:#fbf1de; color:#8a5a1e; }
+</style></head><body>
+
+<!-- ============ PAGE 1 : OVERVIEW ============ -->
+<div class="page">
+  <h1>いちごEC　購入フロー図</h1>
+  <p class="sub-t">商品選択 → 決済完了まで／在庫販売・予約販売・サブスク販売　　2026年8月10日時点の実測にもとづく</p>
+
+  <div class="note good" style="margin:0 0 4.5mm">
+    <b>この図の要点：入口は3つ、チェックアウトは1つ、出口はまた3つ。</b>
+    3つの販売形態が違うのは「商品ページで何を選ばせるか」と「決済のあと何が起きるか」だけで、
+    <b>カート〜決済画面は完全に同じ Shopify の1本道</b>です。作り分けるべき場所はその前後だけです。
+  </div>
+
+  <div class="lane">
+    <div class="tag stock">在庫販売<small>今ある分を売る</small></div>
+    <div class="mid">
+      <div class="step"><b>商品を選ぶ</b><p>在庫が1以上なら購入ボタンが有効</p></div>
+      <div class="arrow">▶</div>
+      <div class="step"><b>数量を選ぶ</b><p>購入オプションは無し</p></div>
+      <div class="arrow">▶</div>
+      <div class="step"><b>カートに入れる</b><p>この時点では在庫は減らない</p></div>
+    </div>
+  </div>
+
+  <div class="lane">
+    <div class="tag pre">予約販売<small>先に売り、後で届ける</small></div>
+    <div class="mid">
+      <div class="step dim"><b>商品を選ぶ</b><p>発送予定日・予約締切を表示</p></div>
+      <div class="arrow">▶</div>
+      <div class="step dim"><b>予約枠を消費</b><p>枠 = 在庫として登録（推奨案）</p></div>
+      <div class="arrow">▶</div>
+      <div class="step dim"><b>カートに入れる</b><p>通常商品と同じカート</p></div>
+    </div>
+  </div>
+
+  <div class="lane">
+    <div class="tag sub">サブスク販売<small>毎月くり返す</small></div>
+    <div class="mid">
+      <div class="step"><b>商品を選ぶ</b><p>Japanese Strawberry Club</p></div>
+      <div class="arrow">▶</div>
+      <div class="step hi"><b>「毎月お届け」を選ぶ</b><p>1回だけ購入／定期のラジオボタン</p></div>
+      <div class="arrow">▶</div>
+      <div class="step"><b>カートに入れる</b><p>定期プランIDが付いた状態で入る</p></div>
+    </div>
+  </div>
+
+  <p class="merge">▼　ここから先は 3 つとも まったく同じ画面　▼</p>
+
+  <div class="band">
+    <div class="lab">Shopify チェックアウト（共通・作り込み不要）</div>
+    <div class="inner">
+      <div class="cell">カート</div><div class="arrow">▶</div>
+      <div class="cell">お客様情報</div><div class="arrow">▶</div>
+      <div class="cell">配送先・配送方法</div><div class="arrow">▶</div>
+      <div class="cell">支払い</div><div class="arrow">▶</div>
+      <div class="cell">確認</div><div class="arrow">▶</div>
+      <div class="cell" style="background:#1f3a5f;color:#fff;border-color:#1f3a5f"><b>注文成立</b></div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:5mm">注文が成立したあと　— ここが3つで分かれる</h3>
+  <table>
+    <tr><th style="width:28mm">　</th><th style="width:40mm">課金</th><th style="width:44mm">在庫が減るタイミング</th><th style="width:44mm">発送</th><th>シートへの反映</th></tr>
+    <tr><td><b>在庫販売</b></td><td>その場で1回</td><td>注文成立の瞬間</td><td>すぐ</td>
+        <td rowspan="3">在庫は10分以内に <code>商品一覧</code> へ、販売は30分以内に <code>販売履歴</code> へ。<br>3形態とも同じ経路です</td></tr>
+    <tr><td><b>予約販売</b></td><td>その場で1回（全額前払い）</td><td>注文成立の瞬間＝予約枠が1つ埋まる</td><td>入荷後（発送予定日に出荷）</td></tr>
+    <tr><td><b>サブスク販売</b></td><td>初回＋毎月自動</td><td><b>毎月の自動注文ごとに減る</b></td><td>毎月くり返し</td></tr>
+  </table>
+
+  <div class="foot">出典：Shopify Admin API 2025-01 の実測（products / sellingPlanGroups / subscriptionContracts）＋ shopify-theme/sections/main-product.liquid</div>
+</div>
+
+<!-- ============ PAGE 2 : STOCK ============ -->
+<div class="page stock">
+  <h2 class="stock">① 在庫販売のフロー　<span style="font-weight:400;font-size:10pt">— 今あるものを売る（稼働中）</span></h2>
+
+  <div class="chain">
+    <div class="step"><div class="n">1</div><b>商品ページを開く</b>
+      <p>在庫数を見て、1以上なら「Reserve Now」が押せる。0なら「Sold Out」で押せない</p>
+      <div class="who">お客様</div></div>
+    <div class="arrow">▶</div>
+    <div class="step"><div class="n">2</div><b>サイズ・数量を選ぶ</b>
+      <p>バリアントがある商品は選択する。売り切れのバリアントは選べない状態で出る</p>
+      <div class="who">お客様</div></div>
+    <div class="arrow">▶</div>
+    <div class="step"><div class="n">3</div><b>カートに入れる</b>
+      <p><b>まだ在庫は減りません。</b>カートは取り置きではないので、他の人に先に買われることがあります</p>
+      <div class="who">お客様</div></div>
+    <div class="arrow">▶</div>
+    <div class="step hi"><div class="n">4</div><b>チェックアウトへ進む</b>
+      <p>Shopifyがこの時点で在庫を<b>一時的に確保</b>します。ここで在庫が尽きていれば進めず、カートに戻されます</p>
+      <div class="who">Shopify</div></div>
+    <div class="arrow">▶</div>
+    <div class="step"><div class="n">5</div><b>情報 → 配送 → 支払い</b>
+      <p>住所・配送方法・支払い方法を入力。使える決済手段の制限は<b>ありません</b></p>
+      <div class="who">お客様</div></div>
+    <div class="arrow">▶</div>
+    <div class="step hi"><div class="n">6</div><b>注文成立</b>
+      <p><b>ここで在庫が確定的に減ります。</b>15 → 14。以後は巻き戻りません</p>
+      <div class="who">Shopify</div></div>
+  </div>
+
+  <h3>そのあと自動で起きること（在庫同期）</h3>
+  <div class="chain">
+    <div class="step"><b>10分以内</b><p>マスターの <code>Products</code> と、各農家ファイルの <code>商品一覧</code> の在庫数が新しい数に書き換わる</p></div>
+    <div class="arrow">▶</div>
+    <div class="step"><b>30分以内</b><p>その農家の <code>販売履歴</code> に <code>#1003 / ICH-005 / −1</code> の行が入る</p></div>
+    <div class="arrow">▶</div>
+    <div class="step"><b>同時に</b><p><code>在庫台帳</code> の最上段に、入荷の行と混ざって日付順で出てくる</p></div>
+    <div class="arrow">▶</div>
+    <div class="step"><b>2時間ごと</b><p><code>Health</code> が同期の生死を判定。止まっていれば管理者にメール</p></div>
+  </div>
+
+  <div class="note good">
+    <b>売り越しが構造的に起きない理由。</b>
+    農家が入荷を書いてもコードがShopifyに送るのは<b>「＋5個」という差分だけ</b>で、「在庫を15個にする」という命令は
+    どこにも存在しません。だから同期の途中でお客様が1個買っても、その1個が消えることはありません
+    （2026-08-10 の注文 #1003 で実測確認済み：15→14 のあと同期が走っても 14 のまま）。
+  </div>
+  <div class="note warn">
+    <b>唯一の注意点：カートは取り置きではない。</b>
+    残り1個の商品を2人が同時にカートへ入れた場合、<b>先に決済を終えた方だけ</b>が買えます。
+    もう一方はチェックアウトで弾かれます。「カートに入れたのに買えなかった」という問い合わせは仕様です。
+  </div>
+
+  <div class="foot">在庫販売は追加の作り込みが不要な唯一の形態です。有効な9商品すべてがこの経路で動いています。</div>
+</div>
+
+<!-- ============ PAGE 3 : PREORDER ============ -->
+<div class="page pre">
+  <h2 class="pre">② 予約販売のフロー　<span style="font-weight:400;font-size:10pt">— 先に売り、収穫後に届ける（未実装・要決定）</span></h2>
+
+  <div class="chain">
+    <div class="step"><div class="n">1</div><b>商品ページを開く</b>
+      <p>「予約受付中」バッジ、発送予定日、予約締切、残り枠数を表示する</p>
+      <div class="who">お客様</div></div>
+    <div class="arrow">▶</div>
+    <div class="step"><div class="n">2</div><b>予約枠を1つ取る</b>
+      <p>枠が残っていれば購入できる。埋まれば「予約受付終了」になる</p>
+      <div class="who">お客様</div></div>
+    <div class="arrow">▶</div>
+    <div class="step"><div class="n">3</div><b>カート → チェックアウト</b>
+      <p>在庫販売と<b>まったく同じ画面</b>。お客様から見て操作の違いはありません</p>
+      <div class="who">お客様</div></div>
+    <div class="arrow">▶</div>
+    <div class="step hi"><div class="n">4</div><b>注文成立・全額課金</b>
+      <p>その場で決済が終わる。<b>商品はまだ手元に無い</b>状態で入金だけ先に立ちます</p>
+      <div class="who">Shopify</div></div>
+    <div class="arrow">▶</div>
+    <div class="step"><div class="n">5</div><b>収穫・入荷を待つ</b>
+      <p>農家が実際に収穫し、シートに入荷を書く。注文は「未発送」のまま滞留する</p>
+      <div class="who">農家・管理者</div></div>
+    <div class="arrow">▶</div>
+    <div class="step"><div class="n">6</div><b>発送予定日に出荷</b>
+      <p>溜まっている予約注文をまとめて発送し、追跡番号を登録する</p>
+      <div class="who">管理者</div></div>
+  </div>
+
+  <h3>作り方は3案あります。どれを取るかで運用が変わります</h3>
+  <div class="cols">
+    <div><div class="opt rec">
+      <h4>案A　予約枠を在庫として登録<span class="badge">推奨</span></h4>
+      <p class="lead">収穫予定数をそのまま在庫数として入れる。仕組みは今のままで、商品ページに発送予定日を出すだけ。</p>
+      <ul>
+        <li class="pro"><b>追加アプリ・追加費用ゼロ</b></li>
+        <li class="pro">枠が埋まれば自動で受付終了</li>
+        <li class="pro"><b>今の在庫同期と売り越し防止がそのまま効く</b></li>
+        <li class="pro">農家シートも今のまま（枠の残りが在庫数に見える）</li>
+        <li class="con">全額前払いのみ（内金は不可）</li>
+        <li class="con">予約締切は「商品を非公開にする」運用で行う</li>
+      </ul>
+    </div></div>
+    <div><div class="opt">
+      <h4>案B　在庫マイナスを許可</h4>
+      <p class="lead">在庫ポリシーを <code>CONTINUE</code> に変え、0を切っても売れるようにする。マイナス値がそのまま受注残になる。</p>
+      <ul>
+        <li class="pro">枠数を先に決めなくてよい</li>
+        <li class="pro">これも追加費用ゼロ</li>
+        <li class="con"><b>農家の画面に「−7個」と出る</b>（説明が要る）</li>
+        <li class="con">上限が無い。採れなかったら全件キャンセル・返金</li>
+        <li class="con"><b>「売り越しが構造的に起きない」という今の性質を捨てることになる</b></li>
+      </ul>
+    </div></div>
+    <div><div class="opt">
+      <h4>案C　予約アプリを入れる</h4>
+      <p class="lead">内金・分割課金・予約締切の自動化が必要な場合のみ。月額のかかる有料アプリになる。</p>
+      <ul>
+        <li class="pro">内金だけ先に取り、残りは発送時に課金できる</li>
+        <li class="pro">締切・上限・バッジ表示が自動</li>
+        <li class="con">月額費用が発生する</li>
+        <li class="con"><b>課金が2段階になると在庫が減る瞬間がアプリ依存</b>になる。今の同期の前提を検証し直す必要がある</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="note">
+    <b>推奨は案A。</b>いちごは収穫量がある程度読める季節商品なので「今シーズン何箱出せるか」＝予約枠が自然に決まります。
+    枠を在庫として持てば、<b>これまで作った売り越し防止・在庫同期・農家シートを1行も変えずに</b>予約販売ができます。
+    内金を取りたいという要望が出た時点で、初めて案Cを検討してください。
+  </div>
+
+  <div class="foot">お客様側の画面・操作は3案とも同じです。違うのは店側の運用と、在庫がマイナスになるかどうかだけです。</div>
+</div>
+
+<!-- ============ PAGE 4 : SUBSCRIPTION ============ -->
+<div class="page sub">
+  <h2 class="sub">③ サブスク販売のフロー　<span style="font-weight:400;font-size:10pt">— 毎月くり返す（プランは設定済み・未検証）</span></h2>
+
+  <div class="chain">
+    <div class="step"><div class="n">1</div><b>Club の商品ページ</b>
+      <p>Japanese Strawberry Club（ICH-003 / ¥12,000）</p>
+      <div class="who">お客様</div></div>
+    <div class="arrow">▶</div>
+    <div class="step hi"><div class="n">2</div><b>「毎月お届け」を選ぶ</b>
+      <p><b>ここが唯一の分岐点。</b>「1回だけ購入」か「毎月お届け」のラジオボタン。実装済みです</p>
+      <div class="who">お客様</div></div>
+    <div class="arrow">▶</div>
+    <div class="step"><div class="n">3</div><b>カートに入れる</b>
+      <p>定期プランのIDが付いた状態でカートに入る</p>
+      <div class="who">お客様</div></div>
+    <div class="arrow">▶</div>
+    <div class="step hi"><div class="n">4</div><b>チェックアウト</b>
+      <p><b>⚠ 支払い方法が絞られます。</b>カード情報を保存できる手段のみ。代引き・銀行振込・コンビニ払いは<b>選択肢に出ません</b></p>
+      <div class="who">Shopify</div></div>
+    <div class="arrow">▶</div>
+    <div class="step"><div class="n">5</div><b>初回課金・注文成立</b>
+      <p>1件目の注文ができ、同時に<b>定期契約</b>が作られる</p>
+      <div class="who">Shopify</div></div>
+    <div class="arrow">▶</div>
+    <div class="step hi"><div class="n">6</div><b>翌月から自動</b>
+      <p>アプリが自動で課金し、<b>毎回ふつうの注文を作ります</b>。その注文が在庫を減らします</p>
+      <div class="who">Shopify Subscriptions</div></div>
+  </div>
+
+  <h3>お客様は自分で止められます（店の作業は不要）</h3>
+  <div class="chain">
+    <div class="step"><b>アカウントにログイン</b><p>注文確認メールのリンク、またはサイトのアカウントページから</p></div>
+    <div class="arrow">▶</div>
+    <div class="step"><b>次回をスキップ／停止</b><p>解約もお客様側で完結する。店に連絡は来ない</p></div>
+    <div class="arrow">▶</div>
+    <div class="step"><b>住所・お届け日の変更</b><p>これもお客様が自分で行える</p></div>
+    <div class="arrow">▶</div>
+    <div class="step"><b>決済失敗のとき</b><p>アプリが自動でリトライし、それでも駄目なら契約が止まる</p></div>
+  </div>
+
+  <div class="note warn">
+    <b>在庫管理として一番大事な点：定期の2回目以降も、ふつうの注文として在庫を食います。</b>
+    契約が10件あれば毎月10箱ぶんの在庫が要ります。在庫が足りないと自動注文が失敗し、その月の売上がまるごと落ちます。
+    <b>毎月、契約数ぶんの在庫を先に確保しておく運用</b>が必要です（Health の毎朝チェックでは検知できません。契約件数は Shopify 側で見る必要があります）。
+  </div>
+  <div class="note">
+    <b>いま確認できている状態。</b>プランは Shopify の公式サブスクアプリが持っており、課金の責任もそのアプリ側にあります。
+    ただし<b>契約は0件＝一度も通していません。</b>本番前に、実際に1件申し込んで
+    ①初回課金が通るか ②契約が作られるか ③翌月の自動注文が在庫を減らすか を確認する必要があります。
+    また Club の販売元は <code>Ichigo</code> なので、売上は農家ファイルではなく Ichigo の行に入ります。
+    ICH-010「3ヶ月前払い」は下書きのままで、定期プランが付いていません。
+  </div>
+
+  <div class="foot">サブスクだけは決済手段に制約があります。代引き・振込を主要な決済にしている場合、その顧客層はサブスクを買えません。</div>
+</div>
+
+<!-- ============ PAGE 5 : COMPARISON ============ -->
+<div class="page">
+  <h1 style="font-size:19pt">3つの比較</h1>
+  <p class="sub-t" style="margin-bottom:1.5mm">同じところ・違うところを1枚にしたもの</p>
+
+  <h3>横並び比較</h3>
+  <table>
+    <tr><th style="width:38mm">　</th><th style="width:68mm">在庫販売</th><th style="width:68mm">予約販売（案A採用時）</th><th>サブスク販売</th></tr>
+    <tr><td><b>お客様の操作</b></td><td>数量を選んで買う</td><td>数量を選んで買う（同じ）</td><td class="part">「毎月お届け」を選んでから買う</td></tr>
+    <tr><td><b>カート〜決済画面</b></td><td colspan="3" class="c ok">3つとも完全に同じ。作り分けは不要</td></tr>
+    <tr><td><b>使える支払い方法</b></td><td class="ok">制限なし</td><td class="ok">制限なし</td><td class="no">カード系のみ（代引・振込・コンビニ不可）</td></tr>
+    <tr><td><b>課金</b></td><td>その場で1回</td><td>その場で1回（全額前払い）</td><td>初回＋毎月自動</td></tr>
+    <tr><td><b>在庫が減る瞬間</b></td><td>注文成立</td><td>注文成立（＝予約枠が埋まる）</td><td class="part">毎月の自動注文ごと</td></tr>
+    <tr><td><b>在庫が0になったら</b></td><td>売り切れ表示</td><td>予約受付終了</td><td class="no">その月の自動注文が失敗する</td></tr>
+    <tr><td><b>発送</b></td><td>すぐ</td><td>発送予定日にまとめて</td><td>毎月くり返し</td></tr>
+    <tr><td><b>農家シートへの反映</b></td><td colspan="2" class="c">3つとも同じ（在庫10分・販売履歴30分）</td>
+        <td>同じ。ただし販売元が <code>Ichigo</code> のため農家には出ない</td></tr>
+    <tr><td><b>追加費用</b></td><td class="ok">なし</td><td class="ok">なし（案A・案B）</td><td class="ok">なし（公式アプリ）</td></tr>
+    <tr><td><b>いまの状態</b></td><td class="c"><span class="chip live">稼働中</span></td>
+        <td class="c"><span class="chip todo">未実装</span></td>
+        <td class="c"><span class="chip half">設定済み・未検証</span></td></tr>
+  </table>
+
+  <h3 style="margin-top:3.4mm">カートに混ざったときどうなるか</h3>
+  <table>
+    <tr><th style="width:56mm">カートの中身</th><th>結果</th></tr>
+    <tr><td>在庫販売 ＋ 予約販売</td><td>同じ1件の注文になります。<b>ただし発送は予約分に引きずられて全部遅れます。</b>「在庫分だけ先に送る」には注文を分割する作業が要ります</td></tr>
+    <tr><td>在庫販売 ＋ サブスク</td><td>同じ1件の注文で買えますが、<b>支払い方法はサブスク側の制限に合わせられます</b>（カード系のみ）</td></tr>
+    <tr><td>サブスク ＋ 予約販売</td><td>技術的には可能ですが、<b>おすすめしません。</b>初回の発送が予約待ちになり、2回目以降との間隔が崩れます</td></tr>
+  </table>
+
+  <div class="note good" style="margin-top:2.4mm">
+    <b>設計としての結論：3つを別々のサイトのように作る必要はありません。</b>
+    共通のチェックアウトを1本持ち、商品ページの購入オプションと、注文後の運用だけを切り替えるのが正しい形です。
+    いま実際にそうなっているので、追加で作るべきものは予約販売の入口だけです。
+  </div>
+
+  <div class="foot">2026-08-10 · Shopify Admin API 2025-01 の実測にもとづく</div>
+</div>
+
+<!-- ============ PAGE 6 : STATUS + TODO ============ -->
+<div class="page">
+  <h1 style="font-size:19pt">現状と、これから必要なこと</h1>
+  <p class="sub-t">2026年8月10日 実測</p>
+
+  <h3>いまサイトがどうなっているか</h3>
+  <table>
+    <tr><th style="width:30mm">　</th><th style="width:30mm">状態</th><th>実際にどうなっているか</th></tr>
+    <tr><td><b>在庫販売</b></td><td class="c"><span class="chip live">稼働中</span></td>
+        <td>有効な9商品すべて。在庫ポリシーは全部 <code>DENY</code>＝在庫0で購入不可。売り越しは起きません</td></tr>
+    <tr><td><b>予約販売</b></td><td class="c"><span class="chip todo">未実装</span></td>
+        <td><b>仕組みとしては存在しません。</b>予約アプリは入っておらず、在庫マイナスを許す商品もゼロです。
+            商品ページの「Reserve Now」ボタンと「Reservation Deadline」の表示は<b>固定の文字を出しているだけ</b>で、
+            中身は通常の在庫販売です</td></tr>
+    <tr><td><b>サブスク販売</b></td><td class="c"><span class="chip half">設定済み・未検証</span></td>
+        <td>ICH-003 <b>Japanese Strawberry Club</b> にのみ月次プランがあり、Shopify の公式サブスクアプリが所有しています。
+            商品ページの選択UIも実装済み。ただし<b>契約は0件＝一度も通していません。</b>
+            ICH-010「3ヶ月前払い」は下書きのままでプラン未設定です</td></tr>
+  </table>
+
+  <h3>これから必要なこと</h3>
+  <table>
+    <tr><th style="width:18mm">優先</th><th style="width:58mm">やること</th><th style="width:34mm">誰が</th><th>理由</th></tr>
+    <tr><td class="c"><b>高</b></td><td>予約販売の方式を決める（案A / B / C）</td><td class="part">オーナー判断</td>
+        <td>いま商品ページが「Reserve Now」「予約締切」と<b>予約であるかのように表示している</b>のに、中身は通常販売です。
+            在庫が切れた瞬間に「予約」ではなく「Sold Out」と出るので、お客様の期待と挙動が食い違います。
+            <b>案Aなら追加費用も追加コードも無しで、表示と実態を一致させられます</b></td></tr>
+    <tr><td class="c"><b>高</b></td><td>サブスクを実際に1件通して確認する</td><td>オーナー承認のうえ実施</td>
+        <td>設定はあるが契約0件。<b>①初回課金 ②契約の生成 ③翌月の自動注文が在庫を減らすか</b>の3つが未検証です。
+            本番で初めて失敗すると、その月の売上が落ちるまで気づけません</td></tr>
+    <tr><td class="c">中</td><td>サブスク契約数ぶんの在庫確保ルールを決める</td><td>管理者の運用</td>
+        <td>契約が増えるほど毎月固定で在庫が要ります。今の Health 監視ではここは検知できません</td></tr>
+    <tr><td class="c">中</td><td>ICH-010「3ヶ月前払い」をどうするか</td><td class="part">オーナー判断</td>
+        <td>下書きのまま・定期プラン無し。公開するなら前払いプランの設定が必要です</td></tr>
+    <tr><td class="c">低</td><td>Club の販売元を農家名にするか検討する</td><td class="part">オーナー判断</td>
+        <td>いまは <code>Ichigo</code>。実際に箱を詰める農家に紐づけたいなら販売元を変えます（SKUは変えません）</td></tr>
+  </table>
+
+  <div class="note">
+    <b>いちばん急ぐのは1行目です。</b>技術的な難易度ではなく、いまサイトの見た目と中身が食い違っているためです。
+    案Aを選べば、こちらの作業は「商品ページに発送予定日を出す」だけで済みます。
+  </div>
+
+  <div class="foot">仕様書・コード・変更履歴は ~/projects/ichigo-ec/（docs/ と sheets-sync/）にあります</div>
+</div>
+
+</body></html>
