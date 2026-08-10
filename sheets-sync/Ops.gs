@@ -61,7 +61,10 @@ function dailyHealthCheck() {
   }
 
   // ---------- H1: Inventory sync freshness ----------
-  let h1Fresh = true;
+  // Fable QA fix 2026-08-10: 既定を「異常」にする。Products が空・シートが無い・最終同期列が読めない —
+  // どれも「同期できている証拠が無い」状態であって、OK ではない。既定 true にしていたため、
+  // 取得失敗で Products が空になった場合に監視が OK を返す穴があった。
+  let h1Fresh = false;
   const productsSheet = ss.getSheetByName('Products');
   if (productsSheet) {
     const syncColIdx = getColumnIndex(productsSheet, '最終同期');
@@ -432,6 +435,8 @@ function onOpen() {
     .addItem('今すぐ同期 (入荷を反映)', 'menuPush')
     .addItem('商品一覧を更新', 'menuSync')
     .addItem('農家ファイルのURLを表示', 'showFarmerFileUrls')
+    .addSeparator()
+    .addItem('稼働状況をチェック', 'menuHealthCheck')
     .addToUi();
 }
 

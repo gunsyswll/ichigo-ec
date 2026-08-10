@@ -28,7 +28,6 @@ const CONFIG = {
   SHOPIFY_STORE: PropertiesService.getScriptProperties().getProperty('SHOPIFY_STORE'), // e.g. myshop.myshopify.com
   SHOPIFY_CLIENTID: PropertiesService.getScriptProperties().getProperty('SHOPIFY_CLIENTID'),
   SHOPIFY_SECRET: PropertiesService.getScriptProperties().getProperty('SHOPIFY_SECRET'),
-  LOCATION_ID: PropertiesService.getScriptProperties().getProperty('SHOPIFY_LOCATION_ID'), // single location
   ADMIN_EMAIL: PropertiesService.getScriptProperties().getProperty('ADMIN_EMAIL')
 };
 const CLEAN_STORE_HOST = (CONFIG.SHOPIFY_STORE || '').replace(/^https?:\/\//, '').replace(/\/$/, '');
@@ -125,7 +124,8 @@ function resolveInventoryItemInfo(sku) {
         edges { node { sku inventoryItem { id } } }
       }
     }`;
-  const vars = { query: 'sku:' + sku };
+  // SKUに空白や記号が入っても検索式が壊れないよう引用する
+  const vars = { query: "sku:'" + String(sku).replace(/'/g, "\\'") + "'" };
   const resp = shopifyGraphql(query, vars);
   const edges = resp.data.productVariants.edges;
   const count = edges.length;
@@ -145,6 +145,8 @@ function resolveInventoryItemInfo(sku) {
 function appendLogRow({sku, delta, result, farmFileId, rowNum, detail}) {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const logSheet = ss.getSheetByName('Log');
+  // Fable QA fix: Log が無いと catch の中から呼ばれたときに二次例外になり、元のエラーが消える
+  if (!logSheet) return;
   const nowISO = new Date().toISOString();
   logSheet.appendRow([nowISO, sku, delta, result, farmFileId, rowNum, detail]);
 }
@@ -231,11 +233,16 @@ function reportStuckSending() {
  * then updates each farm's 商品一覧 sheet filtered by vendor.
  */
 function syncProductsFromShopify() {
+  // Fable QA fix 2026-08-10: ロックを取る。runSync が10分以内に終わらないと2本が重なり、
+  // 下の clearContents と setValues が交錯して Products が壊れうる。
+  const lock = LockService.getScriptLock();
+  if (!lock.tryLock(30000)) return;
+  try {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const prodSheet = ss.getSheetByName('Products');
-  // Clear previous data (keep header row)
-  prodSheet.clearContents();
-  prodSheet.appendRow(['SKU', '商品名', '販売元', 'Shopify在庫', '最終同期', '状態']);
+  // ⚠️ ここでシートを消さないこと。取得に失敗した場合、マスターが空のまま残る。
+  // しかも Products が空だと鮮度監視の H1 が判定材料を失い「OK」を返してしまう
+  // （破壊的な失敗を監視が見逃す最悪の組み合わせ）。取得が全部成功してから書く。
   const allRows = [];
   let cursor = null;
   do {
@@ -270,7 +277,9 @@ function syncProductsFromShopify() {
     }
     cursor = resp.data.products.pageInfo.hasNextPage ? resp.data.products.pageInfo.endCursor : null;
   } while (cursor);
-  // Batch write to Products sheet
+  // ---- ここまで来た＝Shopifyからの取得が全ページ成功。ここで初めてシートを書き換える ----
+  prodSheet.clearContents();
+  prodSheet.appendRow(['SKU', '商品名', '販売元', 'Shopify在庫', '最終同期', '状態']);
   if (allRows.length) prodSheet.getRange(2, 1, allRows.length, allRows[0].length).setValues(allRows);
   // Update each farm's 商品一覧 sheet
   const configSheet = ss.getSheetByName('Config');
@@ -287,6 +296,9 @@ function syncProductsFromShopify() {
       listSheet.getRange(2, 1, filtered.length, 3).setValues(filtered.map(r => [r[0], r[1], r[3]]));
     }
   });
+  } finally {
+    lock.releaseLock();
+  }
 }
 
 /**
