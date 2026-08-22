@@ -36,7 +36,6 @@
       "settings": {
         "eyebrow": "@ichigo",
         "heading": "Follow us",
-        "subtext": "Daily berries, arrivals, and behind-the-farm moments.",
         "note": "Instagram feed coming soon."
       }
     },
@@ -52,7 +51,7 @@
       "type": "index-statement",
       "settings": {
         "eyebrow": "A little luxury from Japan",
-        "heading": "Grown in Japan.<br><em>Loved</em> in the<br>Philippines.",
+        "heading": "Grown in Japan.<br><em>Loved</em> in the Philippines.",
         "text": "One bite and you will taste the difference: a perfect balance of sweetness and tanginess. Reserve a box for the moment you deserve.",
         "cta_label": "Reserve your box →",
         "cta_url": "",

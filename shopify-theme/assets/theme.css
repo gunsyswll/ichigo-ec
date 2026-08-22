@@ -32,7 +32,7 @@ p, li, figcaption, blockquote, .desc, .lead{text-wrap:pretty}
 /* 見出しは balance で行長をそろえ、最終行に1語だけ残るのを避ける。
    本文には掛けない（折る位置を保証しないため。About の件で実証済み）。
    hero の h1 は意図的な大見出しなので対象外。 */
-h2,h3,h4{text-wrap:balance}
+h1,h2,h3,h4{text-wrap:balance}   /* 見出しの行長をそろえ、末尾に1語だけ残る形を減らす */
 /* 明示的に折り返しを止めたい語に付ける */
 .nb{white-space:nowrap}
 body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}

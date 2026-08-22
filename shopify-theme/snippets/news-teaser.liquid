@@ -9,7 +9,12 @@
     <div class="sec-head" data-reveal>
       <span class="eyebrow muted">{{ eyebrow | default: 'Latest from Ichigo' }}</span>
       <h2>{{ heading | default: 'News & Events' }}</h2>
-      <p>{{ subtext | default: 'Announcements, pop-up events, and seasonal stories.' }}{% unless news_blog.articles_count > 0 %} <em>Sample content — replace with real posts.</em>{% endunless %}</p>
+      {%- comment -%} 説明文は任意。空なら段落ごと出さない（不要な一文を置かない） {%- endcomment -%}
+      {%- assign show_sample = false -%}
+      {%- unless news_blog.articles_count > 0 -%}{%- assign show_sample = true -%}{%- endunless -%}
+      {%- if subtext != blank or show_sample -%}
+      <p>{{ subtext }}{% if show_sample %}{% if subtext != blank %} {% endif %}<em>Sample content — replace with real posts.</em>{% endif %}</p>
+      {%- endif -%}
     </div>
     <div class="article-grid" data-stagger>
       {%- if news_blog.articles_count > 0 -%}

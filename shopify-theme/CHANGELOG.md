@@ -3,6 +3,36 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.11.0 — 2026-08-23
+オーナー指摘「モバイルで一文字だけ改行される／そもそも不要な文章が多い」。
+
+### 1. 指定の2文を削除
+| 文 | 場所 | 対応 |
+|---|---|---|
+| `Daily berries, arrivals, and behind-the-farm moments.` | Follow us（ホーム / Shop） | 削除。空なら `<p>` ごと出さない |
+| `Announcements, pop-up events, and seasonal stories.` | News & Events（ABOUT / ホーム） | 削除。同上 |
+
+既定値も消したので、**空欄＝その一文が消える**という運用ができるようになった（以前は空にしても既定値が出た）。
+
+### 2. 一文字だけの改行
+- ホームの statement を `Grown in Japan.<br>Loved in the<br>Philippines.` →
+  **`Grown in Japan.<br>Loved in the Philippines.`**（`the` の後の強制改行をやめた）
+- `text-wrap:balance` を **h1 にも**適用（従来 h2〜h4 のみ）。
+  ABOUT の見出しが `Strawberries to the / Philippines` → `Strawberries to / the Philippines` に改善。
+
+### 3. 実測（スマホ幅をシミュレート: モバイルCSS有効のまま本文幅を350pxに固定して走査）
+全ページを機械走査した結果:
+- **段落で「1語だけ最終行」は0件**（`text-wrap:pretty` が効いている）
+- 1語だけの最終行は**すべて見出し**で、その語が長い（`Philippines.` `strawberries`）ため行の大半を占める
+- 実際に短く見えるのは**最終行が最長行の26〜34%**の段落4件。1語ではなく2〜3語の短い尾。
+
+⚠️ **CSS だけで最終行の長さを保証する方法は無い。** 根本的にはオーナーの言うとおり
+**文章を削る／短くする**のが確実。追加削除の候補はオーナーに提示済み。
+
+### 走査に使った条件（再利用のため）
+`最終行の幅 ÷ 最長行の幅 < 0.35` を「尾が短い」と判定。単語数で数えると、長い1語（`Philippines.`）を
+誤検出し、短い3語（`at its sweetest.`）を見逃す。**語数ではなく幅の比で測ること。**
+
 ## v1.10.2 — 2026-08-11
 オーナー承認「商品ごとの『正味量』メタフィールドを新設し、Quantity のすぐ横に出す」。
 

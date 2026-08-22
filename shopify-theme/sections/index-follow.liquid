@@ -10,7 +10,7 @@
     <div class="sec-head" data-reveal>
       <span class="eyebrow muted">{{ section.settings.eyebrow }}</span>
       <h2>{{ section.settings.heading }}</h2>
-      <p>{{ section.settings.subtext }}</p>
+      {%- if section.settings.subtext != blank -%}<p>{{ section.settings.subtext }}</p>{%- endif -%}
     </div>
     <div class="follow-cta" data-reveal style="justify-content:center">
       {%- if ig != blank -%}
@@ -37,7 +37,7 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "@ichigo" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Follow us" },
-    { "type": "text", "id": "subtext", "label": "Subtext", "default": "Daily berries, arrivals, and behind-the-farm moments." },
+    { "type": "text", "id": "subtext", "label": "Subtext（空でよい）" },
     { "type": "paragraph", "content": "空欄なら「テーマ設定 → SNS」の URL を使います。" },
     { "type": "url", "id": "instagram_url", "label": "Instagram URL" },
     { "type": "url", "id": "facebook_url", "label": "Facebook URL" },
