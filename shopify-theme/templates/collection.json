@@ -2,8 +2,12 @@
   "sections": {
     "main": {
       "type": "main-collection",
-      "settings": {}
+      "settings": {
+        "next_arrival": "October 1, 2026"
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }

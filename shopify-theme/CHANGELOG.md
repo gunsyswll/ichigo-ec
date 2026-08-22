@@ -3,6 +3,46 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.10.0 — 2026-08-11
+オーナー選択「B: 導線をコレクションへ移し、Search & Discovery を入れて絞り込みも実装」。
+
+### やったこと
+1. **Shop ページの中身をコレクションページに移植**（見出し・説明・NEXT ARRIVAL / AVAILABLE BOXES・
+   How it works / Help へのリンク）。`sections/main-collection.liquid`。
+2. **ヘッダーの「Shop / Reserve」を `/collections/all` に変更。**（フッターの Subscription も
+   `/pages/shop#club` → 商品ページ直リンクに修正）
+3. **絞り込みUIを実装**（`collection.filters` を描画）。並び替えと**同じフォーム**に入れてあるので、
+   並び替えても絞り込みが消えない。
+4. **Search & Discovery（Shopify 公式・無料）をインストール**（オーナー承認済み）。
+   絞り込みラベルを日本語→英語に変更（`出品状況`→`Availability`、`価格`→`Price`）。
+
+### 動くもの（実機確認）
+| 機能 | 状態 |
+|---|---|
+| 並び替え9種（価格の安い順/高い順ほか） | ✅ |
+| **在庫あり / 在庫なし の絞り込み** | ✅ In stock 8 / Out of stock 1 → 押すと8件に絞られる |
+| 絞り込み＋並び替えの同時使用 | ✅ 在庫ありのまま価格の安い順 = ₱1,600 → ₱4,800 |
+| Clear all | ✅ |
+
+### 🔴 価格帯フィルタは使えません（Shopify 側の制約）
+アプリで「Price」フィルタを設定しても、**ストアフロントに出てきません**。
+原因は**通貨の自動変換**です。実測: `collection.filters` が返すのは Availability の1件のみ／
+このストアは基準通貨 JPY・唯一のマーケット「フィリピン」が `localCurrencies: true`（自動変換）。
+価格が固定額でないため Shopify が価格帯フィルタを出せません。
+
+**回避策:**
+- **PHP の固定価格を設定する**（Pending #10 と同じ話）。固定すれば価格帯フィルタが使えるはず（要再検証）。
+- それまでは**「価格の安い順／高い順」の並び替え**で代替（実装済み・すぐ使える）。
+
+### 残っている判断
+`/pages/shop` は生きたまま、どこからもリンクされていない状態です。SEO 上は
+`/collections/all` へリダイレクトするのが定石ですが、URL の付け替えはオーナー判断。
+
+### 実装メモ
+- 絞り込みの見出しは Shopify 側の言語設定に引きずられて**日本語で返ってくる**ことがある
+  （実測: `出品状況`）。テーマ側でも既知の絞り込みは英語ラベルに置換している（二重の保険）。
+- 並び替えと絞り込みを別フォームにすると、片方を操作したときにもう片方が URL から落ちる。1フォームにすること。
+
 ## v1.9.0 — 2026-08-11
 オーナー承認「案1: 残り僅少のときだけ数字を出す」。**在庫数の自動表示を実装。**
 

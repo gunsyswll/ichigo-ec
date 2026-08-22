@@ -1,15 +1,72 @@
 {%- comment -%} Live collection grid. Mirrors the page-shop design, wired to {{ collection.products }}. {%- endcomment -%}
 <section class="page-hero"><div class="wrap">
-  <h1>{{ section.settings.heading | default: 'Our Strawberry Boxes' }}</h1>
+  <h1>{{ section.settings.heading | default: 'Shop or' }} <span class="r">{{ section.settings.heading_r | default: 'Reserve' }}</span></h1>
   {%- if section.settings.subtext != blank -%}<p>{{ section.settings.subtext }}</p>{%- endif -%}
+  <div class="stats">
+    {%- if section.settings.next_arrival != blank -%}<div class="stat"><label>Next Arrival</label><b>{{ section.settings.next_arrival }}</b></div>{%- endif -%}
+    {%- if section.settings.reservation_deadline != blank -%}<div class="stat"><label>Reservation Deadline</label><b>{{ section.settings.reservation_deadline }}</b></div>{%- endif -%}
+    <div class="stat"><label>Available Boxes</label><b>{% render 'stock-total', fallback: 'Limited' %}</b></div>
+  </div>
+  <div class="shop-nudge"><a href="{{ routes.root_url }}#journey">How it works · 36–48h fresh →</a><span>·</span><a href="/pages/help">Questions? Visit Help →</a></div>
 </div></section>
 
 <section style="padding:40px 0 84px"><div class="wrap">
   {%- paginate collection.products by 12 -%}
-  <div class="shop-bar">
-    <span>Showing <b style="color:var(--ink)">{{ paginate.items }}</b> {{ paginate.items | pluralize: 'product', 'products' }}</span>
-    {%- assign current_sort = collection.sort_by | default: collection.default_sort_by -%}
-    <form action="{{ collection.url }}" method="get" style="display:contents">
+  {%- comment -%}
+    並び替えと絞り込みを1つのフォームにまとめている。別々にすると、片方を変えたときに
+    もう片方の条件が URL から落ちる（並び替えたら絞り込みが消える）。
+
+    絞り込みの見出し（f.label）は Shopify 側の言語設定に引きずられて日本語になることがある
+    （実測: 在庫の絞り込みが「出品状況」で返ってきた）。サイトは英語のみなので、
+    既知の絞り込みは英語ラベルに置き換え、知らないものだけ f.label をそのまま使う。
+  {%- endcomment -%}
+  {%- assign current_sort = collection.sort_by | default: collection.default_sort_by -%}
+  {%- assign has_active = false -%}
+  {%- for f in collection.filters -%}{%- if f.active_values.size > 0 or f.min_value.value != blank or f.max_value.value != blank -%}{%- assign has_active = true -%}{%- endif -%}{%- endfor -%}
+
+  <form class="shop-controls" action="{{ collection.url }}" method="get">
+    {%- if collection.filters.size > 0 -%}
+    <div class="shop-filters">
+      {%- for f in collection.filters -%}
+        {%- liquid
+          assign flabel = f.label
+          case f.param_name
+            when 'filter.v.availability'
+              assign flabel = 'Availability'
+            when 'filter.v.price'
+              assign flabel = 'Price'
+            when 'filter.p.vendor'
+              assign flabel = 'Farm'
+            when 'filter.p.product_type'
+              assign flabel = 'Type'
+          endcase
+        -%}
+        <div class="filter-group">
+          <span class="filter-label">{{ flabel }}</span>
+          {%- case f.type -%}
+            {%- when 'list' -%}
+              {%- for v in f.values -%}
+                <label class="filter-chip{% if v.active %} on{% endif %}{% if v.count == 0 and v.active == false %} off{% endif %}">
+                  <input type="checkbox" name="{{ v.param_name }}" value="{{ v.value }}"{% if v.active %} checked{% endif %}{% if v.count == 0 and v.active == false %} disabled{% endif %} onchange="this.form.submit()">
+                  {{ v.label }}<span class="c">{{ v.count }}</span>
+                </label>
+              {%- endfor -%}
+            {%- when 'price_range' -%}
+              <span class="filter-range">
+                <input type="number" inputmode="decimal" min="0" max="{{ f.range_max | money_without_currency | replace: ',', '' }}" name="{{ f.min_value.param_name }}" value="{{ f.min_value.value | money_without_currency | replace: ',', '' }}" placeholder="Min" aria-label="Minimum price">
+                <span aria-hidden="true">–</span>
+                <input type="number" inputmode="decimal" min="0" max="{{ f.range_max | money_without_currency | replace: ',', '' }}" name="{{ f.max_value.param_name }}" value="{{ f.max_value.value | money_without_currency | replace: ',', '' }}" placeholder="Max" aria-label="Maximum price">
+                <button class="btn btn-ghost filter-apply" type="submit">Apply</button>
+              </span>
+          {%- endcase -%}
+        </div>
+      {%- endfor -%}
+      {%- if has_active -%}<a class="filter-clear" href="{{ collection.url }}{% if current_sort != blank %}?sort_by={{ current_sort }}{% endif %}">Clear all</a>{%- endif -%}
+    </div>
+    {%- endif -%}
+
+    <div class="shop-bar">
+      <span>Showing <b style="color:var(--ink)">{{ paginate.items }}</b> {{ paginate.items | pluralize: 'product', 'products' }}</span>
       <label>Sort by
         <select name="sort_by" onchange="this.form.submit()">
           {%- for option in collection.sort_options -%}
@@ -17,9 +74,9 @@
           {%- endfor -%}
         </select>
       </label>
-      <noscript><button class="btn btn-ghost" type="submit" style="padding:8px 16px;font-size:.82rem;margin-left:8px">Sort</button></noscript>
-    </form>
-  </div>
+      <noscript><button class="btn btn-ghost" type="submit" style="padding:8px 16px;font-size:.82rem;margin-left:8px">Apply</button></noscript>
+    </div>
+  </form>
   {%- if paginate.items > 0 -%}
     <div class="shop-grid" data-stagger>
       {%- for product in collection.products -%}
@@ -50,8 +107,11 @@
 {
   "name": "Collection grid",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading (defaults to collection title)" },
-    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Browse all available strawberry boxes." }
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Shop or" },
+    { "type": "text", "id": "heading_r", "label": "Heading (red word)", "default": "Reserve" },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Browse all available strawberry boxes. You can also Reserve your box before the next arrival." },
+    { "type": "text", "id": "next_arrival", "label": "Next arrival (blank = hidden)" },
+    { "type": "text", "id": "reservation_deadline", "label": "Reservation deadline (blank = hidden)" }
   ],
   "presets": [{ "name": "Collection grid" }]
 }

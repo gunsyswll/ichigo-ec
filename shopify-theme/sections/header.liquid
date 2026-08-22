@@ -4,7 +4,7 @@
     {%- for link in linklists[section.settings.menu].links -%}
       <a href="{{ link.url }}">{{ link.title }}</a>
     {%- else -%}
-      <a href="/pages/shop">Shop / Reserve</a><a href="/products/japanese-strawberry-club">Ichigo Club</a><a href="/pages/farmers">Farmers</a><a href="{{ routes.root_url }}#journey">How It Works</a><a href="/pages/about">About</a><a href="/pages/help">Help</a>
+      <a href="/collections/all">Shop / Reserve</a><a href="/products/japanese-strawberry-club">Ichigo Club</a><a href="/pages/farmers">Farmers</a><a href="{{ routes.root_url }}#journey">How It Works</a><a href="/pages/about">About</a><a href="/pages/help">Help</a>
     {%- endfor -%}
     {% render 'social-icons', variant: 'drawer' %}
   </nav>
