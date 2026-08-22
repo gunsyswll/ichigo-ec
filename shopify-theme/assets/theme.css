@@ -111,6 +111,11 @@ section{padding:84px 0}
 
 /* page hero (interior pages) */
 .page-hero{background:var(--pink);padding:54px 0;text-align:center}
+/* ---- ウェイトリストのページ: 見出しとフォームだけの短いページなので上下に余白を足す ----
+   フォーム本体は Shopify Forms のアプリブロック。ブロック側の余白は上限64pxなので、
+   足りないぶんをセクション（テンプレートで `forms` と名付けたので id が __forms で終わる）に足す。 */
+.page-hero--waitlist{padding:84px 0}
+[id$="__forms"]{padding:28px 0}
 /* .crumb removed 2026-08-01 (client): the visible Home / Shop rows are gone;
    the trail now ships as BreadcrumbList JSON-LD from snippets/breadcrumb-schema.liquid */
 .page-hero h1{font-size:clamp(2.1rem,3.8vw,3.1rem);line-height:1.22}

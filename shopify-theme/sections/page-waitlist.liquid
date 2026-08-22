@@ -3,7 +3,7 @@
   `templates/page.waitlist.json` の `forms` セクションに入っている（フォーム ID 1123369）。
   見出しはここ、説明文はフォーム側が持つ（同じ文を2回出さないため）。
 {%- endcomment -%}
-<section class="page-hero"><div class="wrap">
+<section class="page-hero page-hero--waitlist"><div class="wrap">
   <h1>{{ section.settings.heading_1 | default: 'Never miss an' }} <span class="r">{{ section.settings.heading_2 | default: 'arrival' }}</span></h1>
   {%- if section.settings.subtext != blank -%}<p>{{ section.settings.subtext }}</p>{%- endif -%}
 </div></section>
