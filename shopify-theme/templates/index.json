@@ -43,7 +43,7 @@
     "boxes": {
       "type": "index-boxes",
       "settings": {
-        "eyebrow": "Shop & Reserve",
+        "eyebrow": "Shop or Reserve",
         "heading": "Choose your strawberries",
         "subtext": "From a personal treat to a premium gift, select the product that fits your occasion."
       }

@@ -3,6 +3,24 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.7.5 — 2026-08-11
+【Shop】オーナー「見出しを `Shop & Reserve` → `Shop or Reserve` に」。
+
+サイト内の `Shop & Reserve` は3か所あり、すべて `or` に統一した。
+
+| 場所 | 内容 |
+|---|---|
+| `sections/page-shop.liquid` | Shop ページの見出し（指示の対象） |
+| `sections/index-boxes.liquid` + `templates/index.json` | **ホーム**の商品グリッド上の小文字ラベル |
+| Shopify のページ設定（`/pages/shop` の**ページ名**） | ブラウザのタブ・OGP・検索結果に出ていた |
+
+ホームのラベルと Shopify のページ名は指示の【Shop】ページ外だが、**同じ文字列**であり、
+片方だけ残すとタブに `Shop & Reserve`・本文に `Shop or Reserve` と食い違う（実際に出ていた）。
+戻す場合はそれぞれ1行。
+
+実機確認: `/pages/shop` の h1・`<title>`・og:title すべて `Shop or Reserve`、
+ページ内に `&` 版は残っていない。ハンドル `/pages/shop` は変更なし。
+
 ## v1.7.4 — 2026-08-11
 【Ichigo Club】オーナー「サブスク商品なので One-time Purchase の選択肢は不要」。
 
