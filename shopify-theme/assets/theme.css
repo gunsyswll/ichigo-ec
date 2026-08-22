@@ -510,7 +510,11 @@ html.reveal-js [data-reveal].in{opacity:1;transform:none}
 .shipmap .step .sc{border-color:#EAD0A4;color:#EAD0A4}
 
 /* ===== mark5: visible floating + spinning strawberry ===== */
-.berry-orb{background:none!important;border-radius:0!important;box-shadow:none!important;opacity:1!important;
+/* opacity は各セクションがインラインで指定している（下の 517行目のコメント参照）。
+   ここで opacity:1!important を掛けると、その指定が全部無効になり装飾いちごが
+   ベタ塗りになる。実際 Help ページのモバイルで赤い見出し「help?」が読めなくなっていた。
+   2026-08-11 に撤去。 */
+.berry-orb{background:none!important;border-radius:0!important;box-shadow:none!important;
   filter:drop-shadow(0 18px 34px rgba(0,0,0,.28));animation:orbSpin 20s linear infinite, orbFloat 7s ease-in-out infinite;mix-blend-mode:normal}
 .berry-orb svg{width:100%;height:100%;display:block;overflow:visible}
 .berry-orb .sb-seed{fill:#FCE7C4}
