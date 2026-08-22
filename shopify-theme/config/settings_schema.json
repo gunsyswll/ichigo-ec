@@ -91,5 +91,32 @@
         "default": false
       }
     ]
+  },
+  {
+    "name": "SNS",
+    "settings": [
+      {
+        "type": "header",
+        "content": "SNS アカウント（1か所で全ページに反映）"
+      },
+      {
+        "type": "paragraph",
+        "content": "ここに入れた URL が、ヘッダーのアイコン・フッターのアイコン・Follow us セクションのボタンの3か所すべてに反映されます。空にすると、そのアイコンは表示されません。"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_url",
+        "label": "Instagram URL",
+        "info": "例: https://www.instagram.com/ichigo.ph/ ・ 未設定の間は Instagram のトップページに飛びます。",
+        "default": "https://instagram.com"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_url",
+        "label": "Facebook URL",
+        "info": "例: https://www.facebook.com/ichigo.ph ・ 未設定の間は Facebook のトップページに飛びます。",
+        "default": "https://facebook.com"
+      }
+    ]
   }
 ]

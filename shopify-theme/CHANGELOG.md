@@ -3,6 +3,35 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.6.9 — 2026-08-11
+【HOME】オーナー「ヘッダーに SNS のロゴを設置してほしい」。
+
+### 入れた場所
+| 幅 | 表示 |
+|---|---|
+| 1120px 以上 | ヘッダー右に Instagram / Facebook の丸アイコン（操作アイコンとの間に細い区切り線） |
+| 921–1119px | **非表示**（下記の理由） |
+| 920px 以下 | バーガーメニューを開いた中に、区切り線＋ラベル付きで表示 |
+
+⚠️ **921–1119px でヘッダーに出せない理由（実測）**: 1024px ではアイコンを足す前から
+ブランド名とナビの間隔が **0px**（＝すでに満杯）で、足すと "Shop / Reserve" が2行に折れた。
+ナビの余白を削れば入るが、既存レイアウトを痩せさせることになるので出さない判断。
+この幅でも フッター と Follow us セクションの SNS リンクは出る。
+
+### URL を1か所に統合
+これまで Instagram / Facebook の URL は **フッター**と **Follow us セクション**で別々に持っていて、
+フッター側は未入力のまま＝**アイコンが出ていなかった**。テーマ設定に **「SNS」グループ**を新設し、
+ヘッダー・フッター・Follow us の3か所すべてがそこを参照するようにした。
+セクション側に入れた場合だけそちらが優先される（上書き用）。
+
+- 新規 `snippets/social-icons.liquid`（nav / drawer / footer の3バリアント）
+- `config/settings_schema.json` に `social_instagram_url` / `social_facebook_url`
+- `templates/index.json` `templates/page.shop.json` からプレースホルダ URL を削除（グローバル設定に一本化）
+- 副次的な修正: フッターの SNS アイコンが表示されるようになった
+
+🔴 **URL はまだ仮**（`https://instagram.com` / `https://facebook.com` ＝各サービスのトップ）。
+実アカウントの URL をもらったら、テーマ設定 → SNS の2欄を書き換えるだけで3か所すべてに反映される。
+
 ## v1.6.8 — 2026-08-11
 オーナー「`Picked at dawn → at your door in ~36–48 hours.` と DAY 0 の間隔を 30px（同じ）に」。
 

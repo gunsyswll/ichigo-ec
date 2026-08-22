@@ -82,6 +82,17 @@ nav.links a:hover::after,nav.links a.active::after{width:100%}
 .icon-btn:hover{border-color:var(--ink);color:var(--ink)}
 .icon-btn .dot{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:.68rem;width:15px;height:15px;border-radius:50%;display:grid;place-items:center;font-weight:700}
 .burger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+/* ---- SNS icons (header nav + mobile drawer + footer). URLs: テーマ設定 → SNS ----
+   ヘッダーは 1120px 未満だと実測でスペースが無い（1024px では SNS 無しでも
+   ブランド名とリンクの間が 0px = 満杯。足すと "Shop / Reserve" が2行に折れる）。
+   そこで 1120px 以上でだけ丸アイコンを出し、920px 以下ではモバイルメニュー内に出す。 */
+.social-icons{display:flex;align-items:center;gap:10px}
+.social-icons--nav,.social-icons--drawer{display:none}
+@media(min-width:1120px){.social-icons--nav{display:flex}}
+/* SNS 2つとカート等の操作アイコンを見分けやすくする細い区切り線 */
+.social-icons--nav{position:relative;padding-right:14px}
+.social-icons--nav::after{content:"";position:absolute;right:0;top:50%;transform:translateY(-50%);width:1px;height:18px;background:var(--line)}
+
 .burger span{width:23px;height:2px;background:var(--ink);border-radius:2px}
 
 /* sections + headings */
@@ -176,6 +187,10 @@ html.reveal-js [data-reveal].in{opacity:1;transform:none}
 @media(max-width:920px){
   nav.links{display:none}.burger{display:flex}
   nav.links.open{display:flex;position:absolute;flex-direction:column;top:72px;left:0;right:0;background:var(--cream);padding:20px 32px;gap:12px;border-bottom:1px solid var(--line)}
+  /* SNS: バーガーが出る幅ではドロワー内にラベル付きで出す */
+  nav.links.open .social-icons--drawer{display:flex;gap:22px;margin-top:6px;padding-top:14px;border-top:1px solid var(--line)}
+  .social-icons--drawer a{display:inline-flex;align-items:center;gap:8px;color:var(--greige-deep);font-size:.9rem;font-weight:500}
+  .social-icons--drawer a:hover{color:var(--ink)}
   .box-grid{grid-template-columns:1fr 1fr}
   .foot-grid{grid-template-columns:1fr 1fr 1fr}
 }
