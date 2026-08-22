@@ -3,6 +3,30 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.6.5 — 2026-08-11
+オーナー指示【HOME】News & Events セクションを About の
+「From Japan to the Philippines」と「Experience the freshness for yourself」の間へ移動。
+
+### 構造上の制約と対応
+About ページは `page-about.liquid` **1つのセクションに全部入っている**ため、
+テンプレートのセクション順を並べ替えても「途中に差し込む」ことができない。
+一方で同じマークアップを2箇所に持つのは保守上まずい。
+
+→ **`snippets/news-teaser.liquid` に切り出し**、両方から呼ぶ形にした。
+- `sections/index-news.liquid` … スニペットを呼ぶだけに変更（セクション自体は残置。
+  設定項目もそのままなので、HOME に戻したくなればテンプレートに追加するだけで復帰できる）
+- `sections/page-about.liquid` … `#journey` と CTA帯の間に `{% render 'news-teaser' %}`
+- `templates/index.json` … `news` をセクションと order から削除
+
+### 確認（実機）
+- HOME: `#news-events` は **0件**、本文に「News & Events」の文字も無し。
+  セクション順 hero → arrival → follow → boxes → statement → farmers → howitworks → club → info → faq
+- About: **journey(From Japan to the Philippines) → news-events → CTA(Experience the freshness)** の順。
+  記事3件がサムネイル付きで正しく描画され、「View all →」も表示。
+
+ℹ️ 副次効果: v1.6.4 で特定した「アライバル帯に被る装飾いちご」は **news セクションのもの**だった。
+HOME から news が消えたのでその原因自体も消えたが、z-index の手当ては保険として残してある。
+
 ## v1.6.4 — 2026-08-11
 オーナー指摘【HOME】アライバル帯の3点。
 

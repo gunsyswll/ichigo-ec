@@ -4,42 +4,8 @@
   labelled SAMPLE cards so the homepage never looks broken. "View all →" goes
   to the Shopify blog index. Write real posts in Admin → Blog posts (blog: News).
 {%- endcomment -%}
-{%- assign news_blog = blogs.news -%}
-<section id="news-events">
-  <div class="wrap">
-    <div class="sec-head" data-reveal>
-      <span class="eyebrow muted">{{ section.settings.eyebrow }}</span>
-      <h2>{{ section.settings.heading }}</h2>
-      <p>{{ section.settings.subtext }}{% unless news_blog.articles_count > 0 %} <em>Sample content — replace with real posts.</em>{% endunless %}</p>
-    </div>
-    <div class="article-grid" data-stagger>
-      {%- if news_blog.articles_count > 0 -%}
-        {%- for article in news_blog.articles limit: 3 -%}
-          <a class="article-card" href="{{ article.url }}" data-reveal>
-            <div class="thumb">
-              {%- if article.image -%}
-                <img src="{{ article.image | image_url: width: 640 }}" alt="{{ article.title | escape }}" loading="lazy" style="width:100%;height:100%;object-fit:cover">
-              {%- else -%}
-                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M32 20c8-10 22-8 22-8s2 14-8 22-22 18-22 18S14 42 14 32s10-12 18-12z"/></svg>
-              {%- endif -%}
-            </div>
-            <div class="article-body">
-              <div class="meta"><span class="tag-news">{% if article.tags.size > 0 %}{{ article.tags.first }}{% else %}News{% endif %}</span><span>{{ article.published_at | date: "%b %-d, %Y" }}</span></div>
-              <h3>{{ article.title }}</h3>
-              <p>{{ article.excerpt_or_content | strip_html | truncatewords: 22 }}</p>
-              <span class="link">Read more →</span>
-            </div>
-          </a>
-        {%- endfor -%}
-      {%- else -%}
-        <a class="article-card" href="{{ news_blog.url | default: '/blogs/news' }}" data-reveal><div class="thumb"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M32 20c8-10 22-8 22-8s2 14-8 22-22 18-22 18S14 42 14 32s10-12 18-12z"/></svg></div><div class="article-body"><div class="meta"><span class="tag-news">Arrival</span><span>Sample date</span></div><h3>Sample event — replace with real content</h3><p>Placeholder excerpt. Announce your next Japan lot, variety, and reservation window here.</p><span class="link">Read more →</span></div></a>
-        <a class="article-card" href="{{ news_blog.url | default: '/blogs/news' }}" data-reveal><div class="thumb"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 20h40v28H12z"/><path d="M12 28h40M28 20v28"/></svg></div><div class="article-body"><div class="meta"><span class="tag-news">Event</span><span>Sample date</span></div><h3>Sample event — replace with real content</h3><p>Placeholder excerpt. Use this card for a pop-up, market appearance, or tasting event.</p><span class="link">Read more →</span></div></a>
-        <a class="article-card" href="{{ news_blog.url | default: '/blogs/news' }}" data-reveal><div class="thumb"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="32" cy="32" r="20"/><path d="M32 22v10l7 5"/></svg></div><div class="article-body"><div class="meta"><span class="tag-news">Journal</span><span>Sample date</span></div><h3>Sample event — replace with real content</h3><p>Placeholder excerpt. Share a how-to-enjoy note, recipe, or story from the farms.</p><span class="link">Read more →</span></div></a>
-      {%- endif -%}
-    </div>
-    <div class="faq-foot" data-reveal><a class="btn btn-outline-red" href="{{ news_blog.url | default: '/blogs/news' }}">{{ section.settings.cta_label }}</a></div>
-  </div>
-</section>
+{% render 'news-teaser', eyebrow: section.settings.eyebrow, heading: section.settings.heading,
+   subtext: section.settings.subtext, cta_label: section.settings.cta_label %}
 
 {% schema %}
 {

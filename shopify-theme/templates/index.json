@@ -31,15 +31,6 @@
         "cta_url": ""
       }
     },
-    "news": {
-      "type": "index-news",
-      "settings": {
-        "eyebrow": "Latest from Ichigo",
-        "heading": "News & Events",
-        "subtext": "Announcements, pop-up events, and seasonal stories.",
-        "cta_label": "View all →"
-      }
-    },
     "follow_news": {
       "type": "index-follow",
       "settings": {
@@ -253,7 +244,6 @@
   "order": [
     "hero",
     "arrival",
-    "news",
     "follow_news",
     "boxes",
     "statement",

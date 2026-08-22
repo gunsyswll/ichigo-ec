@@ -68,6 +68,11 @@
   <p data-reveal style="text-align:center;margin-top:18px;color:var(--greige-deep)">Cold-chain fresh, <b style="color:var(--red)">door to door</b> from Japanese farm to PH customer.</p>
 </div></section>
 
+{%- comment -%} News & Events: HOME から移設（オーナー指示 2026-08-11）。
+   「From Japan to the Philippines」と「Experience the freshness for yourself」の間。
+   実体は snippets/news-teaser.liquid（index-news セクションと共用）。 {%- endcomment -%}
+{% render 'news-teaser' %}
+
 <section style="padding-top:0;margin-top:84px"><div class="wrap"><div class="cta-band" data-reveal="scale">
   <div><h2>Experience the freshness for yourself</h2></div>
   <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-white" href="/collections/all">Shop Now</a><a class="btn btn-ghost" href="/pages/farmers" style="color:#fff;border-color:rgba(255,255,255,.5)">Meet the Farmers</a></div>
