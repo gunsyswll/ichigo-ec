@@ -826,6 +826,9 @@ a.method.linkcard .link{display:inline-block;margin-top:10px;color:var(--red);fo
 .pd-addr{display:inline-block;font-size:.84rem;color:var(--red);font-weight:500;margin-bottom:14px}
 .pd-qtyrow{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:8px 0 16px}
 .pd-qtyrow .qty{margin:0}
+/* 正味量（Quantity の横）。商品ごとのメタフィールド custom.net_weight */
+.pd-netw{margin-left:8px;font-size:.82rem;color:var(--greige-deep);opacity:.85;white-space:nowrap}
+.pd-netw::before{content:"·";margin-right:8px;opacity:.6}
 .wish{width:46px;height:46px;border:1px solid var(--line);border-radius:50%;background:var(--cream);display:grid;place-items:center;cursor:pointer;color:var(--greige-deep);transition:.2s;flex:none}
 .wish:hover,.wish.on{border-color:var(--red);color:var(--red)}
 .pd-cta{display:flex;flex-direction:column;gap:10px}

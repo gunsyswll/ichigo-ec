@@ -121,9 +121,11 @@
 
       {% render 'purchase-options', product: product, variant: variant %}
 
+      {%- comment -%} 正味量（メタフィールド custom.net_weight）。空欄なら何も出ない。 {%- endcomment -%}
+      {%- assign net_w = product.metafields.custom.net_weight.value -%}
       <div class="pd-qtyrow">
         <div class="qty">
-          <span style="font-size:.88rem;color:var(--greige-deep)">Quantity</span>
+          <span style="font-size:.88rem;color:var(--greige-deep)">Quantity{%- if net_w != blank -%}<span class="pd-netw">{{ net_w }}</span>{%- endif -%}</span>
           <div class="ctrl">
             <button type="button" data-q="-1" aria-label="Decrease">−</button>
             <input type="number" id="quantity" name="quantity" value="1" min="1" inputmode="numeric" aria-label="Quantity">
