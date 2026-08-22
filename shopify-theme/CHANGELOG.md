@@ -3,6 +3,15 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.7.3 — 2026-08-11
+【Farmers】オーナー追加指示「How we select our partner farms を見出しにする」。
+
+v1.7.2 で「Our standard for every grower」の見出しを消したブロックは、小文字ラベル
+`HOW WE SELECT OUR PARTNER FARMS` だけが残っていた。そのラベルを**見出し（h2）に昇格**し、
+小文字ラベルは無くした（同じ文字列を2段に重ねないため）。
+
+実機確認（1440px）: 見出し1行、下の4カードとの間隔は 48px で他セクションと同じ。
+
 ## v1.7.2 — 2026-08-11
 【Farmers】クライアント指摘3件。すべて `sections/page-farmers.liquid`。
 
