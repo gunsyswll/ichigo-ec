@@ -3,6 +3,34 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.5.6 — 2026-08-11
+オーナー「さらに酷くなった、so / what reach になっている」。v1.5.5 の `text-wrap:balance` を撤去。
+
+### なぜ2回外したか — 再現環境がズレていた
+ローカル再現の**ルートフォントが 16px、実機は 17.6px**（サイト側の type lift）。
+`max-width:52em` の実寸が **832px 対 915px** と1割違い、折り返し位置がまるごとズレていた。
+実機で確認して初めて判明。**実画面を見ずに5幅サンプルで判断したのが誤り**だった。
+
+### balance を使わない理由
+`text-wrap:balance` は**行長をそろえるだけで、折る位置を保証しない**。
+密走査すると 63幅中50幅では節の切れ目に当たるが、**460〜600px では "is" 止まり**になり、
+実機 1299px では **"— so" の後ろ**に落ちた。当たり外れのある手段を「直った」と言ってはいけない。
+
+### 採用した方法（確定的）
+節の境目に `<br class="lb">` を置き、`.lede .lb{display:inline}` で**常に**折る。
+- 当初は `@media(min-width:800px)` で出し分けたが、**実機 760px で元の悪い折り返しに戻った**
+  （しきい値の下でフォールバックする以上、境界のすぐ下は必ず壊れる）。しきい値は撤去。
+- 狭い幅では各節が内部で折り返すだけで、**節の境目は幅に関係なく守られる**。
+- あわせて `and accountable,` を U+00A0 で連結（500px で3行目が "and" 止まりだったため）。
+
+### 実機で確認した結果（Chrome / 実ストア）
+| 幅 | 折り返し |
+|---|---|
+| 1685 / 1440 / 900 / 760px | `…cold‑chain, and delivery` / `— so what reaches you is …` |
+| 500px | `…sourcing, customs,` / `cold‑chain, and delivery` / `— so what reaches you is traceable, compliant,` / `and accountable, not grey‑market.` |
+
+スクリーンショットでも目視確認済み。
+
 ## v1.5.5 — 2026-08-11
 v1.5.4 の直しが浅かったのでやり直した。オーナー「変わっていないです」。
 
