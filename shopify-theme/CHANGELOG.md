@@ -3,6 +3,32 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.6.6 — 2026-08-11
+オーナー指摘【How it works】PC で「From Japan to your door」の 01 と 03 が上のイラストに被る。
+02・04 と同じだけ空けたい。
+
+### 実測（1440px）
+| | 値 |
+|---|---|
+| 地図イラストの下端 | 180px |
+| **カード01の上端** | **178px** ← 2px 食い込んでいた |
+| 軸の丸の下端 → カード02の上端 | **15px** |
+
+このタイムラインは**奇数ステップ(01/03)のカードが軸の上側に出る組み**なので、
+`.timeline` の上マージン 60px では地図に届いてしまっていた。
+
+### 修正
+`.geomap + .timeline{margin-top:77px}`（+17px）。
+軸ごと下がるので **02・04 の隙間は変わらず**、01・03 だけが目標の 15px に揃う。
+
+⚠️ `.timeline` は About の「From Japan to the Philippines」でも使っている共有クラス。
+そちらは地図が無く上に余白を足す必要がないので、**`.geomap` が直前にある場合だけ**に限定した
+（隣接兄弟セレクタ）。About 側は 60px のまま変わらないことを実機で確認済み。
+
+### 確認
+適用後の実測: **01=15px / 02=15px / 03=15px / 04=15px**（4つとも一致）。
+About のタイムラインは `margin-top:60px` のまま。
+
 ## v1.6.5 — 2026-08-11
 オーナー指示【HOME】News & Events セクションを About の
 「From Japan to the Philippines」と「Experience the freshness for yourself」の間へ移動。

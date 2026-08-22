@@ -626,6 +626,11 @@ html.reveal-js [data-reveal].in{opacity:1;transform:none}
 
 /* ===== journey timeline (zigzag graph, on the dark shipmap section) ===== */
 .timeline{position:relative;display:flex;max-width:1060px;margin:60px auto 0;padding:0 10px 56px}
+/* 地図イラストの直下にタイムラインが来る How it works だけ、上マージンを 60→77px。
+   奇数ステップ(01/03)のカードは軸より上に出る組みなので、60px では地図の下端(180px)に対し
+   カード上端が 178px と 2px 食い込んでいた。偶数ステップ(02/04)は軸の丸から 15px 空いているので
+   +17px してその 15px に揃える。About の同名タイムラインには地図が無いので対象外。 */
+.geomap + .timeline{margin-top:77px}
 .timeline::before{content:"";position:absolute;left:46px;right:46px;top:50%;height:2px;
   background:linear-gradient(90deg,transparent,rgba(234,208,164,.55) 7%,rgba(234,208,164,.55) 93%,transparent)}
 .tl-step{position:relative;flex:1;display:flex;align-items:center;justify-content:center;min-height:300px}
