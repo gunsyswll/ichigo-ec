@@ -136,11 +136,15 @@ section{padding:84px 0}
 .card-body{padding:22px;display:flex;flex-direction:column;gap:8px;flex:1}
 .card h3{font-size:1.18rem}
 .card .desc{font-size:.85rem;color:var(--greige-deep)}
-.card .price{font-family:'Libre Baskerville';font-size:1.15rem;color:var(--red);margin-top:2px}
+.card .price{font-family:'Libre Baskerville';font-size:1.15rem;color:var(--red);margin-top:auto}
 .card .price .sm{font-size:.78rem;color:var(--greige-deep);font-family:Outfit}
 .card .meta{font-size:.78rem;color:var(--greige-deep)}
 .card .btn{margin-top:12px;width:100%}
 .card.sold .card-body h3,.card.sold .price{color:var(--greige-deep)}
+/* 商品カード: 説明文の行数が違ってもボタン（と価格）が横一列でそろうように、
+   カードを行の高さいっぱいに伸ばし、価格から下を下端に寄せる */
+.card-wrap{display:flex}
+.card-wrap>.card{flex:1;min-width:0}
 .soldflag{position:absolute;inset:0;display:grid;place-items:center;z-index:2}
 .soldflag span{background:var(--cream);color:var(--ink);font-weight:700;letter-spacing:.1em;font-size:.8rem;padding:8px 18px;border-radius:6px}
 

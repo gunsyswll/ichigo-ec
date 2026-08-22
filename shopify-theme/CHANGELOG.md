@@ -3,6 +3,29 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.7.1 — 2026-08-11
+オーナー「Purchase ボタンが align していない」。
+
+### 原因
+商品カードは `.card` 自体は flex 縦並びだったが、間に挟まる `.card-wrap`（お気に入りハートを
+重ねるためのラッパー）が**グリッドの高さいっぱいに伸びていなかった**ため、カードの高さ＝中身の高さ
+になっていた。説明文が2行の商品と3行の商品でカードの高さが変わり、ボタンの位置がずれていた。
+
+### 修正（`assets/theme.css`）
+```css
+.card-wrap{display:flex}
+.card-wrap>.card{flex:1;min-width:0}
+.card .price{margin-top:auto}   /* 2px → auto */
+```
+価格から下を下端に寄せたので、**ボタンだけでなく価格の行もそろう**。
+
+### 実機確認（1440px、実測値）
+| ページ | 行 | カード高さ | ボタン下端 |
+|---|---|---|---|
+| ホーム | 1行目3枚 | 558px 一致 | 一致 |
+| /pages/shop | 3行 × 3枚 | 558px 一致 | 各行で一致 |
+| /collections/all | 3行 × 3枚 | 558px 一致 | 各行で一致 |
+
 ## v1.7.0 — 2026-08-11
 【Shop】オーナー「売り切れは画像に Sold Out ＋ ボタンは Reserve、在庫ありは Purchase」。
 
