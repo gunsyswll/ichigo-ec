@@ -145,6 +145,8 @@ section{padding:84px 0}
 .card .price .sm{font-size:.78rem;color:var(--greige-deep);font-family:Outfit}
 .card .meta{font-size:.78rem;color:var(--greige-deep)}
 .card .btn{margin-top:12px;width:100%}
+/* 残り僅少（Only N left）。price の直下、ボタンの上 */
+.card-low{font-size:.78rem;font-weight:600;color:var(--red);letter-spacing:.02em}
 .card.sold .card-body h3,.card.sold .price{color:var(--greige-deep)}
 /* 商品カード: 説明文の行数が違ってもボタン（と価格）が横一列でそろうように、
    カードを行の高さいっぱいに伸ばし、価格から下を下端に寄せる */

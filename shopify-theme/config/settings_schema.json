@@ -118,5 +118,38 @@
         "default": "https://facebook.com"
       }
     ]
+  },
+  {
+    "name": "在庫表示",
+    "settings": [
+      {
+        "type": "header",
+        "content": "残り僅少の表示"
+      },
+      {
+        "type": "paragraph",
+        "content": "在庫が少なくなったときだけ残り数量を出します。多いときは数字を出さないので、販売量を外から読まれません。0 にするとこの機能はオフになります。"
+      },
+      {
+        "type": "range",
+        "id": "low_stock_threshold",
+        "label": "商品ごと: 残り僅少とみなす数",
+        "min": 0,
+        "max": 50,
+        "step": 1,
+        "default": 10,
+        "info": "商品ページと商品カードに「Only 6 left」と出ます。この数より多いときは何も出ません。"
+      },
+      {
+        "type": "range",
+        "id": "low_stock_total_threshold",
+        "label": "サイト全体: Available Boxes に数字を出す合計在庫",
+        "min": 0,
+        "max": 200,
+        "step": 5,
+        "default": 30,
+        "info": "ホームと Shop の「Available Boxes」。全商品の在庫合計がこの数以下になると「Only 24 Boxes Left」に変わり、それ以外は「Limited」のままです。"
+      }
+    ]
   }
 ]

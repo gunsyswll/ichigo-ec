@@ -79,7 +79,8 @@
         {%- if section.settings.fact1_label != blank and v1 != blank -%}<div class="f"><label>{{ section.settings.fact1_label }}</label><b class="hot">{{ v1 }}</b></div>{%- endif -%}
         {%- if section.settings.fact2_label != blank and v2 != blank -%}<div class="f"><label>{{ section.settings.fact2_label }}</label><b>{{ v2 }}</b></div>{%- endif -%}
         {%- if section.settings.fact3_label != blank and v3 != blank -%}<div class="f"><label>{{ section.settings.fact3_label }}</label><b>{{ v3 }}</b></div>{%- endif -%}
-        <div class="f"><label>Availability</label><b class="hot">{% if is_coming %}Coming soon{% elsif product.available %}{% if st == 'preorder' %}Pre-order{% else %}In stock{% endif %}{% else %}Sold out{% endif %}</b></div>
+        {%- capture low -%}{% render 'stock-left', variant: variant %}{%- endcapture -%}
+        <div class="f"><label>Availability</label><b class="hot">{% if is_coming %}Coming soon{% elsif product.available %}{% if st == 'preorder' %}Pre-order{% elsif low != blank %}{{ low }}{% else %}In stock{% endif %}{% else %}Sold out{% endif %}</b></div>
       </div>
     {%- endif -%}
 

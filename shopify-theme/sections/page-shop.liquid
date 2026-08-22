@@ -5,7 +5,7 @@
   <div class="stats">
     {%- if section.settings.next_arrival != blank -%}<div class="stat"><label>Next Arrival</label><b>{{ section.settings.next_arrival }}</b></div>{%- endif -%}
     {%- if section.settings.reservation_deadline != blank -%}<div class="stat"><label>Reservation Deadline</label><b>{{ section.settings.reservation_deadline }}</b></div>{%- endif -%}
-    <div class="stat"><label>Available Boxes</label><b>Limited</b></div>
+    <div class="stat"><label>Available Boxes</label><b>{% render 'stock-total', fallback: 'Limited' %}</b></div>
   </div>
   <div class="shop-nudge"><a href="{{ routes.root_url }}#journey">How it works · 36–48h fresh →</a><span>·</span><a href="/pages/help">Questions? Visit Help →</a></div>
 </div></section>

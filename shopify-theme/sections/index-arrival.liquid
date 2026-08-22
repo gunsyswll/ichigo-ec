@@ -4,7 +4,7 @@
     {%- if section.settings.arrival_date != blank -%}<div class="d"><label>Arrival Date</label><b class="hot">{{ section.settings.arrival_date }}</b></div>{%- endif -%}
     {%- if section.settings.deadline != blank -%}<div class="d"><label>Reservation Deadline</label><b>{{ section.settings.deadline }}</b></div>{%- endif -%}
     {%- if section.settings.delivery != blank -%}<div class="d"><label>Delivery Window</label><b>{{ section.settings.delivery }}</b></div>{%- endif -%}
-    {%- if section.settings.available != blank -%}<div class="d"><label>Available Boxes</label><b>{{ section.settings.available }}</b></div>{%- endif -%}
+    {%- if section.settings.available != blank -%}<div class="d"><label>Available Boxes</label><b>{% render 'stock-total', fallback: section.settings.available %}</b></div>{%- endif -%}
   </div>
   <a class="btn btn-red" href="{{ section.settings.cta_url | default: '/collections/all' }}">{{ section.settings.cta_label }}</a>
 </div></div>

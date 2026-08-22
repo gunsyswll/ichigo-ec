@@ -1,0 +1,20 @@
+{%- comment -%}
+  残り僅少のときだけ「Only N left」を出す。それ以外は何も出さない。
+  引数: variant（必須）, unit（任意: 'boxes' なら "Only 6 Boxes Left" 形式）
+
+  しきい値はテーマ設定「在庫表示 → 残り僅少とみなす数」。0 にすると機能ごとオフ。
+  在庫を追跡していない商品（inventory_management が shopify 以外）は数量が 0 で返るため、
+  必ず追跡中のものだけを対象にする。
+{%- endcomment -%}
+{%- liquid
+  assign q = 0
+  if variant.inventory_management == 'shopify'
+    assign q = variant.inventory_quantity
+  endif
+  assign limit = settings.low_stock_threshold | default: 0
+  assign show = false
+  if limit > 0 and q > 0 and q <= limit
+    assign show = true
+  endif
+-%}
+{%- if show -%}{% if unit == 'boxes' %}Only {{ q }} {% if q == 1 %}Box{% else %}Boxes{% endif %} Left{% else %}Only {{ q }} left{% endif %}{%- endif -%}

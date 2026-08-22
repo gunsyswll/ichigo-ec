@@ -1,0 +1,24 @@
+{%- comment -%}
+  サイト全体の「Available Boxes」欄の値。在庫の合計がしきい値以下のときだけ数字を出し、
+  それ以外は fallback（既定は "Limited"）をそのまま出す。
+  引数: fallback（任意）
+
+  ⚠️ Liquid のループは1コレクションあたり最大50商品まで。現在9商品なので問題ないが、
+  50を超えたら合計が実際より少なくなる。その場合は集計方法を変えること。
+{%- endcomment -%}
+{%- liquid
+  assign total = 0
+  for p in collections.all.products limit: 50
+    for v in p.variants
+      if v.inventory_management == 'shopify'
+        assign total = total | plus: v.inventory_quantity
+      endif
+    endfor
+  endfor
+  assign limit = settings.low_stock_total_threshold | default: 0
+  assign out = fallback | default: 'Limited'
+  if limit > 0 and total > 0 and total <= limit
+    assign out = 'Only ' | append: total | append: ' Boxes Left'
+  endif
+-%}
+{{- out -}}

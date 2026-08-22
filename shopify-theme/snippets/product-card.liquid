@@ -36,6 +36,8 @@
         {{ product.price | money }}
         {%- if on_sale -%}<span class="sm"><s>{{ product.compare_at_price | money }}</s></span>{%- endif -%}
       </div>
+      {%- capture low -%}{% render 'stock-left', variant: product.selected_or_first_available_variant %}{%- endcapture -%}
+      {%- if low != blank -%}<div class="card-low">{{ low }}</div>{%- endif -%}
       {%- liquid
         assign cta = 'Purchase'
         if cst == 'coming_soon'

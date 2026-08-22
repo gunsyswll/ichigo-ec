@@ -3,6 +3,41 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.9.0 — 2026-08-11
+オーナー承認「案1: 残り僅少のときだけ数字を出す」。**在庫数の自動表示を実装。**
+
+### 動き
+| 場所 | 在庫が多いとき | 少ないとき |
+|---|---|---|
+| 商品カード（Shop / ホーム / コレクション） | 何も出ない | 価格の下に赤字で **Only 10 left** |
+| 商品ページの Availability | In stock | **Only 10 left** |
+| ホーム・Shop の Available Boxes | Limited | **Only 24 Boxes Left**（全商品の合計） |
+
+数字は Shopify の在庫からその都度読むので**自動更新**。手入力の欄はありません。
+
+### しきい値はテーマ設定から変更可
+テーマ設定 → **在庫表示**
+- 「商品ごと: 残り僅少とみなす数」= **10**（0 にすると商品側の表示はオフ）
+- 「サイト全体: Available Boxes に数字を出す合計在庫」= **30**（0 でオフ）
+
+### 実装
+`snippets/stock-left.liquid`（商品単位）と `snippets/stock-total.liquid`（サイト合計）を新設し、
+商品ページ2種・商品カード・ホーム・Shop から呼ぶ。在庫を追跡していない商品は数量0で返るため、
+`inventory_management == 'shopify'` のものだけを対象にしている。
+
+### 実機確認
+- Luxury Wooden Gift Box（在庫10＝しきい値ちょうど）→ カード「Only 10 left」／商品ページ「Only 10 left」✅
+- Standard（25）→ 何も出ない・In stock のまま ✅
+- Sky Berry（0）→ 売り切れ表示のまま、数字は出ない ✅
+- 合計148 > 30 → Available Boxes は Limited ✅
+- **しきい値を一時的に200へ上げて低在庫側も確認** → 「Only 148 Boxes Left」✅（30に戻し済み・確認済み）
+
+### 注意
+- ⚠️ **数字は数分古いことがある**（Shopify のページキャッシュ）。「残り1」表示中に売り切れる可能性は残る。
+- ⚠️ 合計の集計は Liquid のループ上限で**50商品まで**。現在9商品なので問題ないが、超えたら集計方法を変えること（スニペットにコメント済み）。
+- 残り僅少の行が入るぶん、そのカードだけ価格の位置が1行ぶん上がる（**ボタンの位置はそろったまま**）。
+  全カードで行の高さを予約して価格もそろえることは可能。
+
 ## v1.8.3 — 2026-08-11
 オーナー「全て10月1日に仮で設定」。**入荷予定日を全商品＋2ページに入れた。**
 
