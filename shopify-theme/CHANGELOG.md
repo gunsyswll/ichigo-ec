@@ -3,6 +3,17 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.7.6 — 2026-08-11
+【Shop】オーナー指定の説明文に差し替え（`sections/page-shop.liquid`）。
+
+修正前: `Browse all available strawberry boxes. Reserve your box before the next arrival.`
+修正後: `Browse all available strawberry boxes. You can also Reserve your box before the next arrival.`
+
+指定どおり `Reserve` の頭文字は大文字のまま（ボタン名と合わせる意図と解釈）。
+
+実機確認: 1440px は1行、500px は文の切れ目（`You can also` の後）で2行に折れる。
+不自然な改行位置なし。
+
 ## v1.7.5 — 2026-08-11
 【Shop】オーナー「見出しを `Shop & Reserve` → `Shop or Reserve` に」。
 
