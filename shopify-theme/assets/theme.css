@@ -201,7 +201,12 @@ html.reveal-js [data-reveal].in{opacity:1;transform:none}
 .badge b{display:block;color:var(--ink);font-weight:600;font-size:.86rem}
 .badge span{color:var(--greige-deep)}
 .hero-photo .ph{aspect-ratio:1/1.04;border-radius:18px;box-shadow:var(--shadow)}
-.arrival-strip{background:var(--pink);border:1px solid rgba(217,64,80,.18);border-radius:18px;padding:30px 34px;display:grid;grid-template-columns:1.1fr 2fr auto;gap:30px;align-items:center}
+/* z-index:1 … 直下の news セクションの装飾いちごは overflow:visible のまま上方向へ
+   はみ出しており、この帯の見出しに重なって『Ne』が読めなくなっていた（1024px で実測）。
+   いちご側を動かさず、帯を前面に出して背面に回す。
+   minmax(320px,…) … 1列目が 202px しかなく『Next Arrival from Japan』(要301px) が2行、
+   その下も『week's harvest.』が折り返していた。320px 確保で両方1行に収まる。 */
+.arrival-strip{background:var(--pink);border:1px solid rgba(217,64,80,.18);border-radius:18px;padding:30px 34px;display:grid;grid-template-columns:minmax(320px,1.1fr) 2fr auto;gap:30px;align-items:center;position:relative;z-index:1}
 .arrival-strip .as-title{font-family:'Libre Baskerville';font-size:1.4rem}
 .arrival-strip .as-title small{display:block;font-family:'Outfit';font-size:.82rem;color:var(--greige-deep);margin-top:6px}
 .as-data{display:flex;gap:28px;flex-wrap:wrap}

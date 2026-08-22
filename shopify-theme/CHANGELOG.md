@@ -3,6 +3,38 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.6.4 — 2026-08-11
+オーナー指摘【HOME】アライバル帯の3点。
+
+### 1) いちごが見出しに被る（1024px で再現）
+最初は幅1685pxで再現せず、**幅を変えて走査してようやく1024pxで再現**した。
+拡大して確認すると「Next Arrival from Japan」の **Ne が真上をいちごに覆われて**いた。
+
+犯人は **`news` セクションの装飾いちご**。`.hero` `.statement` `.page-hero` `.band` `.farmers`
+`.shipmap` には `overflow:hidden` があるが **`news` には無く**、いちごが**上方向へはみ出して**
+1つ上の帯に乗っていた（要素の座標で確定: 該当点を覆う要素が news の `.berry-orb`）。
+
+**対応**: いちご側は動かさず、`.arrival-strip` に `position:relative;z-index:1` を付けて
+**帯を前面に**した。いちごは帯の背面に回るだけで、帯の外では従来どおり見える。
+（`news` に `overflow:hidden` を足す案は、他所での見え方まで変えるので採らなかった）
+
+### 2)「Japan」の前で改行 / 3) その下の文章の折り返し
+1列目が **202px**（1024px時）しかなく、`Next Arrival from Japan` は**301px**必要だった。
+サブテキストも 269px 必要で「week's harvest.」が折り返していた。
+`grid-template-columns: 1.1fr 2fr auto` → **`minmax(320px,1.1fr) 2fr auto`**。
+
+### 確認（実機）
+| 幅 | 1列目 | 見出し | サブ |
+|---|---|---|---|
+| 1685px | 320px | 1行 | 1行 |
+| 1024px | 320px | 1行 | 1行 |
+| 880px | 1列（積み上げ） | 1行 | 1行 |
+
+ボタンは全幅で1行・はみ出しなし。1024px で拡大して、いちごが文字に掛かっていないことも目視確認。
+
+ℹ️ `news` セクションの `overflow` は他にも影響が出うる（別の装飾が隣接セクションへはみ出す）。
+今回は指摘箇所のみ対応したので、他でも同様の被りが出たら同じ手当てが要る。
+
 ## v1.6.3 — 2026-08-11
 オーナー指示「`Our strawberries are grown in Japan, and travel by truck, plane, and van to reach you
 at their freshest.` の freshest の前で改行しない」。
