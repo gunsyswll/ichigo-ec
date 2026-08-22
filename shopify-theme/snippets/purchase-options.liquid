@@ -1,0 +1,38 @@
+{%- comment -%}
+  購入オプション（都度購入 / 定期）。main-product と main-product-gift で共用。
+  引数: product, variant
+
+  ⚠️ 「都度購入を出すかどうか」はテーマ側の判断ではなく **商品の設定**で決まる。
+  Shopify 側で商品を「定期購入のみ」にすると `product.requires_selling_plan` が true になり、
+  ここで One-time purchase を出さなくなる。UI を隠すだけでなく **Shopify 自身が都度購入を拒否**
+  するので、カートを細工しても通らない。
+  確認コマンド（Admin API 2025-01）:
+    { product(id:"gid://shopify/Product/…"){ requiresSellingPlan } }
+{%- endcomment -%}
+{%- if product.selling_plan_groups.size > 0 -%}
+  {%- liquid
+    assign plan_count = 0
+    for group in product.selling_plan_groups
+      assign plan_count = plan_count | plus: group.selling_plans.size
+    endfor
+    assign sub_only = product.requires_selling_plan
+    assign i = 0
+  -%}
+  <div class="pd-purchase">
+    {%- unless sub_only -%}
+      <label class="po-opt"><input type="radio" name="selling_plan" value="" checked> <span><b>One-time purchase</b> — {{ variant.price | money }}</span></label>
+    {%- endunless -%}
+    {%- for group in product.selling_plan_groups -%}{%- for plan in group.selling_plans -%}
+      {%- assign i = i | plus: 1 -%}
+      {%- capture plan_price -%}{%- for a in variant.selling_plan_allocations -%}{%- if a.selling_plan.id == plan.id %} — {{ a.per_delivery_price | money }} / delivery{%- endif -%}{%- endfor -%}{%- endcapture -%}
+      {%- if sub_only and plan_count == 1 -%}
+        {%- comment -%} 選択肢が1つしかないのでラジオにしない。値はフォームに hidden で渡す。 {%- endcomment -%}
+        <input type="hidden" name="selling_plan" value="{{ plan.id }}">
+        <div class="po-opt po-opt--only"><span><b>{{ plan.name }}</b>{{ plan_price }}</span></div>
+      {%- else -%}
+        <label class="po-opt"><input type="radio" name="selling_plan" value="{{ plan.id }}"{% if sub_only and i == 1 %} checked{% endif %}> <span><b>{{ plan.name }}</b>{{ plan_price }}</span></label>
+      {%- endif -%}
+    {%- endfor -%}{%- endfor -%}
+    <p class="po-note">Subscriptions renew automatically. You're billed &amp; shipped each cycle, and can cancel anytime from your account.</p>
+  </div>
+{%- endif -%}

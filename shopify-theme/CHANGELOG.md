@@ -3,6 +3,36 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.7.4 — 2026-08-11
+【Ichigo Club】オーナー「サブスク商品なので One-time Purchase の選択肢は不要」。
+
+### 直し方 — テーマで隠すのではなく、商品を「定期のみ」にした
+UI を消すだけだと、カートに直接投げれば都度購入が通ってしまう。Shopify 側の
+`requiresSellingPlan` を **true** にして、**Shopify 自身が都度購入を拒否**するようにした。
+
+- 商品 `Japanese Strawberry Club`（ICH-003）: `requiresSellingPlan` false → **true**
+- テーマは `product.requires_selling_plan` を見て One-time の行を出さない
+  → 商品設定を戻せばテーマは自動的に元に戻る（テーマ側にハードコードなし）
+
+### 実装
+`snippets/purchase-options.liquid` を新設し、`main-product` と `main-product-gift` の
+**同一の重複ブロック（879文字 × 2）を置き換え**。定期プランが1つだけのときはラジオを出さず、
+選択済みの見た目で1行だけ表示し、値は hidden で送る。
+
+### 実機確認（walk the flow）
+| 確認 | 結果 |
+|---|---|
+| 商品ページ | One-time の行が消え、`Deliver every month — ₱4,800.00 / delivery` の1行のみ |
+| 定期でカート投入 | 成功。`selling_plan_allocation.selling_plan` = Deliver every month (6988792088) |
+| **都度購入を強行**（`selling_plan` 無しで `/cart/add.js`） | **422 で拒否**「Variant can only be purchased with a selling plan.」カート0件 |
+| 他商品 | Premium Gift Box / Standard Box とも購入オプション欄なし・Liquid エラーなし |
+
+### 補足
+- ICH-010「Ichigo Club — 3ヶ月前払い」は下書き・定期プラン未設定（Pending #31）。
+  公開するときは同じく `requiresSellingPlan` を true にする。
+- ⚠️ この商品は **決済がまだ通らない**（Pending #3、テスト決済が定期課金に非対応）。
+  今回の変更で都度購入という抜け道が塞がったので、**Club は #3 完了まで購入不可**になる。
+
 ## v1.7.3 — 2026-08-11
 【Farmers】オーナー追加指示「How we select our partner farms を見出しにする」。
 

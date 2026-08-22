@@ -915,6 +915,8 @@ a.method.linkcard .link{display:inline-block;margin-top:10px;color:var(--red);fo
 .po-opt:has(input:checked){border-color:var(--red,#D94050);background:rgba(217,64,80,.05)}
 .po-opt input{accent-color:var(--red,#D94050)}
 .po-note{font-size:.8rem;color:var(--greige-deep,#6f6258);margin:2px 2px 0}
+/* 定期のみの商品: 選択肢が1つなのでラジオを出さず、選択済みの見た目で1行だけ見せる */
+.po-opt--only{cursor:default;border-color:var(--red,#D94050);background:rgba(217,64,80,.05)}
 /* gift options block */
 .gift-opts{margin:18px 0 4px;padding:18px;border:1.5px solid var(--line);border-radius:var(--r);background:var(--pink)}
 .gift-opts-head{margin-bottom:14px}

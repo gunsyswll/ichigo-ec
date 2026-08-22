@@ -118,15 +118,7 @@
         <input type="hidden" name="id" value="{{ variant.id }}">
       {%- endif -%}
 
-      {%- if product.selling_plan_groups.size > 0 -%}
-        <div class="pd-purchase">
-          <label class="po-opt"><input type="radio" name="selling_plan" value="" checked> <span><b>One-time purchase</b> — {{ variant.price | money }}</span></label>
-          {%- for group in product.selling_plan_groups -%}{%- for plan in group.selling_plans -%}
-            <label class="po-opt"><input type="radio" name="selling_plan" value="{{ plan.id }}"> <span><b>{{ plan.name }}</b>{%- for a in variant.selling_plan_allocations -%}{%- if a.selling_plan.id == plan.id %} — {{ a.per_delivery_price | money }} / delivery{%- endif -%}{%- endfor -%}</span></label>
-          {%- endfor -%}{%- endfor -%}
-          <p class="po-note">Subscriptions renew automatically. You're billed &amp; shipped each cycle, and can cancel anytime from your account.</p>
-        </div>
-      {%- endif -%}
+      {% render 'purchase-options', product: product, variant: variant %}
 
       <div class="pd-qtyrow">
         <div class="qty">
