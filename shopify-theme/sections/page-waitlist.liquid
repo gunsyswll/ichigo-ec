@@ -1,0 +1,20 @@
+{%- comment -%}
+  ウェイトリストのページ見出し。フォーム本体は Shopify Forms のアプリブロックで、
+  `templates/page.waitlist.json` の `forms` セクションに入っている（フォーム ID 1123369）。
+  見出しはここ、説明文はフォーム側が持つ（同じ文を2回出さないため）。
+{%- endcomment -%}
+<section class="page-hero"><div class="wrap">
+  <h1>{{ section.settings.heading_1 | default: 'Never miss an' }} <span class="r">{{ section.settings.heading_2 | default: 'arrival' }}</span></h1>
+  {%- if section.settings.subtext != blank -%}<p>{{ section.settings.subtext }}</p>{%- endif -%}
+</div></section>
+
+{% schema %}
+{
+  "name": "Waitlist header",
+  "settings": [
+    { "type": "text", "id": "heading_1", "label": "Heading", "default": "Never miss an" },
+    { "type": "text", "id": "heading_2", "label": "Heading (red)", "default": "arrival" },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "info": "空でよい。説明文はフォーム側（Shopify Forms）が持っています。" }
+  ]
+}
+{% endschema %}

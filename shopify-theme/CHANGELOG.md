@@ -3,6 +3,41 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.8.0 — 2026-08-11
+オーナー決定「C、Shopify Forms で本物のウェイトリストを作って」。**実装・稼働確認済み。**
+
+### できたもの
+**`/pages/waitlist`** — 名前とメールを入れると **Shopify の顧客として登録**され、
+`waitlist` タグが付き、メールマーケティングの同意も記録される。
+以後この人たちにお知らせを送れる（顧客管理 → タグ `waitlist` で絞り込み）。
+
+| 部品 | 内容 |
+|---|---|
+| フォーム | Shopify Forms（公式・無料、導入済みだった）／**Form ID 1123369**／インライン型 |
+| ページ | `templates/page.waitlist.json` ＋ `sections/page-waitlist.liquid`（見出しは当方、フォームはアプリブロック） |
+| 導線 | ホームの **Join the Waitlist** ボタン → `/pages/waitlist`（それまでは商品一覧に落ちていた）／フッター「Sold Out / Waitlist」も同ページへ |
+
+### 実機で通した確認（テスト送信2回、後で顧客レコードは削除済み）
+| 確認 | 結果 |
+|---|---|
+| 送信 → 顧客が作られるか | ✅ 作成される |
+| メール同意 | ✅ `SUBSCRIBED`（single opt-in、同意日時つき） |
+| `waitlist` タグ | ✅ 付く（**1回目は付かなかった** — タグ入力が候補をクリックするまで確定しない仕様。修正して再テスト） |
+| 完了メッセージ | ✅「You're on the list」に差し替え |
+| ヘッダー・フッター | ✅ 通常ページとして表示される |
+
+### メモ
+- アプリが自動生成した `templates/page.Forms - Waitlist.json`（フォームだけの素のページ）は
+  **削除**し、サイトのデザインに合わせた `page.waitlist.json` に置き換えた。
+- フォントはアプリ側の設定で **Libre Baskerville / Outfit** に合わせた（既定は Arial）。
+  ⚠️ **ボタンの色はアプリに設定項目が無く、黒のまま**。フォームの中身は外部から読み込まれるため
+  テーマの CSS も届かない。ブランドの赤にしたい場合はアプリの対応待ちになる。
+- ⚠️ **メール通知は OFF のまま**にした。通知先がストア設定のアドレス
+  （`s-yamanaka@credo-system.com`）になるため、送信の可否はオーナー判断。
+- ⚠️ 未公開のローンチページ (`sections/launch.liquid`) の登録フォームは**依然として張りぼて**
+  （メールをどこにも送らず「You're on the list」と出すだけ）。到達不能だが、公開するなら
+  この本物のフォームに差し替えること。
+
 ## v1.7.6 — 2026-08-11
 【Shop】オーナー指定の説明文に差し替え（`sections/page-shop.liquid`）。
 

@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-waitlist",
+      "settings": {}
+    },
+    "forms": {
+      "type": "apps",
+      "blocks": {
+        "waitlist_form": {
+          "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
+          "settings": {
+            "form_id": "1123369"
+          }
+        }
+      },
+      "block_order": ["waitlist_form"],
+      "settings": {}
+    }
+  },
+  "order": ["main", "forms"]
+}
