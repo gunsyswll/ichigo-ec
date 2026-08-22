@@ -3,6 +3,31 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.5.5 — 2026-08-11
+v1.5.4 の直しが浅かったのでやり直した。オーナー「変わっていないです」。
+
+**まず配信を確認した**（公開テーマ 186906968344 / About は `page-about` セクションを描画 /
+同じ段落は他に無い / 資産の更新時刻あり）→ **v1.5.4 は確かに反映されていた**。
+変わって見えなかったのは、**折り返し位置が "is" の後から "reaches" の後へ2語動いただけ**で、
+依然として句の途中だったから。指摘の本質は「行末が中途半端」ではなく
+**「文の切れ目で折れていない」**だった。
+
+**やり直し**: 段落に `.lede{text-wrap:balance}` を付けた。実測（640/820/1024/1280/1440px）で
+全幅とも**文のヒンジであるダッシュの直前で折れる**ようになった:
+
+```
+A single official import partner handles sourcing, customs, cold‑chain, and delivery
+— so what reaches you is traceable, compliant, and accountable, not grey‑market.
+```
+
+⚠️ **v1.5.4 で入れた `delivery —` 周りの U+00A0 は無効だったと判明。**
+UAX#14 では **em ダッシュ自体が改行機会**なので、前後を改行しない空白にしても
+ダッシュのところでは折れる。今回はその性質を逆に利用している。
+U+2011（`cold‑chain` / `grey‑market` の分割防止）は有効なので残した。
+
+`text-wrap:balance` は短い数行のブロック専用。本文全体には掛けていない（重く、長文に向かない）。
+非対応ブラウザでは無視され、v1.5.4 相当の折り返しになる。
+
 ## v1.5.4 — 2026-08-11
 クライアント指摘「不自然な改行箇所を修正」(About ページ `#importer` の導入文)。
 
