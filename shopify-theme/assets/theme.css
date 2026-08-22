@@ -630,7 +630,15 @@ html.reveal-js [data-reveal].in{opacity:1;transform:none}
    奇数ステップ(01/03)のカードは軸より上に出る組みなので、60px では地図の下端(180px)に対し
    カード上端が 178px と 2px 食い込んでいた。偶数ステップ(02/04)は軸の丸から 15px 空いているので
    +17px してその 15px に揃える。About の同名タイムラインには地図が無いので対象外。 */
-.geomap + .timeline{margin-top:77px}
+/* 2026-08-11 オーナー「今の間隔を2倍に」。
+   隙間15px の正体は .tl-card の calc(50% + 52px) と 丸の半径37px の差。
+   52 → 67px で 15→30px。奇数カードは上へ15px動くぶん、地図との距離が元に戻らないよう
+   タイムラインの上マージンは 77 → 107px。奇数カードが上へ15px動くのを打ち消す15px と、
+   地図との隙間自体を15→30pxにする15px の合計 +30px が要る（+15 だけだと相殺されて15pxのまま）。
+   About の同名タイムラインには適用しない（指摘は How it works のみ）。 */
+.geomap + .timeline{margin-top:107px}
+.geomap + .timeline .tl-step:nth-child(odd) .tl-card{bottom:calc(50% + 67px)}
+.geomap + .timeline .tl-step:nth-child(even) .tl-card{top:calc(50% + 67px)}
 .timeline::before{content:"";position:absolute;left:46px;right:46px;top:50%;height:2px;
   background:linear-gradient(90deg,transparent,rgba(234,208,164,.55) 7%,rgba(234,208,164,.55) 93%,transparent)}
 .tl-step{position:relative;flex:1;display:flex;align-items:center;justify-content:center;min-height:300px}
