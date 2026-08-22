@@ -3,6 +3,32 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.8.1 — 2026-08-11
+オーナー指摘「デザインを揃えて、アプリ側に変更できるはず」。**指摘のとおりでした。**
+
+v1.8.0 で「ボタンの色はアプリに設定が無い」と書いたのは**誤り**。色の設定は
+Forms アプリの管理画面ではなく、**テーマエディタでアプリブロックを選んだときの設定パネル**に
+ある（色5つ・テキスト配置・フォーム配置・余白4つ）。実画面で操作して合わせた。
+
+| 設定 | 変更前 | 変更後 |
+|---|---|---|
+| テキスト | `#202020` | **`#2B2420`**（サイトの `--ink`） |
+| ボタンの背景 | `#202020` | **`#D94050`**（`--red`） |
+| ボタンのラベル | `#FFFFFF` | 据え置き |
+| リンク | `#1878B9` | **`#D94050`** |
+| エラー | `#E02229` | 据え置き（エラーはブランド色と分けたいので変えない） |
+
+### この設定は `templates/page.waitlist.json` に保存される
+テーマエディタで保存すると、アプリブロックの `settings` にキーが書き込まれる。
+リポジトリ側にも取り込み済みなので、**今後の色変更は JSON を1行直して push するだけでよい**
+（`text_color` / `button_background_color` / `button_label_color` / `links_color` /
+`errors_color` / `text_alignment` / `form_alignment` / `padding_*`）。
+
+### 残る差（設定項目が無い）
+サイトのボタンは**角丸100px（ピル型）**だが、フォームのボタンは角丸が浅い。
+アプリブロックに角丸の設定は無く、フォームの中身は外部から読み込まれるためテーマの CSS も届かない。
+色・フォント・幅は一致した。
+
 ## v1.8.0 — 2026-08-11
 オーナー決定「C、Shopify Forms で本物のウェイトリストを作って」。**実装・稼働確認済み。**
 
@@ -30,8 +56,7 @@ The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py 
 - アプリが自動生成した `templates/page.Forms - Waitlist.json`（フォームだけの素のページ）は
   **削除**し、サイトのデザインに合わせた `page.waitlist.json` に置き換えた。
 - フォントはアプリ側の設定で **Libre Baskerville / Outfit** に合わせた（既定は Arial）。
-  ⚠️ **ボタンの色はアプリに設定項目が無く、黒のまま**。フォームの中身は外部から読み込まれるため
-  テーマの CSS も届かない。ブランドの赤にしたい場合はアプリの対応待ちになる。
+- **色も合わせた（v1.8.1 で追記）。**
 - ⚠️ **メール通知は OFF のまま**にした。通知先がストア設定のアドレス
   （`s-yamanaka@credo-system.com`）になるため、送信の可否はオーナー判断。
 - ⚠️ 未公開のローンチページ (`sections/launch.liquid`) の登録フォームは**依然として張りぼて**
