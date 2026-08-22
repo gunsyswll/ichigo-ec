@@ -86,7 +86,11 @@ nav.links a:hover::after,nav.links a.active::after{width:100%}
 
 /* sections + headings */
 section{padding:84px 0}
-.sec-head{text-align:center;max-width:42em;margin:0 auto 48px}
+/* 42em(739px) だと『Our strawberries are grown in Japan, …at their freshest.』だけが
+   2行になり、2行目が『their freshest.』の2語だけ垂れ下がっていた（1行に必要なのは794px）。
+   46em(810px) で1行に収まる。他の sec-head の段落・見出しは元から全部1行で、
+   広げても折り返しは一切変わらないことを実測で確認済み。 */
+.sec-head{text-align:center;max-width:46em;margin:0 auto 48px}
 .sec-head .eyebrow{display:block;margin-bottom:14px}
 /* 行間は字形の衝突を実測して決めている（Canvas の actualBoundingBox で
    上の行の降部と下の行の昇部を測り、行送りから引いた残りが『インクの隙間』）。

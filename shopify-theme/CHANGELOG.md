@@ -3,6 +3,33 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.6.3 — 2026-08-11
+オーナー指示「`Our strawberries are grown in Japan, and travel by truck, plane, and van to reach you
+at their freshest.` の freshest の前で改行しない」。
+
+### 実測でわかったこと
+まず全幅を走査したところ、**どの幅でも `freshest` が行頭に来ることはなかった**。
+実際に起きていたのは、2行目が **`their freshest.` の2語だけ**になって垂れ下がる状態。
+`text-wrap:pretty` は既に効いているが、Chrome の pretty が回避するのは**1語**の孤立行までで、
+2語は対象外だった。
+
+### 原因は文字組みではなく枠の幅（About と同じ型）
+- 1行に必要な幅: **794px**
+- `.sec-head` の枠: `max-width:42em` = **739px**（55px 足りない）
+- 親の `.wrap` は 1136px あり、**この見出しブロックだけが狭かった**
+
+### 修正
+`.sec-head{max-width:42em → 46em}`（810px）。**改行そのものが無くなり1行に収まった。**
+
+⚠️ `.sec-head` は全ページのセクション見出しで共有しているため、影響を先に実測した:
+- **他の `.sec-head p` は元から全部1行**で、広げても折り返しは変わらない（HOME 5件 / Shop 1件）
+- **`.sec-head h2` も全件変化なし**（2行のままの「Special strawberries come / from special farmers.」を含む）
+
+HOME / Farmers / Shop で適用後も再確認し、段落は全件1行・見出しは変化なし。
+
+ℹ️ 810px 未満の画面では当然折り返すが、そこでも `freshest` が行頭に来ないことは走査で確認済み
+（340〜860px の10段階）。
+
 ## v1.6.2 — 2026-08-11
 オーナー指示「他の見出しについて、同様な問題があったところのみ修正」。
 **一律に緩めるのではなく、FVと同じ『字形が接触している』箇所だけ**を実測で特定して直した。
