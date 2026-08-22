@@ -3,6 +3,19 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.5.10 — 2026-08-11
+クライアント指摘【文言削除】。Farmers ページ「We partner with only two growers」直下の説明文を削除。
+
+> So we can tell their full story, uphold strict quality standards, and put their name on
+> every box delivered to the Philippines. Tap a farm to read its story.
+
+`sections/page-farmers.liquid` の `.sec-head` 内 `<p>` を削除（ベタ書きのマークアップ）。
+アイキャッチ「WHY EACH FARM MATTERS」と見出しは残し、そのまま農家カードへ続く。
+実機で消えたことと、見出しブロックの体裁が崩れていないことを確認。
+
+⚠️ 削除した文には「put their name on every box」（全箱に生産者名を記載）という**運用上の約束**が
+含まれていた。同種の約束が他ページに残っていないかは未確認 — 必要なら洗い出す。
+
 ## v1.5.9 — 2026-08-11
 クライアント指摘「モバイルで How can we help の help がいちごのアイコンに被って見えない」。
 
