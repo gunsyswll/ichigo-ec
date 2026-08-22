@@ -3,6 +3,30 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.8.3 — 2026-08-11
+オーナー「全て10月1日に仮で設定」。**入荷予定日を全商品＋2ページに入れた。**
+
+| 場所 | 入れ方 | 値 |
+|---|---|---|
+| 全10商品 | メタフィールド `custom.next_arrival`（date型・Admin API） | `2026-10-01` |
+| ホームの Next Arrival 帯 | `templates/index.json` の `arrival_date`（手入力テキスト） | `October 1, 2026` |
+| Shop ページのヘッダー | `templates/page.shop.json` の `next_arrival`（手入力テキスト） | `October 1, 2026` |
+
+実機確認: ホーム帯 / Shop ヘッダー / 商品ページ（通常・Club・ギフトの3テンプレートすべて）で
+`October 1, 2026` を表示。
+
+### 入れていないもの（意図的）
+- **予約締切（Reservation Deadline）** と **配送予定（Delivery Window）** は空のまま。
+  締切は「入荷の何日前か」という運用ルールが決まらないと決められず、
+  当てずっぽうの日付を出すとお客様への約束になるため。ルールをもらえば同じ方法で一括投入できる。
+
+### ⚠️ 日付の置き場が3か所に分かれている
+商品はメタフィールド、ホームと Shop は手入力テキスト。**更新時に3か所直す必要があり、
+片方だけ古いという事故が起きる。** ホームと Shop も「一番近い `next_arrival` を自動で拾う」
+作りに変えられる（当方で実装可・追加費用なし）。オーナー判断待ち。
+
+⚠️ 2026-10-01 は**仮の日付**。実際の入荷が決まったら差し替えること。
+
 ## v1.8.2 — 2026-08-11
 オーナー「出来ていますが、上下の幅が狭く感じる」。ウェイトリストのページに余白を足した。
 
