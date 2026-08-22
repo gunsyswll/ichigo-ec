@@ -1084,7 +1084,7 @@ a.method.linkcard .link{display:inline-block;margin-top:10px;color:var(--red);fo
 
 
 /* --- Sale status badges (metafield custom.sale_status) --- */
-.pd-status{display:inline-block;margin:0 0 10px;padding:5px 14px;border-radius:999px;font-size:.78rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1.2}
+.pd-status{display:inline-block;margin:12px 0 10px;padding:5px 14px;border-radius:999px;font-size:.78rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1.2}
 .pd-status.pre{background:#c0394b;color:#fff}
 .pd-status.in{background:#eaf4ea;color:#2f6b3a;border:1px solid #cbe3cd}
 .pd-status.coming{background:#f3ece6;color:#6e6256;border:1px solid #ded3c8}

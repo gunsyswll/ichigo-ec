@@ -3,6 +3,18 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.10.1 — 2026-08-11
+オーナー指摘「IN STOCK のバッジが商品タイトルに近すぎ」。
+
+実測すると **タイトル下端 → バッジ上端が 2px**、バッジ下 → 説明文が 18px で、上下が極端に不均衡だった。
+`.pd-status` の上マージンを 0 → **12px**。結果: 上 **12px** / 下 18px。
+
+**ソート機能で追加されたものではありません。** バッジ自体は本日午前の **v1.5.3**
+（商品ごとの予約情報＝メタフィールドを入れたとき）に追加したもので、
+そのときから上の余白が足りていなかった。v1.10.0（並び替え・絞り込み）は商品ページを触っていない。
+
+In Stock / Sold Out / Pre-order / Coming Soon の4種すべて、通常・ギフト・Club の各テンプレートに適用。
+
 ## v1.10.0 — 2026-08-11
 オーナー選択「B: 導線をコレクションへ移し、Search & Discovery を入れて絞り込みも実装」。
 
