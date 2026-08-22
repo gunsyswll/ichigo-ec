@@ -60,7 +60,7 @@
     {%- elsif st == 'preorder' and product.available -%}<span class="pd-status pre">Pre-order</span>
     {%- elsif product.available -%}<span class="pd-status in">In Stock</span>
     {%- else -%}<span class="pd-status out">Sold Out</span>{%- endif -%}
-    {%- if product.description != blank and section.settings.overview_first != true -%}<p class="desc">{{ product.description | strip_html | truncatewords: 38 }}</p>{%- endif -%}
+    {%- if product.description != blank and section.settings.overview_first != true -%}<p class="desc">{{ product.description | strip_html | truncatewords: 38 | replace: ' — ', ' — ' }}</p>{%- endif -%}
     {%- if section.settings.badges != blank -%}
       <div class="pd-badges">{%- assign badges = section.settings.badges | split: ',' -%}{%- for b in badges -%}<span>{{ b | strip }}</span>{%- endfor -%}</div>
     {%- endif -%}

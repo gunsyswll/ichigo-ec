@@ -3,7 +3,7 @@
     <div class="sec-head" data-reveal><span class="eyebrow">{{ section.settings.eyebrow }}</span><h2>{{ section.settings.heading }}</h2><p>{{ section.settings.subtext }}</p></div>
     <div class="farmer-grid" data-stagger>
       {%- for block in section.blocks -%}
-      <a class="farmer" href="{{ block.settings.url | default: '/pages/farmers' }}" data-reveal="{{ block.settings.reveal }}" {{ block.shopify_attributes }}><div class="ph {{ block.settings.ph_class }}"></div><div class="farmer-info"><span class="loc">{{ block.settings.loc }}</span><h3>{{ block.settings.title }}</h3><p>{{ block.settings.text }}</p><span class="link">{{ block.settings.link_label }}</span></div></a>
+      <a class="farmer" href="{{ block.settings.url | default: '/pages/farmers' }}" data-reveal="{{ block.settings.reveal }}" {{ block.shopify_attributes }}><div class="ph {{ block.settings.ph_class }}"></div><div class="farmer-info"><span class="loc">{{ block.settings.loc }}</span><h3>{{ block.settings.title }}</h3><p>{{ block.settings.text | replace: ' — ', ' — ' }}</p><span class="link">{{ block.settings.link_label }}</span></div></a>
       {%- endfor -%}
     </div>
   </div>
