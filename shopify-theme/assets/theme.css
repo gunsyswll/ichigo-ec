@@ -178,11 +178,15 @@ html.reveal-js [data-reveal].in{opacity:1;transform:none}
 }
 
 /* ============ HOME components ============ */
-.hero{padding:62px 0 70px}
+/* FV の行間を広げたぶん上余白を詰め、CTA が折り返し位置より下に落ちないようにする
+   （実測: 見出し1.24 + 上余白62px で CTA 下端 865px / 画面 866px。48px にして 851px）。 */
+.hero{padding:48px 0 70px}
 .hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:54px;align-items:center}
-.hero h1{font-size:clamp(2.3rem,4.4vw,3.7rem);line-height:1.1}
+/* Libre Baskerville は J の降部が深く、行間1.1では『Japanese』のJと次行『strawberries』の
+   b/t の昇部の隙間が実測 0.7px しかなかった（ほぼ接触）。1.24 で 9.8px 確保。 */
+.hero h1{font-size:clamp(2.3rem,4.4vw,3.7rem);line-height:1.24}
 .hero h1 em{font-style:italic;color:var(--red)}
-.hero p.lead{margin:22px 0 30px;font-size:1.06rem;color:var(--greige-deep);max-width:30em}
+.hero p.lead{margin:22px 0 30px;font-size:1.06rem;line-height:1.7;color:var(--greige-deep);max-width:30em}
 .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
 .badges{display:flex;gap:30px;margin-top:34px;flex-wrap:wrap}
 .badge{display:flex;align-items:center;gap:11px;font-size:.82rem}
