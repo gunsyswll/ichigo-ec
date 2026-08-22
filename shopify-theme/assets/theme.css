@@ -88,14 +88,17 @@ nav.links a:hover::after,nav.links a.active::after{width:100%}
 section{padding:84px 0}
 .sec-head{text-align:center;max-width:42em;margin:0 auto 48px}
 .sec-head .eyebrow{display:block;margin-bottom:14px}
-.sec-head h2{font-size:clamp(1.9rem,3.2vw,2.6rem);line-height:1.14}
+/* 行間は字形の衝突を実測して決めている（Canvas の actualBoundingBox で
+   上の行の降部と下の行の昇部を測り、行送りから引いた残りが『インクの隙間』）。
+   2026-08-11 に全ページを走査し、隙間が字サイズの10%未満だったものだけ緩めた。 */
+.sec-head h2{font-size:clamp(1.9rem,3.2vw,2.6rem);line-height:1.22}
 .sec-head p{margin-top:14px;color:var(--greige-deep)}
 
 /* page hero (interior pages) */
 .page-hero{background:var(--pink);padding:54px 0;text-align:center}
 /* .crumb removed 2026-08-01 (client): the visible Home / Shop rows are gone;
    the trail now ships as BreadcrumbList JSON-LD from snippets/breadcrumb-schema.liquid */
-.page-hero h1{font-size:clamp(2.1rem,3.8vw,3.1rem);line-height:1.12}
+.page-hero h1{font-size:clamp(2.1rem,3.8vw,3.1rem);line-height:1.22}
 .page-hero h1 .r{color:var(--red)}
 .page-hero p{margin:16px auto 0;color:var(--greige-deep);max-width:44em}
 .page-tabs{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:26px}
@@ -276,7 +279,7 @@ html.reveal-js [data-reveal].in{opacity:1;transform:none}
 .detail-hero{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start;padding:50px 0}
 .detail-hero .ph{aspect-ratio:1/.9;border-radius:var(--r)}
 .dh-info .pin{display:inline-block;color:var(--red);border:1px solid var(--red);font-size:.72rem;font-weight:600;padding:4px 12px;border-radius:100px;margin-bottom:14px}
-.dh-info h1{font-size:2.6rem;line-height:1.05}.dh-info h1 .r{color:var(--red);display:block}
+.dh-info h1{font-size:2.6rem;line-height:1.22}.dh-info h1 .r{color:var(--red);display:block}
 .dh-info .quote{font-style:italic;font-family:'Libre Baskerville';color:var(--greige-deep);margin:14px 0}
 .spec{width:100%;border-collapse:collapse;margin:18px 0}
 .spec td{padding:11px 0;border-bottom:1px solid var(--line);font-size:.9rem}
@@ -446,7 +449,7 @@ html.reveal-js [data-reveal].in{opacity:1;transform:none}
 .statement::before{content:"";position:absolute;right:-180px;top:-120px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 65%)}
 .statement-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:50px;align-items:center;position:relative;z-index:2}
 .statement .eyebrow{color:rgba(255,255,255,.85);display:block;margin-bottom:16px}
-.statement h2{font-size:clamp(2.4rem,5.2vw,4.3rem);line-height:1.03;color:#fff;letter-spacing:-.02em}
+.statement h2{font-size:clamp(2.4rem,5.2vw,4.3rem);line-height:1.22;color:#fff;letter-spacing:-.02em}
 .statement h2 em{font-style:italic;color:#FBE3CF}
 .statement p{color:rgba(255,255,255,.88);margin:20px 0 28px;font-size:1.05rem}
 .st-berry{position:relative;display:grid;place-items:center}
