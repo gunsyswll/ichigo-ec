@@ -3,6 +3,29 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.7.0 — 2026-08-11
+【Shop】オーナー「売り切れは画像に Sold Out ＋ ボタンは Reserve、在庫ありは Purchase」。
+
+### 変更（`snippets/product-card.liquid`）
+| 状態 | 変更前 | 変更後 |
+|---|---|---|
+| 在庫あり | Reserve（赤） | **Purchase**（赤） |
+| 売り切れ | View（枠線） | **Reserve**（枠線）＋ 画像に SOLD OUT（従来どおり） |
+| Coming Soon / Pre-order | Reserve | **Coming Soon / Pre-order** |
+
+Coming Soon / Pre-order を分けたのは、商品ページ側のボタンがその文言で**押せない状態**に
+なっているため。一律 Purchase にすると「買えるように見えて買えない」カードができる。
+
+このカードは Shop・ホームの商品グリッド・コレクションページで共用なので、3か所すべてに反映される。
+
+### 実機確認（1440px, /pages/shop）
+Sky Berry Limited Box（在庫0）= SOLD OUT ＋ Reserve、他8点 = Purchase。
+
+### 🔴 未解決: 売り切れの Reserve は行き止まり
+Reserve を押すと商品ページに行くが、そこのボタンは **`disabled` の "Sold Out"**（実測）。
+予約の仕組みはサイトに1つも入っていない（Pending #28）。ボタン文言だけ先に変えた状態なので、
+**予約方式（#28）が決まるまでは「予約できそうに見えて予約できない」**。
+
 ## v1.6.9 — 2026-08-11
 【HOME】オーナー「ヘッダーに SNS のロゴを設置してほしい」。
 

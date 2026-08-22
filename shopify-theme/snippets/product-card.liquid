@@ -1,7 +1,13 @@
 {%- comment -%}
   Real product card. Param: product (a Shopify product object).
   Reuses the existing .card / .ph / .card-body design classes.
-  The "Reserve" button links to the product page (add-to-cart lives there).
+  ボタンはどれも商品ページへのリンク（カート投入は商品ページ側）。
+
+  ボタン文言（クライアント指定 2026-08-11）:
+    在庫あり            → Purchase
+    売り切れ            → Reserve（画像には SOLD OUT を重ねる）
+    Coming Soon / Pre-order → 商品ページのボタンと同じ文言にそろえる
+      （そろえないと、カードで Purchase → 商品ページでは押せない、という食い違いが出る）
 {%- endcomment -%}
 {%- liquid
   assign on_sale = false
@@ -30,7 +36,15 @@
         {{ product.price | money }}
         {%- if on_sale -%}<span class="sm"><s>{{ product.compare_at_price | money }}</s></span>{%- endif -%}
       </div>
-      <span class="btn btn-red">Reserve</span>
+      {%- liquid
+        assign cta = 'Purchase'
+        if cst == 'coming_soon'
+          assign cta = 'Coming Soon'
+        elsif cst == 'preorder'
+          assign cta = 'Pre-order'
+        endif
+      -%}
+      <span class="btn btn-red">{{ cta }}</span>
     </div>
   </a>
 {%- else -%}
@@ -45,7 +59,7 @@
       <h3>{{ product.title }}</h3>
       {%- if product.description != blank -%}<p class="desc">{{ product.description | strip_html | truncatewords: 14 }}</p>{%- endif -%}
       <div class="price">{{ product.price | money }}</div>
-      <a class="btn btn-ghost" href="{{ product.url }}">View</a>
+      <a class="btn btn-ghost" href="{{ product.url }}">Reserve</a>
     </div>
   </div>
 {%- endif -%}
