@@ -3,6 +3,26 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.6.8 — 2026-08-11
+オーナー「`Picked at dawn → at your door in ~36–48 hours.` と DAY 0 の間隔を 30px（同じ）に」。
+
+### 実測と修正
+DAY 0 のピル下端 → ship-banner 上端 = **25px** だった。
+偶数カードはタイムラインの箱から 22px はみ出しているため、
+実際の隙間 = `timeline下端 + banner上マージン46px − カード下端`。
+`.geomap + .timeline` の `padding-bottom` を **56 → 61px** に。
+
+### 結果（実機 1440px）
+| 箇所 | 隙間 |
+|---|---|
+| 地図 → 01 / 03 | 30px |
+| 丸 → 02 / 04 | 30px |
+| **DAY 0 → バナー** | **30.5px** |
+
+⚠️ **30.0px ちょうどには詰められなかった。** 60px だと 29.5px、61px だと 30.5px で、
+中間の 60.5px を指定しても Chrome 側で丸められて 29.5px のままだった（サブピクセルの丸め）。
+0.5px の差は視認できないため 61px 側を採用。
+
 ## v1.6.7 — 2026-08-11
 オーナー「今の間隔を2倍に」。How it works のカード〜軸／カード〜地図の隙間 15px → **30px**。
 

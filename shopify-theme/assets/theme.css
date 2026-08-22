@@ -636,7 +636,13 @@ html.reveal-js [data-reveal].in{opacity:1;transform:none}
    タイムラインの上マージンは 77 → 107px。奇数カードが上へ15px動くのを打ち消す15px と、
    地図との隙間自体を15→30pxにする15px の合計 +30px が要る（+15 だけだと相殺されて15pxのまま）。
    About の同名タイムラインには適用しない（指摘は How it works のみ）。 */
-.geomap + .timeline{margin-top:107px}
+/* 下の ship-banner との隙間も 30px に揃える。
+   偶数カードはタイムラインの箱から 22px はみ出しているので、
+   実際の隙間 = timeline下端 + banner上マージン46px − カード下端 = 25px だった。
+   padding-bottom を 56→61px（+5）で 30px になる。
+   ※ 実測 30.5px。60px だと 29.5px で、60.5px にしても Chrome 側で丸められて変わらなかった。
+     サブピクセルの丸めが原因で、ここが実質的な最小刻み。 */
+.geomap + .timeline{margin-top:107px;padding-bottom:61px}
 .geomap + .timeline .tl-step:nth-child(odd) .tl-card{bottom:calc(50% + 67px)}
 .geomap + .timeline .tl-step:nth-child(even) .tl-card{top:calc(50% + 67px)}
 .timeline::before{content:"";position:absolute;left:46px;right:46px;top:50%;height:2px;
