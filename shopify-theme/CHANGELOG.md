@@ -3,6 +3,30 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.11.1 — 2026-08-23
+オーナー指示で不要な説明文をさらに削除＋カートのバッジの数字ずれを修正。
+
+### 削除した説明文（4件＋Wishlist は前半のみ削除）
+| 文 | 場所 |
+|---|---|
+| `A special subscription plan for our Ichigo lovers.` | Ichigo Club |
+| `From a personal treat to a premium gift, select the product that fits your occasion.` | Choose your strawberries |
+| `Reserve your box from this week's harvest.` | Next Arrival 帯 |
+| `Arrival announcements, pop-ups, and seasonal notes from the farms.` | ブログ一覧 |
+| `Boxes you've saved for later.` を削除し `Your wishlist is stored on this device.` のみ残す | Wishlist |
+
+いずれも**既定値を消し、空欄なら要素ごと出さない**ようにしたので、今後は管理画面で空欄にするだけで消せる。
+実機で 5ページ（ホーム / Shop / ABOUT / ブログ / Wishlist）から消えていることを確認。
+
+⚠️ `templates/index.json` の `subtext` が**オブジェクトの末尾要素**だったため、
+最初の削除では前のカンマが残って JSON が壊れる形になり、値が消えていなかった（実機確認で発見）。
+テンプレートの値を消したら**必ずライブのページ本文で消えたか確認する**こと。
+
+### カートのバッジ（赤い丸の数字）
+`0` が丸の中心より **2px 下**にあった。原因は `.dot` が本文の `line-height:1.6` を継承し、
+行box（19.1px）が丸（15px）より高くなっていたこと。`line-height:1` を指定して **ずれ 2px → 0.5px 未満**に。
+数字が2桁になっても幅が揺れないよう `font-variant-numeric:tabular-nums` も追加。
+
 ## v1.11.0 — 2026-08-23
 オーナー指摘「モバイルで一文字だけ改行される／そもそも不要な文章が多い」。
 

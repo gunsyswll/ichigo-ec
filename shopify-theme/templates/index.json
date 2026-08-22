@@ -22,7 +22,6 @@
       "type": "index-arrival",
       "settings": {
         "title": "Next Arrival from Japan",
-        "subtitle": "Reserve your box from this week's harvest.",
         "arrival_date": "October 1, 2026",
         "deadline": "",
         "delivery": "",
@@ -43,8 +42,7 @@
       "type": "index-boxes",
       "settings": {
         "eyebrow": "Shop or Reserve",
-        "heading": "Choose your strawberries",
-        "subtext": "From a personal treat to a premium gift, select the product that fits your occasion."
+        "heading": "Choose your strawberries"
       }
     },
     "statement": {
@@ -138,7 +136,6 @@
       "settings": {
         "eyebrow": "The Ichigo Club",
         "heading": "A new lot at your door, every month.",
-        "subtext": "A special subscription plan for our Ichigo lovers.",
         "cta_label": "View Subscription Plan →",
         "cta_url": ""
       }

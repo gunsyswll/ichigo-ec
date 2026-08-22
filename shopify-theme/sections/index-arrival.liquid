@@ -1,5 +1,5 @@
 <div class="wrap"><div class="arrival-strip" data-reveal>
-  <div class="as-title">{{ section.settings.title }}<small>{{ section.settings.subtitle }}</small></div>
+  <div class="as-title">{{ section.settings.title }}{% if section.settings.subtitle != blank %}<small>{{ section.settings.subtitle }}</small>{% endif %}</div>
   <div class="as-data">
     {%- if section.settings.arrival_date != blank -%}<div class="d"><label>Arrival Date</label><b class="hot">{{ section.settings.arrival_date }}</b></div>{%- endif -%}
     {%- if section.settings.deadline != blank -%}<div class="d"><label>Reservation Deadline</label><b>{{ section.settings.deadline }}</b></div>{%- endif -%}
@@ -15,7 +15,7 @@
   "name": "Arrival strip",
   "settings": [
     { "type": "text", "id": "title", "label": "Title", "default": "Next Arrival from Japan" },
-    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Reserve your box from this week's harvest." },
+    { "type": "text", "id": "subtitle", "label": "Subtitle（空でよい）" },
     { "type": "text", "id": "arrival_date", "label": "Arrival date" },
     { "type": "text", "id": "deadline", "label": "Reservation deadline" },
     { "type": "text", "id": "delivery", "label": "Delivery window" },

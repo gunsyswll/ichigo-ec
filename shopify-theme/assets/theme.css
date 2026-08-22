@@ -80,7 +80,7 @@ nav.links a:hover::after,nav.links a.active::after{width:100%}
 .nav-right{display:flex;align-items:center;gap:16px}
 .icon-btn{width:36px;height:36px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--greige-deep);position:relative;transition:.2s}
 .icon-btn:hover{border-color:var(--ink);color:var(--ink)}
-.icon-btn .dot{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:.68rem;width:15px;height:15px;border-radius:50%;display:grid;place-items:center;font-weight:700}
+.icon-btn .dot{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:.68rem;width:15px;height:15px;border-radius:50%;display:grid;place-items:center;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}   /* line-height を 1 にしないと本文の 1.6 を継承し、行box が 15px の丸より高くなって数字が下にずれる */
 .burger{display:none;flex-direction:column;gap:5px;cursor:pointer}
 /* ---- SNS icons (header nav + mobile drawer + footer). URLs: テーマ設定 → SNS ----
    ヘッダーは 1120px 未満だと実測でスペースが無い（1024px では SNS 無しでも

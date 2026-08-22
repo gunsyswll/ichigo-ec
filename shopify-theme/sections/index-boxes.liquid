@@ -1,6 +1,6 @@
 <section class="boxes" id="shop">
   <div class="wrap">
-    <div class="sec-head" data-reveal><span class="eyebrow">{{ section.settings.eyebrow }}</span><h2>{{ section.settings.heading }}</h2><p>{{ section.settings.subtext }}</p></div>
+    <div class="sec-head" data-reveal><span class="eyebrow">{{ section.settings.eyebrow }}</span><h2>{{ section.settings.heading }}</h2>{% if section.settings.subtext != blank %}<p>{{ section.settings.subtext }}</p>{% endif %}</div>
     <div class="box-grid" data-stagger>
       {%- paginate collections.all.products by 4 -%}
         {%- for product in collections.all.products -%}
@@ -18,7 +18,7 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Shop or Reserve" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Choose your strawberries" },
-    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "From a personal treat to a premium gift, select the product that fits your occasion." }
+    { "type": "textarea", "id": "subtext", "label": "Subtext（空でよい）" }
   ],
   "presets": [
     { "name": "Choose your box" }
