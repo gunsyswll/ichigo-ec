@@ -3,6 +3,29 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.5.7 — 2026-08-11
+オーナー「わざと折り返さなくてもいい。ボーダーをFITにして画面に合わせて自動改行にして」。
+
+### 本当の原因は折り返しではなく**幅**だった
+実測: 見出しの罫線 **1136px** / カード列 **1136px** / **段落だけ 915px**（`max-width:52em`）。
+段落だけが手前で切れていたので、**どこで折れても「早すぎる」ように見えていた**。
+v1.5.4〜v1.5.6 は3回とも「どこで折るか」を調整していたが、直すべきは器のほうだった。
+
+### 変更
+- 段落の `max-width:52em` を撤去 → 親（`.wrap` の内容幅）に一致。右端が罫線・カードと揃う。
+- `<br class="lb">` と CSS の `.lede .lb` を撤去 → **強制改行ゼロ、完全な自動折り返し**。
+- 折ってはいけない箇所の糊だけ残した（改行を強制するものではない）:
+  U+2011 = `cold‑chain` / `grey‑market` の分割防止、
+  U+00A0 = `is traceable,` / `and accountable,`（行末が機能語になるのを防ぐ）。
+
+### 実機で確認（Chrome / 実ストア）
+| 幅 | 段落幅 = カード幅 | 折り返し |
+|---|---|---|
+| 1685px | 1136 = 1136 ✅ | `…you is traceable, compliant,` / `and accountable, not grey‑market.` |
+| 500px | 460 = 460 ✅ | `…sourcing,` / `customs, cold‑chain, and delivery — so what reaches` / `you is traceable, compliant, and accountable,` / `not grey‑market.` |
+
+強制改行 0 / 行末に機能語・ダッシュ・割れたハイフンなし。スクリーンショットでも確認済み。
+
 ## v1.5.6 — 2026-08-11
 オーナー「さらに酷くなった、so / what reach になっている」。v1.5.5 の `text-wrap:balance` を撤去。
 
