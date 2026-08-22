@@ -64,7 +64,7 @@
       "settings": {
         "eyebrow": "A little luxury from Japan",
         "heading": "Grown in Japan.<br><em>Loved</em> in the<br>Philippines.",
-        "text": "One bite and you will taste the difference — a perfect balance of sweetness and tanginess. Reserve a box for the moment you deserve.",
+        "text": "One bite and you will taste the difference: a perfect balance of sweetness and tanginess. Reserve a box for the moment you deserve.",
         "cta_label": "Reserve your box →",
         "cta_url": "",
         "tag1": "15° Brix sweetness",
@@ -79,7 +79,7 @@
           "settings": {
             "loc": "Farm A · Chiba, Japan",
             "title": "Berry Farm",
-            "text": "The Tanaka family, est. 1992 — third-generation Amaou growers focused on flavour, sweetness, and careful temperature control.",
+            "text": "The Tanaka family, est. 1992: third-generation Amaou growers focused on flavour, sweetness, and careful temperature control.",
             "link_label": "View Farm Story →",
             "url": "/pages/farmers#farm-a",
             "ph_class": "",
@@ -91,7 +91,7 @@
           "settings": {
             "loc": "Farm B · Chiba, Japan",
             "title": "Sun Harvest",
-            "text": "The Sato family, est. 1985 — perfecting the Tochiotome berry with advanced cultivation and selection for beautiful colour.",
+            "text": "The Sato family, est. 1985: perfecting the Tochiotome berry with advanced cultivation and selection for beautiful colour.",
             "link_label": "View Farm Story →",
             "url": "/pages/farmers#farm-b",
             "ph_class": "soft",
@@ -106,7 +106,7 @@
       "settings": {
         "eyebrow": "Meet the farmers behind each strawberry",
         "heading": "Special strawberries come from special farmers.",
-        "subtext": "Quality first — we've selected the finest farmers from all over Japan."
+        "subtext": "Quality first. We've selected the finest farmers from all over Japan."
       }
     },
     "howitworks": {
@@ -114,7 +114,7 @@
       "settings": {
         "eyebrow": "The journey",
         "heading": "From Japan to your door",
-        "subtext": "Our strawberries are grown in Japan — and travel by truck, plane, and van to reach you at their freshest."
+        "subtext": "Our strawberries are grown in Japan, and travel by truck, plane, and van to reach you at their freshest."
       }
     },
     "club": {
@@ -124,7 +124,7 @@
           "type": "feat",
           "settings": {
             "title": "Monthly Deliveries",
-            "text": "One delivery a month, ongoing — pause or cancel anytime."
+            "text": "One delivery a month, ongoing. Pause or cancel anytime."
           }
         },
         "c2": {
@@ -203,7 +203,7 @@
           "type": "qa",
           "settings": {
             "q": "When will the strawberries be delivered?",
-            "a": "Delivery follows each Japan arrival. Once you reserve, you'll see the exact delivery window — typically 1–2 days after the berries land and clear customs."
+            "a": "Delivery follows each Japan arrival. Once you reserve, you'll see the exact delivery window: typically 1–2 days after the berries land and clear customs."
           }
         },
         "q2": {
@@ -231,7 +231,7 @@
           "type": "qa",
           "settings": {
             "q": "Can I send this as a gift?",
-            "a": "Yes — the Premium Gift Box is made for it, and you can ship to any address in our delivery area with a personal note."
+            "a": "Yes. The Premium Gift Box is made for it, and you can ship to any address in our delivery area with a personal note."
           }
         }
       },

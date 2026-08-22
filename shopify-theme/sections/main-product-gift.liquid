@@ -41,7 +41,7 @@
     {%- elsif st == 'preorder' and product.available -%}<span class="pd-status pre">Pre-order</span>
     {%- elsif product.available -%}<span class="pd-status in">In Stock</span>
     {%- else -%}<span class="pd-status out">Sold Out</span>{%- endif -%}
-    <p class="desc">{{ section.settings.gift_intro | default: 'A premium box, wrapped to give. Add a message, choose a ribbon, and we ship it ready to gift — straight to them or to you.' }}</p>
+    <p class="desc">{{ section.settings.gift_intro | default: 'A premium box, wrapped to give. Add a message, choose a ribbon, and we ship it ready to gift, straight to them or to you.' }}</p>
     {%- if section.settings.badges != blank -%}
       <div class="pd-badges">{%- assign badges = section.settings.badges | split: ',' -%}{%- for b in badges -%}<span>{{ b | strip }}</span>{%- endfor -%}</div>
     {%- endif -%}
@@ -113,7 +113,7 @@
 
         <div class="gift-field">
           <label for="gift-message">Gift message <span class="gift-opt">(optional)</span></label>
-          <textarea id="gift-message" name="properties[Gift message]" maxlength="200" rows="3" placeholder="Write a short note — we'll print it on the gift card." oninput="document.getElementById('gift-msg-count').textContent=this.value.length"></textarea>
+          <textarea id="gift-message" name="properties[Gift message]" maxlength="200" rows="3" placeholder="Write a short note. We'll print it on the gift card." oninput="document.getElementById('gift-msg-count').textContent=this.value.length"></textarea>
           <div class="gift-hint"><span id="gift-msg-count">0</span>/200 characters</div>
         </div>
 
@@ -143,7 +143,7 @@
           {%- for group in product.selling_plan_groups -%}{%- for plan in group.selling_plans -%}
             <label class="po-opt"><input type="radio" name="selling_plan" value="{{ plan.id }}"> <span><b>{{ plan.name }}</b>{%- for a in variant.selling_plan_allocations -%}{%- if a.selling_plan.id == plan.id %} — {{ a.per_delivery_price | money }} / delivery{%- endif -%}{%- endfor -%}</span></label>
           {%- endfor -%}{%- endfor -%}
-          <p class="po-note">Subscriptions renew automatically — you're billed &amp; shipped each cycle, and can cancel anytime from your account.</p>
+          <p class="po-note">Subscriptions renew automatically. You're billed &amp; shipped each cycle, and can cancel anytime from your account.</p>
         </div>
       {%- endif -%}
 
@@ -161,10 +161,10 @@
       <div class="pd-cta">
         {%- if is_coming -%}
           <button type="button" class="btn btn-ghost btn-block" style="padding:16px" disabled>Coming Soon</button>
-          <p class="pd-status-note">Reservations open soon — join the waitlist to be notified.</p>
+          <p class="pd-status-note">Reservations open soon. Join the waitlist to be notified.</p>
         {%- elsif product.available -%}
           <button type="submit" name="add" class="btn btn-red btn-block" style="padding:16px">{% if st == 'preorder' %}Pre-order Gift{% else %}{{ section.settings.cta_label | default: 'Add Gift to Cart' }}{% endif %}</button>
-          {%- if st == 'preorder' and v3 != blank -%}<p class="pd-status-note">Pre-order — ships in the {{ v3 }} delivery window.</p>{%- endif -%}
+          {%- if st == 'preorder' and v3 != blank -%}<p class="pd-status-note">Pre-order: ships in the {{ v3 }} delivery window.</p>{%- endif -%}
         {%- else -%}
           <button type="submit" name="add" class="btn btn-ghost btn-block" style="padding:16px" disabled>Sold Out</button>
         {%- endif -%}
@@ -305,7 +305,7 @@
       "type": "textarea",
       "id": "gift_intro",
       "label": "Intro copy",
-      "default": "A premium box, wrapped to give. Add a message, choose a ribbon, and we ship it ready to gift — straight to them or to you."
+      "default": "A premium box, wrapped to give. Add a message, choose a ribbon, and we ship it ready to gift, straight to them or to you."
     },
     {
       "type": "text",
@@ -327,7 +327,7 @@
       "type": "text",
       "id": "gift_block_note",
       "label": "Gift options note",
-      "default": "Personalize the box — all details print on the gift card."
+      "default": "Personalize the box. All details print on the gift card."
     },
     {
       "type": "header",
@@ -470,7 +470,7 @@
       "type": "richtext",
       "id": "farmer_body",
       "label": "Body",
-      "default": "<p><b>A family-run greenhouse focused on doing one craft well.</b></p><p>The family behind Farm A grows on a small scale — small enough that every plant is hand-inspected.</p>"
+      "default": "<p><b>A family-run greenhouse focused on doing one craft well.</b></p><p>The family behind Farm A grows on a small scale, small enough that every plant is hand-inspected.</p>"
     },
     {
       "type": "text",

@@ -3,7 +3,7 @@
     <div class="sec-head" data-reveal><span class="eyebrow">{{ section.settings.eyebrow }}</span><h2>{{ section.settings.heading }}</h2><p>{{ section.settings.subtext }}</p></div>
     <div class="farmer-grid" data-stagger>
       {%- for block in section.blocks -%}
-      <a class="farmer" href="{{ block.settings.url | default: '/pages/farmers' }}" data-reveal="{{ block.settings.reveal }}" {{ block.shopify_attributes }}><div class="ph {{ block.settings.ph_class }}"></div><div class="farmer-info"><span class="loc">{{ block.settings.loc }}</span><h3>{{ block.settings.title }}</h3><p>{{ block.settings.text | replace: ' — ', ' — ' }}</p><span class="link">{{ block.settings.link_label }}</span></div></a>
+      <a class="farmer" href="{{ block.settings.url | default: '/pages/farmers' }}" data-reveal="{{ block.settings.reveal }}" {{ block.shopify_attributes }}><div class="ph {{ block.settings.ph_class }}"></div><div class="farmer-info"><span class="loc">{{ block.settings.loc }}</span><h3>{{ block.settings.title }}</h3><p>{{ block.settings.text }}</p><span class="link">{{ block.settings.link_label }}</span></div></a>
       {%- endfor -%}
     </div>
   </div>
@@ -15,7 +15,7 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Meet the farmers behind each strawberry" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Special strawberries come from special farmers." },
-    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Quality first — we've selected the finest farmers from all over Japan." }
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Quality first. We've selected the finest farmers from all over Japan." }
   ],
   "blocks": [
     { "type": "farmer", "name": "Farmer", "settings": [

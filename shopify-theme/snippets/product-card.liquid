@@ -25,7 +25,7 @@
     </div>
     <div class="card-body">
       <h3>{{ product.title }}</h3>
-      {%- if product.description != blank -%}<p class="desc">{{ product.description | strip_html | truncatewords: 14 | replace: ' — ', ' — ' }}</p>{%- endif -%}
+      {%- if product.description != blank -%}<p class="desc">{{ product.description | strip_html | truncatewords: 14 }}</p>{%- endif -%}
       <div class="price">
         {{ product.price | money }}
         {%- if on_sale -%}<span class="sm"><s>{{ product.compare_at_price | money }}</s></span>{%- endif -%}
@@ -43,7 +43,7 @@
     </div>
     <div class="card-body">
       <h3>{{ product.title }}</h3>
-      {%- if product.description != blank -%}<p class="desc">{{ product.description | strip_html | truncatewords: 14 | replace: ' — ', ' — ' }}</p>{%- endif -%}
+      {%- if product.description != blank -%}<p class="desc">{{ product.description | strip_html | truncatewords: 14 }}</p>{%- endif -%}
       <div class="price">{{ product.price | money }}</div>
       <a class="btn btn-ghost" href="{{ product.url }}">View</a>
     </div>

@@ -3,6 +3,46 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.6.0 — 2026-08-11
+オーナー指示「全ページで多用されている em ダッシュ（—）を減らし、別の語法にしたい。AIの癖なので」。
+
+### 範囲と結果
+| 対象 | 修正前 | 修正後 |
+|---|---|---|
+| テーマ（本文・スキーマ既定値） | 94 | **2**（コード内コメントのみ） |
+| テンプレートJSON（保存済み設定） | 10 | 0 |
+| 商品説明（8商品） | 12 | 0 |
+| ブログ記事（4本） | 28 | 0 |
+| **本文合計** | **約135** | **顧客に見えるのは 7 箇所のみ** |
+
+### やり方
+機械的な一括置換はしていない。**全94箇所に通し番号を振り、1件ずつ置換文字を指定**した。
+規則ベースの初案はコンマ・スプライス（`No minimum, reserve a single box`）を10件ほど作ったため破棄。
+
+使い分け:
+- **同格・言い換えが続く** → コロン。`the exact delivery window: typically 1–2 days…`
+- **接続詞が続く** → カンマ。`grown in Japan, and travel by truck…`
+- **独立した節が続く** → 文を切って大文字化。`No minimum. Reserve a single box…` / `Yes. You'll receive…`
+- **ラベルの対** → 中黒。`Farm A · Berry Farm`（サイト既存の `Farm A · Chiba, Japan` に合わせた）
+- **挟み込みの2本組** → 両方カンマ。`breeding programs, often run by prefectural research stations, chase…`
+
+**語は1つも変えていない。句読点と接続だけ。**
+
+### 意図的に残した7箇所
+- 引用の署名 `— our grower, Farm A`（3件）: 英文組版の標準。ダッシュが正しい用法。
+- 購入オプションの区切り `One-time purchase — ₱4,800.00`（2件）: UIの区切りで散文ではない。
+- **商品名** `Farm B — Seasonal Box` / `Ichigo Club — 3-Month Prepaid`（2件）:
+  商品名の変更は文言修正ではなくデータ変更なので独断で行わない。要否は要判断。
+
+### 後片付け
+v1.5.8 で入れたダッシュ糊付けフィルタ（`replace: ' — ', ' —\u00A0'`）は対象が消えたため4箇所とも撤去。
+ベタ書きに入れた U+00A0 も本文からは消滅（残るのはコード内コメント1件のみ）。
+
+### ⚠️ 取りこぼしの原因（記録）
+除外条件を**行単位**で書いたため、引用の署名（`— our grower`）と同じ行にあった
+**引用文中のダッシュ1件を巻き添えで除外**していた。実機スキャンで発見して修正。
+除外はダッシュ単位で判定すべきだった。
+
 ## v1.5.10 — 2026-08-11
 クライアント指摘【文言削除】。Farmers ページ「We partner with only two growers」直下の説明文を削除。
 
