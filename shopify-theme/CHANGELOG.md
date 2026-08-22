@@ -3,6 +3,27 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.7.2 — 2026-08-11
+【Farmers】クライアント指摘3件。すべて `sections/page-farmers.liquid`。
+
+| # | 指摘 | 対応 |
+|---|---|---|
+| 1 | 「Where **your** strawberries grow」→「Where **our** strawberries grow」 | 修正 |
+| 2 | 「Our Standard for every grower」を削除 | 見出しの行だけ削除（オーナー確認済み）。小文字ラベル「HOW WE SELECT OUR PARTNER FARMS」と4つのカードは残す |
+| 3 | 以前の文言修正が未反映（「We partner with only two growers」のまま） | 「We've selected the finest farmers from all over Japan」に差し替え |
+
+### #3 の出典
+2026-07-18 の校閲 docx 項目17 が
+`We work with two growers only, so we can tell their full story.`
+→ `Quality first. We've selected the finest farmers from all over Japan.`
+と指示していた。**これはホームの Meet the Farmers に適用済み**だったが、
+Farmers ページの見出しは同じ主張の**別の文**（`We partner with only two growers`）で、
+校閲 docx が行単位で対象を指定していたため取りこぼしていた。承認済みの文言に合わせて差し替え。
+
+### ⚠️ 同じ主張がもう1か所ある（未変更）
+`sections/page-about.liquid:25` に **「Two farms we know by name, not a marketplace.」**。
+ABOUT ページなので今回の指示範囲外。残すか直すかは要確認。
+
 ## v1.7.1 — 2026-08-11
 オーナー「Purchase ボタンが align していない」。
 
