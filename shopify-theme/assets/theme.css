@@ -809,12 +809,6 @@ a.method.linkcard .link{display:inline-block;margin-top:10px;color:var(--red);fo
   .jump-tabs{position:sticky;top:calc(var(--header-h,64px) - 1px);flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;gap:8px;padding:10px 14px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
   .jump-tabs::-webkit-scrollbar{display:none}
   .seg-tab{flex:0 0 auto;white-space:nowrap;font-size:.8rem;padding:8px 16px}
-  /* 商品ページのタブ（.pd-tabs）も同じ横スワイプ処理に。中央寄せのままだと、タブが横幅に
-     収まらないときに先頭「Overview」が左端で見切れる（client 2026-08-24）。スマホは左寄せ＋
-     横スクロール、PC は既定の中央寄せのまま。 */
-  .pd-tabs{justify-content:flex-start;padding:12px 14px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .pd-tabs::-webkit-scrollbar{display:none}
-  .pd-tabs a{flex:0 0 auto}
 }
 
 /* ===== mark8: product detail — full p24 build ===== */
@@ -851,6 +845,15 @@ a.method.linkcard .link{display:inline-block;margin-top:10px;color:var(--red);fo
 .pd-tabs{position:sticky;top:calc(var(--header-h,72px) - 1px);z-index:40;background:rgba(251,246,241,.94);backdrop-filter:blur(8px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;justify-content:center;gap:8px;padding:12px 32px;margin:0;overflow-x:auto}
 .pd-tabs a{white-space:nowrap;font-size:.86rem;font-weight:500;color:var(--greige-deep);padding:8px 16px;border-radius:100px;transition:.2s}
 .pd-tabs a:hover,.pd-tabs a.on{background:var(--red);color:#fff}
+/* 商品ページのタブをスマホで「左寄せ＋横スワイプ」に。中央寄せ（上の既定）のままだと、タブが横幅に
+   収まらないときに先頭「Overview」が左端で見切れる（client 2026-08-24, WebKit実機で再現確認）。
+   ⚠️ この上書きは .pd-tabs の既定 rule の「後ろ」に置くこと。@media はセレクタの詳細度を上げないので、
+   640px ブロックを先頭側（他コンポーネントの mobile 群）に置くと、後ろにある .pd-tabs{center} に負ける。 */
+@media(max-width:640px){
+  .pd-tabs{justify-content:flex-start;padding:12px 14px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .pd-tabs::-webkit-scrollbar{display:none}
+  .pd-tabs a{flex:0 0 auto}
+}
 
 /* checklist (overview + what's inside) */
 .checklist{display:flex;flex-direction:column;gap:14px}
