@@ -809,6 +809,12 @@ a.method.linkcard .link{display:inline-block;margin-top:10px;color:var(--red);fo
   .jump-tabs{position:sticky;top:calc(var(--header-h,64px) - 1px);flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;gap:8px;padding:10px 14px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
   .jump-tabs::-webkit-scrollbar{display:none}
   .seg-tab{flex:0 0 auto;white-space:nowrap;font-size:.8rem;padding:8px 16px}
+  /* 商品ページのタブ（.pd-tabs）も同じ横スワイプ処理に。中央寄せのままだと、タブが横幅に
+     収まらないときに先頭「Overview」が左端で見切れる（client 2026-08-24）。スマホは左寄せ＋
+     横スクロール、PC は既定の中央寄せのまま。 */
+  .pd-tabs{justify-content:flex-start;padding:12px 14px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .pd-tabs::-webkit-scrollbar{display:none}
+  .pd-tabs a{flex:0 0 auto}
 }
 
 /* ===== mark8: product detail — full p24 build ===== */

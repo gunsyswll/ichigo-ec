@@ -3,6 +3,14 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.11.3 — 2026-08-24
+商品ページのタブ「Overview」がスマホで左端に見切れる不具合を修正（Notion「スマホで"Overview"が切れている」）。
+`.pd-tabs` が `justify-content:center` のままで、タブが横幅に収まらないと中央寄せのはみ出しが左右
+両方に出て先頭タブが左端の外へ（スクロールでも戻せない）行っていた。既に About ページのタブ
+（`.jump-tabs`）に入れてある「スマホ＝左寄せ＋横スワイプ」処理を `.pd-tabs` にも `@media(max-width:640px)`
+で追加（PC は従来どおり中央寄せ）。実機DOM検証: 幅360pxに絞ると先頭タブ左端が **-66px（見切れ）→ +14px
+（可視）** に。`assets/theme.css`。
+
 ## v1.11.2 — 2026-08-24
 Waitlist ページの依頼（Notion「Waitlistのデザイン修正」全4件）に対応。
 
