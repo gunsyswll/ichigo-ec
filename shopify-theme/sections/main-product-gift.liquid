@@ -274,10 +274,18 @@
   window.addEventListener('scroll',onScroll,{passive:true});onScroll();
   var tabs=[].slice.call(document.querySelectorAll('#pdtabs a'));
   var secs=tabs.map(function(t){return document.querySelector(t.getAttribute('href'));});
+  var pdnav=document.getElementById('pdtabs'),lastAct=-1;
   window.addEventListener('scroll',function(){
     var y=window.scrollY+140,act=0;
     secs.forEach(function(s,i){if(s&&s.offsetTop<=y)act=i;});
     tabs.forEach(function(t,i){t.classList.toggle('on',i===act);});
+    // アクティブなタブが変わったら、そのタブが中央に来るようタブ列を横スクロール（縦スクロールと連動）。
+    // 横方向のみ scrollTo するのでページの縦位置には影響しない。PC は溢れないので実質no-op。
+    if(act!==lastAct){
+      lastAct=act;
+      var el=tabs[act];
+      if(el&&pdnav){pdnav.scrollTo({left:Math.max(0,el.offsetLeft-(pdnav.clientWidth-el.offsetWidth)/2),behavior:'smooth'});}
+    }
   },{passive:true});
 })();
 </script>

@@ -3,6 +3,15 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.11.5 — 2026-08-24
+商品ページのタブ列を**縦スクロールと連動して横スクロール**するように（Notion「下行くと What's Inside が
+隠れる。スクロールと連動できる？」）。v1.11.4 でタブ列を左寄せ＋横スワイプにしたため、下にスクロールして
+「What's Inside」がアクティブになっても、タブ列は左（Overview）のままで右端に見切れていた。FIX: スクロール
+スパイJS（`#pdtabs`）で、アクティブなタブが変わったら `pdnav.scrollTo({left})` でそのタブが中央に来るよう
+**横方向のみ**スクロール（縦位置には非干渉、PCは溢れないので実質no-op）。`main-product-gift.liquid` と
+`main-product.liquid` 両方。WebKit(iPhone13/390px)実機で確認: #inside まで下スクロール→ activeTab
+"What's Inside"、navScrollLeft 0→130、右端見切れ解消（activeFullyVisible=true）、スクショで目視確認。
+
 ## v1.11.4 — 2026-08-24
 v1.11.3 の「Overview 見切れ」修正が**効いていなかったのを修正**（オーナー実機で継続報告）。
 原因: v1.11.3 は `.pd-tabs` の mobile 上書きを既存の `@media(max-width:640px)` 群（ファイル前方）に
