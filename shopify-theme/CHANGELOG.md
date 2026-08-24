@@ -3,6 +3,24 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.11.2 — 2026-08-24
+Waitlist ページの依頼（Notion「Waitlistのデザイン修正」全4件）に対応。
+
+### ④ フォームの横幅を約80%に（実装済み・実機確認）
+「Join the Waitlist」フォームが画面幅ぴったりに張り付く問題。フォームは Shopify Forms の
+Web Component `<shopify-forms-embed>`（内部はシャドウDOMで隔離）。ホスト要素はライトDOM側なので
+そこに `max-width:80%; margin-inline:auto` を当てた（`assets/theme.css`）。
+実機確認: viewport 1440px で embed 1440→**1152px（=80%）**、左右 144px ずつのセンター寄せ。
+`max-width` は割合指定なのでスマホでも同じく80%（＝左右に余白）になる。
+
+### ①②③ 対応不可（技術的制約）— 見送り/作り替え判断待ち
+①Be first… を見出しから離す ②Be first… 拡大 ③By signing up… 拡大 は、いずれもフォーム内部の
+文字サイズ（見出し22px / Be first 14px / disclaimer 10px）と見出し下余白（5px）で、**Shopify Forms の
+シャドウDOM内に固定値でハードコード**。`::part` 等の styling hook も CSS変数も無く（実機で確認）、
+テーマCSSでは一切変更できない。アプリのブロック設定にも文字サイズ項目なし（色・配置・余白のみ）。
+→ ①②③を実現するにはフォームを Shopify Forms から自前テーマフォームへ作り替える必要あり（送信先＝
+マーケ連携も作り直しの大きめ変更）。オーナーの「作り替える/見送る」判断待ち。
+
 ## v1.11.1 — 2026-08-23
 オーナー指示で不要な説明文をさらに削除＋カートのバッジの数字ずれを修正。
 

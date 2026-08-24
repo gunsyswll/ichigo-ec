@@ -116,6 +116,13 @@ section{padding:84px 0}
    足りないぶんをセクション（テンプレートで `forms` と名付けたので id が __forms で終わる）に足す。 */
 .page-hero--waitlist{padding:84px 0}
 [id$="__forms"]{padding:28px 0}
+/* 2026-08-24 client req #4: フォームが画面幅ぴったりに広がるのを避け、内容を約80%幅に
+   収めて左右に余白を作る（主にスマホの全幅張り付き対策）。フォーム本体は Shopify Forms の
+   Web Components（<shopify-forms-embed>、内部はシャドウDOMで隔離）なので内部には触れられない。
+   ホスト要素はライトDOM側にあるので、その幅だけをここで制御する。
+   実測確認: 1440px幅で embed 1440→1152px（=80%）に縮小。①②③（文字サイズ/見出し余白）は
+   シャドウDOM内で固定のためテーマCSSでは変更不可（styling hookなし）。 */
+[id$="__forms"] shopify-forms-embed{display:block;max-width:80%;margin-inline:auto}
 /* .crumb removed 2026-08-01 (client): the visible Home / Shop rows are gone;
    the trail now ships as BreadcrumbList JSON-LD from snippets/breadcrumb-schema.liquid */
 .page-hero h1{font-size:clamp(2.1rem,3.8vw,3.1rem);line-height:1.22}
