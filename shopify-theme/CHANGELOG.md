@@ -3,6 +3,12 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.12.1 — 2026-08-25
+ホーム「Choose your strawberries」を4件→**3件表示**に（オーナー：4件目が次の行にはみ出してデザインが悪い）。
+`sections/index-boxes.liquid` の `paginate collections.all.products by 4` → `by 3`。実機（ライブ）で3件
+（Amaou / Farm B / Japanese Strawberry Club）を確認、4件目の折り返し解消。全件は「View all boxes」→
+/collections/all で従来どおり閲覧可。
+
 ## v1.12.0 — 2026-08-25
 Waitlist フォームを **Shopify Forms アプリ → 自前のネイティブテーマフォームに作り替え**（案A、オーナー
 「見た目重視」）。Shopify Forms は shadow DOM で文字サイズ/間隔が固定＝デザイン修正①②③が不可だったため。

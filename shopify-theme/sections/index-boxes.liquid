@@ -2,7 +2,7 @@
   <div class="wrap">
     <div class="sec-head" data-reveal><span class="eyebrow">{{ section.settings.eyebrow }}</span><h2>{{ section.settings.heading }}</h2>{% if section.settings.subtext != blank %}<p>{{ section.settings.subtext }}</p>{% endif %}</div>
     <div class="box-grid" data-stagger>
-      {%- paginate collections.all.products by 4 -%}
+      {%- paginate collections.all.products by 3 -%}
         {%- for product in collections.all.products -%}
           {%- render 'product-card', product: product -%}
         {%- endfor -%}
