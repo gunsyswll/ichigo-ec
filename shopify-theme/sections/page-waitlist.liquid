@@ -1,20 +1,54 @@
 {%- comment -%}
-  ウェイトリストのページ見出し。フォーム本体は Shopify Forms のアプリブロックで、
-  `templates/page.waitlist.json` の `forms` セクションに入っている（フォーム ID 1123369）。
-  見出しはここ、説明文はフォーム側が持つ（同じ文を2回出さないため）。
+  ウェイトリストのページ。2026-08-25 に Shopify Forms アプリブロックから NATIVE テーマフォームへ作り替え
+  （案A、オーナー「見た目重視」）。理由: Shopify Forms は shadow DOM で文字サイズ・間隔が固定＝デザイン修正
+  （①Be first を見出しから離す ②Be first 拡大 ③By signing up 拡大 ④横幅8割）が一切できなかった。
+  ネイティブの {% form 'customer' %} なら顧客登録＋メール配信同意＝購読者リスト登録は同じで、hidden の
+  contact[tags]=waitlist で今と同じ waitlist タグも付く（実機テスト送信で検証すること）。全文言はスキーマ設定。
 {%- endcomment -%}
 <section class="page-hero page-hero--waitlist"><div class="wrap">
   <h1>{{ section.settings.heading_1 | default: 'Never miss an' }} <span class="r">{{ section.settings.heading_2 | default: 'arrival' }}</span></h1>
   {%- if section.settings.subtext != blank -%}<p>{{ section.settings.subtext }}</p>{%- endif -%}
 </div></section>
 
+<section class="wl">
+  <div class="wl__box">
+    <h2 class="wl__title">{{ section.settings.form_title | default: 'Join the Waitlist' }}</h2>
+    <p class="wl__sub">{{ section.settings.form_sub | default: "Be first to know when the next lot lands from Japan. We'll email you the arrival date and your reservation window." }}</p>
+
+    {%- form 'customer', class: 'wl__form' -%}
+      <input type="hidden" name="contact[tags]" value="{{ section.settings.tag | default: 'waitlist' }}">
+      {%- if form.posted_successfully? -%}
+        <p class="wl__ok">{{ section.settings.success_msg | default: "You're on the list — we'll email you the moment the next arrival is confirmed." }}</p>
+      {%- else -%}
+        {%- if form.errors -%}
+          <p class="wl__err">{{ form.errors | default_errors }}</p>
+        {%- endif -%}
+        <label class="visually-hidden" for="wl-fname">First name</label>
+        <input class="wl__input" id="wl-fname" type="text" name="contact[first_name]" placeholder="First name" autocomplete="given-name">
+        <label class="visually-hidden" for="wl-email">Email</label>
+        <input class="wl__input" id="wl-email" type="email" name="contact[email]" placeholder="Email" autocomplete="email" required>
+        <button type="submit" class="btn btn-red btn-block wl__btn">{{ section.settings.button_label | default: 'Join the Waitlist' }}</button>
+        <p class="wl__note">{{ section.settings.disclaimer | default: 'By signing up, you agree to receive marketing emails. View our <a href="/policies/privacy-policy">privacy policy</a> and <a href="/policies/terms-of-service">terms of service</a> for more info.' }}</p>
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</section>
+
 {% schema %}
 {
-  "name": "Waitlist header",
+  "name": "Waitlist",
   "settings": [
+    { "type": "header", "content": "Hero 見出し（ピンク帯）" },
     { "type": "text", "id": "heading_1", "label": "Heading", "default": "Never miss an" },
     { "type": "text", "id": "heading_2", "label": "Heading (red)", "default": "arrival" },
-    { "type": "textarea", "id": "subtext", "label": "Subtext", "info": "空でよい。説明文はフォーム側（Shopify Forms）が持っています。" }
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "info": "空でよい" },
+    { "type": "header", "content": "フォーム（ネイティブ）" },
+    { "type": "text", "id": "form_title", "label": "フォーム見出し", "default": "Join the Waitlist" },
+    { "type": "textarea", "id": "form_sub", "label": "説明文（Be first…）", "default": "Be first to know when the next lot lands from Japan. We'll email you the arrival date and your reservation window." },
+    { "type": "text", "id": "button_label", "label": "ボタン文言", "default": "Join the Waitlist" },
+    { "type": "html", "id": "disclaimer", "label": "免責文（By signing up…）", "default": "By signing up, you agree to receive marketing emails. View our <a href=\"/policies/privacy-policy\">privacy policy</a> and <a href=\"/policies/terms-of-service\">terms of service</a> for more info." },
+    { "type": "text", "id": "success_msg", "label": "送信完了メッセージ", "default": "You're on the list — we'll email you the moment the next arrival is confirmed." },
+    { "type": "text", "id": "tag", "label": "登録者に付ける顧客タグ", "default": "waitlist", "info": "Shopify顧客に付くタグ。入荷通知の対象抽出に使う。" }
   ]
 }
 {% endschema %}

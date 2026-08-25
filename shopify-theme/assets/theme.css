@@ -111,18 +111,24 @@ section{padding:84px 0}
 
 /* page hero (interior pages) */
 .page-hero{background:var(--pink);padding:54px 0;text-align:center}
-/* ---- ウェイトリストのページ: 見出しとフォームだけの短いページなので上下に余白を足す ----
-   フォーム本体は Shopify Forms のアプリブロック。ブロック側の余白は上限64pxなので、
-   足りないぶんをセクション（テンプレートで `forms` と名付けたので id が __forms で終わる）に足す。 */
 .page-hero--waitlist{padding:84px 0}
-[id$="__forms"]{padding:28px 0}
-/* 2026-08-24 client req #4: フォームが画面幅ぴったりに広がるのを避け、内容を約80%幅に
-   収めて左右に余白を作る（主にスマホの全幅張り付き対策）。フォーム本体は Shopify Forms の
-   Web Components（<shopify-forms-embed>、内部はシャドウDOMで隔離）なので内部には触れられない。
-   ホスト要素はライトDOM側にあるので、その幅だけをここで制御する。
-   実測確認: 1440px幅で embed 1440→1152px（=80%）に縮小。①②③（文字サイズ/見出し余白）は
-   シャドウDOM内で固定のためテーマCSSでは変更不可（styling hookなし）。 */
-[id$="__forms"] shopify-forms-embed{display:block;max-width:80%;margin-inline:auto}
+/* ---- ウェイトリスト NATIVE フォーム（2026-08-25, 案A で Shopify Forms から作り替え）----
+   Shopify Forms は shadow DOM で文字サイズ/間隔が固定＝①②③が不可だったので、自前フォームに。
+   ④ 横幅8割: スマホ約80%、PCは適正幅にキャップ（80%×1440=1152 は広すぎるため min() で 460px 上限）。 */
+.wl{padding:40px 0 84px}
+.wl__box{width:min(80%,460px);margin-inline:auto;text-align:center}
+.wl__title{font-size:1.4rem;line-height:1.22;margin:0}                 /* 見出し（旧22px相当・据え置き） */
+.wl__sub{margin:18px auto 0;max-width:34em;color:var(--greige-deep);font-size:.9rem;line-height:1.55} /* ①離す(旧5px→18px) */
+.wl__form{margin-top:26px;display:flex;flex-direction:column;gap:12px}
+.wl__input{width:100%;padding:15px 18px;border:1.5px solid var(--line);border-radius:var(--r);font-family:'Outfit';font-size:1rem;color:var(--ink);background:#fff;transition:.2s var(--ease)}
+.wl__input::placeholder{color:var(--greige)}
+.wl__input:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 3px rgba(217,64,80,.12)}
+.wl__btn{margin-top:4px;font-size:1rem;padding:15px 26px;border-radius:var(--r)}
+.wl__note{margin:8px auto 0;max-width:34em;font-size:.8rem;line-height:1.5;color:var(--greige)} /* ③ By signing up 拡大(旧10px→約13px, PC+スマホ) */
+.wl__note a{color:var(--red);text-decoration:underline;text-underline-offset:2px}
+.wl__ok{font-size:1.05rem;color:var(--greige-deep);background:var(--cream-2);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;margin:0}
+.wl__err{color:var(--red-deep);font-size:.9rem;margin:0 0 4px;text-align:left}
+.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 /* .crumb removed 2026-08-01 (client): the visible Home / Shop rows are gone;
    the trail now ships as BreadcrumbList JSON-LD from snippets/breadcrumb-schema.liquid */
 .page-hero h1{font-size:clamp(2.1rem,3.8vw,3.1rem);line-height:1.22}
@@ -809,6 +815,8 @@ a.method.linkcard .link{display:inline-block;margin-top:10px;color:var(--red);fo
   .jump-tabs{position:sticky;top:calc(var(--header-h,64px) - 1px);flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;gap:8px;padding:10px 14px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
   .jump-tabs::-webkit-scrollbar{display:none}
   .seg-tab{flex:0 0 auto;white-space:nowrap;font-size:.8rem;padding:8px 16px}
+  /* ② client req: Waitlist の「Be first…」をスマホでのみ拡大（PCは据え置き）。2026-08-25 */
+  .wl__sub{font-size:1.05rem}
 }
 
 /* ===== mark8: product detail — full p24 build ===== */

@@ -3,6 +3,20 @@
 Versioning for the **Ichigo-preview** theme (Shopify theme id 186906968344).
 The live **Rise** theme is never touched. Bump with `python3 ../bump_version.py [major|minor|patch]`.
 
+## v1.12.0 — 2026-08-25
+Waitlist フォームを **Shopify Forms アプリ → 自前のネイティブテーマフォームに作り替え**（案A、オーナー
+「見た目重視」）。Shopify Forms は shadow DOM で文字サイズ/間隔が固定＝デザイン修正①②③が不可だったため。
+- `sections/page-waitlist.liquid`：`{% form 'customer' %}` に置換（全文言はスキーマ設定）。hidden
+  `contact[tags]=waitlist` でタグ付与、`contact[email]`/`first_name` で登録。
+- `templates/page.waitlist.json`：Shopify Forms アプリブロックを削除。
+- `assets/theme.css`：`.wl` スタイル追加。**①** 見出し⇔本文の間隔 5px→18px、**②** Be first をスマホで
+  拡大（.wl__sub 15.8px→18.5px, mobile-only）、**③** By signing up 10px→14px（PC+スマホ）、**④** 幅は
+  スマホ80%/PCは460pxキャップ。WebKit(iPhone13/Desktop)実機で実測確認。
+- **バックエンド実機検証（Admin API）**: 新規メールで送信→ 新規顧客作成 ＋ `waitlist` タグ付与 ＋
+  email_marketing_consent=subscribed、3点すべて確認（waitlist-new1@gmail.com, 2026-08-25 10:14）。
+  ⚠️ Shopify標準スパム対策あり＝トークン無し/自動送信はブロック（実ユーザーの1回送信は通る）。
+- 判別：顧客管理をタグ `waitlist` で絞り込み／Segment 化して入荷通知の対象にする（旧Shopify Forms 時と同じ運用）。
+
 ## v1.11.5 — 2026-08-24
 商品ページのタブ列を**縦スクロールと連動して横スクロール**するように（Notion「下行くと What's Inside が
 隠れる。スクロールと連動できる？」）。v1.11.4 でタブ列を左寄せ＋横スワイプにしたため、下にスクロールして
